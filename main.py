@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 import os
 import asyncio
-import mysql.connector
 import datetime
 import math
 
@@ -22,7 +21,7 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
 
     def __init__(self):
         super().__init__(command_attrs={
-            'description': "This command will inform you about any command that you'd like to, or all the commands, by leaving the command argument empty."
+            'description': "This command will inform you about any command that you'd like to, or all the commands by leaving the command argument empty."
         })
         self.dm_help = False
 
