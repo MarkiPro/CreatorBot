@@ -112,7 +112,7 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
         await self.get_destination().send(embed=embed)
 
 
-client = commands.Bot(command_prefix='r!', case_insensitive=True)
+client = commands.Bot(command_prefix='r!', case_insensitive=True, help_command=EmbedHelpCommand())
 @client.event
 async def on_ready():
     print(f"Ready. Logged onto {client.user}")
