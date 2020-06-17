@@ -1,6 +1,5 @@
 discord.py
 asyncio~=3.4.3
-mysql-connector
 pbwrap~=1.2.0
 requests~=2.22.0
 pillow~=7.0.0
