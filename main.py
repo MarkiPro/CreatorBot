@@ -202,3 +202,4 @@ async def suggest(ctx):
         await sent.add_reaction('👍')
         await sent.add_reaction('👎')
 
+client.run(token)
