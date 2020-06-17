@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import mysql.connector
 import datetime
 import re
 
@@ -112,86 +111,6 @@ class Moderation(commands.Cog):
                 break
 
     @commands.command()
-    @commands.cooldown(1, 5, commands.BucketType.member)
-    async def warn(self, ctx, member: discord.Member, *, reason):
-        if member.id == 466591581286170624:
-            return await ctx.send("Sorry bro, not gonna happen :D")
-        connection = mysql.connector.connect(
-            host="us-cdbr-east-06.cleardb.net",
-            user="baba29035f4254",
-            passwd="8a63c86d",
-            database="heroku_daa9f1b493ff319"
-        )
-        cursor = connection.cursor()
-        cursor.execute("INSERT INTO warns VALUES (%s, %s, %s, %s, %s)",
-                       (None, ctx.guild.id, member.id, reason, ctx.author.id))
-        connection.commit()
-        embed1 = discord.Embed(
-            title="**SUCCESS**",
-            description=f":white_check_mark: ***{member} has been warned!***",
-            color=0x00fa00,
-            timestamp=datetime.datetime.now(tz=None)
-        )
-        await ctx.send(embed=embed1)
-
-    @commands.command()
-    async def warnings(self, ctx, member: discord.Member):
-        connection = mysql.connector.connect(
-            host="us-cdbr-east-06.cleardb.net",
-            user="baba29035f4254",
-            passwd="8a63c86d",
-            database="heroku_daa9f1b493ff319"
-        )
-        cursor = connection.cursor()
-        cursor.execute("SELECT * FROM warns WHERE user_id = %s AND guild_id = %s", (member.id, ctx.guild.id))
-        warns = cursor.fetchall()
-        embed = discord.Embed(title=f"Warnings of {member}".upper(), description="Returns all the warns of a user")
-        member_converter = commands.MemberConverter()
-        for warn in warns:
-            moderator = await member_converter.convert(ctx, warn[4])
-            embed.add_field(name=f"Warning #{warn[0]} by {moderator}", value=f"{warn[3]}", inline=False)
-        await ctx.send(embed=embed)
-
-    @commands.command()
-    async def removewarn(self, ctx, *, id):
-        connection = mysql.connector.connect(
-            host="us-cdbr-east-06.cleardb.net",
-            user="baba29035f4254",
-            passwd="8a63c86d",
-            database="heroku_daa9f1b493ff319"
-        )
-        cursor = connection.cursor()
-        cursor.execute("SELECT * FROM warns WHERE id = %s", (int(id),))
-        warn = cursor.fetchone()
-
-        if warn == None:
-            embed3 = discord.Embed(
-                title="**ERROR**",
-                description=f"""***:no_entry_sign: This warn doesn't exist!***""",
-                color=0xff0000,
-                timestamp=datetime.datetime.now(tz=None)
-            )
-            return await ctx.send(embed=embed3)
-        if int(warn[1]) != ctx.guild.id:
-            embed4 = discord.Embed(
-                title="**ERROR**",
-                description=f"""***:no_entry_sign: This warn doesn't exist in this guild!***""",
-                color=0xff0000,
-                timestamp=datetime.datetime.now(tz=None)
-            )
-            return await ctx.send(embed=embed4)
-
-        cursor.execute("DELETE FROM warns WHERE id = %s", (int(id),))
-        connection.commit()
-        embed1 = discord.Embed(
-            title="**SUCCESS**",
-            description=f":white_check_mark: ***Removed warning #{id}***",
-            color=0x00fa00,
-            timestamp=datetime.datetime.now(tz=None)
-        )
-        await ctx.send(embed=embed1)
-
-    @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def say(self, ctx, *, text):
         await ctx.message.delete()
@@ -283,25 +202,6 @@ class Moderation(commands.Cog):
             color=0x3aff00
         )
         await ctx.send(embed=embed)
-
-    @commands.command()
-    @commands.bot_has_permissions(administrator=True, manage_guild=True)
-    async def prefix(self, ctx, *, prefix):
-        connection = mysql.connector.connect(
-            host="us-cdbr-east-06.cleardb.net",
-            user="baba29035f4254",
-            passwd="8a63c86d",
-            database="heroku_daa9f1b493ff319"
-        )
-
-        cursor = connection.cursor()
-
-        cursor.execute("UPDATE guilds SET prefix = %s WHERE guild_id = %s", (prefix, ctx.guild.id))
-
-        connection.commit()
-
-        await ctx.send(f"Changed prefix of this server to `{prefix}`")
-
 
 def setup(client):
     client.add_cog(Moderation(client))
