@@ -6,7 +6,7 @@ import datetime
 import math
 
 token = os.environ['TOKEN']
-client = commands.Bot(command_prefix='r!', case_insensitive=True)
+client = commands.Bot(command_prefix='>', case_insensitive=True)
 
 class EmbedHelpCommand(commands.MinimalHelpCommand):
     """This is an example of a HelpCommand that utilizes embeds.
@@ -130,6 +130,7 @@ async def on_member_join(member):
     await member.send(embed=SomeRandomEmbed)
 
 @client.command()
+@commands.command(description="This command is used for suggesting useful ideas!")
 async def suggest(ctx):
     suggestionsChannel = client.get_channel(id=712655570737299567)
     startedEmbed = discord.Embed(
