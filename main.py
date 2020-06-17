@@ -129,8 +129,7 @@ async def on_member_join(member):
     )
     await member.send(embed=SomeRandomEmbed)
 
-@client.command()
-@commands.command(description="This command is used for suggesting useful ideas!")
+@client.command(description="This command is used for suggesting useful ideas!")
 async def suggest(ctx):
     suggestionsChannel = client.get_channel(id=712655570737299567)
     startedEmbed = discord.Embed(
