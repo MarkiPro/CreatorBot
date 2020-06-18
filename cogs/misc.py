@@ -8,34 +8,6 @@ class Misc(commands.Cog):
         self.client = client
         self.client.help_command.cog = self
 
-
-    @commands.command(description="This command is simply going to define the creators of this bot",
-                      aliases=['cr'])
-    @commands.cooldown(1, 60, commands.BucketType.member)
-    async def credits(self, ctx):
-        user_converter = commands.UserConverter()
-        credit_users = {'malware': await user_converter.convert(ctx, "466591581286170624"),
-                        'markipro': await user_converter.convert(ctx, "438333007036678155"),
-                        'leaf': await user_converter.convert(ctx, "527945767059718154"),
-                        'rama': await user_converter.convert(ctx, "561592624562044948")}
-
-        credits_embed = discord.Embed(
-            title=f"**CREDITS**",
-            description=f"""
-                Scripting: **{credit_users['malware'].mention}**
-
-                Designing: **{credit_users['markipro'].mention}**
-
-                GFX: **{credit_users['rama'].mention}**
-
-                Special Thanks to:
-                **{credit_users['leaf'].mention}**
-                for helping beta test the bot!""",
-            color=0x0064ff,
-            timestamp=datetime.datetime.utcnow()
-        )
-        await ctx.send(embed=credits_embed)
-
     @commands.command(aliases=['who'],
                     description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
     async def whois(self, ctx, user: discord.Member = None):
