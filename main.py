@@ -105,7 +105,7 @@ client = commands.Bot(command_prefix='>', case_insensitive=True, help_command=Em
 @client.event
 async def on_ready():
     print(f"Ready. Logged onto {client.user}")
-    activity = discord.Activity(type=discord.ActivityType.watching, name="Content Creators")
+    activity = discord.Activity(type=discord.ActivityType.watching, name="**Content Creators**")
     await client.change_presence(activity=activity)
 
 @client.event
