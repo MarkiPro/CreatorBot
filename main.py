@@ -28,7 +28,7 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
     COLOUR = 0x1E90FF
 
     def command_not_found(self, string):
-        return 'Command Not Found.'
+        return 'Command not found.'
 
     def get_command_signature(self, command):
         if command.signature:
