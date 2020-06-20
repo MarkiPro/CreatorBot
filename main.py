@@ -127,7 +127,7 @@ async def on_member_join(member):
 async def on_command_error(ctx, error):
     embed = discord.Embed(
         title="**ERROR**",
-        description="***:no_entry_sign: {error}***",
+        description=f"***:no_entry_sign: {error}***",
         color=0xff0000
     )
     await ctx.send(embed=embed)
