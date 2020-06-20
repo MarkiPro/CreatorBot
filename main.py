@@ -102,16 +102,16 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
 
 client = commands.Bot(command_prefix='>', case_insensitive=True, help_command=EmbedHelpCommand())
 
-for file in os.listdir('cogs/'):
-    if file.endswith('.py'):
-        print(f"LOADED {file}")
-        client.load_extension(f'cogs.{file[:-3]}')
-
 @client.event
 async def on_ready():
     print(f"Ready. Logged onto {client.user}")
     activity = discord.Activity(type=discord.ActivityType.watching, name="**Content Creators**")
     await client.change_presence(activity=activity)
+
+for file in os.listdir('cogs/'):
+    if file.endswith('.py'):
+        print(f"LOADED {file}")
+        client.load_extension(f'cogs.{file[:-3]}')
 
 @client.event
 async def on_member_join(member):
