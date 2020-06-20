@@ -125,10 +125,11 @@ async def on_member_join(member):
 
 @client.event
 async def on_command_error(ctx, error):
-    await ctx.send(discord.Embed(
+    embed = discord.Embed(
         title="**ERROR**",
         description="***:no_entry_sign: {error}***",
         color=0xff0000
-    ))
+    )
+    await ctx.send(embed=embed)
 
 client.run(token)
