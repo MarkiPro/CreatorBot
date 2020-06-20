@@ -18,7 +18,6 @@ class Fun(commands.Cog):
         embed = discord.Embed(title=f"A nice dog, for you!", colour=discord.Color.blurple())
         embed.set_image(url=data['message'])
         await ctx.send(embed=embed)
-        await message.edit("Here is a dog image for you")
 
     @commands.command()
     async def cat(self, ctx):
