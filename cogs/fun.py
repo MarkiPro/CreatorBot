@@ -29,38 +29,5 @@ class Fun(commands.Cog):
         embed.set_image(url=data[0]['url'])
         await ctx.send(embed=embed)
 
-
-    @commands.command()
-    async def mushroom(self, ctx, member: discord.Member, *, reason):
-        await ctx.send(f"{member.mention} has been mushroomed for `{reason}`")
-
-        def check(m):
-            if m.author.id == member.id:
-                return True
-            else:
-                return False
-
-        message = await self.client.wait_for('message', check=check)
-
-        await message.add_reaction(":timthemushroom:716208401675452437")
-
-    @commands.command()
-    @commands.has_permissions(ban_members=True)
-    async def bean(self, ctx, member: discord.Member, *, reason=None):
-
-        await ctx.send(f"{member} were beaned for `{reason}`")
-
-        await member.send("https://tenor.com/EQmg.gif")
-
-        def check(m):
-            if m.author == member:
-                return True
-            else:
-                return False
-        
-        message = await self.client.wait_for("message", check=check)
-
-        await message.add_reaction(":bean:721246373957074984")
-
 def setup(client):
     client.add_cog(Fun(client))
