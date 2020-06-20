@@ -8,6 +8,81 @@ class Misc(commands.Cog):
         self.client = client
         self.client.help_command.cog = self
 
+@client.command(description="This command is used for suggesting useful ideas!")
+async def suggest(ctx):
+    suggestionsChannel = client.get_channel(id=712655570737299567)
+    startedEmbed = discord.Embed(
+        title="**SUGGESTION SETUP**",
+        description="Please continue the setup in dms.",
+        color=0x0064ff,
+        set_footer=f"{datetime.datetime.now(tz=None)} Reply to this message within `16 minutes`. Say `cancel` to cancel this prompt."
+    )
+    furstEmbed = discord.Embed(
+        title="**SUGGESTION SETUP**",
+        description="What would you like to name your suggestion?",
+        color=0x0064ff,
+        timestamp={datetime.datetime.now(tz=None)}
+    )
+    furstEmbed.set_footer(text=f"Reply to this message within `16 minutes`. Say `cancel` to cancel this prompt.")
+    await ctx.send(embed=startedEmbed)
+    await ctx.author.send(embed=furstEmbed)
+    def check(m):
+        if isinstance(m.channel, discord.DMChannel):
+            if m.author == ctx.author:
+                return True
+            else:
+                return False
+        else:
+            return False
+    title_message = await client.wait_for('message', check=check, timeout=1000)
+    title = title_message.content
+    startEmbed = discord.Embed(
+        title="**SUGGESTION SETUP**",
+        description="Please write down your suggestion in detail.",
+        color=0x0064ff,
+        timestamp=datetime.datetime.now(tz=None)
+    )
+    startEmbed.set_footer(text=f"Reply to this message within `16 minutes`. Say `cancel` to cancel this prompt.")
+    await ctx.author.send(embed=startEmbed)
+    body_message = await client.wait_for('message', check=check, timeout=1000)
+    body = body_message.content
+    suggestedEmbed2 = discord.Embed(
+        title=f"**FINISHED PRODUCT**",
+        description=f"""*Say `done` to post.*""",
+        color=0x0064ff,
+        timestamp=datetime.datetime.now(tz=None)
+    )
+    suggestedEmbed2.set_footer(text=f"Reply to this message within `16 minutes`. Say `cancel` to cancel this prompt.")
+    suggestedEmbed1 = discord.Embed(
+        title=f"**{title}**",
+        description=f"{body}",
+        color=0x0064ff,
+        timestamp=datetime.datetime.now(tz=None)
+    )
+    suggestedEmbed1.set_footer(text=f"by: {ctx.author}")
+    await ctx.author.send(embed=suggestedEmbed2)
+    await ctx.author.send(embed=suggestedEmbed1)
+    body_message2 = await client.wait_for('message', check=check, timeout=1000)
+    body2 = body_message2.content
+    if(body2 == "done"):
+        finalEmbed = discord.Embed(
+            title="**SUGGESTION SETUP**",
+            description="Your suggestion has been posted.",
+            color=0x0064ff,
+            timestamp=datetime.datetime.now(tz=None)
+            )
+        await ctx.author.send(embed=finalEmbed)
+        suggestedEmbed = discord.Embed(
+            title=f"**{title}**",
+            description=f"{body}",
+            color=0x0064ff,
+            timestamp=datetime.datetime.now(tz=None)
+            )
+        suggestedEmbed.set_footer(text=f"by: {ctx.author}")
+        sent = await suggestionsChannel.send(embed=suggestedEmbed)
+        await sent.add_reaction('👍')
+        await sent.add_reaction('👎')
+
     @commands.command(aliases=['who'],
                     description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
     async def whois(self, ctx, user: discord.Member = None):
@@ -33,21 +108,6 @@ class Misc(commands.Cog):
                         value=f"{perms}",
                         inline=False)
         await ctx.send(embed=embed)
-
-    @commands.command(description="This command will remember MarkiPro, the original creator of the bot.")
-    async def markipro(self, ctx):
-        embed = discord.Embed(
-            title="MarkiPro",
-            description="We all know who you are, and what you did. We all know that you were an amazing mod, amazing friend, and an amazing programmer. We will always miss you, Marki...",
-            color=0x0064ff,
-            timestamp=datetime.datetime.utcnow()
-        )
-
-        await ctx.send(embed=embed)
-
-    @commands.command(description="Invite link for RoDevs")
-    async def rodevs(self, ctx):
-        return await ctx.send("https://discord.gg/rodevs")
 
     @commands.command()
     async def boosters(self, ctx):
