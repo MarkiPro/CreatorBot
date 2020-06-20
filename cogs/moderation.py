@@ -11,14 +11,8 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
-    async def clear(self, ctx, amount=0):
-        limit = 2000
-
-        if amount > limit:
-            if ctx.author.id == 438333007036678155:
-                return await ctx.send("NO MARKI ARE YOU IDIOT")
-            return await ctx.send(f"Sorry, the limit is {limit}")
-
+    async def clear(self, ctx, amount):
+        amount = 0
         await ctx.channel.purge(limit=amount + 1)
 
     @commands.command()
