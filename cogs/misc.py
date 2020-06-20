@@ -91,7 +91,6 @@ class Misc(commands.Cog):
 
         embed = discord.Embed(title=f"**Who is {user.name}**".upper(),
                               description="Displays basic information about the given user", colour=0xd9ac32)
-        embed.set_author(name=f"{ctx.message.author}", icon_url=ctx.message.author.avatar_url)
         format = "%A, %d %B, %Y : %I:%M %p"
         delta_joined = datetime.datetime.utcnow() - user.joined_at
         delta_created = datetime.datetime.utcnow() - user.created_at
@@ -122,7 +121,7 @@ class Misc(commands.Cog):
             )
 
         if boosters is "":
-            embed.description = "There are no boosters in this guild  :cry:"
+            embed.description = "There are no boosters in this guild.  :cry:"
 
         await ctx.send(embed=embed)
 
