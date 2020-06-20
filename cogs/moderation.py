@@ -76,7 +76,12 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(ban_members=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
-    async def tempban(self, ctx, member: discord.Member, time, *, reason=None):
+    async def tempban(self, ctx, member: discord.Member, *args):
+        time = []
+        time_fields = []
+
+        possible_time = args[:2]
+
         if member.id == ctx.me.id:
             embed1 = discord.Embed(
                 title="**OOPS**",
@@ -97,14 +102,15 @@ class Moderation(commands.Cog):
             color=0x0064ff,
             timestamp=datetime.datetime.now(tz=None)
         )
+
         available_options = ['s' , 'm', 'h', 'd', 'w']
+
         async with ctx.typing():
             await member.ban(reason=reason)
             await ctx.send(embed=embed1)
-            await member.send(embed=embed2)
-            asyncio.sleep(time)
+            await member.send(embed=embed2):
+            await asyncio.sleep(time)
             await member.unban(reason=reason)
-
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
@@ -133,8 +139,8 @@ class Moderation(commands.Cog):
         async with ctx.typing():
             await member.ban(reason=reason)
             await ctx.send(embed=embed1)
-            await member.send(embed=embed2)
             await member.unban(reason=reason)
+            await member.send(embed=embed2)
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
