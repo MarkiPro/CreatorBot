@@ -100,6 +100,10 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
 
         await self.get_destination().send(embed=embed)
 
+for file in os.listdir('cogs/'):
+    if file.endswith('.py'):
+        print(f"LOADED {file}")
+        client.load_extension(f'cogs.{file[:-3]}')
 
 client = commands.Bot(command_prefix='>', case_insensitive=True, help_command=EmbedHelpCommand())
 @client.event
@@ -193,70 +197,12 @@ async def suggest(ctx):
         await sent.add_reaction('👍')
         await sent.add_reaction('👎')
 
-@commands.command()
-@commands.has_permissions(ban_members=True)
-@commands.cooldown(1, 5, commands.BucketType.member)
-async def ban(self, ctx, member: discord.Member, *, reason=None):
-    if member.id == ctx.me.id:
-        embed1 = discord.Embed(
-            title="**OOPS**",
-            description=f"***Sorry bro, not gonna happen :) ***",
-            color=0xffbd00,
-            timestamp=datetime.datetime.now(tz=None)
-        )
-        await ctx.send(embed=embed1)
-    embed1 = discord.Embed(
-        title="**SUCCESS**",
-        description=f"***:white_check_mark: *** {member.display_name} *** has been banned for: `{reason}`!***",
-        color=0x00fa00,
-        timestamp=datetime.datetime.now(tz=None)
-    )
-    embed2 = discord.Embed(
-        title="**NOTIFICATION**",
-        description=f":bell: *You have been banned in **{ctx.guild}** for:* `{reason}`!",
-        color=0x0064ff,
-        timestamp=datetime.datetime.now(tz=None)
-    )
-    async with ctx.typing():
-        await member.ban(reason=reason)
-        await ctx.send(embed=embed1)
-        await member.send(embed=embed2)
-
-@commands.command()
-@commands.has_permissions(ban_members=True)
-@commands.cooldown(1, 5, commands.BucketType.member)
-async def unban(self, ctx, member, *, reason=None):
-    ban_list = await ctx.guild.bans()
-    for ban_entry in ban_list:
-        user = ban_entry.user
-        id = member
-        embed1 = discord.Embed(
-            title="**SUCCESS**",
-            description=f"***:white_check_mark: *** {user.display_name} *** has been unbanned for: `{reason}`!***",
-            color=0x00fa00,
-            timestamp=datetime.datetime.now(tz=None)
-        )
-        try:
-            user_name, user_discriminator = member.split('#')
-        except ValueError:
-            user_name = ''
-            user_discriminator = ''
-        pass
-
-        try:
-            int_id = int(id)
-        except ValueError:
-            int_id = None
-
-        if (user.name, user.discriminator) == (user_name, user_discriminator) or int_id == user.id:
-            await ctx.guild.unban(user, reason=reason)
-            await ctx.send(embed=embed1)
-            break
-
-@commands.command()
-@commands.has_permissions(manage_guild=True)
-async def say(self, ctx, *, text):
-    await ctx.message.delete()
-    await ctx.send(text)
+@client.event
+async def on_command_error(ctx, error):
+    await ctx.send(discord.Embed(
+        title="**ERROR**",
+        description="***:no_entry_sign: {error}***",
+        color=0xff0000
+    ))
 
 client.run(token)
