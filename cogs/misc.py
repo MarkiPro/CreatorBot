@@ -9,7 +9,7 @@ class Misc(commands.Cog):
         self.client.help_command.cog = self
 
     @commands.command(aliases=['suggestion'], description="This command is used for suggesting useful ideas!")
-    async def suggest(ctx):
+    async def suggest(self, ctx):
         suggestionsChannel = client.get_channel(id=712655570737299567)
         startedEmbed = discord.Embed(
             title="**SUGGESTION SETUP**",
