@@ -51,7 +51,7 @@ class Moderation(commands.Cog):
         if member.id == ctx.me.id:
             embed1 = discord.Embed(
                 title="**OOPS**",
-                description=f"***Sorry bro, not gonna happen :) ***",
+                description=f"***Sorry bro, not gonna happen! :) ***",
                 color=0xffbd00,
                 timestamp=datetime.datetime.now(tz=None)
             )
@@ -64,7 +64,7 @@ class Moderation(commands.Cog):
         )
         embed2 = discord.Embed(
             title="**NOTIFICATION**",
-            description=f":bell: *You have been perm-banned in **{ctx.guild}** for: `{reason}`*",
+            description=f":bell: ***You have been perm-banned in **{ctx.guild}** for: `{reason}`***",
             color=0x0064ff,
             timestamp=datetime.datetime.now(tz=None)
         )
@@ -85,7 +85,7 @@ class Moderation(commands.Cog):
         if member.id == ctx.me.id:
             embed1 = discord.Embed(
                 title="**OOPS**",
-                description=f"***Sorry bro, not gonna happen :) ***",
+                description=f"***Sorry bro, not gonna happen! :) ***",
                 color=0xffbd00,
                 timestamp=datetime.datetime.now(tz=None)
             )
@@ -98,7 +98,7 @@ class Moderation(commands.Cog):
         )
         embed2 = discord.Embed(
             title="**NOTIFICATION**",
-            description=f":bell: *You have been temp-banned in **{ctx.guild}** for: `{reason}`, for: {time}!*",
+            description=f":bell: ***You have been temp-banned in **{ctx.guild}** for: `{reason}`, for: {time}!***",
             color=0x0064ff,
             timestamp=datetime.datetime.now(tz=None)
         )
@@ -108,7 +108,7 @@ class Moderation(commands.Cog):
         async with ctx.typing():
             await member.ban(reason=reason)
             await ctx.send(embed=embed1)
-            await member.send(embed=embed2):
+            await member.send(embed=embed2)
             await asyncio.sleep(time)
             await member.unban(reason=reason)
 
@@ -132,7 +132,7 @@ class Moderation(commands.Cog):
         )
         embed2 = discord.Embed(
             title="**NOTIFICATION**",
-            description=f":bell: *You have been soft-banned in **{ctx.guild}** for: `{reason}`!*",
+            description=f":bell: ***You have been soft-banned in **{ctx.guild}** for: `{reason}`!***",
             color=0x0064ff,
             timestamp=datetime.datetime.now(tz=None)
         )
