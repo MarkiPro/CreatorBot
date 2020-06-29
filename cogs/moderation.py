@@ -73,44 +73,44 @@ class Moderation(commands.Cog):
             await ctx.send(embed=embed1)
             await member.send(embed=embed2)
 
-    @commands.command()
-    @commands.has_permissions(ban_members=True)
-    @commands.cooldown(1, 5, commands.BucketType.member)
-    async def tempban(self, ctx, member: discord.Member, *args):
-        time = []
-        time_fields = []
+    #@commands.command()
+    #@commands.has_permissions(ban_members=True)
+    #@commands.cooldown(1, 5, commands.BucketType.member)
+    #async def tempban(self, ctx, member: discord.Member, *args):
+        #time = []
+        #time_fields = []
 
-        possible_time = args[:2]
+        #possible_time = args[:2]
 
-        if member.id == ctx.me.id:
-            embed1 = discord.Embed(
-                title="**OOPS**",
-                description=f"***Sorry bro, not gonna happen! :) ***",
-                color=0xffbd00,
-                timestamp=datetime.datetime.now(tz=None)
-            )
-            await ctx.send(embed=embed1)
-        embed1 = discord.Embed(
-            title="**SUCCESS**",
-            description=f"***:white_check_mark: *** {member.display_name} *** has been temp-banned for: `{reason}`, for: {time}!***",
-            color=0x00fa00,
-            timestamp=datetime.datetime.now(tz=None)
-        )
-        embed2 = discord.Embed(
-            title="**NOTIFICATION**",
-            description=f":bell: ***You have been temp-banned in **{ctx.guild}** for: `{reason}`, for: {time}!***",
-            color=0x0064ff,
-            timestamp=datetime.datetime.now(tz=None)
-        )
+        #if member.id == ctx.me.id:
+        #    embed1 = discord.Embed(
+        #        title="**OOPS**",
+        #        description=f"***Sorry bro, not gonna happen! :) ***",
+        #        color=0xffbd00,
+        #        timestamp=datetime.datetime.now(tz=None)
+        #    )
+        #    await ctx.send(embed=embed1)
+        #embed1 = discord.Embed(
+        #    title="**SUCCESS**",
+        #    description=f"***:white_check_mark: *** {member.display_name} *** has been temp-banned for: `{reason}`, for: {time}!***",
+        #    color=0x00fa00,
+        #    timestamp=datetime.datetime.now(tz=None)
+        #)
+        #embed2 = discord.Embed(
+        #    title="**NOTIFICATION**",
+        #    description=f":bell: ***You have been temp-banned in **{ctx.guild}** for: `{reason}`, for: {time}!***",
+        #    color=0x0064ff,
+        #    timestamp=datetime.datetime.now(tz=None)
+        #)
 
-        available_options = ['s' , 'm', 'h', 'd', 'w']
+        #available_options = ['s' , 'm', 'h', 'd', 'w']
 
-        async with ctx.typing():
-            await member.ban(reason=reason)
-            await ctx.send(embed=embed1)
-            await member.send(embed=embed2)
-            await asyncio.sleep(time)
-            await member.unban(reason=reason)
+        #async with ctx.typing():
+        #    await member.ban(reason=reason)
+        #    await ctx.send(embed=embed1)
+        #    await member.send(embed=embed2)
+        #   await asyncio.sleep(time)
+        #    await member.unban(reason=reason)
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
