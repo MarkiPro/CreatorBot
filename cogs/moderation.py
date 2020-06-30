@@ -138,8 +138,8 @@ class Moderation(commands.Cog):
         )
         async with ctx.typing():
             await member.ban(reason=reason)
-            await ctx.send(embed=embed1)
             await member.unban(reason=reason)
+            await ctx.send(embed=embed1)
             await member.send(embed=embed2)
 
     @commands.command()
