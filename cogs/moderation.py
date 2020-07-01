@@ -43,8 +43,9 @@ class Moderation(commands.Cog):
             try:
                 await member.send(embed=embed2)
             except discord.Forbidden:
-                await member.kick(reason=reason)
-                await ctx.send(embed=embed1)
+                None
+            await member.kick(reason=reason)
+            await ctx.send(embed=embed1)
 
     @commands.command(aliases=['perm-ban'], description="This command is used for permanently banning.")
     @commands.has_permissions(ban_members=True)
@@ -74,8 +75,9 @@ class Moderation(commands.Cog):
             try:
                 await member.send(embed=embed2)
             except discord.Forbidden:
-                await member.ban(reason=reason)
-                await ctx.send(embed=embed1)
+                None
+            await member.ban(reason=reason)
+            await ctx.send(embed=embed1)
 
     #@commands.command(aliases=['temp-ban'], description="This command is used for temporarily banning.")
     #@commands.has_permissions(ban_members=True)
@@ -113,11 +115,12 @@ class Moderation(commands.Cog):
         #    try:
         #        await member.send(embed=embed2)
         #    except discord.Forbidden:
-        #       await member.ban(reason=reason)
-        #       await ctx.send(embed=embed1)
-        #       await member.send(embed=embed2)
-        #       await asyncio.sleep(time)
-        #       await member.unban(reason=reason)
+        #       None
+        #    await member.ban(reason=reason)
+        #    await ctx.send(embed=embed1)
+        #    await member.send(embed=embed2)
+        #    await asyncio.sleep(time)
+        #    await member.unban(reason=reason)
 
     @commands.command(aliases=['soft-ban'], description="This command is used for banning and immediate unbanning, mostly used for clearing out user's messages.")
     @commands.has_permissions(ban_members=True)
@@ -147,9 +150,10 @@ class Moderation(commands.Cog):
             try:
                 await member.send(embed=embed2)
             except discord.Forbidden:
-                await member.ban(reason=reason)
-                await member.unban(reason=reason)
-                await ctx.send(embed=embed1)
+                None
+            await member.ban(reason=reason)
+            await member.unban(reason=reason)
+            await ctx.send(embed=embed1)
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
