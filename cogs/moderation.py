@@ -12,7 +12,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
-    async def clear(self, ctx, amount=None):
+    async def clear(self, ctx, amount=0):
         await ctx.channel.purge(limit=amount + 1)
 
     @commands.command()
@@ -40,11 +40,14 @@ class Moderation(commands.Cog):
             timestamp=datetime.datetime.now(tz=None)
         )
         async with ctx.typing():
-            await member.send(embed=embed2)
             await member.kick(reason=reason)
             await ctx.send(embed=embed1)
+            try:
+                await member.send(embed=embed2)
+            except discord.Forbidden:
+                None
 
-    @commands.command()
+    @commands.command(aliases=['perm-ban'], description="This command is used for permanently banning.")
     @commands.has_permissions(ban_members=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def permban(self, ctx, member: discord.Member, *, reason=None):
@@ -71,9 +74,12 @@ class Moderation(commands.Cog):
         async with ctx.typing():
             await member.ban(reason=reason)
             await ctx.send(embed=embed1)
-            await member.send(embed=embed2)
+            try:
+                await member.send(embed=embed2)
+            except discord.Forbidden:
+                None
 
-    #@commands.command()
+    #@commands.command(aliases=['temp-ban'], description="This command is used for temporarily banning.")
     #@commands.has_permissions(ban_members=True)
     #@commands.cooldown(1, 5, commands.BucketType.member)
     #async def tempban(self, ctx, member: discord.Member, *args):
@@ -112,7 +118,7 @@ class Moderation(commands.Cog):
         #   await asyncio.sleep(time)
         #    await member.unban(reason=reason)
 
-    @commands.command()
+    @commands.command(aliases=['soft-ban'], description="This command is used for banning and immediate unbanning, mostly used for clearing out user's messages.")
     @commands.has_permissions(ban_members=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def softban(self, ctx, member: discord.Member, *, reason=None):
@@ -140,7 +146,10 @@ class Moderation(commands.Cog):
             await member.ban(reason=reason)
             await member.unban(reason=reason)
             await ctx.send(embed=embed1)
-            await member.send(embed=embed2)
+            try:
+                await member.send(embed=embed2)
+            except discord.Forbidden:
+                None
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
@@ -171,7 +180,15 @@ class Moderation(commands.Cog):
             if (user.name, user.discriminator) == (user_name, user_discriminator) or int_id == user.id:
                 await ctx.guild.unban(user, reason=reason)
                 await ctx.send(embed=embed1)
-                break
+                try:
+                    embed2 = discord.Embed(
+                        title="**NOTIFICATION**",
+                        description=f":bell: ***You have been unbanned from {ctx.guild}, for: `{reason}`!***",
+                        timestamp=datetime.datetime.now(tz=None)
+                    )
+                    await user.send(embed=embed2)
+                except discord.Forbidden:
+                    break
 
     @commands.command()
     @commands.has_permissions(manage_guild=True)
