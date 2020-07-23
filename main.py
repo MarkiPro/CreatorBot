@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import os
 import asyncio
 import datetime
@@ -107,14 +107,118 @@ async def on_ready():
     print(f"Ready. Logged onto {client.user}")
     activity = discord.Activity(type=discord.ActivityType.watching, name="Content Creators")
     await client.change_presence(activity=activity)
+    send_meme.start()
 
 for file in os.listdir('cogs/'):
     if file.endswith('.py'):
         print(f"LOADED {file}")
         client.load_extension(f'cogs.{file[:-3]}')
 
+@tasks.loop(seconds=3600)
+async def send_meme():
+    channel = client.get_channel(id=712625666490761297)
+    embed = discord.Embed(title="A nice meme for you!", color=0xe700ff)
+    async with aiohttp.ClientSession() as cs:
+        async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
+            res = await r.json()
+            embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+            await channel.send(embed=embed)
+
 @client.event
 async def on_member_join(member):
+    if client.get_guild(id=729495109963612270):
+        content_creators = client.get_guild(id=611227128020598805)
+        content_creators_staff = client.get_guild(id=729495109963612270)
+
+        # CONTENT CREATORS
+
+        content_creators_community_helper = discord.utils.get(content_creators.roles, id=712732582365757470)
+        content_creators_senior_community_helper = discord.utils(content_creators.roles, id=722861996504121456)
+        content_creators_head_community_helper = discord.utils.get(content_creators.roles, id=722860980782235819)
+        content_creators_trial_application_reader = discord.utils(content_creators.roles, id=722860699327397950)
+        content_creators_application_reader = discord.utils.get(content_creators.roles, id=722860570998603827)
+        content_creators_senior_application_reader = discord.utils(content_creators.roles, id=722860303993405572)
+        content_creators_head_application_reacer = discord.utils.get(content_creators.roles, id=722860184845680791)
+        content_creators_trial_scam_investigator = discord.utils(content_creators.roles, id=722859531784421376)
+        content_creators_scam_investigator = discord.utils.get(content_creators.roles, id=722859441350770719)
+        content_creators_senior_scam_investigator = discord.utils(content_creators.roles, id=722859802690060430)
+        content_creators_head_scam_investigator = discord.utils.get(content_creators.roles, id=722859343560704050)
+        content_creators_trial_moderator = discord.utils(content_creators.roles, id=722792418922987550)
+        content_creators_moderator = discord.utils(content_creators.roles, id=695328029303635998)
+        content_creators_senior_moderator = discord.utils(content_creators.roles, id=722792492969492540)
+        content_creators_head_moderator = discord.utils(content_creators.roles, id=722792338073714759)
+        content_creators_administrator = discord.utils(content_creators.roles, id=695328300364464248)
+        content_creators_senior_administrator = discord.utils(content_creators.roles, id=722791896480612362)
+        content_creators_head_administrator = discord.utils(content_creators.roles, id=722791558088491038)
+        content_creators_server_manager = discord.utils(content_creators.roles, id=722792808896921711)
+        content_creators_founder = discord.utils(content_creators.roles, id=695328208844881972)
+
+        # CONTENT CREATORS STAFF
+
+        content_creators_staff_community_helper = discord.utils.get(content_creators_staff.roles, id=729495109984321537)
+        content_creators_staff_senior_community_helper = discord.utils(content_creators_staff.roles, id=729495109984321538)
+        content_creators_staff_head_community_helper = discord.utils.get(content_creators_staff.roles, id=729495109984321539)
+        content_creators_staff_trial_application_reader = discord.utils(content_creators_staff.roles, id=729495109984321540)
+        content_creators_staff_application_reader = discord.utils.get(content_creators_staff.roles, id=729495109984321541)
+        content_creators_staff_senior_application_reader = discord.utils(content_creators_staff.roles, id=729495109984321542)
+        content_creators_staff_head_application_reacer = discord.utils.get(content_creators_staff.roles, id=729495109984321543)
+        content_creators_staff_trial_scam_investigator = discord.utils(content_creators_staff.roles, id=729495109984321544)
+        content_creators_staff_scam_investigator = discord.utils.get(content_creators_staff.roles, id=729495109984321545)
+        content_creators_staff_senior_scam_investigator = discord.utils(content_creators_staff.roles, id=729495109984321546)
+        content_creators_staff_head_scam_investigator = discord.utils.get(content_creators_staff.roles, id=729495109984321547)
+        content_creators_staff_trial_moderator = discord.utils(content_creators_staff.roles, id=729495109984321548)
+        content_creators_staff_moderator = discord.utils(content_creators_staff.roles, id=729495109984321549)
+        content_creators_staff_senior_moderator = discord.utils(content_creators_staff.roles, id=729495110001361000)
+        content_creators_staff_head_moderator = discord.utils(content_creators_staff.roles, id=729495110001361001)
+        content_creators_staff_administrator = discord.utils(content_creators_staff.roles, id=729495110001361002)
+        content_creators_staff_senior_administrator = discord.utils(content_creators_staff.roles, id=729495110001361003)
+        content_creators_staff_head_administrator = discord.utils(content_creators_staff.roles, id=729495110001361004)
+        content_creators_staff_server_manager = discord.utils(content_creators_staff.roles, id=729495110001361005)
+        content_creators_staff_founder = discord.utils(content_creators_staff.roles, id=729495110001361006)
+
+        if member.has_role(content_creators_community_helper):
+            member.add_role(content_creators_staff_community_helper)
+        if member.has_role(content_creators_senior_community_helper):
+            member.add_role(content_creators_staff_senior_community_helper)
+        if member.has_role(content_creators_head_community_helper):
+            member.add_role(content_creators_staff_head_community_helper)
+        if member.has_role(content_creators_trial_application_reader):
+            member.add_role(content_creators_staff_trial_application_reader)
+        if member.has_role(content_creators_application_reader):
+            member.add_role(content_creators_staff_application_reader)
+        if member.has_role(content_creators_senior_application_reader):
+            member.add_role(content_creators_staff_senior_application_reader)
+        if member.has_role(content_creators_head_application_reader):
+            member.add_role(content_creators_staff_head_application_reader)
+        if member.has_role(content_creators_trial_scam_investigator):
+            member.add_role(content_creators_staff_trial_scam_investigator)
+        if member.has_role(content_creators_scam_investigator):
+            member.add_role(content_creators_staff_scam_investigator)
+        if member.has_role(content_creators_senior_scam_investigator):
+            member.add_role(content_creators_staff_senior_scam_investigator)
+        if member.has_role(content_creators_head_scam_investigator):
+            member.add_role(content_creators_staff_head_scam_investigator)
+        if member.has_role(content_creators_trial_moderator):
+            member.add_role(content_creators_staff_trial_moderator)
+        if member.has_role(content_creators_moderator):
+            member.add_role(content_creators_staff_moderator)
+        if member.has_role(content_creators_senior_moderator):
+            member.add_role(content_creators_staff_senior_moderator)
+        if member.has_role(content_creators_head_moderator):
+            member.add_role(content_creators_staff_head_moderator)
+        if member.has_role(content_creators_administrator):
+            member.add_role(content_creators_staff_administrator)
+        if member.has_role(content_creators_senior_administrator):
+            member.add_role(content_creators_staff_senior_administrator)
+        if member.has_role(content_creators_head_administrator):
+            member.add_role(content_creators_staff_head_administrator)
+        if member.has_role(content_creators_server_manager):
+            member.add_role(content_creators_staff_server_manager)
+        if member.has_role(content_creators_founder):
+            member.add_role(content_creators_staff_founder)
+        else:
+            member.kick(reason="Not a staff member.")
+
     SomeRandomEmbed = discord.Embed(
         title="**WELCOME MESSAGE**",
         description=f"*Welcome to the **{member.guild}**!*",
