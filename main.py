@@ -107,15 +107,12 @@ async def on_ready():
     print(f"Ready. Logged onto {client.user}")
     activity = discord.Activity(type=discord.ActivityType.watching, name="Content Creators")
     await client.change_presence(activity=activity)
+    send_meme.start()
 
 for file in os.listdir('cogs/'):
     if file.endswith('.py'):
         print(f"LOADED {file}")
         client.load_extension(f'cogs.{file[:-3]}')
-
-@client.command()
-async def meme_config(ctx):
-    send_meme.start()
 
 @tasks.loop(seconds=3600)
 async def send_meme(ctx):
