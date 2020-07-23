@@ -3,6 +3,7 @@ from discord.ext import commands
 import datetime
 import re
 import asyncio
+from discord.utils import parse_time
 
 class Moderation(commands.Cog):
 
@@ -79,48 +80,67 @@ class Moderation(commands.Cog):
             await member.ban(reason=reason)
             await ctx.send(embed=embed1)
 
-    #@commands.command(aliases=['temp-ban'], description="This command is used for temporarily banning.")
-    #@commands.has_permissions(ban_members=True)
-    #@commands.cooldown(1, 5, commands.BucketType.member)
-    #async def tempban(self, ctx, member: discord.Member, *args):
-        #time = []
-        #time_fields = []
+    @commands.command(aliases=['temp-ban'], description="This command is used for temporarily banning.")
+    @commands.has_permissions(ban_members=True)
+    @commands.cooldown(1, 5, commands.BucketType.member)
+    async def tempban(self, ctx, member: discord.Member, *args):
+        time = []
+        time_fields = []
 
-        #possible_time = args[:2]
+        possible_time = args[:2]
+        
+        available_options = {'s':1, 'm':60, 'h':3600, 'd':86400, 'w':604800}
+        
+        if member.id == ctx.me.id:
+            embed1 = discord.Embed(
+                title="**OOPS**",
+                description=f"***Sorry bro, not gonna happen! :) ***",
+                color=0xffbd00,
+                timestamp=datetime.datetime.now(tz=None)
+            )
+            await ctx.send(embed=embed1)
+        i = 0
+        for arg in possible_time:
+            if arg.endswith(available_options):
+                try:
+                    int(arg[:-1])
+                    time.append(arg)
+                    time_fields.append(i)
+                    i = i + 1
+                except ValueError:
+                    break
+            else:
+                break
 
-        #if member.id == ctx.me.id:
-        #    embed1 = discord.Embed(
-        #        title="**OOPS**",
-        #        description=f"***Sorry bro, not gonna happen! :) ***",
-        #        color=0xffbd00,
-        #        timestamp=datetime.datetime.now(tz=None)
-        #    )
-        #    await ctx.send(embed=embed1)
-        #embed1 = discord.Embed(
-        #    title="**SUCCESS**",
-        #    description=f"***:white_check_mark: *** {member.display_name} *** has been temp-banned for: `{reason}`, for: {time}!***",
-        #    color=0x00fa00,
-        #    timestamp=datetime.datetime.now(tz=None)
-        #)
-        #embed2 = discord.Embed(
-        #    title="**NOTIFICATION**",
-        #    description=f":bell: ***You have been temp-banned in **{ctx.guild}** for: `{reason}`, for: {time}!***",
-        #    color=0x0064ff,
-        #    timestamp=datetime.datetime.now(tz=None)
-        #)
+        args_list = list(args)
 
-        #available_options = ['s' , 'm', 'h', 'd', 'w']
+        for element in time_fields:
+            args_list[element] = None
 
-        #async with ctx.typing():
-        #    try:
-        #        await member.send(embed=embed2)
-        #    except discord.Forbidden:
-        #       None
-        #    await member.ban(reason=reason)
-        #    await ctx.send(embed=embed1)
-        #    await member.send(embed=embed2)
-        #    await asyncio.sleep(time)
-        #    await member.unban(reason=reason)
+        reason = " ".join([i for i in args_list if i is not None])
+
+        embed1 = discord.Embed(
+            title="**SUCCESS**",
+            description=f"***:white_check_mark: *** {member.display_name} *** has been temp-banned for: `{reason}`, for: {time}!***",
+            color=0x00fa00,
+            timestamp=datetime.datetime.now(tz=None)
+        )
+        embed2 = discord.Embed(
+            title="**NOTIFICATION**",
+            description=f":bell: ***You have been temp-banned in **{ctx.guild}** for: `{reason}`, for: {time}!***",
+            color=0x0064ff,
+            timestamp=datetime.datetime.now(tz=None)
+        )
+
+        await ctx.send(embed=embed2)
+        await member.send(embed=embed2)
+        await member.ban(reason=reason)
+
+        parsed_time = await parse_time(time)
+        
+        if parsed_time is not 0:
+            await asyncio.sleep(parsed_time)
+            await member.unban(reason=" ended.")
 
     @commands.command(aliases=['soft-ban'], description="This command is used for banning and immediate unbanning, mostly used for clearing out user's messages.")
     @commands.has_permissions(ban_members=True)
