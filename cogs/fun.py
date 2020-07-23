@@ -27,7 +27,7 @@ class Fun(commands.Cog):
         async with aiohttp.ClientSession() as cs:
             async with cs.get('https://api.thecatapi.com/v1/images/search') as r:
                 res = await r.json()
-                embed.set_image(url=res[0]['url'])
+                embed.set_image(url=res['url'])
                 await ctx.send(embed=embed)
 
 def setup(client):
