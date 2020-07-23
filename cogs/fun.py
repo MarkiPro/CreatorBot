@@ -23,7 +23,7 @@ class Fun(commands.Cog):
     @commands.command()
     async def cat(self, ctx):
         message = await ctx.send("Generating a cat image for you!")
-        embed = discord.Embed(title="A nice dog for you!", color=0xe700ff)
+        embed = discord.Embed(title="A nice cat for you!", color=0xe700ff)
         async with aiohttp.ClientSession() as cs:
             async with cs.get('https://api.thecatapi.com/v1/images/search') as r:
                 res = await r.json()
