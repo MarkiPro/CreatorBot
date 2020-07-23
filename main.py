@@ -125,7 +125,7 @@ async def send_meme(ctx):
     async with aiohttp.ClientSession() as cs:
         async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
             res = await r.json()
-            embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+            embed.set_image(url=data[0]['url'])
             await channel.send(embed=embed)
 
 @client.event
