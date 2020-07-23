@@ -17,7 +17,7 @@ class Fun(commands.Cog):
         async with aiohttp.ClientSession() as cs:
             async with cs.get('https://dog.ceo/api/breeds/image/random') as r:
                 res = await r.json()
-                embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+                embed.set_image(url=res['data']['children']['data']['url'])
                 await ctx.send(embed=embed)
 
     @commands.command()
@@ -27,7 +27,7 @@ class Fun(commands.Cog):
         async with aiohttp.ClientSession() as cs:
             async with cs.get('https://api.thecatapi.com/v1/images/search') as r:
                 res = await r.json()
-                embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+                embed.set_image(url=res['data']['children']['data']['url'])
                 await ctx.send(embed=embed)
 
 def setup(client):
