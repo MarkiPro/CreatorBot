@@ -119,7 +119,7 @@ async def meme_config(ctx):
     send_meme.start()
 
 @tasks.loop(seconds=3600)
-async def send_meme(ctx: commands.Context):
+async def send_meme(ctx):
     channel = client.get_channel(id=712625666490761297)
     embed = discord.Embed(title="A nice meme for you!", color=0xe700ff)
     async with aiohttp.ClientSession() as cs:
