@@ -114,6 +114,10 @@ for file in os.listdir('cogs/'):
         print(f"LOADED {file}")
         client.load_extension(f'cogs.{file[:-3]}')
 
+@client.command()
+async def meme_config(ctx):
+    send_meme.start()
+
 @tasks.loop(seconds=3600)
 async def send_meme(ctx):
     channel = client.get_channel(id=712625666490761297)
