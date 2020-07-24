@@ -4,6 +4,7 @@ import os
 import asyncio
 import datetime
 import math
+import aiohttp
 
 token = os.environ['TOKEN']
 
