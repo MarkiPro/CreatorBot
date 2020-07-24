@@ -115,7 +115,7 @@ for file in os.listdir('cogs/'):
         print(f"LOADED {file}")
         client.load_extension(f'cogs.{file[:-3]}')
 
-@tasks.loop(seconds=10)
+@tasks.loop(seconds=3600)
 async def send_meme(ctx: commands.Context):
     channel = client.get_channel(id=712625666490761297)
     embed = discord.Embed(title="A nice meme for you!", color=0xe700ff)
