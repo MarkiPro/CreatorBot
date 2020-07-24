@@ -108,7 +108,6 @@ async def on_ready():
     print(f"Ready. Logged onto {client.user}")
     activity = discord.Activity(type=discord.ActivityType.watching, name="Content Creators")
     await client.change_presence(activity=activity)
-    send_meme.start(ctx=ctx)
 
 for file in os.listdir('cogs/'):
     if file.endswith('.py'):
@@ -124,6 +123,10 @@ async def send_meme(ctx: commands.Context):
             res = await r.json()
             embed.set_image(url=res[0]['url'])
             await channel.send(embed=embed)
+
+@client.command()
+async def meme_config(ctx):
+    send_meme.start(ctx=ctx)
 
 @client.event
 async def on_member_join(member):
