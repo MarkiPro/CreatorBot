@@ -13,7 +13,7 @@ class Moderation(commands.Cog):
         self.client = client
 
     @tasks.loop(seconds=3600)
-    async def send_meme(ctx: commands.Context):
+    async def send_meme(self, ctx: commands.Context):
         channel = client.get_channel(id=712625666490761297)
         embed = discord.Embed(title="A nice meme for you!", color=0xe700ff)
         async with aiohttp.ClientSession() as cs:
