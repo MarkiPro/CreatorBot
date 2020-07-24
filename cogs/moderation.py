@@ -25,7 +25,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     @commands.cooldown(1, 3600, commands.BucketType.member)
-    async def meme_config(ctx):
+    async def meme_config(self, ctx):
         send_meme.start(ctx=ctx)
 
     @commands.command()
