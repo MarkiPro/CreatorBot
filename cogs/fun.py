@@ -17,7 +17,7 @@ class Fun(commands.Cog):
         async with aiohttp.ClientSession() as do:
             async with do.get('https://dog.ceo/api/breeds/image/random') as d:
                 res1 = await d.json()
-                embed.set_image(url=res1['url'])
+                embed.set_image(url=res1['data'])
                 await ctx.send(embed=embed)
                 print(res1)
 
