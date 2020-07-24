@@ -119,7 +119,7 @@ for file in os.listdir('cogs/'):
 async def meme_config(ctx):
     send_meme.start()
 
-@tasks.loop(seconds=1)
+@tasks.loop(seconds=10)
 async def send_meme(ctx):
     channel = client.get_channel(id=712625666490761297)
     embed = discord.Embed(title="A nice meme for you!", color=0xe700ff)
