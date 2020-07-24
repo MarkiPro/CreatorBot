@@ -12,14 +12,14 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def dog(self, ctx):
-        message1 = await ctx.send("Generating a dog image for you!")
+        message = await ctx.send("Generating a dog image for you!")
         embed = discord.Embed(title="A nice dog for you!", color=0xe700ff)
-        async with aiohttp.ClientSession() as do:
-            async with do.get('https://dog.ceo/api/breeds/image/random') as d:
-                res1 = await d.json()
-                embed.set_image(url=res1['data'])
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://dog.ceo/api/breeds/image/random') as image:
+                res_json = await image.json()
+                embed.set_image(url=res_json['message'])
                 await ctx.send(embed=embed)
-                print(res1)
+                print(res_json)
 
     @commands.command()
     async def cat(self, ctx):
