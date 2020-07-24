@@ -115,10 +115,6 @@ for file in os.listdir('cogs/'):
         print(f"LOADED {file}")
         client.load_extension(f'cogs.{file[:-3]}')
 
-@client.command()
-async def meme_config(ctx):
-    send_meme.start(ctx=ctx)
-
 @tasks.loop(seconds=10)
 async def send_meme(ctx: commands.Context):
     channel = client.get_channel(id=712625666490761297)
@@ -128,6 +124,10 @@ async def send_meme(ctx: commands.Context):
             res = await r.json()
             embed.set_image(url=res[0]['url'])
             await channel.send(embed=embed)
+
+@client.command()
+async def meme_config(ctx):
+    send_meme.start(ctx=ctx)
 
 @client.event
 async def on_member_join(member):
