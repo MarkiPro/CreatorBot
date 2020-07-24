@@ -117,7 +117,7 @@ for file in os.listdir('cogs/'):
 
 @client.command()
 async def meme_config(ctx):
-    send_meme.start()
+    send_meme.start(ctx)
 
 @tasks.loop(seconds=10)
 async def send_meme(ctx):
