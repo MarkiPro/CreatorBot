@@ -126,8 +126,8 @@ for file in os.listdir('cogs/'):
                 await channel.send(embed=embed)
 
     @client.command()
-    @command.has_permissions(manage_messages=True)
-    @command.cooldown(1, 3600, commands.BucketType.member)
+    @commands.has_permissions(manage_messages=True)
+    @commands.cooldown(1, 3600, commands.BucketType.member)
     async def meme_config(ctx):
         send_meme.start(ctx=ctx)
 
