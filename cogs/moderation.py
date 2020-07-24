@@ -1,9 +1,11 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import datetime
 import re
 import asyncio
 from discord.utils import parse_time
+import aiohttp
+import random
 
 class Moderation(commands.Cog):
 
