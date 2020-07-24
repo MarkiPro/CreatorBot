@@ -118,10 +118,10 @@ for file in os.listdir('cogs/'):
 @tasks.loop(seconds=10)
 async def send_meme(ctx: commands.Context):
     embed = discord.Embed(title="A nice meme for you!", color=0xe700ff)
-    async with aiohttp.ClientSession() as cs:
-        async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
-            res = await r.json()
-            embed.set_image(url=res[0]['url'])
+    async with aiohttp.ClientSession() as session:
+        async with session.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as image:
+            res_json = await image.json()
+            embed.set_image(url=res_json['message'])
             await ctx.send(embed=embed)
 
 @client.command()
