@@ -108,7 +108,7 @@ async def on_ready():
     print(f"Ready. Logged onto {client.user}")
     activity = discord.Activity(type=discord.ActivityType.watching, name="Content Creators")
     await client.change_presence(activity=activity)
-    send_meme.start()
+    send_meme.start(ctx=ctx)
 
 for file in os.listdir('cogs/'):
     if file.endswith('.py'):
@@ -117,16 +117,13 @@ for file in os.listdir('cogs/'):
 
 @tasks.loop(seconds=10)
 async def send_meme(ctx: commands.Context):
+    channel = client.get_channel(id=712625666490761297)
     embed = discord.Embed(title="A nice meme for you!", color=0xe700ff)
-    async with aiohttp.ClientSession() as session:
-        async with session.get('https://dog.ceo/api/breeds/image/random') as image:
-            res_json = await image.json()
-            embed.set_image(url=res_json['message'])
-            await ctx.send(embed=embed)
-
-@client.command()
-async def meme_config(ctx):
-    send_meme.start(ctx=ctx)
+    async with aiohttp.ClientSession() as cs:
+        async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
+            res = await r.json()
+            embed.set_image(url=res[0]['url'])
+            await channel.send(embed=embed)
 
 @client.event
 async def on_member_join(member):
