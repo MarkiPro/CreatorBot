@@ -36,5 +36,24 @@ class Fun(commands.Cog):
         except:
             return await ctx.send("There was an issue with loading the image.")
 
+    @tasks.loop(seconds=3600)
+    async def send_meme(ctx: commands.Context):
+        try:
+            channel = client.get_channel(id=712625666490761297)
+            embed = discord.Embed(title="A nice meme for you!", color=0xe700ff)
+            async with aiohttp.ClientSession() as cs:
+                async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
+                    res = await r.json()
+                    embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+                    await channel.send(embed=embed)
+        except:
+            return await channel.send("There was an issue with loading the meme.")
+
+    @commands.command()
+    @command.has_permissions(manage_messages=True)
+    @command.cooldown(1, 3600, commands.BucketType.member)
+    async def meme_config(ctx):
+        send_meme.start(ctx=ctx)
+
 def setup(client):
     client.add_cog(Fun(client))
