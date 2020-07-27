@@ -25,8 +25,8 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def cat(self, ctx):
+        message = await ctx.send("Generating a cat image for you!")
         try:
-            message = await ctx.send("Generating a cat image for you!")
             embed = discord.Embed(title="A nice cat for you!", color=0xe700ff)
             async with aiohttp.ClientSession() as ca:
                 async with ca.get('https://api.thecatapi.com/v1/images/search') as c:
@@ -35,7 +35,6 @@ class Fun(commands.Cog):
                     await ctx.send(embed=embed)
         except:
             return await ctx.send("There was an issue with loading the image.")
-
 
 def setup(client):
     client.add_cog(Fun(client))
