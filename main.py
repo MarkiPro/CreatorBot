@@ -115,19 +115,6 @@ for file in os.listdir('cogs/'):
         print(f"LOADED {file}")
         client.load_extension(f'cogs.{file[:-3]}')
 
-@tasks.loop(seconds=3600)
-async def send_meme(ctx: commands.Context):
-    try:
-        channel = client.get_channel(id=712625666490761297)
-        embed = discord.Embed(title="A nice meme for you!", color=0xe700ff)
-        async with aiohttp.ClientSession() as cs:
-            async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
-                res = await r.json()
-                embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
-                await channel.send(embed=embed)
-    except:
-        return await channel.send("There was an issue with loading the meme.")
-
 @client.event
 async def on_member_join(member):
     if client.get_guild(id=729495109963612270):
