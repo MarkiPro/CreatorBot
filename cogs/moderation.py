@@ -13,8 +13,11 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
-    async def clear(self, ctx, amount=0):
-        await ctx.channel.purge(limit=amount + 1)
+    async def clear(self, ctx, amount = 0, *, channel = None):
+        if not channel:
+            await ctx.channel.purge(limit=amount + 1)
+        if channel:
+            await channel.purge(limit=amount + 1)
 
     @commands.command()
     @commands.has_permissions(kick_members=True)
