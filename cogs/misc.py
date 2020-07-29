@@ -151,139 +151,21 @@ class Misc(commands.Cog):
                 except asyncio.TimeoutError or programmer_hiring_other == ['0']:
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-            if hiring_category == "2":
-                scripter_hiring_embed = discord.Embed(
-                    title="**SCRIPTER HIRING POST**",
-                    description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.",
-                    color=0x0064ff
-                )
-                try:
-                    hiring_category_message = await client.wait_for('message', check=check, timeout=1000)
-                    hiring_category = hiring_category_message.content
-                except asyncio.TimeoutError or category == ['0']:
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-            if hiring_category == "3":
-                gfx_designer_hiring_embed = discord.Embed(
-                    title="**GFX DESIGNER HIRING POST**",
-                    description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.",
-                    color=0x0064ff
-                )
-                try:
-                    hiring_category_message = await client.wait_for('message', check=check, timeout=1000)
-                    hiring_category = hiring_category_message.content
-                except asyncio.TimeoutError or category == ['0']:
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-            if hiring_category == "4":
-                artist_hiring_embed = discord.Embed(
-                    title="**ARTIST HIRING POST**",
-                    description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.",
-                    color=0x0064ff
-                )
-                try:
-                    hiring_category_message = await client.wait_for('message', check=check, timeout=1000)
-                    hiring_category = hiring_category_message.content
-                except asyncio.TimeoutError or category == ['0']:
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-            if hiring_category == "5":
-                modeler_hiring_embed = discord.Embed(
-                    title="**MODELER HIRING POST**",
-                    description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.",
-                    color=0x0064ff
-                )
-                try:
-                    hiring_category_message = await client.wait_for('message', check=check, timeout=1000)
-                    hiring_category = hiring_category_message.content
-                except asyncio.TimeoutError or category == ['0']:
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-            if hiring_category == "6":
-                builder_hiring_embed = discord.Embed(
-                    title="**BUILDER HIRING POST**",
-                    description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.",
-                    color=0x0064ff
-                )
-                try:
-                    hiring_category_message = await client.wait_for('message', check=check, timeout=1000)
-                    hiring_category = hiring_category_message.content
-                except asyncio.TimeoutError or category == ['0']:
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-            if hiring_category == "7":
-                staff_hiring_embed = discord.Embed(
-                    title="**STAFF HIRING POST**",
-                    description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.",
-                    color=0x0064ff
-                )
-                try:
-                    hiring_category_message = await client.wait_for('message', check=check, timeout=1000)
-                    hiring_category = hiring_category_message.content
-                except asyncio.TimeoutError or category == ['0']:
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-            if hiring_category == "8":
-                ui_designer_hiring_embed = discord.Embed(
-                    title="**UI DESIGNER HIRING POST**",
-                    description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.",
-                    color=0x0064ff
-                )
-                try:
-                    hiring_category_message = await client.wait_for('message', check=check, timeout=1000)
-                    hiring_category = hiring_category_message.content
-                except asyncio.TimeoutError or category == ['0']:
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-            if hiring_category == "9":
-                animator_hiring_embed = discord.Embed(
-                    title="**ANIMATOR HIRING POST**",
-                    description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.",
-                    color=0x0064ff
-                )
-                try:
-                    hiring_category_message = await client.wait_for('message', check=check, timeout=1000)
-                    hiring_category = hiring_category_message.content
-                except asyncio.TimeoutError or category == ['0']:
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-            if hiring_category == "10":
-                tutor_hiring_embed = discord.Embed(
-                    title="**TUTOR HIRING POST**",
-                    description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.",
-                    color=0x0064ff
-                )
-                try:
-                    hiring_category_message = await client.wait_for('message', check=check, timeout=1000)
-                    hiring_category = hiring_category_message.content
-                except asyncio.TimeoutError or category == ['0']:
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-            if hiring_category == "11":
-                clothing_designer_hiring_embed = discord.Embed(
-                    title="**MUSIC COMPOSER HIRING POST**",
-                    description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.",
-                    color=0x0064ff
-                )
-                try:
-                    hiring_category_message = await client.wait_for('message', check=check, timeout=1000)
-                    hiring_category = hiring_category_message.content
-                except asyncio.TimeoutError or category == ['0']:
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-            if hiring_category == "12":
-                clothing_designer_hiring_embed = discord.Embed(
-                    title="**CLOTHING DESIGNER HIRING POST**",
-                    description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.",
-                    color=0x0064ff
-                )
-                try:
-                    hiring_category_message = await client.wait_for('message', check=check, timeout=1000)
-                    hiring_category = hiring_category_message.content
-                except asyncio.TimeoutError or category == ['0']:
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-        
+                some_long_text = "blah blah ISUIBGUIBOIOGERONGIPOENOGPA"
+                text_splitter = TextSplitter(char_per_page=11, text=some_long_text)
+
+                for i, entry in enumerate(text_splitter.words_list):
+                    prepared_embed = discord.Embed(title="A simple Paginated thing") # do not set the footer and descriping they get overriden.
+                    
+                    if i != 0:
+                        prepared_embed.title = None
+                    
+                    prepared_embed.description = discord.utils.escape_mentions(entry)
+                    prepared_embed.set_footer(text=f"Page {i + 1} of {len(text_splitter.words_list)}")
+                    some_channel = client.get_channel(id=729498148057382994)
+                    
+                    await some_channel.send(embed=prepared_embed)
+                
 
     @commands.command(aliases=['suggestion'], description="This command is used for suggesting useful ideas!")
     async def suggest(self, ctx):
