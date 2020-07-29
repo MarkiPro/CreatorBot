@@ -47,7 +47,7 @@ class Misc(commands.Cog):
         )
         title_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
         await ctx.send(embed=categories_embed)
-        await ctx.author.send(categories)
+        await ctx.author.send(embed=categories)
         def check(m):
             if isinstance(m.channel, discord.DMChannel):
                 if m.author == ctx.author:
