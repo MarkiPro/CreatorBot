@@ -36,11 +36,5 @@ class Fun(commands.Cog):
         except:
             return await ctx.send("There was an issue with loading the image.")
 
-    @commands.command()
-    @command.has_permissions(manage_messages=True)
-    @command.cooldown(1, 3600, commands.BucketType.member)
-    async def meme_config(ctx):
-        send_meme.start(ctx=ctx)
-
 def setup(client):
     client.add_cog(Fun(client))
