@@ -124,25 +124,25 @@ async def on_member_join(member):
         # CONTENT CREATORS
 
         content_creators_community_helper = discord.utils.get(content_creators.roles, id=712732582365757470)
-        content_creators_senior_community_helper = discord.utils(content_creators.roles, id=722861996504121456)
+        content_creators_senior_community_helper = discord.utils.get(content_creators.roles, id=722861996504121456)
         content_creators_head_community_helper = discord.utils.get(content_creators.roles, id=722860980782235819)
-        content_creators_trial_application_reader = discord.utils(content_creators.roles, id=722860699327397950)
+        content_creators_trial_application_reader = discord.utils.get(content_creators.roles, id=722860699327397950)
         content_creators_application_reader = discord.utils.get(content_creators.roles, id=722860570998603827)
-        content_creators_senior_application_reader = discord.utils(content_creators.roles, id=722860303993405572)
+        content_creators_senior_application_reader = discord.utils.get(content_creators.roles, id=722860303993405572)
         content_creators_head_application_reacer = discord.utils.get(content_creators.roles, id=722860184845680791)
-        content_creators_trial_scam_investigator = discord.utils(content_creators.roles, id=722859531784421376)
+        content_creators_trial_scam_investigator = discord.utils.get(content_creators.roles, id=722859531784421376)
         content_creators_scam_investigator = discord.utils.get(content_creators.roles, id=722859441350770719)
-        content_creators_senior_scam_investigator = discord.utils(content_creators.roles, id=722859802690060430)
+        content_creators_senior_scam_investigator = discord.utils.get(content_creators.roles, id=722859802690060430)
         content_creators_head_scam_investigator = discord.utils.get(content_creators.roles, id=722859343560704050)
-        content_creators_trial_moderator = discord.utils(content_creators.roles, id=722792418922987550)
-        content_creators_moderator = discord.utils(content_creators.roles, id=695328029303635998)
-        content_creators_senior_moderator = discord.utils(content_creators.roles, id=722792492969492540)
-        content_creators_head_moderator = discord.utils(content_creators.roles, id=722792338073714759)
-        content_creators_administrator = discord.utils(content_creators.roles, id=695328300364464248)
-        content_creators_senior_administrator = discord.utils(content_creators.roles, id=722791896480612362)
-        content_creators_head_administrator = discord.utils(content_creators.roles, id=722791558088491038)
-        content_creators_server_manager = discord.utils(content_creators.roles, id=722792808896921711)
-        content_creators_founder = discord.utils(content_creators.roles, id=695328208844881972)
+        content_creators_trial_moderator = discord.utils.get(content_creators.roles, id=722792418922987550)
+        content_creators_moderator = discord.utils.get(content_creators.roles, id=695328029303635998)
+        content_creators_senior_moderator = discord.utils.get(content_creators.roles, id=722792492969492540)
+        content_creators_head_moderator = discord.utils.get(content_creators.roles, id=722792338073714759)
+        content_creators_administrator = discord.utils.get(content_creators.roles, id=695328300364464248)
+        content_creators_senior_administrator = discord.utils.get(content_creators.roles, id=722791896480612362)
+        content_creators_head_administrator = discord.utils.get(content_creators.roles, id=722791558088491038)
+        content_creators_server_manager = discord.utils.get(content_creators.roles, id=722792808896921711)
+        content_creators_founder = discord.utils.get(content_creators.roles, id=695328208844881972)
 
         # CONTENT CREATORS STAFF
 
@@ -209,7 +209,13 @@ async def on_member_join(member):
             member.add_role(content_creators_staff_founder)
         else:
             member.kick(reason="Not a staff member.")
-
+        SomeRandomEmbed20 = discord.Embed(
+            title="**WELCOME MESSAGE**",
+            description=f"*Welcome to the **{member.guild}** fellow staff member!*",
+            color=0xffa200,
+            timestamp=datetime.datetime.now(tz=None)
+        )
+        await member.send(embed=SomeRandomEmbed20)
     SomeRandomEmbed = discord.Embed(
         title="**WELCOME MESSAGE**",
         description=f"*Welcome to the **{member.guild}**!*",
