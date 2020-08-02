@@ -129,7 +129,7 @@ async def on_member_join(member):
         content_creators_trial_application_reader = discord.utils.get(content_creators.roles, id=722860699327397950)
         content_creators_application_reader = discord.utils.get(content_creators.roles, id=722860570998603827)
         content_creators_senior_application_reader = discord.utils.get(content_creators.roles, id=722860303993405572)
-        content_creators_head_application_reacer = discord.utils.get(content_creators.roles, id=722860184845680791)
+        content_creators_head_application_reader = discord.utils.get(content_creators.roles, id=722860184845680791)
         content_creators_trial_scam_investigator = discord.utils.get(content_creators.roles, id=722859531784421376)
         content_creators_scam_investigator = discord.utils.get(content_creators.roles, id=722859441350770719)
         content_creators_senior_scam_investigator = discord.utils.get(content_creators.roles, id=722859802690060430)
@@ -152,7 +152,7 @@ async def on_member_join(member):
         content_creators_staff_trial_application_reader = discord.utils.get(content_creators_staff.roles, id=729495109984321540)
         content_creators_staff_application_reader = discord.utils.get(content_creators_staff.roles, id=729495109984321541)
         content_creators_staff_senior_application_reader = discord.utils.get(content_creators_staff.roles, id=729495109984321542)
-        content_creators_staff_head_application_reacer = discord.utils.get(content_creators_staff.roles, id=729495109984321543)
+        content_creators_staff_head_application_reader = discord.utils.get(content_creators_staff.roles, id=729495109984321543)
         content_creators_staff_trial_scam_investigator = discord.utils.get(content_creators_staff.roles, id=729495109984321544)
         content_creators_staff_scam_investigator = discord.utils.get(content_creators_staff.roles, id=729495109984321545)
         content_creators_staff_senior_scam_investigator = discord.utils.get(content_creators_staff.roles, id=729495109984321546)
@@ -167,45 +167,45 @@ async def on_member_join(member):
         content_creators_staff_server_manager = discord.utils.get(content_creators_staff.roles, id=729495110001361005)
         content_creators_staff_founder = discord.utils.get(content_creators_staff.roles, id=729495110001361006)
 
-        if member.has_role(content_creators_community_helper):
+        if content_creators_community_helper in member.roles:
             member.add_role(content_creators_staff_community_helper)
-        if member.has_role(content_creators_senior_community_helper):
+        if content_creators_senior_community_helper in member.roles:
             member.add_role(content_creators_staff_senior_community_helper)
-        if member.has_role(content_creators_head_community_helper):
+        if content_creators_head_community_helper in member.roles:
             member.add_role(content_creators_staff_head_community_helper)
-        if member.has_role(content_creators_trial_application_reader):
+        if content_creators_trial_application_reader in member.roles:
             member.add_role(content_creators_staff_trial_application_reader)
-        if member.has_role(content_creators_application_reader):
+        if content_creators_application_reader in member.roles:
             member.add_role(content_creators_staff_application_reader)
-        if member.has_role(content_creators_senior_application_reader):
+        if content_creators_senior_application_reader in member.roles:
             member.add_role(content_creators_staff_senior_application_reader)
-        if member.has_role(content_creators_head_application_reader):
+        if content_creators_head_application_reader in member.roles:
             member.add_role(content_creators_staff_head_application_reader)
-        if member.has_role(content_creators_trial_scam_investigator):
+        if content_creators_trial_scam_investigator in member.roles:
             member.add_role(content_creators_staff_trial_scam_investigator)
-        if member.has_role(content_creators_scam_investigator):
+        if content_creators_scam_investigator in member.roles:
             member.add_role(content_creators_staff_scam_investigator)
-        if member.has_role(content_creators_senior_scam_investigator):
+        if content_creators_senior_scam_investigator in member.roles:
             member.add_role(content_creators_staff_senior_scam_investigator)
-        if member.has_role(content_creators_head_scam_investigator):
+        if content_creators_head_scam_investigator in member.roles:
             member.add_role(content_creators_staff_head_scam_investigator)
-        if member.has_role(content_creators_trial_moderator):
+        if content_creators_trial_moderator in member.roles:
             member.add_role(content_creators_staff_trial_moderator)
-        if member.has_role(content_creators_moderator):
+        if content_creators_moderator in member.roles:
             member.add_role(content_creators_staff_moderator)
-        if member.has_role(content_creators_senior_moderator):
+        if content_creators_senior_moderator in member.roles:
             member.add_role(content_creators_staff_senior_moderator)
-        if member.has_role(content_creators_head_moderator):
+        if content_creators_head_moderator in member.roles:
             member.add_role(content_creators_staff_head_moderator)
-        if member.has_role(content_creators_administrator):
+        if content_creators_administrator in member.roles:
             member.add_role(content_creators_staff_administrator)
-        if member.has_role(content_creators_senior_administrator):
+        if content_creators_senior_administrator in member.roles:
             member.add_role(content_creators_staff_senior_administrator)
-        if member.has_role(content_creators_head_administrator):
+        if content_creators_administrator in member.roles:
             member.add_role(content_creators_staff_head_administrator)
-        if member.has_role(content_creators_server_manager):
+        if content_creators_server_manager in member.roles:
             member.add_role(content_creators_staff_server_manager)
-        if member.has_role(content_creators_founder):
+        if content_creators_founder in member.roles:
             member.add_role(content_creators_staff_founder)
         else:
             member.kick(reason="Not a staff member.")
