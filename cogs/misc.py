@@ -28,13 +28,13 @@ class Misc(commands.Cog):
 
         embed3 = discord.Embed(
             title="**SUCCESS**",
-            description="***:white_check_mark: Removed the `Not For Hire` role.`.",
+            description="***:white_check_mark: Removed the `Not For Hire` role.***",
             color=0x00fa00
         )
 
         embed2 = discord.Embed(
             title="**SUCCESS**",
-            description="***:white_check_mark: You now have the `For Hire` role.",
+            description="***:white_check_mark: You now have the `For Hire` role.***",
             color=0x00fa00
         )
 
@@ -67,13 +67,13 @@ class Misc(commands.Cog):
 
         embed3 = discord.Embed(
             title="**SUCCESS**",
-            description="***:white_check_mark: Removed the `For Hire` role.`.",
+            description="***:white_check_mark: Removed the `For Hire` role.***",
             color=0x00fa00
         )
 
         embed2 = discord.Embed(
             title="**SUCCESS**",
-            description="***:white_check_mark: You now have the `Not For Hire` role.",
+            description="***:white_check_mark: You now have the `Not For Hire` role.***",
             color=0x00fa00
         )
 
