@@ -11,7 +11,7 @@ class Fun(commands.Cog):
         self.client = client
 
     @commands.command()
-    @commands.cooldown(1, 5, commands.BucketType.Member)
+    @commands.cooldown(1, 5, commands.BucketType.member)
     async def dog(self, ctx):
         try:
             message = await ctx.send("Generating a dog image for you!")
@@ -25,7 +25,7 @@ class Fun(commands.Cog):
             return await ctx.send("There was an issue with loading the image.")
 
     @commands.command()
-    @commands.cooldown(1, 5, commands.BucketType.Member)
+    @commands.cooldown(1, 5, commands.BucketType.member)
     async def cat(self, ctx):
         message = await ctx.send("Generating a cat image for you!")
         try:
