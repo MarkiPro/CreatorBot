@@ -10,8 +10,86 @@ class Misc(commands.Cog):
         self.client = client
         self.client.help_command.cog = self
 
+    @commands.command(aliases=["for-hire", "forhire"], description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
+    @commands.cooldown(1, 300, commands.BucketType.member)
+    async def fh(self, ctx):
+        cc_guild = client.get_guild(id=611227128020598805)
+        
+        nfh_role = discord.utils.get(cc_guild.roles, id=729491617630912613)
+        fh_role = discord.utils.get(cc_guild.roles, id=738814225614635100)
+
+        member = ctx.author
+
+        embed1 = discord.Embed(
+            title="**ERROR**",
+            description="***:no_entry_sign: You already have the `For Hire` role.***",
+            color=0xff0000
+        )
+
+        embed3 = discord.Embed(
+            title="**SUCCESS**",
+            description="***:white_check_mark: Removed the `Not For Hire` role.`.",
+            color=0x00fa00
+        )
+
+        embed2 = discord.Embed(
+            title="**SUCCESS**",
+            description="***:white_check_mark: You now have the `For Hire` role.",
+            color=0x00fa00
+        )
+
+        if nfh_role in member.roles:
+            member.remove_roles(nfh_role)
+            member.add_role(fh_role)
+            await member.send(embed=embed3)
+            await member.send(embed=embed2)
+        if nfh_role and fh_role not in member.roles:
+            member.add_role(fh_role)
+            await member.send(embed=embed2)
+        if fh_role in member.roles:
+            await member.send(embed=embed1)
+        
+    @commands.command(aliases=["not-for-hire", "notforhire"], description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
+    @commands.cooldown(1, 300, commands.BucketType.member)
+    async def nfh(self, ctx):
+        cc_guild = client.get_guild(id=611227128020598805)
+        
+        nfh_role = discord.utils.get(cc_guild.roles, id=729491617630912613)
+        fh_role = discord.utils.get(cc_guild.roles, id=738814225614635100)
+
+        member = ctx.author
+
+        embed1 = discord.Embed(
+            title="**ERROR**",
+            description="***:no_entry_sign: You already have the `Not For Hire` role.***",
+            color=0xff0000
+        )
+
+        embed3 = discord.Embed(
+            title="**SUCCESS**",
+            description="***:white_check_mark: Removed the `For Hire` role.`.",
+            color=0x00fa00
+        )
+
+        embed2 = discord.Embed(
+            title="**SUCCESS**",
+            description="***:white_check_mark: You now have the `Not For Hire` role.",
+            color=0x00fa00
+        )
+
+        if fh_role in member.roles:
+            member.remove_roles(fh_role)
+            member.add_role(nfh_role)
+            await member.send(embed=embed3)
+            await member.send(embed=embed2)
+        if nfh_role and fh_role not in member.roles:
+            member.add_role(nfh_role)
+            await member.send(embed=embed2)
+        if nfh_role in member.roles:
+            await member.send(embed=embed1)
+
     @commands.command(description="This command is used for posting hiring requests.")
-    @commands.cooldown(4, 10800, commands.BucketType.member)
+    @commands.cooldown(3, 10800, commands.BucketType.member)
     async def post(self, ctx):
         cancel_prompt_embed = discord.Embed(
             title="**CANCELLED**",
