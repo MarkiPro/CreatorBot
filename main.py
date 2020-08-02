@@ -139,7 +139,7 @@ async def on_member_join(member):
     if not is_staff_member:
         await member.kick(reason="Not staff member.")
 
-    for cc_role, ccs_role in role_definition.values():
+    for cc_role, ccs_role in role_definition.items():
         for role in member_in_cc.roles:
             if cc_role == role.id:
                 await member.add_roles(discord.utils.get(member.guild.roles, id=ccs_role))
