@@ -150,64 +150,69 @@ class Misc(commands.Cog):
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         if category == "1":
-            programmer_hiring_embed1 = discord.Embed(
-                title="**PROGRAMMER HIRING POST**",
+            hiring_embed0 = discord.Embed(
+                title="**HIRING POST**",
                 description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.***",
                 color=0x0064ff
             )
-            programmer_hiring_embed1.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-            await ctx.author.send(embed=programmer_hiring_embed1)
+            hiring_embed0.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+            await ctx.author.send(embed=hiring_embed0)
             try:
-                programmer_hiring_details_message = await client.wait_for('message', check=check, timeout=1000)
-                programmer_hiring_details = programmer_hiring_details_message.content
-            except asyncio.TimeoutError or programmer_hiring_details == ['0']:
+                hiring_details_message = await client.wait_for('message', check=check, timeout=1000)
+                hiring_details = hiring_details_message.content
+            except asyncio.TimeoutError or hiring_details == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            programmer_hiring_embed1 = discord.Embed(
-                title="**PROGRAMMER HIRING POST**",
+            hiring_embed1 = discord.Embed(
+                title="**HIRING POST**",
                 description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.***",
                 color=0x0064ff
             )
-            programmer_hiring_embed1.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-            await ctx.author.send(embed=programmer_hiring_embed1)
+            hiring_embed1.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+            await ctx.author.send(embed=hiring_embed1)
             try:
-                programmer_hiring_details_message = await client.wait_for('message', check=check, timeout=1000)
-                programmer_hiring_details = programmer_hiring_details_message.content
-            except asyncio.TimeoutError or programmer_hiring_details == ['0']:
+                hiring_details_message = await client.wait_for('message', check=check, timeout=1000)
+                hiring_details = hiring_details_message.content
+            except asyncio.TimeoutError or hiring_details == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            programmer_hiring_embed2 = discord.Embed(
-                title="**PROGRAMMER HIRING POST**",
+            hiring_embed2 = discord.Embed(
+                title="**HIRING POST**",
                 description="***Describe the payment to this job.***",
                 color=0x0064ff
             )
-            programmer_hiring_embed2.set_footer.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-            await ctx.author.send(embed=programmer_hiring_embed2)
+            hiring_embed2.set_footer.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+            await ctx.author.send(embed=hiring_embed2)
             try:
-                programmer_hiring_payment_message = await client.wait_for('message', check=check, timeout=1000)
-                programmer_hiring_payment = programmer_hiring_payment_message.content
-            except asyncio.TimeoutError or programmer_hiring_payment == ['0']:
+                hiring_payment_message = await client.wait_for('message', check=check, timeout=1000)
+                hiring_payment = hiring_payment_message.content
+            except asyncio.TimeoutError or hiring_payment == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            programmer_hiring_embed3 = discord.Embed(
-                title="**PROGRAMMER HIRING POST**",
+            hiring_embed3 = discord.Embed(
+                title="**HIRING POST**",
                 description="***You may send links leading to the project ideas/screenshots, anything really.***",
                 color=0x0064ff
             )
-            programmer_hiring_embed3.set_footer.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-            await ctx.author.send(embed=programmer_hiring_embed3)
+            hiring_embed3.set_footer.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+            await ctx.author.send(embed=hiring_embed3)
             try:
-                programmer_hiring_image_message = await client.wait_for('message', check=check, timeout=1000)
-                programmer_hiring_image = programmer_hiring_other_message.content
-            except asyncio.TimeoutError or programmer_hiring_other == ['0']:
+                hiring_image_message = await client.wait_for('message', check=check, timeout=1000)
+                hiring_image = hiring_other_message.content
+            except asyncio.TimeoutError or hiring_other == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            programmer_hiring_embed4.set_footer.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-            await ctx.author.send(embed=programmer_hiring_embed3)
+            hiring_embed4 = discord.Embed(
+                title="**HIRING POST**",
+                description="***In case you have something else that you would like to add onto the previous statements, please provide it now.***",
+                color=0x0064ff
+            )
+            hiring_embed4.set_footer.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+            await ctx.author.send(embed=hiring_embed3)
             try:
-                programmer_hiring_other_message = await client.wait_for('message', check=check, timeout=1000)
-                programmer_hiring_other = programmer_hiring_other_message.content
-            except asyncio.TimeoutError or programmer_hiring_other == ['0']:
+                hiring_other_message = await client.wait_for('message', check=check, timeout=1000)
+                hiring_other = hiring_other_message.content
+            except asyncio.TimeoutError or hiring_other == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             some_long_text = "blah blah ISUIBGUIBOIOGERONGIPOENOGPA"
@@ -221,7 +226,7 @@ class Misc(commands.Cog):
                 
                 prepared_embed.description = discord.utils.escape_mentions(entry)
                 prepared_embed.set_footer(text=f"Page {i + 1} of {len(text_splitter.words_list)}")
-                some_channel = client.get_channel(id=729498148057382994)
+                some_channel = client.get_channel(id=712659793008918538)
                 
                 await some_channel.send(embed=prepared_embed)
     
@@ -252,7 +257,7 @@ class Misc(commands.Cog):
         artist = discord.utils.get(content_creators.roles, id=734662196025360416)
         ruby_programmer = discord.utils.get(content_creators.roles, id=735147661430227025)
         music_composer = discord.utils.get(content_creators.roles, id=735497558855516161)
-        html_and_css_programmer = discord.utils.get(content_creators.roles, id=735147383716970507)
+        html_programmer = discord.utils.get(content_creators.roles, id=735147383716970507)
         animator = discord.utils.get(content_creators.roles, id=734662028353994752)
 
     @commands.command(aliases=['suggestion'], description="This command is used for suggesting cool ideas!")
