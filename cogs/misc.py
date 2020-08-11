@@ -185,8 +185,8 @@ class Misc(commands.Cog):
             await ctx.author.send(embed=hiring_embed3)
             try:
                 hiring_image_message = await client.wait_for('message', check=check, timeout=1000)
-                hiring_image = hiring_other_message.content
-            except asyncio.TimeoutError or hiring_other == ['0']:
+                hiring_image = hiring_image_message.content
+            except asyncio.TimeoutError or hiring_image == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             hiring_embed4 = discord.Embed(
