@@ -39,12 +39,12 @@ class Misc(commands.Cog):
         )
 
         if nfh_role in member.roles:
-            member.remove_roles(nfh_role)
-            member.add_roles(fh_role)
+            await member.remove_roles(nfh_role)
+            await member.add_roles(fh_role)
             await member.send(embed=embed3)
             await member.send(embed=embed2)
         if nfh_role and fh_role not in member.roles:
-            member.add_roles(fh_role)
+            await member.add_roles(fh_role)
             await member.send(embed=embed2)
         if fh_role in member.roles:
             await member.send(embed=embed1)
@@ -78,12 +78,12 @@ class Misc(commands.Cog):
         )
 
         if fh_role in member.roles:
-            member.remove_roles(fh_role)
-            member.add_roles(nfh_role)
+            await member.remove_roles(fh_role)
+            await member.add_roles(nfh_role)
             await member.send(embed=embed3)
             await member.send(embed=embed2)
         if nfh_role and fh_role not in member.roles:
-            member.add_roles(nfh_role)
+            await member.add_roles(nfh_role)
             await member.send(embed=embed2)
         if nfh_role in member.roles:
             await member.send(embed=embed1)
