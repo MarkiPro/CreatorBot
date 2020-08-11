@@ -43,11 +43,14 @@ class Misc(commands.Cog):
             await member.add_roles(fh_role)
             await member.send(embed=embed3)
             await member.send(embed=embed2)
+            return
         if nfh_role and fh_role not in member.roles:
             await member.add_roles(fh_role)
             await member.send(embed=embed2)
+            return
         if fh_role in member.roles:
             await member.send(embed=embed1)
+            return
         
     @commands.command(aliases=["not-for-hire", "notforhire"], description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
     @commands.cooldown(1, 300, commands.BucketType.member)
@@ -82,11 +85,14 @@ class Misc(commands.Cog):
             await member.add_roles(nfh_role)
             await member.send(embed=embed3)
             await member.send(embed=embed2)
+            return
         if nfh_role and fh_role not in member.roles:
             await member.add_roles(nfh_role)
             await member.send(embed=embed2)
+            return
         if nfh_role in member.roles:
             await member.send(embed=embed1)
+            return
 
     @commands.command(description="This command is used for posting hiring requests.")
     @commands.cooldown(3, 10800, commands.BucketType.member)
