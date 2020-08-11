@@ -168,7 +168,7 @@ class Misc(commands.Cog):
                 description="***Describe the payment to this job.***",
                 color=0x0064ff
             )
-            hiring_embed2.set_footer.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+            hiring_embed2.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed2)
             try:
                 hiring_payment_message = await client.wait_for('message', check=check, timeout=1000)
@@ -181,7 +181,7 @@ class Misc(commands.Cog):
                 description="***You may send links leading to the project ideas/screenshots, anything really.***",
                 color=0x0064ff
             )
-            hiring_embed3.set_footer.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+            hiring_embed3.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed3)
             try:
                 hiring_image_message = await client.wait_for('message', check=check, timeout=1000)
@@ -194,7 +194,7 @@ class Misc(commands.Cog):
                 description="***In case you have something else that you would like to add onto the previous statements, please provide it now.***",
                 color=0x0064ff
             )
-            hiring_embed4.set_footer.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+            hiring_embed4.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed3)
             try:
                 hiring_other_message = await client.wait_for('message', check=check, timeout=1000)
