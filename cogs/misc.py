@@ -215,7 +215,7 @@ class Misc(commands.Cog):
             except asyncio.TimeoutError or hiring_other == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            some_long_text = "blah blah ISUIBGUIBOIOGERONGIPOENOGPA"
+            some_long_text = "blah blah blah blah test"
             text_splitter = TextSplitter(char_per_page=11, text=some_long_text)
 
             for i, entry in enumerate(text_splitter.words_list):
