@@ -150,19 +150,6 @@ class Misc(commands.Cog):
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         if category == "1":
-            hiring_embed0 = discord.Embed(
-                title="**HIRING POST**",
-                description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.***",
-                color=0x0064ff
-            )
-            hiring_embed0.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-            await ctx.author.send(embed=hiring_embed0)
-            try:
-                hiring_details_message = await client.wait_for('message', check=check, timeout=1000)
-                hiring_details = hiring_details_message.content
-            except asyncio.TimeoutError or hiring_details == ['0']:
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
             hiring_embed1 = discord.Embed(
                 title="**HIRING POST**",
                 description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.***",
