@@ -59,7 +59,7 @@ class Fun(commands.Cog):
         if choice not in options:
             return await ctx.send("Please use a valid choice")
 
-        bot_choice = random.choice([i for i in choices.keys() if i != "marki")
+        bot_choice = random.choice([i for i in choices.keys() if i != "marki"])
 
         if f"{choice}" == bot_choice:
             return await ctx.send(f"I chose {bot_choice}\nIt is a draw.")
