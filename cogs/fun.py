@@ -38,5 +38,36 @@ class Fun(commands.Cog):
         except:
             return await ctx.send("There was an issue with loading the image.")
 
+    @commands.command()
+    @commands.cooldown(1, 5, commands.BucketType.member)
+    async def rps(self, ctx, *, choice):
+
+        choice = choice.lower()
+
+        choices = {"rock": {
+            "loose": ["scissors"],
+        }, "paper": {
+            "loose": ['rock']
+        }, "scissors": {
+            "loose": ['paper']
+        }, "marki": {
+            "loose": ['rock', 'paper', 'scissors']
+        }}
+
+        options = [i for i in choices.keys()]
+
+        if choice not in options:
+            return await ctx.send("Please use a valid choice")
+
+        bot_choice = random.choice([i for i in choices.keys() if i != "marki")
+
+        if f"{choice}" == bot_choice:
+            return await ctx.send(f"I chose {bot_choice}\nIt is a draw.")
+
+        if f"{choice}" in choices[bot_choice]['loose']:
+            return await ctx.send(f"I chose {bot_choice}\nI won!")
+        else:
+            return await ctx.send(f"I chose {bot_choice}\nYou won!")
+
 def setup(client):
     client.add_cog(Fun(client))
