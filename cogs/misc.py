@@ -3,7 +3,7 @@ from discord.ext import commands
 import datetime
 import asyncio
 from main import client
-from paginator import TextSplitter
+from pagething import TextSplitter
 
 class Misc(commands.Cog):
 
