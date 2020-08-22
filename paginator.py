@@ -1,12 +1,11 @@
 import discord
 from discord.ext import commands
-from discord.ext import buttons
+#from discord.ext import buttons
 
 
-class ReactionsPaginator(buttons.Paginator):
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-
+#class ReactionsPaginator(buttons.Paginator):
+ #   def __init__(self, *args, **kwargs) -> None:
+  #      super().__init__(*args, **kwargs)
 
 class TextSplitter:
     def __init__(self, char_per_page, text):
