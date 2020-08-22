@@ -102,7 +102,9 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
 
         await self.get_destination().send(embed=embed)
 
-client = commands.Bot(command_prefix='>', case_insensitive=True, help_command=EmbedHelpCommand())
+prefix = ">"
+
+client = commands.Bot(commands.when_mentioned_or(prefix), command_prefix='>', case_insensitive=True, help_command=EmbedHelpCommand())
 
 @client.event
 async def on_ready():
