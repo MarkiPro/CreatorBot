@@ -104,7 +104,7 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
 
 prefix = ">"
 
-client = commands.Bot(commands.when_mentioned_or(prefix), command_prefix='>', case_insensitive=True, help_command=EmbedHelpCommand())
+client = commands.Bot(commands.when_mentioned_or(prefix), case_insensitive=True, help_command=EmbedHelpCommand())
 
 @client.event
 async def on_ready():
