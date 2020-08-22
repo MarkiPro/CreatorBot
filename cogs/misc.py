@@ -3,7 +3,7 @@ from discord.ext import commands
 import datetime
 import asyncio
 from main import client
-from pagething import TextSplitter
+from paginator import TextSplitter
 
 class Misc(commands.Cog):
 
@@ -217,72 +217,6 @@ class Misc(commands.Cog):
                 some_channel = client.get_channel(id=712659793008918538)
                 
                 await some_channel.send(embed=prepared_embed)
-    
-    @commands.command(aliases=["chat-color", "color-chat", "chatcolor", "colorchat", "chat"], description="This command is used for chaning the color of your name in chat!")
-    @commands.cooldown(1, 300, commands.BucketType.member)
-    async def color(self, ctx):
-        
-        # SERVER
-
-        content_creators = client.get_guild(id=611227128020598805)
-
-        # CONTENT CREATOR ROLES
-
-        sever_booster = discord.utils.get(content_creators.roles, id=712685506424471612)
-        python_programmer = discord.utils.get(content_creators.roles, id=732377712286761001)
-        game_designer = discord.utils.get(content_creators.roles, id=733281086913773599)
-        threed_modeler = discord.utils.get(content_creators.roles, id=733281157872877629)
-        csharp_programmer = discord.utils.get(content_creators.roles, id=732377857317142650)
-        youtuber = discord.utils.get(content_creators.roles, id=738788543211634756)
-        java_programmer = discord.utils.get(content_creators.roles, id=732379273100263464)
-        roblox_studio_builder = discord.utils.get(content_creators.roles, id=733281281671954442)
-        twitch_streamer = discord.utils.get(content_creators.roles, id=738814393663619182)
-        js_programmer = discord.utils.get(content_creators.roles, id=732377955669508097)
-        gfx_designer = discord.utils.get(content_creators.roles, id=733280979921141821)
-        cpp_programmer = discord.utils.get(content_creators.roles, id=732377777772167188)
-        translator = discord.utils.get(content_creators.roles, id=734527264657637416)
-        c_programmer = discord.utils.get(content_creators.roles, id=732378157449216040)
-        ui_designer = discord.utils.get(content_creators.roles, id=733274530524561430)
-        php_programmer = discord.utils.get(content_creators.roles, id=732378321387520092)
-        clothing_designer = discord.utils.get(content_creators.roles, id=734177621876801637)
-        lua_programmer = discord.utils.get(content_creators.roles, id=732376072397783093)
-        artist = discord.utils.get(content_creators.roles, id=734662196025360416)
-        ruby_programmer = discord.utils.get(content_creators.roles, id=735147661430227025)
-        music_composer = discord.utils.get(content_creators.roles, id=735497558855516161)
-        html_programmer = discord.utils.get(content_creators.roles, id=735147383716970507)
-        animator = discord.utils.get(content_creators.roles, id=734662028353994752)
-        roblox_verified = discord.utils.get(content_creators.roles, id=741735258411499560)
-        former_staff = discord.utils.get(content_creators.roles, id=741728478721736755)
-        devforum_member = discord.utils.get(content_creators.roles, id=742333164352962581)
-        devforum_regular = discord.utils.get(content_creators.roles, id=742333164352962581)
-        devforum_top_contributor = discord.utils.get(content_creators.roles, id=742333168576888943)
-        devforum_community_sage = discord.utils.get(content_creators.roles, id=742333164352962581)
-        verified = discord.utils.get(content_creators.roles, id=695328817157373992)
-
-        # CHAT COLOR ROLES
-
-        sb_color = discord.utils.get(content_creators.roles, id=734527854871707762)
-        translator_color = discord.utils.get(content_creators.roles, id=734527217350082672)
-        animator_color = discord.utils.get(content_creators.roles, id=734664243038912552)
-        twitch_streamer_color = discord.utils.get(content_creators.roles, id=738814580712669214)
-        youtuber_color = discord.utils.get(content_creators.roles, id=735557139984285706)
-        clothes_designer_color = discord.utils.get(content_creators.roles, id=734527130565738516)
-        artist_color = discord.utils.get(content_creators.roles, id=734664303327838230)
-        threed_modeler_color = discord.utils.get(content_creators.roles, id=734527020905529375)
-        music_composer_color = discord.utils.get(content_creators.roles, id=735497751978311681)
-        gfx_designer_color = discord.utils.get(content_creators.roles, id=734150696944795698)
-        ui_designer_color = discord.utils.get(content_creators.roles, id=734150445764837466)
-        roblox_studio_builder_color = discord.utils.get(content_creators.roles, id=734149969292034208)
-        game_designer_color = discord.utils.get(content_creators.roles, id=732402691296198848)
-        programmer_color = discord.utils.get(content_creators.roles, id=732387788493946881)
-        verified_color = discord.utils.get(content_creators.roles, id=732388199107657828)
-        roblox_verified_color = discord.utils.get(content_creators.roles, id=743013370588037191)
-        former_staff_color = discord.utils.get(content_creators.roles, id=743013368511594569)
-        devforum_member_color = discord.utils.get(content_creators.roles, id=743013366515236915)
-        devforum_regular_color = discord.utils.get(content_creators.roles, id=743013366880272474)
-        devforum_top_contributor_color = discord.utils.get(content_creators.roles, id=743013367840768072)
-        devforum_community_sage_color = discord.utils.get(content_creators.roles, id=743013368134107166)
-
 
     @commands.command(aliases=['suggestion'], description="This command is used for suggesting cool ideas!")
     async def suggest(self, ctx):
