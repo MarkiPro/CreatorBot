@@ -203,7 +203,7 @@ class Misc(commands.Cog):
             except asyncio.TimeoutError or hiring_other == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-                await some_channel.send(embed=hiring_embed4)
+            await some_channel.send(embed=hiring_embed4)
 
     @commands.command(aliases=['suggestion'], description="This command is used for suggesting cool ideas!")
     async def suggest(self, ctx):
