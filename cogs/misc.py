@@ -196,7 +196,7 @@ class Misc(commands.Cog):
                 color=0x0064ff
             )
             hiring_embed4.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-            await ctx.author.send(embed=hiring_embed3)
+            await ctx.author.send(embed=hiring_embed4)
             try:
                 hiring_other_message = await client.wait_for('message', check=check, timeout=1000)
                 hiring_other = hiring_other_message.content
@@ -214,7 +214,7 @@ class Misc(commands.Cog):
                 
                 prepared_embed.description = discord.utils.escape_mentions(entry)
                 prepared_embed.set_footer(text=f"Page {i + 1} of {len(text_splitter.words_list)}")
-                some_channel = client.get_channel(id=712659793008918538)
+                some_channel = client.get_channel(id=712625020567814157)
                 
                 await some_channel.send(embed=prepared_embed)
 
