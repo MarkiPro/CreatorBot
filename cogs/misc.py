@@ -203,20 +203,7 @@ class Misc(commands.Cog):
             except asyncio.TimeoutError or hiring_other == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            some_long_text = "blah blah blah blah test"
-            text_splitter = TextSplitter(char_per_page=11, text=some_long_text)
-
-            for i, entry in enumerate(text_splitter.words_list):
-                prepared_embed = discord.Embed(title="A simple Paginated thing") # do not set the footer and descriping they get overriden.
-                
-                if i != 0:
-                    prepared_embed.title = None
-                
-                prepared_embed.description = discord.utils.escape_mentions(entry)
-                prepared_embed.set_footer(text=f"Page {i + 1} of {len(text_splitter.words_list)}")
-                some_channel = client.get_channel(id=712625020567814157)
-                
-                await some_channel.send(embed=prepared_embed)
+                await some_channel.send(embed=hiring_embed4)
 
     @commands.command(aliases=['suggestion'], description="This command is used for suggesting cool ideas!")
     async def suggest(self, ctx):
