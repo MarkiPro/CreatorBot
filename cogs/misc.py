@@ -147,10 +147,13 @@ class Misc(commands.Cog):
         try:
             category_message = await client.wait_for('message', check=check, timeout=1000)
             category = category_message.content
-        except asyncio.TimeoutError or category == ['0']:
+        except asyncio.TimeoutError:
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        if category == "1":
+        if category == ['0']:
+            await ctx.author.send(embed=cancel_prompt_embed)
+            return
+        elif category == "1":
             hiring_embed1 = discord.Embed(
                 title="**HIRING POST**",
                 description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.***",
@@ -161,7 +164,10 @@ class Misc(commands.Cog):
             try:
                 hiring_details_message = await client.wait_for('message', check=check, timeout=1000)
                 hiring_details = hiring_details_message.content
-            except asyncio.TimeoutError or hiring_details == ['0']:
+            except asyncio.TimeoutError:
+                await ctx.author.send(embed=cancel_prompt_embed)
+                return
+            if hiring_details == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             hiring_embed2 = discord.Embed(
@@ -174,7 +180,10 @@ class Misc(commands.Cog):
             try:
                 hiring_payment_message = await client.wait_for('message', check=check, timeout=1000)
                 hiring_payment = hiring_payment_message.content
-            except asyncio.TimeoutError or hiring_payment == ['0']:
+            except asyncio.TimeoutError:
+                await ctx.author.send(embed=cancel_prompt_embed)
+                return
+            if hiring_payment == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             hiring_embed3 = discord.Embed(
@@ -187,7 +196,10 @@ class Misc(commands.Cog):
             try:
                 hiring_image_message = await client.wait_for('message', check=check, timeout=1000)
                 hiring_image = hiring_image_message.content
-            except asyncio.TimeoutError or hiring_image == ['0']:
+            except asyncio.TimeoutError:
+                await ctx.author.send(embed=cancel_prompt_embed)
+                return
+            if hiring_image == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             hiring_embed4 = discord.Embed(
@@ -200,7 +212,10 @@ class Misc(commands.Cog):
             try:
                 hiring_other_message = await client.wait_for('message', check=check, timeout=1000)
                 hiring_other = hiring_other_message.content
-            except asyncio.TimeoutError or hiring_other == ['0']:
+            except asyncio.TimeoutError
+                await ctx.author.send(embed=cancel_prompt_embed)
+                return
+            if hiring_other == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             some_long_text = "blah blah blah blah test"
