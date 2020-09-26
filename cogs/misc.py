@@ -218,6 +218,7 @@ class Misc(commands.Cog):
             if hiring_other == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
+            some_channel = client.get_channel(id=712625020567814157)
             await some_channel.send(embed=hiring_embed4)
 
     @commands.command(aliases=['suggestion'], description="This command is used for suggesting cool ideas!")
