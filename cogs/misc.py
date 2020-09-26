@@ -212,7 +212,7 @@ class Misc(commands.Cog):
             try:
                 hiring_other_message = await client.wait_for('message', check=check, timeout=1000)
                 hiring_other = hiring_other_message.content
-            except asyncio.TimeoutError
+            except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             if hiring_other == ['0']:
