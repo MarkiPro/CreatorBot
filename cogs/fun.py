@@ -6,15 +6,14 @@ import random
 import asyncio
 
 class Fun(commands.Cog):
-
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, bot):
+        self.bot = bot
 
     @commands.command()
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def dog(self, ctx):
         try:
-            message = await ctx.send("Generating a dog image for you!")
+            await ctx.send("Generating a dog image for you!")
             embed = discord.Embed(title="A nice dog for you!", color=0xe700ff)
             async with aiohttp.ClientSession() as session:
                 async with session.get('https://dog.ceo/api/breeds/image/random') as image:
@@ -27,7 +26,7 @@ class Fun(commands.Cog):
     @commands.command()
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def cat(self, ctx):
-        message = await ctx.send("Generating a cat image for you!")
+        await ctx.send("Generating a cat image for you!")
         try:
             embed = discord.Embed(title="A nice cat for you!", color=0xe700ff)
             async with aiohttp.ClientSession() as ca:
@@ -69,5 +68,5 @@ class Fun(commands.Cog):
         else:
             return await ctx.send(f"I chose {bot_choice}\nYou won!")
 
-def setup(client):
-    client.add_cog(Fun(client))
+def setup(bot):
+    bot.add_cog(Fun(bot))
