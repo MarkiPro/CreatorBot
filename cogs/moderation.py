@@ -7,13 +7,13 @@ from discord.utils import parse_time
 
 class Moderation(commands.Cog):
 
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, bot):
+        self.bot = bot
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
-    async def clear(self, ctx, amount = 0, *, channel = None):
+    async def clear(self, ctx, amount = 0, *, channel=None):
         if not channel:
             await ctx.channel.purge(limit=amount + 1)
         if channel:
@@ -136,7 +136,10 @@ class Moderation(commands.Cog):
         )
 
         await ctx.send(embed=embed2)
-        await member.send(embed=embed2)
+        try:
+            await member.send(embed=embed2)
+        except Exception:
+            return
         await member.ban(reason=reason)
 
         parsed_time = await parse_time(time)
@@ -222,6 +225,11 @@ class Moderation(commands.Cog):
     async def say(self, ctx, *, text):
         await ctx.message.delete()
         await ctx.send(text)
+
+    @commands.command()
+    @commands.has_permissions(manage_messages=True)
+    async def slowmode(self, ctx, channel, *, time):
+        channel.slowmode_delay = time
 
     @commands.group()
     @commands.has_permissions(manage_roles=True)
@@ -310,5 +318,5 @@ class Moderation(commands.Cog):
         )
         await ctx.send(embed=embed)
 
-def setup(client):
-    client.add_cog(Moderation(client))
+def setup(bot):
+    bot.add_cog(Moderation(bot))
