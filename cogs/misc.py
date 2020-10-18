@@ -2,11 +2,10 @@ import discord
 from discord.ext import commands
 import datetime
 import asyncio
-from main import bot
+from bot.bot import bot
 from paginator import TextSplitter
 
 class Misc(commands.Cog):
-
     def __init__(self, bot):
         self.bot = bot
         self.bot.help_command.cog = self
