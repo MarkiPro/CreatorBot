@@ -4,8 +4,8 @@ from discord.ext import commands
 
 
 #class ReactionsPaginator(buttons.Paginator):
- #   def __init__(self, *args, **kwargs) -> None:
-  #      super().__init__(*args, **kwargs)
+#    def __init__(self, *args, **kwargs) -> None:
+#        super().__init__(*args, **kwargs)
 
 class TextSplitter:
     def __init__(self, char_per_page, text):
