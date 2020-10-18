@@ -2,19 +2,19 @@ import discord
 from discord.ext import commands
 import datetime
 import asyncio
-from main import client
+from main import bot
 from paginator import TextSplitter
 
 class Misc(commands.Cog):
 
-    def __init__(self, client):
-        self.client = client
-        self.client.help_command.cog = self
+    def __init__(self, bot):
+        self.bot = bot
+        self.bot.help_command.cog = self
 
     @commands.command(aliases=["for-hire", "forhire"], description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
     @commands.cooldown(1, 300, commands.BucketType.member)
     async def fh(self, ctx):
-        cc_guild = client.get_guild(id=611227128020598805)
+        cc_guild = bot.get_guild(id=611227128020598805)
         
         nfh_role = discord.utils.get(cc_guild.roles, id=729491617630912613)
         fh_role = discord.utils.get(cc_guild.roles, id=738814225614635100)
@@ -145,7 +145,7 @@ class Misc(commands.Cog):
             else:
                 return False
         try:
-            category_message = await client.wait_for('message', check=check, timeout=1000)
+            category_message = await bot.wait_for('message', check=check, timeout=1000)
             category = category_message.content
         except asyncio.TimeoutError:
             await ctx.author.send(embed=cancel_prompt_embed)
@@ -162,7 +162,7 @@ class Misc(commands.Cog):
             hiring_embed1.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed1)
             try:
-                hiring_details_message = await client.wait_for('message', check=check, timeout=1000)
+                hiring_details_message = await bot.wait_for('message', check=check, timeout=1000)
                 hiring_details = hiring_details_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
@@ -178,7 +178,7 @@ class Misc(commands.Cog):
             hiring_embed2.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed2)
             try:
-                hiring_payment_message = await client.wait_for('message', check=check, timeout=1000)
+                hiring_payment_message = await bot.wait_for('message', check=check, timeout=1000)
                 hiring_payment = hiring_payment_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
@@ -194,7 +194,7 @@ class Misc(commands.Cog):
             hiring_embed3.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed3)
             try:
-                hiring_image_message = await client.wait_for('message', check=check, timeout=1000)
+                hiring_image_message = await bot.wait_for('message', check=check, timeout=1000)
                 hiring_image = hiring_image_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
@@ -210,7 +210,7 @@ class Misc(commands.Cog):
             hiring_embed4.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed4)
             try:
-                hiring_other_message = await client.wait_for('message', check=check, timeout=1000)
+                hiring_other_message = await bot.wait_for('message', check=check, timeout=1000)
                 hiring_other = hiring_other_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
@@ -229,12 +229,12 @@ class Misc(commands.Cog):
                 
                 prepared_embed.description = discord.utils.escape_mentions(entry)
                 prepared_embed.set_footer(text=f"Page {i + 1} of {len(text_splitter.words_list)}")
-                some_channel = client.get_channel(id=712625020567814157)
+                some_channel = bot.get_channel(id=712625020567814157)
                 await some_channel.send(embed=hiring_embed4)
 
     @commands.command(aliases=['suggestion'], description="This command is used for suggesting cool ideas!")
     async def suggest(self, ctx):
-        suggestionsChannel = client.get_channel(id=712655570737299567)
+        suggestionsChannel = bot.get_channel(id=712655570737299567)
         cancel_prompt_embed = discord.Embed(
             title="**CANCELLED**",
             description="***The setup has been cancelled.***",
@@ -265,7 +265,7 @@ class Misc(commands.Cog):
             else:
                 return False
         try:
-            title_message = await client.wait_for('message', check=check, timeout=1000)
+            title_message = await bot.wait_for('message', check=check, timeout=1000)
             title = title_message.content
         except asyncio.TimeoutError or title == ['cancel', 'Cancel', 'CaNcEl', 'cAnCeL', 'cAncel', 'caNcel', 'canCel', 'cancEl', 'canceL', 'CANcel', 'CANCEL']:
             await ctx.author.send(embed=cancel_prompt_embed)
@@ -278,7 +278,7 @@ class Misc(commands.Cog):
         startEmbed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
         await ctx.author.send(embed=startEmbed)
         try:
-            body_message = await client.wait_for('message', check=check, timeout=1000)
+            body_message = await bot.wait_for('message', check=check, timeout=1000)
             body = body_message.content
         except TimeoutError or body == ['cancel', 'Cancel', 'CaNcEl', 'cAnCeL', 'cAncel', 'caNcel', 'canCel', 'cancEl', 'canceL', 'CANcel', 'CANCEL']:
             await ctx.author.send(embed=cancel_prompt_embed)
@@ -299,7 +299,7 @@ class Misc(commands.Cog):
         await ctx.author.send(embed=suggestedEmbed2)
         await ctx.author.send(embed=suggestedEmbed1)
         try:
-            body_message2 = await client.wait_for('message', check=check, timeout=1000)
+            body_message2 = await bot.wait_for('message', check=check, timeout=1000)
             body2 = body_message2.content
         except asyncio.TimeoutError or body2 == ['cancel', 'Cancel', 'CaNcEl', 'cAnCeL', 'cAncel', 'caNcel', 'canCel', 'cancEl', 'canceL', 'CANcel', 'CANCEL']:
             await ctx.author.send(embed=cancel_prompt_embed)
@@ -367,5 +367,5 @@ class Misc(commands.Cog):
 
         await ctx.send(embed=embed)
 
-def setup(client):
-    client.add_cog(Misc(client))
+def setup(bot):
+    bot.add_cog(Misc(bot))
