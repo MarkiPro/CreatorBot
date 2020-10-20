@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 import datetime
 import asyncio
-from bot.bot import bot
 from paginator import TextSplitter
 
 class Misc(commands.Cog):
@@ -13,7 +12,7 @@ class Misc(commands.Cog):
     @commands.command(aliases=["for-hire", "forhire"], description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
     @commands.cooldown(1, 300, commands.BucketType.member)
     async def fh(self, ctx):
-        cc_guild = bot.get_guild(id=611227128020598805)
+        cc_guild = self.bot.get_guild(id=611227128020598805)
         
         nfh_role = discord.utils.get(cc_guild.roles, id=729491617630912613)
         fh_role = discord.utils.get(cc_guild.roles, id=738814225614635100)
@@ -55,7 +54,7 @@ class Misc(commands.Cog):
     @commands.command(aliases=["not-for-hire", "notforhire"], description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
     @commands.cooldown(1, 300, commands.BucketType.member)
     async def nfh(self, ctx):
-        cc_guild = client.get_guild(id=611227128020598805)
+        cc_guild = self.bot.get_guild(id=611227128020598805)
         
         nfh_role = discord.utils.get(cc_guild.roles, id=729491617630912613)
         fh_role = discord.utils.get(cc_guild.roles, id=738814225614635100)
@@ -144,7 +143,7 @@ class Misc(commands.Cog):
             else:
                 return False
         try:
-            category_message = await bot.wait_for('message', check=check, timeout=1000)
+            category_message = await self.bot.wait_for('message', check=check, timeout=1000)
             category = category_message.content
         except asyncio.TimeoutError:
             await ctx.author.send(embed=cancel_prompt_embed)
@@ -161,7 +160,7 @@ class Misc(commands.Cog):
             hiring_embed1.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed1)
             try:
-                hiring_details_message = await bot.wait_for('message', check=check, timeout=1000)
+                hiring_details_message = await self.bot.wait_for('message', check=check, timeout=1000)
                 hiring_details = hiring_details_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
@@ -177,7 +176,7 @@ class Misc(commands.Cog):
             hiring_embed2.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed2)
             try:
-                hiring_payment_message = await bot.wait_for('message', check=check, timeout=1000)
+                hiring_payment_message = await self.bot.wait_for('message', check=check, timeout=1000)
                 hiring_payment = hiring_payment_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
@@ -193,7 +192,7 @@ class Misc(commands.Cog):
             hiring_embed3.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed3)
             try:
-                hiring_image_message = await bot.wait_for('message', check=check, timeout=1000)
+                hiring_image_message = await self.bot.wait_for('message', check=check, timeout=1000)
                 hiring_image = hiring_image_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
@@ -209,7 +208,7 @@ class Misc(commands.Cog):
             hiring_embed4.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed4)
             try:
-                hiring_other_message = await bot.wait_for('message', check=check, timeout=1000)
+                hiring_other_message = await self.bot.wait_for('message', check=check, timeout=1000)
                 hiring_other = hiring_other_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
@@ -228,101 +227,11 @@ class Misc(commands.Cog):
                 
                 prepared_embed.description = discord.utils.escape_mentions(entry)
                 prepared_embed.set_footer(text=f"Page {i + 1} of {len(text_splitter.words_list)}")
-                some_channel = bot.get_channel(id=712625020567814157)
+                some_channel = self.bot.get_channel(id=712625020567814157)
                 await some_channel.send(embed=hiring_embed4)
 
-    @commands.command(aliases=['suggestion'], description="This command is used for suggesting cool ideas!")
-    async def suggest(self, ctx):
-        suggestionsChannel = bot.get_channel(id=712655570737299567)
-        cancel_prompt_embed = discord.Embed(
-            title="**CANCELLED**",
-            description="***The setup has been cancelled.***",
-            color=0xff0000,
-            timestamp=datetime.datetime.now(tz=None)
-        )
-        startedEmbed = discord.Embed(
-            title="**SUGGESTION SETUP**",
-            description="***Please continue the setup in DMs.***",
-            color=0x0064ff,
-            timestamp=datetime.datetime.now(tz=None)
-        )
-        startedEmbed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-        furstEmbed = discord.Embed(
-            title="**SUGGESTION SETUP**",
-            description="***What would you like to name your suggestion?***",
-            color=0x0064ff
-        )
-        furstEmbed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-        await ctx.send(embed=startedEmbed)
-        await ctx.author.send(embed=furstEmbed)
-        def check(m):
-            if isinstance(m.channel, discord.DMChannel):
-                if m.author == ctx.author:
-                    return True
-                else:
-                    return False
-            else:
-                return False
-        try:
-            title_message = await bot.wait_for('message', check=check, timeout=1000)
-            title = title_message.content
-        except asyncio.TimeoutError or title == ['cancel', 'Cancel', 'CaNcEl', 'cAnCeL', 'cAncel', 'caNcel', 'canCel', 'cancEl', 'canceL', 'CANcel', 'CANCEL']:
-            await ctx.author.send(embed=cancel_prompt_embed)
-            return
-        startEmbed = discord.Embed(
-            title="**SUGGESTION SETUP**",
-            description="***Please write down your suggestion in detail.***",
-            color=0x0064ff,
-        )
-        startEmbed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-        await ctx.author.send(embed=startEmbed)
-        try:
-            body_message = await bot.wait_for('message', check=check, timeout=1000)
-            body = body_message.content
-        except TimeoutError or body == ['cancel', 'Cancel', 'CaNcEl', 'cAnCeL', 'cAncel', 'caNcel', 'canCel', 'cancEl', 'canceL', 'CANcel', 'CANCEL']:
-            await ctx.author.send(embed=cancel_prompt_embed)
-            return
-        suggestedEmbed2 = discord.Embed(
-            title=f"**FINISHED PRODUCT**",
-            description=f"""***Say `done` to post.***""",
-            color=0x0064ff,
-        )
-        suggestedEmbed2.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-        suggestedEmbed1 = discord.Embed(
-            title=f"**{title}**",
-            description=f"{body}",
-            color=0x0064ff,
-            timestamp=datetime.datetime.now(tz=None)
-        )
-        suggestedEmbed1.set_footer(text=f"by: {ctx.author}")
-        await ctx.author.send(embed=suggestedEmbed2)
-        await ctx.author.send(embed=suggestedEmbed1)
-        try:
-            body_message2 = await bot.wait_for('message', check=check, timeout=1000)
-            body2 = body_message2.content
-        except asyncio.TimeoutError or body2 == ['cancel', 'Cancel', 'CaNcEl', 'cAnCeL', 'cAncel', 'caNcel', 'canCel', 'cancEl', 'canceL', 'CANcel', 'CANCEL']:
-            await ctx.author.send(embed=cancel_prompt_embed)
-            return
-        if body2 == ['Done', 'dOne', 'DonE', 'DOne', 'DONe', 'DONE', 'done', 'donE', 'doNe', 'DoNe', 'DOnE', 'dOnE', 'doNE', 'DoNE', 'dONE']:
-            finalEmbed = discord.Embed(
-                title="**SUGGESTION SETUP**",
-                description="***Your suggestion has been posted.***",
-                color=0x0064ff,
-                timestamp=datetime.datetime.now(tz=None)
-            )
-            await ctx.author.send(embed=finalEmbed)
-            suggestedEmbed = discord.Embed(
-                title=f"**{title}**",
-                description=f"{body}",
-                color=0x0064ff,
-                timestamp=datetime.datetime.now(tz=None)
-            )
-            suggestedEmbed.set_footer(text=f"by: {ctx.author}")
-            sent = await suggestionsChannel.send(embed=suggestedEmbed)
-            await sent.add_reaction('👍')
-            await sent.add_reaction('👎')
-        else:
-            await ctx.author.send(embed=cancel_prompt_embed)
+#            await sent.add_reaction('👍')
+#            await sent.add_reaction('👎')
 
     @commands.command(aliases=['who'],
                     description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
