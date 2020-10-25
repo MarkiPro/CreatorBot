@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import datetime
 import asyncio
-from paginator import TextSplitter
+from cogs.paginator import TextSplitter
 
 class Misc(commands.Cog):
     def __init__(self, bot):
