@@ -7,20 +7,19 @@ from discord.ext import commands
 #    def __init__(self, *args, **kwargs) -> None:
 #        super().__init__(*args, **kwargs)
 
+class TextSplitter:
+    def __init__(self, char_per_page, text):
+        self.char_per_page = char_per_page
+        self.words_list = []
+        self.text = text
+
+    async def make_text(self):
+        n = self.char_per_page
+        self.words_list = [self.text[i:i + n] for i in range(0, len(self.text), n)]
+
 class Paginator(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-    class TextSplitter:
-        def __init__(self, char_per_page, text):
-            self.char_per_page = char_per_page
-            self.words_list = []
-            self.text = text
-
-        async def make_text(self):
-            n = self.char_per_page
-            self.words_list = [self.text[i:i + n] for i in range(0, len(self.text), n)]
-
 
     class EmbedDescriptionSplitter(TextSplitter):
         def __init__(self, embed: discord.Embed, description, char_per_page=1000) -> None:
