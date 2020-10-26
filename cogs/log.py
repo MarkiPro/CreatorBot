@@ -23,8 +23,8 @@ class Log(Cog):
         message = await channel.fetch_message(767422159270182922)
         guild = channel.guild
         booster_role = discord.utils.get(guild.roles, id=762172204628181023)
-        before_roles = ", ".join([i.mention for i in before.roles if i.name != '@everyone' or '­@­━━­━━━━ SKILLS ­━━­━━━━' or '­@━━━━━ ATTAINMENTS ━━━━­' or '@­━━━━━   ESTABLISHED  ━━━━­']) or "No roles assigned."
-        after_roles = ", ".join([i.mention for i in after.roles if i.name != '@everyone' or '­@­━━­━━━━ SKILLS ­━━­━━━━' or '­@━━━━━ ATTAINMENTS ━━━━­' or '@­━━━━━   ESTABLISHED  ━━━━­']) or "No roles assigned."
+        before_roles = ", ".join([i.mention for i in before.roles if i.name != '@everyone' or i.name != '­@­━━­━━━━ SKILLS ­━━­━━━━' or i.name != '­@━━━━━ ATTAINMENTS ━━━━­' or i.name != '@­━━━━━   ESTABLISHED  ━━━━­']) or "No roles assigned."
+        after_roles = ", ".join([i.mention for i in after.roles if i.name != '@everyone' or i.name != '­@­━━­━━━━ SKILLS ­━━­━━━━' or i.name != '­@━━━━━ ATTAINMENTS ━━━━­' or i.name != '@­━━━━━   ESTABLISHED  ━━━━­']) or "No roles assigned."
         role_update_log_channel = self.bot.get_channel(712761099401035799)
 
         if before_roles != after_roles:
@@ -39,8 +39,8 @@ class Log(Cog):
 
         if booster_role in before.roles and booster_role not in after.roles:
             await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,
-                                        **{guild.premium_subscription_count}** Boosters,
-                                        Boosting Level for this server is currently {guild.premium_tier}.""")
+                **{guild.premium_subscription_count}** Boosters,
+                Boosting Level for this server is currently **{guild.premium_tier}**.""")
 
 
 
@@ -51,8 +51,8 @@ class Log(Cog):
         guild = channel.guild
 
         await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,
-                            **{guild.premium_subscription_count}** Boosters,
-                            Boosting Level for this server is currently {guild.premium_tier}.""")
+            **{guild.premium_subscription_count}** Boosters,
+            Boosting Level for this server is currently **{guild.premium_tier}**.""")
 
     @Cog.listener()
     async def on_member_remove(self, ember):
@@ -61,7 +61,7 @@ class Log(Cog):
         guild = channel.guild
 
         await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,
-                                    **{guild.premium_subscription_count}** Boosters,
-                                    Boosting Level for this server is currently {guild.premium_tier}.""")
+            **{guild.premium_subscription_count}** Boosters,
+            Boosting Level for this server is currently **{guild.premium_tier}**.""")
 def setup(bot):
     bot.add_cog(Log(bot))
