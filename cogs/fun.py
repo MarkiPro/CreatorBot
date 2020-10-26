@@ -5,6 +5,7 @@ import json
 import random
 import asyncio
 
+
 class Fun(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -67,6 +68,7 @@ class Fun(commands.Cog):
             return await ctx.send(f"I chose {bot_choice}\nI won!")
         else:
             return await ctx.send(f"I chose {bot_choice}\nYou won!")
+
 
 def setup(bot):
     bot.add_cog(Fun(bot))
