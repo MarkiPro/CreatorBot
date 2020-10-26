@@ -245,17 +245,13 @@ class Misc(commands.Cog):
         delta_joined = datetime.datetime.utcnow() - user.joined_at
         delta_created = datetime.datetime.utcnow() - user.created_at
         embed.set_thumbnail(url=user.avatar_url)
-        embed.add_field(name="Joined on", value=f"{user.joined_at.strftime(format)} ({delta_joined.days} days)",
-                        inline=True)
-        embed.add_field(name="Account created on",
-                        value=f"{user.created_at.strftime(format)} ({delta_created.days} days)", inline=True)
+        embed.add_field(name="Joined on", value=f"{user.joined_at.strftime(format)} ({delta_joined.days} days)", inline=True)
+        embed.add_field(name="Account created on", value=f"{user.created_at.strftime(format)} ({delta_created.days} days)", inline=True)
         embed.add_field(name="Nickname", value=f"{user.nick}", inline=True)
         roles = ", ".join([i.mention for i in user.roles if i.name != '@everyone']) or "No roles assigned."
         embed.add_field(name="Guild Roles", value=f"{roles}", inline=False)
         perms = ", ".join(list(i[0].title() for i in user.guild_permissions if i[1] == True)) or "No permissions in the guild."
-        embed.add_field(name="Guild Permissions",
-                        value=f"{perms}",
-                        inline=False)
+        embed.add_field(name="Guild Permissions", value=f"{perms}", inline=False)
         await ctx.send(embed=embed)
 
     @commands.command()
