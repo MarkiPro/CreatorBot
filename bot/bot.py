@@ -104,11 +104,6 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
 bot = commands.Bot(commands.when_mentioned_or(">"), case_insensitive=True, help_command=EmbedHelpCommand())
 
 
-@bot.command()
-async def verify(message):
-    pass
-
-
 @bot.event
 async def on_ready():
     print(f"Ready. Logged onto {bot.user}")
@@ -124,6 +119,8 @@ for file in os.listdir('cogs/'):
 
 @bot.event
 async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        return
     embed = discord.Embed(
         title="**ERROR**",
         description=f"***:no_entry_sign: {error}***",
