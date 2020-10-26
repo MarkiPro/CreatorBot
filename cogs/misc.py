@@ -4,16 +4,18 @@ import datetime
 import asyncio
 from cogs.paginator import TextSplitter
 
+
 class Misc(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.help_command.cog = self
 
-    @commands.command(aliases=["for-hire", "forhire"], description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
+    @commands.command(aliases=["for-hire", "forhire"],
+                      description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
     @commands.cooldown(1, 300, commands.BucketType.member)
     async def fh(self, ctx):
         cc_guild = self.bot.get_guild(id=611227128020598805)
-        
+
         nfh_role = discord.utils.get(cc_guild.roles, id=729491617630912613)
         fh_role = discord.utils.get(cc_guild.roles, id=738814225614635100)
 
@@ -50,12 +52,13 @@ class Misc(commands.Cog):
         if fh_role in member.roles:
             await member.send(embed=embed1)
             return
-        
-    @commands.command(aliases=["not-for-hire", "notforhire"], description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
+
+    @commands.command(aliases=["not-for-hire", "notforhire"],
+                      description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
     @commands.cooldown(1, 300, commands.BucketType.member)
     async def nfh(self, ctx):
         cc_guild = self.bot.get_guild(id=611227128020598805)
-        
+
         nfh_role = discord.utils.get(cc_guild.roles, id=729491617630912613)
         fh_role = discord.utils.get(cc_guild.roles, id=738814225614635100)
 
@@ -134,6 +137,7 @@ class Misc(commands.Cog):
         title_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
         await ctx.send(embed=categories_embed)
         await ctx.author.send(embed=categories)
+
         def check(m):
             if isinstance(m.channel, discord.DMChannel):
                 if m.author == ctx.author:
@@ -142,6 +146,7 @@ class Misc(commands.Cog):
                     return False
             else:
                 return False
+
         try:
             category_message = await self.bot.wait_for('message', check=check, timeout=1000)
             category = category_message.content
@@ -220,38 +225,45 @@ class Misc(commands.Cog):
             text_splitter = TextSplitter(char_per_page=11, text=some_long_text)
 
             for i, entry in enumerate(text_splitter.words_list):
-                prepared_embed = discord.Embed(title="A simple Paginated thing") # do not set the footer and descriping they get overriden.
-                
+                prepared_embed = discord.Embed(
+                    title="A simple Paginated thing")  # do not set the footer and descriping they get overriden.
+
                 if i != 0:
                     prepared_embed.title = None
-                
+
                 prepared_embed.description = discord.utils.escape_mentions(entry)
                 prepared_embed.set_footer(text=f"Page {i + 1} of {len(text_splitter.words_list)}")
                 some_channel = self.bot.get_channel(id=712625020567814157)
                 await some_channel.send(embed=hiring_embed4)
 
-#            await sent.add_reaction('👍')
-#            await sent.add_reaction('👎')
+    #            await sent.add_reaction('👍')
+    #            await sent.add_reaction('👎')
 
     @commands.command(aliases=['who'],
-                    description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
-    async def whois(self, ctx, user: discord.Member=None):
+                      description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
+    async def whois(self, ctx, user: discord.Member = None):
         user = user or ctx.author
-
         embed = discord.Embed(title=f"**Who is {user.name}**".upper(),
                               description="Displays basic information about the given user", colour=0xd9ac32)
         format = "%A, %d %B, %Y : %I:%M %p"
         delta_joined = datetime.datetime.utcnow() - user.joined_at
         delta_created = datetime.datetime.utcnow() - user.created_at
-        join_pos = sum(m.joined_at < user.joined_at for m in ctx.guild.members if m.joined_at is not None)
         embed.set_thumbnail(url=user.avatar_url)
         embed.add_field(name="Joined on", value=f"{user.joined_at.strftime(format)} ({delta_joined.days} days)", inline=True)
+        if user.joined_at is None:
+            await ctx.send("Could not locate your join date.")
+            embed.add_field(name="Join Position", value=f"None", inline=True)
+            pass
+        join_pos = sum(m.joined_at < user.joined_at for m in ctx.guild.members if m.joined_at is not None)
         embed.add_field(name="Join Position", value=f"#{join_pos}", inline=True)
-        embed.add_field(name="Account created on", value=f"{user.created_at.strftime(format)} ({delta_created.days} days)", inline=True)
+        embed.add_field(name="Account created on",
+                        value=f"{user.created_at.strftime(format)} ({delta_created.days} days)", inline=True)
         embed.add_field(name="Nickname", value=f"{user.nick}", inline=True)
-        roles = ", ".join([i.mention for i in user.roles if i.name != '@everyone' and i.name != '━━━━━━ SKILLS ━━━━━━' and i.name != '━━━━━ ATTAINMENTS ━━━━' and i.name != '━━━━━   ESTABLISHED  ━━━━']) or "No roles assigned."
+        roles = ", ".join([i.mention for i in user.roles if
+                           i.name != '@everyone' and i.name != '━━━━━━ SKILLS ━━━━━━' and i.name != '━━━━━ ATTAINMENTS ━━━━' and i.name != '━━━━━   ESTABLISHED  ━━━━']) or "No roles assigned."
         embed.add_field(name="Guild Roles", value=f"{roles}", inline=False)
-        perms = ", ".join(list(i[0].title() for i in user.guild_permissions if i[1] == True)) or "No permissions in the guild."
+        perms = ", ".join(
+            list(i[0].title() for i in user.guild_permissions if i[1] == True)) or "No permissions in the guild."
         embed.add_field(name="Guild Permissions", value=f"{perms}", inline=False)
         await ctx.send(embed=embed)
 
@@ -265,12 +277,13 @@ class Misc(commands.Cog):
             description=f"***These are the boosters on the server:\n\n***{boosters}",
             color=0x0089ff,
             timestamp=datetime.datetime.utcnow()
-            )
+        )
 
         if boosters is "":
             embed.description = "There are no boosters in this guild.  :cry:"
 
         await ctx.send(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Misc(bot))
