@@ -24,7 +24,7 @@ class Log(Cog):
     @Cog.listener()
     async def on_member_join(self, member):
         channel = self.bot.get_channel(767416354700918814)
-        message = channel.fetch_message(767422159270182922)
+        message = await channel.fetch_message(767422159270182922)
         guild = channel.guild
 
         await message.edit(content=f"Currently, there are a total **{guild.member_count}** Members in this server!!!")
@@ -32,7 +32,7 @@ class Log(Cog):
     @Cog.listener()
     async def on_member_remove(self, ember):
         channel = self.bot.get_channel(767416354700918814)
-        message = channel.fetch_message(767422159270182922)
+        message = await channel.fetch_message(767422159270182922)
         guild = channel.guild
 
         await message.edit(content=f"Currently, there are a total **{guild.member_count}** Members in this server!!!")
