@@ -249,7 +249,7 @@ class Misc(commands.Cog):
         embed.add_field(name="Join Position", value=f"#{join_pos}", inline=True)
         embed.add_field(name="Account created on", value=f"{user.created_at.strftime(format)} ({delta_created.days} days)", inline=True)
         embed.add_field(name="Nickname", value=f"{user.nick}", inline=True)
-        roles = ", ".join([i.mention for i in user.roles if i.name != '@everyone']) or "No roles assigned."
+        roles = ", ".join([i.mention for i in user.roles if i.name != '@everyone' and '­@­━━­━━━━ SKILLS ­━━­━━━━' and '­@━━━━━ ATTAINMENTS ━━━━­' and '@­━━━━━   ESTABLISHED  ━━━━­']) or "No roles assigned."
         embed.add_field(name="Guild Roles", value=f"{roles}", inline=False)
         perms = ", ".join(list(i[0].title() for i in user.guild_permissions if i[1] == True)) or "No permissions in the guild."
         embed.add_field(name="Guild Permissions", value=f"{perms}", inline=False)
