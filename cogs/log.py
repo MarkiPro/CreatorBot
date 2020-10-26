@@ -6,10 +6,6 @@ from discord.ext.commands import command
 class Log(Cog):
     def __init__(self, bot):
         self.bot = bot
-    
-    @Cog.listener()
-    async def on_ready(self):
-        self.bot.cogs_ready.ready_up("log")
 
     @Cog.listener()
     async def on_message_delete(self, before, after):
