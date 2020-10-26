@@ -1,9 +1,10 @@
+import asyncio
+import datetime
+
 import discord
 from discord.ext import commands
-import datetime
-import re
-import asyncio
 from discord.utils import parse_time
+
 
 class Moderation(commands.Cog):
 
@@ -13,7 +14,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
-    async def clear(self, ctx, amount = 0, *, channel=None):
+    async def clear(self, ctx, amount=0, *, channel=None):
         if not channel:
             await ctx.channel.purge(limit=amount + 1)
         if channel:
@@ -47,7 +48,7 @@ class Moderation(commands.Cog):
             try:
                 await member.send(embed=embed2)
             except discord.Forbidden:
-                None
+                pass
             await member.kick(reason=reason)
             await ctx.send(embed=embed1)
 
@@ -79,7 +80,7 @@ class Moderation(commands.Cog):
             try:
                 await member.send(embed=embed2)
             except discord.Forbidden:
-                None
+                pass
             await member.ban(reason=reason)
             await ctx.send(embed=embed1)
 
@@ -91,9 +92,9 @@ class Moderation(commands.Cog):
         time_fields = []
 
         possible_time = args[:2]
-        
-        available_options = {'s':1, 'm':60, 'h':3600, 'd':86400, 'w':604800}
-        
+
+        available_options = {'s': 1, 'm': 60, 'h': 3600, 'd': 86400, 'w': 604800}
+
         if member.id == ctx.me.id:
             embed1 = discord.Embed(
                 title="**OOPS**",
@@ -143,12 +144,13 @@ class Moderation(commands.Cog):
         await member.ban(reason=reason)
 
         parsed_time = await parse_time(time)
-        
+
         if parsed_time != 0:
             await asyncio.sleep(parsed_time)
             await member.unban(reason=" ended.")
 
-    @commands.command(aliases=['soft-ban'], description="This command is used for banning and immediate unbanning, mostly used for clearing out user's messages.")
+    @commands.command(aliases=['soft-ban'],
+                      description="This command is used for banning and immediate unbanning, mostly used for clearing out user's messages.")
     @commands.has_permissions(ban_members=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def softban(self, ctx, member: discord.Member, *, reason=None):
@@ -176,12 +178,10 @@ class Moderation(commands.Cog):
             try:
                 await member.send(embed=embed2)
             except discord.Forbidden:
-                None
+                pass
             await member.ban(reason=reason)
             await member.unban(reason=reason)
             await ctx.send(embed=embed1)
-
-
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
@@ -222,9 +222,8 @@ class Moderation(commands.Cog):
                 except discord.Forbidden:
                     break
 
-
-    #@commands.command()
-    #@commands.has_permissions()
+    # @commands.command()
+    # @commands.has_permissions()
 
     @commands.command()
     @commands.has_permissions(manage_guild=True)
@@ -236,7 +235,7 @@ class Moderation(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     async def slowmode(self, ctx, channel, *, time):
         channel.slowmode_delay = time
-    
+
     @commands.group()
     @commands.has_permissions(manage_guild=True)
     async def toggle_cmd(self, ctx):
@@ -248,7 +247,7 @@ class Moderation(commands.Cog):
             command.enabled = False
         except:
             return
-    
+
     @toggle_cmd.command()
     async def enable(self, ctx, command):
         try:
@@ -342,6 +341,7 @@ class Moderation(commands.Cog):
             color=0x3aff00
         )
         await ctx.send(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
