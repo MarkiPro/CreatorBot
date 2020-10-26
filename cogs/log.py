@@ -23,21 +23,21 @@ class Log(Cog):
         message = await channel.fetch_message(767422159270182922)
         guild = channel.guild
         booster_role = discord.utils.get(guild.roles, id=762172204628181023)
-        before_roles = ", ".join([i.mention for i in before.roles if i.name != '@everyone' and '­@­━━­━━━━ SKILLS ­━━­━━━━' and '­@━━━━━ ATTAINMENTS ━━━━­' and '@­━━━━━   ESTABLISHED  ━━━━­']) or "No roles assigned."
-        after_roles = ", ".join([i.mention for i in after.roles if i.name != '@everyone' and '­@­━━­━━━━ SKILLS ­━━­━━━━' and '­@━━━━━ ATTAINMENTS ━━━━­' and '@­━━━━━   ESTABLISHED  ━━━━­']) or "No roles assigned."
+        before_roles = ", ".join([i.mention for i in before.roles if i.name != '@everyone' or '­@­━━­━━━━ SKILLS ­━━­━━━━' or '­@━━━━━ ATTAINMENTS ━━━━­' or '@­━━━━━   ESTABLISHED  ━━━━­']) or "No roles assigned."
+        after_roles = ", ".join([i.mention for i in after.roles if i.name != '@everyone' or '­@­━━­━━━━ SKILLS ­━━­━━━━' or '­@━━━━━ ATTAINMENTS ━━━━­' or '@­━━━━━   ESTABLISHED  ━━━━­']) or "No roles assigned."
         role_update_log_channel = self.bot.get_channel(712761099401035799)
 
         if before_roles != after_roles:
             log_embed = discord.Embed(
                 title="Role Update",
-                description=f"Role Update for {before_roles}",
+                description=f"Role Update for {before}",
                 timestamp=datetime.datetime.utcnow()
             )
             log_embed.add_field(name="**Before**", value=f"{before_roles}", inline=True)
             log_embed.add_field(name="**After**", value=f"{after_roles}", inline=True)
             await role_update_log_channel.send(embed=log_embed)
 
-        if booster_role in before_roles and booster_role not in after_roles:
+        if booster_role in before.roles and booster_role not in after.roles:
             await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,
                                         **{guild.premium_subscription_count}** Boosters,
                                         Boosting Level for this server is currently {guild.premium_tier}.""")
