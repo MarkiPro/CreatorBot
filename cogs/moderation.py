@@ -220,6 +220,9 @@ class Moderation(commands.Cog):
                 except discord.Forbidden:
                     break
 
+    #@commands.command()
+    #@commands.has_permissions()
+
     @commands.command()
     @commands.has_permissions(manage_guild=True)
     async def say(self, ctx, *, text):
