@@ -1,9 +1,11 @@
 import discord
 from discord.ext import commands
-#from discord.ext import buttons
 
 
-#class ReactionsPaginator(buttons.Paginator):
+# from discord.ext import buttons
+
+
+# class ReactionsPaginator(buttons.Paginator):
 #    def __init__(self, *args, **kwargs) -> None:
 #        super().__init__(*args, **kwargs)
 
@@ -16,6 +18,7 @@ class TextSplitter:
     async def make_text(self):
         n = self.char_per_page
         self.words_list = [self.text[i:i + n] for i in range(0, len(self.text), n)]
+
 
 class Paginator(commands.Cog):
     def __init__(self, bot):
@@ -34,5 +37,7 @@ class Paginator(commands.Cog):
                 prepared_embed.description = entry
 
                 await ctx.send(embed=prepared_embed)
+
+
 def setup(bot):
     bot.add_cog(Paginator(bot))
