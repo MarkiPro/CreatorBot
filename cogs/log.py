@@ -9,8 +9,7 @@ class Log(Cog):
     
     @Cog.listener()
     async def on_ready(self):
-        if not self.bot.ready:
-            self.bot.cogs_ready.ready_up("log")
+        self.bot.cogs_ready.ready_up("log")
 
     @Cog.listener()
     async def on_message_delete(self, before, after):
