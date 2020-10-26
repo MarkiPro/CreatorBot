@@ -1,13 +1,11 @@
-import discord
-from discord.ext import commands, tasks
-import os
-import asyncio
 import datetime
-import math
-import aiohttp
-import random
+import os
+
+import discord
+from discord.ext import commands
 
 token = os.environ['TOKEN']
+
 
 class EmbedHelpCommand(commands.MinimalHelpCommand):
     """This is an example of a HelpCommand that utilizes embeds.
@@ -52,7 +50,6 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
                 for c in commands:
                     commands_dict.get(f"{name}").append(c)
 
-
         description = '**``[]``: OPTIONAL, ``<>``: REQUIRED**\n\n'
 
         for cog in commands_dict.keys():
@@ -90,21 +87,27 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
 
     async def send_command_help(self, command):
         cog = 'Uncategorized' if command.cog is None else command.cog.qualified_name
-        embed = discord.Embed(title=f"{command.name} - {cog}".upper(), colour=self.COLOUR, image=bot.user.avatar_url, timestamp=datetime.datetime.utcnow())
-        #embed.set_author(name=f"{self.context.author}", icon_url=self.context.author.avatar_url)
+        embed = discord.Embed(title=f"{command.name} - {cog}".upper(), colour=self.COLOUR, image=bot.user.avatar_url,
+                              timestamp=datetime.datetime.utcnow())
+        # embed.set_author(name=f"{self.context.author}", icon_url=self.context.author.avatar_url)
         no_desc = "No description assigned."
         command_aliases = ", ".join([f"``{i}``" for i in command.aliases])
         no_aliases = 'This command has no aliases.'
 
         if isinstance(command, commands.Command):
-            embed.description = f"\n\n{self.get_command_signature(command)} - This is the correct usage of the ``{command.name}`` command. {command.description or no_desc}\n\nAliases: {command_aliases or no_aliases}"
-            # embed.add_field(name=self.get_command_signature(command), value=command.description or 'No description assigned.', inline=False)
+            embed.description = f"\n\n{self.get_command_signature(command)} - This is the correct usage of the ``{command.name}`` command. {command.description or no_desc}\n\nAliases: {command_aliases or no_aliases} "
+            # embed.add_field(name=self.get_command_signature(command), value=command.description or 'No description  assigned.', inline=False)
 
         await self.get_destination().send(embed=embed)
 
-prefix = ">"
 
-bot = commands.Bot(commands.when_mentioned_or(prefix), case_insensitive=True, help_command=EmbedHelpCommand())
+bot = commands.Bot(commands.when_mentioned_or(">"), case_insensitive=True, help_command=EmbedHelpCommand())
+
+
+@bot.command()
+async def verify(message):
+    pass
+
 
 @bot.event
 async def on_ready():
@@ -112,10 +115,12 @@ async def on_ready():
     activity = discord.Activity(type=discord.ActivityType.watching, name="Content Creators")
     await bot.change_presence(activity=activity)
 
+
 for file in os.listdir('cogs/'):
     if file.endswith('.py'):
         print(f"LOADED {file}")
         bot.load_extension(f'cogs.{file[:-3]}')
+
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -125,6 +130,6 @@ async def on_command_error(ctx, error):
         color=0xff0000
     )
     await ctx.send(embed=embed)
-    
+
 
 bot.run(token)
