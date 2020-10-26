@@ -181,6 +181,8 @@ class Moderation(commands.Cog):
             await member.unban(reason=reason)
             await ctx.send(embed=embed1)
 
+
+
     @commands.command()
     @commands.has_permissions(ban_members=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
@@ -220,6 +222,7 @@ class Moderation(commands.Cog):
                 except discord.Forbidden:
                     break
 
+
     #@commands.command()
     #@commands.has_permissions()
 
@@ -233,6 +236,25 @@ class Moderation(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     async def slowmode(self, ctx, channel, *, time):
         channel.slowmode_delay = time
+    
+    @commands.group()
+    @commands.has_permissions(manage_guild=True)
+    async def toggle_cmd(self, ctx):
+        pass
+
+    @toggle_cmd.command()
+    async def disable(self, ctx, command)
+    try:
+        command.enabled = False
+    except:
+        return
+    
+    @toggle_cmd.command()
+    async def enable(self, ctx, command)
+    try:
+        command.enabled = True
+    except:
+        return
 
     @commands.group()
     @commands.has_permissions(manage_roles=True)
