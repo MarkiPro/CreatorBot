@@ -15,7 +15,13 @@ class Log(Cog):
     @Cog.listener()
     async def on_message_edit(self, before, after):
         if not after.author.bot:
-            pass
+            log_embed = discord.Embed(
+                title="**Message Edit**",
+                description=f"{before.author} Edited The Message",
+                timestamp=datetime.datetime.utcnow()
+            )
+            log_embed.add_field(name="**Before**", value=f"{before}", inline=True)
+            log_embed.add_field(name="**After**", value=f"{after}", inline=True)
 
     @Cog.listener()
     async def on_member_update(self, before, after):
