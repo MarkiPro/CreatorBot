@@ -235,17 +235,18 @@ class Misc(commands.Cog):
 
     @commands.command(aliases=['who'],
                     description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
-    async def whois(self, ctx, user: discord.Member = None):
-        if not user:
-            user = ctx.message.author
+    async def whois(self, ctx, user: discord.Member=None):
+        user = user or ctx.author
 
         embed = discord.Embed(title=f"**Who is {user.name}**".upper(),
                               description="Displays basic information about the given user", colour=0xd9ac32)
         format = "%A, %d %B, %Y : %I:%M %p"
         delta_joined = datetime.datetime.utcnow() - user.joined_at
         delta_created = datetime.datetime.utcnow() - user.created_at
+        join_pos = sum(m.joined_at < user.joined_at for m in ctx.guild.members if m.joined_at is not None)
         embed.set_thumbnail(url=user.avatar_url)
         embed.add_field(name="Joined on", value=f"{user.joined_at.strftime(format)} ({delta_joined.days} days)", inline=True)
+        embed.add_field(name="Join Position", value=f"#{join_pos}", inline=True)
         embed.add_field(name="Account created on", value=f"{user.created_at.strftime(format)} ({delta_created.days} days)", inline=True)
         embed.add_field(name="Nickname", value=f"{user.nick}", inline=True)
         roles = ", ".join([i.mention for i in user.roles if i.name != '@everyone']) or "No roles assigned."
