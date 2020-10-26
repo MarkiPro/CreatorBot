@@ -144,7 +144,7 @@ class Moderation(commands.Cog):
 
         parsed_time = await parse_time(time)
         
-        if parsed_time is not 0:
+        if parsed_time != 0:
             await asyncio.sleep(parsed_time)
             await member.unban(reason=" ended.")
 
@@ -243,18 +243,18 @@ class Moderation(commands.Cog):
         pass
 
     @toggle_cmd.command()
-    async def disable(self, ctx, command)
-    try:
-        command.enabled = False
-    except:
-        return
+    async def disable(self, ctx, command):
+        try:
+            command.enabled = False
+        except:
+            return
     
     @toggle_cmd.command()
-    async def enable(self, ctx, command)
-    try:
-        command.enabled = True
-    except:
-        return
+    async def enable(self, ctx, command):
+        try:
+            command.enabled = True
+        except:
+            return
 
     @commands.group()
     @commands.has_permissions(manage_roles=True)
