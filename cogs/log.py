@@ -22,7 +22,7 @@ class Log(Cog):
         if not after.author.bot:
             log_embed = discord.Embed(
                 title="**Message Edit**",
-                description=f"{before.author} Edited The Message",
+                description=f"{before.author} Edited The Message!",
                 timestamp=datetime.datetime.utcnow()
             )
             log_embed.add_field(name="**Before**", value=f"{before.content}", inline=True)
@@ -48,7 +48,7 @@ class Log(Cog):
 
         log_embed = discord.Embed(
             title="Role Update",
-            description=f"Role Update for {before}",
+            description=f"Role Update for {before}!",
             timestamp=datetime.datetime.utcnow()
         )
         log_embed.add_field(name="**Before**", value=f"{before_roles}", inline=True)
@@ -60,22 +60,34 @@ class Log(Cog):
         channel = self.bot.get_channel(767416354700918814)
         message = await channel.fetch_message(767422159270182922)
         guild = channel.guild
+        log_channel = self.bot.get_channel(736234502816399422)
 
+        log_embed = discord.Embed(
+            title="**Member Left**",
+            description=f"{member} Left The Server!",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
+        )
+        await log_channel.send(embed=log_embed)
 
-
-        await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,
-            **{guild.premium_subscription_count}** Boosters,
-            Boosting Level for this server is currently **{guild.premium_tier}**.""")
+        await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.""")
 
     @Cog.listener()
-    async def on_member_remove(self, ember):
+    async def on_member_remove(self, member):
         channel = self.bot.get_channel(767416354700918814)
         message = await channel.fetch_message(767422159270182922)
         guild = channel.guild
+        log_channel = self.bot.get_channel(736234502816399422)
 
-        await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,
-            **{guild.premium_subscription_count}** Boosters,
-            Boosting Level for this server is currently **{guild.premium_tier}**.""")
+        log_embed = discord.Embed(
+            title="**Member Left**",
+            description=f"{member} Left The Server!",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
+        )
+        await log_channel.send(embed=log_embed)
+
+        await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.""")
 
 
 def setup(bot):
