@@ -26,7 +26,6 @@ class Log(Cog):
     async def on_message_edit(self, before, after):
         log_channel = self.bot.get_channel(712624826463813753)
         message = before
-        guild_id = log_channel.guild.id
 
         if not after.author.bot:
             log_embed = discord.Embed(
@@ -50,21 +49,22 @@ class Log(Cog):
         after_roles = ", ".join(role.mention for role in after.roles if role.id not in exculded_roles) or "No roles assigned."
         role_update_log_channel = self.bot.get_channel(770368850679169075)
 
+        if before.roles != after.roles or after.roles != before.roles:
+            log_embed = discord.Embed(
+                title="Role Update",
+                description=f"Role Update for {before}!",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            log_embed.add_field(name="**Before**", value=f"{before_roles}", inline=True)
+            log_embed.add_field(name="**After**", value=f"{after_roles}", inline=True)
+            await role_update_log_channel.send(embed=log_embed)
+
         if booster_role in before.roles and booster_role not in after.roles:
             await message.edit(
                 content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,
                 **{guild.premium_subscription_count}** Boosters,
                 Boosting Level for this server is currently **{guild.premium_tier}**.""")
-
-        log_embed = discord.Embed(
-            title="Role Update",
-            description=f"Role Update for {before}!",
-            timestamp=datetime.datetime.utcnow(),
-            color = 0x0064ff
-        )
-        log_embed.add_field(name="**Before**", value=f"{before_roles}", inline=True)
-        log_embed.add_field(name="**After**", value=f"{after_roles}", inline=True)
-        await role_update_log_channel.send(embed=log_embed)
 
     @Cog.listener()
     async def on_member_join(self, member):
