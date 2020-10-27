@@ -2,6 +2,7 @@ import discord
 from discord.ext.commands import Cog
 from discord.ext.commands import command
 import datetime
+import asyncio
 
 
 class Log(Cog):
@@ -49,7 +50,7 @@ class Log(Cog):
         after_roles = ", ".join(role.mention for role in after.roles if role.id not in exculded_roles) or "No roles assigned."
         role_update_log_channel = self.bot.get_channel(770368850679169075)
 
-        if before.roles != after.roles or after.roles != before.roles:
+        if before.roles != after.roles or after.roles != before.roles or str(before_roles) == "No roles assigned." or str(after_roles) == "No roles assigned.":
             log_embed = discord.Embed(
                 title="Role Update",
                 description=f"Role Update for {before}!",
@@ -59,6 +60,7 @@ class Log(Cog):
             log_embed.add_field(name="**Before**", value=f"{before_roles}", inline=True)
             log_embed.add_field(name="**After**", value=f"{after_roles}", inline=True)
             await role_update_log_channel.send(embed=log_embed)
+            await asyncio.sleep(60)
 
         if booster_role in before.roles and booster_role not in after.roles:
             await message.edit(
@@ -74,8 +76,8 @@ class Log(Cog):
         log_channel = self.bot.get_channel(736234502816399422)
 
         log_embed = discord.Embed(
-            title="**Member Left**",
-            description=f"{member} Left The Server!",
+            title="**Member Joined**",
+            description=f"{member} Joined The Server!\n",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
