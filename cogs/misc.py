@@ -245,7 +245,7 @@ class Misc(commands.Cog):
         user = user or ctx.author
 
         join_pos = sum([m.joined_at < user.joined_at for m in ctx.guild.members if m.joined_at is not None])
-        embed = discord.Embed(title=f"**Who is {user.name}**".upper(),
+        embed = discord.Embed(title=f"**Who is {user}**".upper(),
                               description="Displays basic information about the given user",
                               timestamp=datetime.datetime.utcnow(),
                               colour=0x0064ff)
