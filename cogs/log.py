@@ -25,13 +25,13 @@ class Log(Cog):
     @Cog.listener()
     async def on_message_edit(self, before, after):
         log_channel = self.bot.get_channel(712624826463813753)
-        message_id = before.id
+        message = before
         guild_id = log_channel.guild.id
 
         if not after.author.bot:
             log_embed = discord.Embed(
                 title="**Message Edit**",
-                description=f'{before.author.mention} Edited The [Message](https://discordapp.com/{guild_id}/{message_id})!',
+                description=f'{before.author.mention} Edited The [Message]({message.jump_url})!',
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
