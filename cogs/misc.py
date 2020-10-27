@@ -261,7 +261,7 @@ class Misc(commands.Cog):
         roles = ", ".join(role.mention for role in user.roles if role.id not in exculded_roles) or 'No roles assigned.'
         embed.add_field(name="Guild Roles", value=f"{roles}", inline=False)
         notable_perms = ['administrator', 'manage_guild', 'view_audit_log', 'manage_roles', 'manage_channels', 'ban_members', 'kick_members', 'manage_messages', 'mention_everyone', 'manage_emojis', 'manage_webhooks', 'manage_nicknames', 'mute_members', 'deafen_members', 'move_members', 'priority_speaker']
-        member_permissions = ", ".join(f"{i.title().replace('_', ' ')}" for i in notable_perms if getattr(user, i, False)) or "No Permissions."
+        member_permissions = ", ".join(f"{i.title().replace('_', ' ')}" for i in notable_perms if getattr(user.permissions_in(ctx.channel), i, False)) or "No Permissions."
         embed.add_field(name="Guild Permissions", value=f"{member_permissions}", inline=False)
         await ctx.send(embed=embed)
 
