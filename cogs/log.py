@@ -61,7 +61,7 @@ class Log(Cog):
         message = await channel.fetch_message(767422159270182922)
         guild = channel.guild
 
-        
+
 
         await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,
             **{guild.premium_subscription_count}** Boosters,
