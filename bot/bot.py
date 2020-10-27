@@ -101,7 +101,11 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
         await self.get_destination().send(embed=embed)
 
 
-bot = commands.Bot(commands.when_mentioned_or(">"), case_insensitive=True, help_command=EmbedHelpCommand())
+intents = discord.Intents.default()
+
+intents.members = True
+
+bot = commands.Bot(commands.when_mentioned_or(">"), case_insensitive=True, help_command=EmbedHelpCommand(), intents=intents)
 
 
 @bot.event
