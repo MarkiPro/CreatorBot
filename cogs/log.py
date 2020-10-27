@@ -25,8 +25,8 @@ class Log(Cog):
                 description=f"{before.author} Edited The Message",
                 timestamp=datetime.datetime.utcnow()
             )
-            log_embed.add_field(name="**Before**", value=f"{before}", inline=True)
-            log_embed.add_field(name="**After**", value=f"{after}", inline=True)
+            log_embed.add_field(name="**Before**", value=f"{before.content}", inline=True)
+            log_embed.add_field(name="**After**", value=f"{after.content}", inline=True)
             await log_channel.send(embed=log_embed)
 
     @Cog.listener()
