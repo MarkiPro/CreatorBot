@@ -249,7 +249,9 @@ class Misc(commands.Cog):
 
         member_join_position = sorted_members.index(user.id) + 1
         embed = discord.Embed(title=f"**Who is {user.name}**".upper(),
-                              description="Displays basic information about the given user", colour=0xd9ac32)
+                              description="Displays basic information about the given user",
+                              timestamp=datetime.datetime.utcnow(),
+                              colour=0x0064ff)
         format = "%A, %d %B, %Y : %I:%M %p"
         delta_joined = datetime.datetime.utcnow() - user.joined_at
         delta_created = datetime.datetime.utcnow() - user.created_at
