@@ -20,7 +20,7 @@ class Log(Cog):
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            log_embed.set_image(url=before.avatar_url)
+            log_embed.set_thumbnail(url=before.avatar_url)
             log_embed.add_field(name="**Message**", value=f"{before.content}", inline=True)
             await log_channel.send(embed=log_embed)
 
@@ -38,7 +38,7 @@ class Log(Cog):
             )
             log_embed.add_field(name="**Before**", value=f"{before.content}", inline=True)
             log_embed.add_field(name="**After**", value=f"{after.content}", inline=True)
-            log_embed.set_image(url=before.avatar_url)
+            log_embed.set_thumbnail(url=before.avatar_url)
             await log_channel.send(embed=log_embed)
 
     @Cog.listener()
@@ -61,7 +61,7 @@ class Log(Cog):
             )
             log_embed.add_field(name="**Before**", value=f"{before_roles}", inline=True)
             log_embed.add_field(name="**After**", value=f"{after_roles}", inline=True)
-            log_embed.set_image(url=before.avatar_url)
+            log_embed.set_thumbnail(url=before.avatar_url)
             await role_update_log_channel.send(embed=log_embed)
             await asyncio.sleep(60)
 
@@ -85,7 +85,7 @@ class Log(Cog):
             color=0x0064ff
         )
 
-        log_embed.set_image(url=member.avatar_url)
+        log_embed.set_thumbnail(url=member.avatar_url)
 
         await log_channel.send(embed=log_embed)
 
@@ -105,7 +105,7 @@ class Log(Cog):
             color=0x0064ff
         )
 
-        log_embed.set_image(url=member.avatar_url)
+        log_embed.set_thumbnail(url=member.avatar_url)
 
         await log_channel.send(embed=log_embed)
 
