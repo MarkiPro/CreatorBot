@@ -16,7 +16,7 @@ class Log(Cog):
         if not after.author.bot:
             log_embed = discord.Embed(
                 title="**Message Deletion**",
-                description=f"{before.author} Deleted a Message!",
+                description=f"{before.author.mention} Deleted a Message in {before.channel.mention}!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -32,7 +32,7 @@ class Log(Cog):
         if not after.author.bot:
             log_embed = discord.Embed(
                 title="**Message Edit**",
-                description=f'{before.author.mention} Edited The [Message]({message.jump_url})!',
+                description=f'{before.author.mention} Edited The [Message]({message.jump_url}) in {before.channel.mention}!',
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -55,7 +55,7 @@ class Log(Cog):
         if before_roles != after_roles or after_roles != before_roles or str(before_roles) == "No roles assigned." or str(after_roles) == "No roles assigned.":
             log_embed = discord.Embed(
                 title="Role Update",
-                description=f"Role Update for {after}!",
+                description=f"Role Update for {after.mention}!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -77,10 +77,30 @@ class Log(Cog):
         message = await channel.fetch_message(770695658318463007)
         guild = channel.guild
         log_channel = self.bot.get_channel(736234502816399422)
+        delta_created = datetime.datetime.utcnow() - member.created_at
+
+        myaccount = self.bot.get_user(member.id)
+        myaccount.created_at
+        myaccount.timestamp()
+        if datetime.time() - myaccount.timestamp() >= 604800:
+            pass
+        else:
+            kick_embed = discord.Embed(
+                title="**NOTIFICATION**",
+                description=f":bell: *You have been kicked in **{guild}** because your account is not even a week old. You may join back once your account is at least one week old*!",
+                color=0x0064ff,
+                timestamp=datetime.datetime.now(tz=None)
+            )
+            try:
+                await member.send(embed=kick_embed)
+            except discord.Forbidden:
+                pass
+            await member.kick(reason="Account Age is less than a week.")
+            return
 
         log_embed = discord.Embed(
             title="**Member Joined**",
-            description=f"{member.mention} Joined The Server!",
+            description=f"{member.mention} Joined The Server!\n Account Created {member.created_at.strftime(format)} ({delta_created.days} days)",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
@@ -97,10 +117,11 @@ class Log(Cog):
         message = await channel.fetch_message(770695658318463007)
         guild = channel.guild
         log_channel = self.bot.get_channel(736234502816399422)
+        delta_created = datetime.datetime.utcnow() - member.created_at
 
         log_embed = discord.Embed(
             title="**Member Left**",
-            description=f"{member} Left The Server!",
+            description=f"{member.mention} Joined The Server!\n{member.created_at.strftime(format)} ({delta_created.days} days)",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
