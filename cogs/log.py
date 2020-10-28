@@ -52,7 +52,7 @@ class Log(Cog):
         after_roles = ", ".join(role.mention for role in after.roles if role.id not in exculded_roles) or "No roles assigned."
         role_update_log_channel = self.bot.get_channel(770368850679169075)
 
-        if before_roles != after_roles or after_roles != before_roles or str(before_roles) == "No roles assigned." or str(after_roles) == "No roles assigned.":
+        if before_roles != after_roles and after_roles != before_roles and str(before_roles) != "No roles assigned." and str(after_roles) != "No roles assigned.":
             log_embed = discord.Embed(
                 title="Role Update",
                 description=f"Role Update for {after.mention}!",
@@ -79,12 +79,7 @@ class Log(Cog):
         log_channel = self.bot.get_channel(736234502816399422)
         delta_created = datetime.datetime.utcnow() - member.created_at
 
-        myaccount = self.bot.get_user(member.id)
-        myaccount.created_at
-        myaccount.timestamp()
-        if datetime.time() - myaccount.timestamp() >= 604800:
-            pass
-        else:
+        if datetime.datetime.utcnow() - member.created_at.timestamp() < 604800:
             kick_embed = discord.Embed(
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been kicked in **{guild}** because your account is not even a week old. You may join back once your account is at least one week old*!",
@@ -97,6 +92,8 @@ class Log(Cog):
                 pass
             await member.kick(reason="Account Age is less than a week.")
             return
+        else:
+            pass
 
         log_embed = discord.Embed(
             title="**Member Joined**",
