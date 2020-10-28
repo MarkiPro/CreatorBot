@@ -79,12 +79,9 @@ class Log(Cog):
             title="**Member Joined**",
             description=f"{member.mention} Joined The Server!",
             timestamp=datetime.datetime.utcnow(),
-            color=0x0064ff
+            color=0x0064ff,
+            image=member.avatar_url
         )
-        member_avatar_url = member.avatar_url
-
-        log_embed.set_image(member_avatar_url)
-
         await log_channel.send(embed=log_embed)
 
         await message.edit(content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
