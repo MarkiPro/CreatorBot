@@ -97,7 +97,7 @@ class Log(Cog):
 
         log_embed = discord.Embed(
             title="**Member Joined**",
-            description=f"{member.mention} Joined The Server!\n Account Created {member.created_at.strftime(format)} ({delta_created.days} days)",
+            description=f"{member.mention} Joined The Server!",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
@@ -118,7 +118,7 @@ class Log(Cog):
 
         log_embed = discord.Embed(
             title="**Member Left**",
-            description=f"{member.mention} Joined The Server!\n Account Created {member.created_at.strftime(format)} ({delta_created.days} days)",
+            description=f"{member.mention} Joined The Server!",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
