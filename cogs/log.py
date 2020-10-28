@@ -50,10 +50,10 @@ class Log(Cog):
         after_roles = ", ".join(role.mention for role in after.roles if role.id not in exculded_roles) or "No roles assigned."
         role_update_log_channel = self.bot.get_channel(770368850679169075)
 
-        if before.roles != after.roles or after.roles != before.roles or str(before_roles) == "No roles assigned." or str(after_roles) == "No roles assigned.":
+        if before_roles != after_roles or after_roles != before_roles or str(before_roles) == "No roles assigned." or str(after_roles) == "No roles assigned.":
             log_embed = discord.Embed(
                 title="Role Update",
-                description=f"Role Update for {before}!",
+                description=f"Role Update for {after}!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
