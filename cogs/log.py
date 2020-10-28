@@ -79,6 +79,8 @@ class Log(Cog):
         log_channel = self.bot.get_channel(736234502816399422)
         delta_created = datetime.datetime.utcnow() - member.created_at
 
+        print(datetime.datetime.utcnow() - member.created_at.timestamp())
+
         if datetime.datetime.utcnow() - member.created_at.timestamp() < 604800:
             kick_embed = discord.Embed(
                 title="**NOTIFICATION**",
@@ -93,20 +95,19 @@ class Log(Cog):
             await member.kick(reason="Account Age is less than a week.")
             return
         else:
-            pass
+            log_embed = discord.Embed(
+                title="**Member Joined**",
+                description=f"{member.mention} Joined The Server!",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
 
-        log_embed = discord.Embed(
-            title="**Member Joined**",
-            description=f"{member.mention} Joined The Server!",
-            timestamp=datetime.datetime.utcnow(),
-            color=0x0064ff
-        )
+            log_embed.set_thumbnail(url=member.avatar_url)
 
-        log_embed.set_thumbnail(url=member.avatar_url)
+            await log_channel.send(embed=log_embed)
 
-        await log_channel.send(embed=log_embed)
-
-        await message.edit(content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
+            await message.edit(
+                content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
 
     @Cog.listener()
     async def on_member_remove(self, member):
