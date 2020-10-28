@@ -1,8 +1,8 @@
+import asyncio
+import datetime
+
 import discord
 from discord.ext.commands import Cog
-from discord.ext.commands import command
-import datetime
-import asyncio
 
 
 class Log(Cog):
@@ -16,10 +16,11 @@ class Log(Cog):
         if not after.author.bot:
             log_embed = discord.Embed(
                 title="**Message Deletion**",
-                description=f"{before.author} Deleted The Message!",
+                description=f"{before.author} Deleted a Message!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
+            log_embed.set_image(url=before.avatar_url)
             log_embed.add_field(name="**Message**", value=f"{before.content}", inline=True)
             await log_channel.send(embed=log_embed)
 
@@ -37,6 +38,7 @@ class Log(Cog):
             )
             log_embed.add_field(name="**Before**", value=f"{before.content}", inline=True)
             log_embed.add_field(name="**After**", value=f"{after.content}", inline=True)
+            log_embed.set_image(url=before.avatar_url)
             await log_channel.send(embed=log_embed)
 
     @Cog.listener()
@@ -59,6 +61,7 @@ class Log(Cog):
             )
             log_embed.add_field(name="**Before**", value=f"{before_roles}", inline=True)
             log_embed.add_field(name="**After**", value=f"{after_roles}", inline=True)
+            log_embed.set_image(url=before.avatar_url)
             await role_update_log_channel.send(embed=log_embed)
             await asyncio.sleep(60)
 
@@ -79,9 +82,11 @@ class Log(Cog):
             title="**Member Joined**",
             description=f"{member.mention} Joined The Server!",
             timestamp=datetime.datetime.utcnow(),
-            color=0x0064ff,
-            image=member.avatar_url
+            color=0x0064ff
         )
+
+        log_embed.set_image(url=member.avatar_url)
+
         await log_channel.send(embed=log_embed)
 
         await message.edit(content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
@@ -99,6 +104,9 @@ class Log(Cog):
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
+
+        log_embed.set_image(url=member.avatar_url)
+
         await log_channel.send(embed=log_embed)
 
         await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.""")
