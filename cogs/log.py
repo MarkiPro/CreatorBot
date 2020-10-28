@@ -118,7 +118,7 @@ class Log(Cog):
 
         log_embed = discord.Embed(
             title="**Member Left**",
-            description=f"{member.mention} Joined The Server!",
+            description=f"{member.mention} Left The Server!",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
