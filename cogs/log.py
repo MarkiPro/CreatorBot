@@ -12,11 +12,12 @@ class Log(Cog):
     @Cog.listener()
     async def on_message_delete(self, before, after):
         log_channel = self.bot.get_channel(712624826463813753)
+        message = before
 
         if not after.author.bot:
             log_embed = discord.Embed(
                 title="**Message Deletion**",
-                description=f"{before.author.mention} Deleted a Message in {before.channel.mention}!",
+                description=f"{before.author.mention} Deleted a Message in {message.channel.mention}!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -32,7 +33,7 @@ class Log(Cog):
         if not after.author.bot:
             log_embed = discord.Embed(
                 title="**Message Edit**",
-                description=f'{before.author.mention} Edited The [Message]({message.jump_url}) in {message.mention}!',
+                description=f'{before.author.mention} Edited The [Message]({message.jump_url}) in {message.channel.mention}!',
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
