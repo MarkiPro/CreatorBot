@@ -16,12 +16,12 @@ class Log(Cog):
         if not message.author.bot:
             log_embed = discord.Embed(
                 title="**Message Deletion**",
-                description=f"{message.author.mention} Deleted a Message!",
+                description=f"{message.author.mention} Deleted a Message in {message.channel.mention}!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
             log_embed.set_thumbnail(url=message.author.avatar_url)
-            log_embed.add_field(name="**Message Content**", value=f"{message.content}", inline=True)
+            log_embed.add_field(name="**Message Content**", value=f"```{message.content}```", inline=True)
             await log_channel.send(embed=log_embed)
 
     @Cog.listener()
@@ -36,8 +36,8 @@ class Log(Cog):
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            log_embed.add_field(name="**Before**", value=f"{before.content}", inline=True)
-            log_embed.add_field(name="**After**", value=f"{after.content}", inline=True)
+            log_embed.add_field(name="**Before**", value=f"```{before.content}```", inline=True)
+            log_embed.add_field(name="**After**", value=f"```{after.content}```", inline=True)
             log_embed.set_thumbnail(url=before.author.avatar_url)
             await log_channel.send(embed=log_embed)
 
