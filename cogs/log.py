@@ -51,25 +51,35 @@ class Log(Cog):
         before_roles = ", ".join(role.mention for role in before.roles if role.id not in exculded_roles) or "No roles assigned."
         after_roles = ", ".join(role.mention for role in after.roles if role.id not in exculded_roles) or "No roles assigned."
         role_update_log_channel = self.bot.get_channel(770368850679169075)
+        nick_update_log_channel = self.bot.get_channel(771465528618254347)
+
+        if before.display_name != after.display_name and after.display_name != before.display_name:
+            nick_log_embed = discord.Embed(
+                title="Nickname Update",
+                description=f"Nickname Update for {after.mention}!",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            nick_log_embed.add_field(name="**Before**", value=f"```{before.display_name}```", inline=False)
+            nick_log_embed.add_field(name="**After**", value=f"```{after.display_name}```", inline=False)
+
+            await nick_update_log_channel.send(nick_log_embed)
 
         if before_roles != after_roles and after_roles != before_roles and str(before_roles) != "No roles assigned." and str(after_roles) != "No roles assigned.":
-            log_embed = discord.Embed(
+            role_log_embed = discord.Embed(
                 title="Role Update",
                 description=f"Role Update for {after.mention}!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            log_embed.add_field(name="**Before**", value=f"{before_roles}", inline=True)
-            log_embed.add_field(name="**After**", value=f"{after_roles}", inline=True)
-            log_embed.set_thumbnail(url=before.avatar_url)
-            await role_update_log_channel.send(embed=log_embed)
+            role_log_embed.add_field(name="**Before**", value=f"{before_roles}", inline=False)
+            role_log_embed.add_field(name="**After**", value=f"{after_roles}", inline=False)
+            role_log_embed.set_thumbnail(url=before.avatar_url)
+            await role_update_log_channel.send(embed=role_log_embed)
             await asyncio.sleep(60)
 
         if booster_role in before.roles and booster_role not in after.roles:
-            await message.edit(
-                content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,
-                **{guild.premium_subscription_count}** Boosters,
-                Boosting Level for this server is currently **{guild.premium_tier}**.""")
+            await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.""")
 
     @Cog.listener()
     async def on_member_join(self, member):
@@ -95,7 +105,7 @@ class Log(Cog):
         else:
             log_embed = discord.Embed(
                 title="**Member Joined**",
-                description=f"{member.mention} Joined The Server!",
+                description=f"{member.mention} Joined The Server!\n Account Created {delta_created.time()} ago.",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -116,7 +126,7 @@ class Log(Cog):
 
         log_embed = discord.Embed(
             title="**Member Left**",
-            description=f"{member.mention} Left The Server!",
+            description=f"{member.mention} Left The Server!\n Account Created {delta_created.time()} ago.",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
