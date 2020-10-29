@@ -11,7 +11,7 @@ class Log(Cog):
 
     @Cog.listener()
     async def on_message_delete(self, message):
-        log_channel = self.bot.get_channel(712624826463813753)
+        log_channel = self.bot.get_channel(771471454629003314)
 
         if not message.author.bot:
             log_embed = discord.Embed(
@@ -26,7 +26,7 @@ class Log(Cog):
 
     @Cog.listener()
     async def on_message_edit(self, before, after):
-        log_channel = self.bot.get_channel(712624826463813753)
+        log_channel = self.bot.get_channel(771471454629003314)
         message = before
 
         if not message.author.bot:
@@ -105,7 +105,7 @@ class Log(Cog):
         else:
             log_embed = discord.Embed(
                 title="**Member Joined**",
-                description=f"{member.mention} Joined The Server!\n Account Created {delta_created.time()} ago.",
+                description=f"{member.mention} Joined The Server!\n Account Created {delta_created.days} days ago.",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -126,7 +126,7 @@ class Log(Cog):
 
         log_embed = discord.Embed(
             title="**Member Left**",
-            description=f"{member.mention} Left The Server!\n Account Created {delta_created.time()} ago.",
+            description=f"{member.mention} Left The Server!\n Account Created {delta_created.days} days ago.",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
