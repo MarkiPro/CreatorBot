@@ -21,7 +21,7 @@ class Log(Cog):
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            log_embed.set_thumbnail(url=before.avatar_url)
+            log_embed.set_thumbnail(url=before.author.avatar_url)
             log_embed.add_field(name="**Message**", value=f"{before.content}", inline=True)
             await log_channel.send(embed=log_embed)
 
@@ -39,7 +39,7 @@ class Log(Cog):
             )
             log_embed.add_field(name="**Before**", value=f"{before.content}", inline=True)
             log_embed.add_field(name="**After**", value=f"{after.content}", inline=True)
-            log_embed.set_thumbnail(url=before.avatar_url)
+            log_embed.set_thumbnail(url=before.author.avatar_url)
             await log_channel.send(embed=log_embed)
 
     @Cog.listener()
@@ -105,8 +105,7 @@ class Log(Cog):
 
             await log_channel.send(embed=log_embed)
 
-            await message.edit(
-                content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
+            await message.edit(content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
 
     @Cog.listener()
     async def on_member_remove(self, member):
