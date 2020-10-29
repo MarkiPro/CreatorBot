@@ -32,7 +32,7 @@ class Log(Cog):
         if not after.author.bot:
             log_embed = discord.Embed(
                 title="**Message Edit**",
-                description=f'{before.author.mention} Edited The [Message]({message.jump_url}) in {before.channel.mention}!',
+                description=f'{before.author.mention} Edited The [Message]({message.jump_url}) in {message.mention}!',
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -79,9 +79,7 @@ class Log(Cog):
         log_channel = self.bot.get_channel(736234502816399422)
         delta_created = datetime.datetime.utcnow() - member.created_at
 
-        print(datetime.datetime.utcnow() - member.created_at.timestamp())
-
-        if datetime.datetime.utcnow() - member.created_at.timestamp() < 604800:
+        if delta_created.days < 7:
             kick_embed = discord.Embed(
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been kicked in **{guild}** because your account is not even a week old. You may join back once your account is at least one week old*!",
