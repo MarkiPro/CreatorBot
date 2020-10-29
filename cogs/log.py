@@ -32,7 +32,7 @@ class Log(Cog):
         if not message.author.bot:
             log_embed = discord.Embed(
                 title="**Message Edit**",
-                description=f'{message.author.mention} Edited The [Message]({message.jump_url})!',
+                description=f'{message.author.mention} Edited The [Message]({message.jump_url}) in {message.channel.mention}!',
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
