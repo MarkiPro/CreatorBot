@@ -10,19 +10,18 @@ class Log(Cog):
         self.bot = bot
 
     @Cog.listener()
-    async def on_message_delete(self, before, after):
+    async def on_message_delete(self, message):
         log_channel = self.bot.get_channel(712624826463813753)
-        message = before or after
 
         if not message.author.bot:
             log_embed = discord.Embed(
                 title="**Message Deletion**",
-                description=f"{before.author.mention} Deleted a Message in {message.channel.mention}!",
+                description=f"{message.author.mention} Deleted a Message!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            log_embed.set_thumbnail(url=before.author.avatar_url)
-            log_embed.add_field(name="**Message**", value=f"{before.content}", inline=True)
+            log_embed.set_thumbnail(url=message.author.avatar_url)
+            log_embed.add_field(name="**Message Content**", value=f"{message.content}", inline=True)
             await log_channel.send(embed=log_embed)
 
     @Cog.listener()
@@ -30,10 +29,10 @@ class Log(Cog):
         log_channel = self.bot.get_channel(712624826463813753)
         message = before
 
-        if not after.author.bot:
+        if not message.author.bot:
             log_embed = discord.Embed(
                 title="**Message Edit**",
-                description=f'{message.author.mention} Edited The [Message]({message.jump_url}) in {message.channel.mention}!',
+                description=f'{message.author.mention} Edited The [Message]({message.jump_url})!',
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
