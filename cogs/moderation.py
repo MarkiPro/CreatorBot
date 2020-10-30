@@ -140,7 +140,8 @@ class Moderation(commands.Cog):
         try:
             await member.send(embed=embed2)
         except Exception:
-            return
+            pass
+        await ctx.send(embed=embed1)
         await member.ban(reason=reason)
 
         parsed_time = await parse_time(time)
