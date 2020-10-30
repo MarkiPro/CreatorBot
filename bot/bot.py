@@ -121,8 +121,9 @@ for file in os.listdir('cogs/'):
 
 @bot.event
 async def on_command_error(ctx, error):
+    blocked_list = [">:", ">;", ">0", ">1", ">2", ">3", ">4", ">5", ">6", ">7", ">8", ">9", ">/", ">|", ">_", ">?", "><", ">.", ">,", ">=", ">-", ">`", ">!", ">@", ">#", ">$", ">%", ">^", ">&", ">*", ">(", ">)"]
     if isinstance(error, commands.CommandNotFound):
-        if ctx.message.content.startswith(">:" or ">;" or ">:c" or ">:)" or ">:(" or ">:C" or ">;C" or ">;c" or ">;)"):
+        if ctx.message.content.startswith(tuple(blocked_list)):
             return
         else:
             pass
