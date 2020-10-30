@@ -122,7 +122,12 @@ for file in os.listdir('cogs/'):
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
-        return
+        if ctx.message.content.startswith(">:" or ">;" or ">:c" or ">:)" or ">:(" or ">:C" or ">;C" or ">;c" or ">;)"):
+            return
+        else:
+            pass
+    else:
+        pass
     embed = discord.Embed(
         title="**ERROR**",
         description=f"***:no_entry_sign: {error}***",
