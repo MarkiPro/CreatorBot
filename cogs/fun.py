@@ -1,9 +1,8 @@
-import discord
-from discord.ext import commands, tasks
-import aiohttp
-import json
 import random
-import asyncio
+
+import aiohttp
+import discord
+from discord.ext import commands
 
 
 class Fun(commands.Cog):
