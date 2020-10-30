@@ -10,8 +10,7 @@ class Misc(commands.Cog):
         self.bot = bot
         self.bot.help_command.cog = self
 
-    @commands.command(aliases=["for-hire", "forhire"],
-                      description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
+    @commands.command(aliases=["for-hire", "forhire"], description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
     @commands.cooldown(1, 300, commands.BucketType.member)
     async def fh(self, ctx):
         cc_guild = self.bot.get_guild(id=611227128020598805)
