@@ -36,8 +36,8 @@ class Log(Cog):
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            log_embed.add_field(name="**Before**", value=f"```{before.content}```", inline=True)
-            log_embed.add_field(name="**After**", value=f"```{after.content}```", inline=True)
+            log_embed.add_field(name="**Before**", value=f"```{before.content}```", inline=False)
+            log_embed.add_field(name="**After**", value=f"```{after.content}```", inline=False)
             log_embed.set_thumbnail(url=before.author.avatar_url)
             await log_channel.send(embed=log_embed)
 
@@ -63,7 +63,7 @@ class Log(Cog):
             nick_log_embed.add_field(name="**Before**", value=f"```{before.display_name}```", inline=False)
             nick_log_embed.add_field(name="**After**", value=f"```{after.display_name}```", inline=False)
 
-            await nick_update_log_channel.send(nick_log_embed)
+            await nick_update_log_channel.send(embed=nick_log_embed)
 
         if before_roles != after_roles and after_roles != before_roles and str(before_roles) != "No roles assigned." and str(after_roles) != "No roles assigned.":
             role_log_embed = discord.Embed(
@@ -80,6 +80,43 @@ class Log(Cog):
 
         if booster_role in before.roles and booster_role not in after.roles:
             await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.""")
+
+    @Cog.listener()
+    async def on_voice_state_update(self, member, before, after):
+        log_channel = self.bot.get_channel(736234713940754432)
+
+        if after.channel and not before.channel:
+            member_joined_vc_log_embed = discord.Embed(
+                title="Member Joined Voice Channel",
+                description=f"{member.mention} just joined {after.channel.mention}!",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+
+            member_joined_vc_log_embed.set_thumbnail(url=member.avatar_url)
+            await log_channel.send(embed=member_joined_vc_log_embed)
+
+        elif before.channel and not after.channel:
+            member_left_vc_log_embed = discord.Embed(
+                title="Member Left Voice Channel",
+                description=f"{member.mention} just left {after.channel.mention}!",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+
+            member_left_vc_log_embed.set_thumbnail(url=member.avatar_url)
+            await log_channel.send(embed=member_left_vc_log_embed)
+
+        elif before.channel and after.channel and before.channel != after.channel:
+            member_switched_vc_log_embed = discord.Embed(
+                title="Member Switched Voice Channels",
+                description=f"{member.mention} just left {before.channel.mention} and joined {after.channel.mention}!",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+
+            member_switched_vc_log_embed.set_thumbnail(url=member.avatar_url)
+            await log_channel.send(embed=member_switched_vc_log_embed)
 
     @Cog.listener()
     async def on_member_join(self, member):
