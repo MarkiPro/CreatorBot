@@ -46,7 +46,7 @@ class Log(Cog):
         top_suggestions_channel = self.bot.get_channel(771822991256059905)
 
         if reaction.emoji == "👍":
-            reaction = self.bot.get(message.reactions, emoji=reaction.emoji.name)
+            reaction = discord.utils.get(message.reactions, emoji=reaction.emoji.name)
             if reaction and reaction.count >= 2:
                 if message.channel == suggestions_channel:
                     suggest_embed = discord.Embed(
@@ -59,8 +59,8 @@ class Log(Cog):
                     await top_suggestions_channel.send(embed=suggest_embed)
 
         elif reaction.emoji == "👎":
-            reaction = self.bot.get(message.reactions, emoji=reaction.emoji.name)
-            if reaction and reaction.count >= 10:
+            reaction = discord.utils.get(message.reactions, emoji=reaction.emoji.name)
+            if reaction and reaction.count >= 2:
                 if message.channel == suggestions_channel:
                     await message.delete()
 
