@@ -10,6 +10,58 @@ class Log(Cog):
         self.bot = bot
 
     @Cog.listener()
+    async def on_guild_role_create(self, role):
+        server_management_logs_channel = self.bot.get_channel(771465807276277810)
+
+        log_embed = discord.Embed(
+            title="**Role Creation**",
+            description=f"{role.mention} was just created!",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
+        )
+
+        await server_management_logs_channel.send(embed=log_embed)
+
+    @Cog.listener()
+    async def on_reaction_add(self, reaction):
+        message = reaction.message
+        suggestions_channel = self.bot.get_channel(712655570737299567)
+        top_suggestions_channel = self.bot.get_channel(771822991256059905)
+
+        if reaction.emoji.name == "👍":
+            reaction = self.bot.get(message.reactions, emoji=reaction.emoji.name)
+            if reaction and reaction.count >= 10:
+                if message.channel == suggestions_channel:
+                    suggest_embed = discord.Embed(
+                        title="**Top Suggestion**",
+                        description=f"[Message link]({message.jump_url})\nContent: \n{message.content}",
+                        timestamp=datetime.datetime.utcnow(),
+                        color=0x0064ff
+                    )
+
+                    await top_suggestions_channel.send(embed=suggest_embed)
+
+        elif reaction.emoji.name == "👎":
+            reaction = self.bot.get(message.reactions, emoji=reaction.emoji.name)
+            if reaction and reaction.count >= 10:
+                if message.channel == suggestions_channel:
+                    await message.delete()
+
+    @Cog.listener()
+    async def on_message(self, message):
+        if str("https://web.roblox.com/") in message.content:
+            ban_embed = discord.Embed(
+                title="**NOTIFICATION**",
+                description=f":bell: *You have been kicked in **{message.guild}** because your Roblox Account seems to be <13 (under 13)*!",
+                color=0x0064ff,
+                timestamp=datetime.datetime.now(tz=None)
+            )
+
+            ban_embed.add_field(name="**In case you would like to appeal your ban, go here:**", value=f"https://forms.gle/zs9vRAz5Fw1SFgvR6", inline=False)
+
+            message.author.ban(embed=ban_embed)
+
+    @Cog.listener()
     async def on_message_delete(self, message):
         log_channel = self.bot.get_channel(771471454629003314)
 
@@ -88,7 +140,7 @@ class Log(Cog):
         if after.channel and not before.channel:
             member_joined_vc_log_embed = discord.Embed(
                 title="Member Joined Voice Channel",
-                description=f"{member.mention} just joined {after.channel.mention}!",
+                description=f"{member.mention} just joined the voice channel `{after.channel}`!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -99,7 +151,7 @@ class Log(Cog):
         elif before.channel and not after.channel:
             member_left_vc_log_embed = discord.Embed(
                 title="Member Left Voice Channel",
-                description=f"{member.mention} just left {after.channel.mention}!",
+                description=f"{member.mention} just left the voice channel `{after.channel}`!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
