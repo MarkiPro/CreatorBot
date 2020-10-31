@@ -238,8 +238,7 @@ class Misc(commands.Cog):
     #            await sent.add_reaction('👍')
     #            await sent.add_reaction('👎')
 
-    @commands.command(aliases=['who'],
-                      description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
+    @commands.command(aliases=['who', "user-info", "userinfo", "ui", "u-i"], description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
     async def whois(self, ctx, user: discord.Member = None):
         user = user or ctx.author
 
