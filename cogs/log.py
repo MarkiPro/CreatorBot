@@ -32,7 +32,7 @@ class Log(Cog):
         suggestions_channel = self.bot.get_channel(712655570737299567)
         top_suggestions_channel = self.bot.get_channel(771822991256059905)
 
-        if reaction.emoji.name == "👍":
+        if reaction.emoji == "👍":
             reaction = self.bot.get(message.reactions, emoji=reaction.emoji.name)
             if reaction and reaction.count >= 2:
                 if message.channel == suggestions_channel:
@@ -45,7 +45,7 @@ class Log(Cog):
 
                     await top_suggestions_channel.send(embed=suggest_embed)
 
-        elif reaction.emoji.name == "👎":
+        elif reaction.emoji == "👎":
             reaction = self.bot.get(message.reactions, emoji=reaction.emoji.name)
             if reaction and reaction.count >= 10:
                 if message.channel == suggestions_channel:
