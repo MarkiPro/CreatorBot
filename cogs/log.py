@@ -24,7 +24,20 @@ class Log(Cog):
 
     @Cog.listener()
     async def on_guild_role_update(self, before, after):
-        pass
+        server_management_logs_channel = self.bot.get_channel(771465807276277810)
+        role = before or after
+
+        log_embed = discord.Embed(
+            title="**Role Creation**",
+            description=f"{role.mention} was just created!",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
+        )
+
+        log_embed.add_field(name="**Before**", value=f"{before.permissions}", inline=True)
+        log_embed.add_field(name="**After**", value=f"{after.permissions}", inline=True)
+
+        await server_management_logs_channel.send(embed=log_embed)
 
     @Cog.listener()
     async def on_reaction_add(self, reaction, user):
