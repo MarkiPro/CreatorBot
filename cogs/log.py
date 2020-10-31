@@ -27,7 +27,7 @@ class Log(Cog):
         pass
 
     @Cog.listener()
-    async def on_reaction_add(self, reaction):
+    async def on_reaction_add(self, reaction, user):
         message = reaction.message
         suggestions_channel = self.bot.get_channel(712655570737299567)
         top_suggestions_channel = self.bot.get_channel(771822991256059905)
