@@ -234,7 +234,8 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def slowmode(self, ctx, channel, *, time):
+    async def slowmode(self, ctx, channel=None, *, time):
+        channel = channel or ctx.channel
         channel.slowmode_delay = time
 
     @commands.group()
