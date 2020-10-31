@@ -55,7 +55,7 @@ class Log(Cog):
     async def on_message(self, message):
         suggestions_channel = self.bot.get_channel(712655570737299567)
 
-        if message.channel == suggestions_channel:
+        if not message.author.bot and message.channel == suggestions_channel:
             suggestion_embed = discord.Embed(
                 title="**Suggestion**",
                 description=f"{message.content}",
