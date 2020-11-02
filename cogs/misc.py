@@ -13,6 +13,12 @@ class Misc(commands.Cog):
     @commands.command(aliases=["for-hire", "forhire"], description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
     @commands.cooldown(1, 300, commands.BucketType.member)
     async def fh(self, ctx):
+        bot_commands = self.bot.get_channel(712659793008918538)
+
+        if ctx.channel != bot_commands:
+            return
+        else:
+            pass
         cc_guild = self.bot.get_guild(id=611227128020598805)
 
         nfh_role = discord.utils.get(cc_guild.roles, id=729491617630912613)
@@ -56,6 +62,12 @@ class Misc(commands.Cog):
                       description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
     @commands.cooldown(1, 300, commands.BucketType.member)
     async def nfh(self, ctx):
+        bot_commands = self.bot.get_channel(712659793008918538)
+
+        if ctx.channel != bot_commands:
+            return
+        else:
+            pass
         cc_guild = self.bot.get_guild(id=611227128020598805)
 
         nfh_role = discord.utils.get(cc_guild.roles, id=729491617630912613)
@@ -98,6 +110,12 @@ class Misc(commands.Cog):
     @commands.command(description="This command is used for posting hiring requests.")
     @commands.cooldown(3, 10800, commands.BucketType.member)
     async def post(self, ctx):
+        bot_commands = self.bot.get_channel(712659793008918538)
+
+        if ctx.channel != bot_commands:
+            return
+        else:
+            pass
         cancel_prompt_embed = discord.Embed(
             title="**CANCELLED**",
             description="***The setup has been cancelled.***",
@@ -220,23 +238,31 @@ class Misc(commands.Cog):
             if hiring_other == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            some_long_text = "blah blah blah blah test"
-            text_splitter = TextSplitter(char_per_page=11, text=some_long_text)
+            else:
+                some_long_text = "blah blah blah blah test"
+                text_splitter = TextSplitter(char_per_page=11, text=some_long_text)
 
-            for i, entry in enumerate(text_splitter.words_list):
-                prepared_embed = discord.Embed(
-                    title="A simple Paginated thing")  # do not set the footer and descriping they get overriden.
+                for i, entry in enumerate(text_splitter.words_list):
+                    prepared_embed = discord.Embed(
+                        title="A simple Paginated thing")  # do not set the footer and descriping they get overriden.
 
-                if i != 0:
-                    prepared_embed.title = None
+                    if i != 0:
+                        prepared_embed.title = None
 
-                prepared_embed.description = discord.utils.escape_mentions(entry)
-                prepared_embed.set_footer(text=f"Page {i + 1} of {len(text_splitter.words_list)}")
-                some_channel = self.bot.get_channel(id=712625020567814157)
-                await some_channel.send(embed=hiring_embed4)
+                    prepared_embed.description = discord.utils.escape_mentions(entry)
+                    prepared_embed.set_footer(text=f"Page {i + 1} of {len(text_splitter.words_list)}")
+                    some_channel = self.bot.get_channel(id=712625020567814157)
+                    await some_channel.send(embed=hiring_embed4)
 
     @commands.command(aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info", "g_i"], description="Displays basic information about the server.")
     async def serverinfo(self, ctx):
+        bot_commands = self.bot.get_channel(712659793008918538)
+
+        if ctx.channel != bot_commands:
+            return
+        else:
+            pass
+
         guild = ctx.guild
         embed = discord.Embed(
             title=f"Server Information for {guild.name}",
@@ -267,8 +293,16 @@ class Misc(commands.Cog):
             embed.set_image(url=guild.banner_url)
         embed.set_thumbnail(url=guild.icon_url)
 
+        await ctx.send(embed=embed)
+
     @commands.command(aliases=["who", "user-info", "userinfo", "ui", "u-i", "who-is", "who_is"], description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
     async def whois(self, ctx, user: discord.Member = None):
+        bot_commands = self.bot.get_channel(712659793008918538)
+
+        if ctx.channel != bot_commands:
+            return
+        else:
+            pass
         user = user or ctx.author
 
         join_pos = sum([m.joined_at < user.joined_at for m in ctx.guild.members if m.joined_at is not None])
@@ -294,7 +328,12 @@ class Misc(commands.Cog):
 
     @commands.command()
     async def boosters(self, ctx):
+        bot_commands = self.bot.get_channel(712659793008918538)
 
+        if ctx.channel != bot_commands:
+            return
+        else:
+            pass
         boosters = "\n".join([i.mention for i in ctx.guild.premium_subscribers])
 
         embed = discord.Embed(
