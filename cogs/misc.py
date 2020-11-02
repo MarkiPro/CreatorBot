@@ -239,8 +239,10 @@ class Misc(commands.Cog):
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             else:
+                some_channel = self.bot.get_channel(712625020567814157)
+                await some_channel.send("HmMmmMmmMmmMmMMmmMmMmmMmM")
                 some_long_text = "blah blah blah blah test"
-                text_splitter = TextSplitter(char_per_page=11, text=some_long_text)
+                text_splitter = TextSplitter(char_per_page=200, text=some_long_text)
 
                 for i, entry in enumerate(text_splitter.words_list):
                     prepared_embed = discord.Embed(
@@ -251,8 +253,7 @@ class Misc(commands.Cog):
 
                     prepared_embed.description = discord.utils.escape_mentions(entry)
                     prepared_embed.set_footer(text=f"Page {i + 1} of {len(text_splitter.words_list)}")
-                    some_channel = self.bot.get_channel(id=712625020567814157)
-                    await some_channel.send(embed=hiring_embed4)
+                    await some_channel.send(embed=prepared_embed)
 
     @commands.command(aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info", "g_i"], description="Displays basic information about the server.")
     async def serverinfo(self, ctx):
