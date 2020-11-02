@@ -235,18 +235,47 @@ class Misc(commands.Cog):
                 some_channel = self.bot.get_channel(id=712625020567814157)
                 await some_channel.send(embed=hiring_embed4)
 
-    #            await sent.add_reaction('👍')
-    #            await sent.add_reaction('👎')
+    @commands.command(aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info", "g_i"], description="Displays basic information about the server.")
+    async def serverinfo(self, ctx):
+        guild = ctx.guild
+        embed = discord.Embed(
+            title=f"Server Information for {guild.name}",
+            description=f"{guild.description}",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
+        )
 
-    @commands.command(aliases=['who', "user-info", "userinfo", "ui", "u-i"], description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
+        bot_role = discord.utils.get(guild.roles, id=712623235807838258)
+        bots_amount = len(bot_role.members)
+        boosters_amount = len(guild.premium_subscribers)
+        human_member_count = ctx.guild.member_count - bots_amount
+        roles_amount = len(guild.roles)
+        text_channels_amount = len(guild.text_channels)
+        voice_channels_amount = len(guild.voice_channels)
+        categoires_amount = len(guild.categories)
+
+        embed.add_field(name="Server ID", value=f"{guild.id}", inline=True)
+        embed.add_field(name="Server Created", value=f"{guild.created_at}", inline=True)
+        embed.add_field(name="Member Count", value=f"Total: {guild.member_count}\n Humans: {human_member_count}\n Boosters: {boosters_amount}\nBots: {bots_amount}", inline=True)
+        embed.add_field(name="Boost Level", value=f"{guild.premium_tier}")
+        embed.add_field(name="Roles Amount", value=f"{roles_amount}", inline=True)
+        embed.add_field(name="Categories Amount", value=f"{categoires_amount}")
+        embed.add_field(name="Channels Amount", value=f"Text Channels: {text_channels_amount}\n Voice Channels: {voice_channels_amount}")
+        embed.add_field(name="Server Region", value=f"{guild.region}", inline=True)
+        embed.add_field(name="Verification Level", value=f"{guild.verification_level}", inline=True)
+        if guild.banner:
+            embed.set_image(url=guild.banner_url)
+        embed.set_thumbnail(url=guild.icon_url)
+
+    @commands.command(aliases=["who", "user-info", "userinfo", "ui", "u-i", "who-is", "who_is"], description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
     async def whois(self, ctx, user: discord.Member = None):
         user = user or ctx.author
 
         join_pos = sum([m.joined_at < user.joined_at for m in ctx.guild.members if m.joined_at is not None])
         embed = discord.Embed(title=f"**Who is {user}**".upper(),
-                              description="Displays basic information about the given user",
+                              description="Displays basic information about the given user.",
                               timestamp=datetime.datetime.utcnow(),
-                              colour=0x0064ff)
+                              color=0x0064ff)
         format = "%A, %d %B, %Y : %I:%M %p"
         delta_joined = datetime.datetime.utcnow() - user.joined_at
         delta_created = datetime.datetime.utcnow() - user.created_at
