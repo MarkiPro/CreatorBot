@@ -254,8 +254,9 @@ class Misc(commands.Cog):
 
                     prepared_embed.description = discord.utils.escape_mentions(entry)
                     prepared_embed.set_footer(text=f"Page {i + 1} of {len(text_splitter.words_list)}")
-                await some_channel.send("33333333333333333333333333333333333")
+                    await some_channel.send("33333333333333333333333333333333333")
                 await some_channel.send(embed=prepared_embed)
+                await some_channel.send("44444444444444444444444444444444444444")
 
     @commands.command(aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info", "g_i"], description="Displays basic information about the server.")
     async def serverinfo(self, ctx):
