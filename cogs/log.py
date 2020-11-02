@@ -1,5 +1,6 @@
 import asyncio
 import datetime
+from typing import Optional, Any
 
 import discord
 from discord.ext.commands import Cog
@@ -44,29 +45,28 @@ class Log(Cog):
         message = reaction.message
         suggestions_channel = self.bot.get_channel(712655570737299567)
         top_suggestions_channel = self.bot.get_channel(771822991256059905)
+        thumbs_up_reaction = discord.utils.get(message.reactions, emoji=reaction.emoji)
+        thumbs_down_reaction = discord.utils.get(message.reactions, emoji=reaction.emoji)
 
-        if reaction.emoji == "👍":
-            reaction = discord.utils.get(message.reactions, emoji=reaction.emoji)
-            if reaction and reaction.count >= 2:
-                if message.channel == suggestions_channel:
-                    suggest_embed = discord.Embed(
-                        title="**Top Suggestion**",
-                        description=f"[Message link]({message.jump_url})\nContent: \n{message.content}",
-                        timestamp=datetime.datetime.utcnow(),
-                        color=0x0064ff
-                    )
+        if reaction == thumbs_up_reaction and thumbs_up_reaction.count > thumbs_down_reaction.count and thumbs_up_reaction.count >= 10:
+            if message.channel == suggestions_channel:
+                suggest_embed = discord.Embed(
+                    title="**Top Suggestion**",
+                    description=f"[Message link]({message.jump_url})",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
 
-                    await top_suggestions_channel.send(embed=suggest_embed)
-
-        elif reaction.emoji == "👎":
-            reaction = discord.utils.get(message.reactions, emoji=reaction.emoji)
-            if reaction and reaction.count >= 2:
-                if message.channel == suggestions_channel:
-                    await message.delete()
+                await top_suggestions_channel.send(embed=suggest_embed)
+        elif reaction == thumbs_down_reaction and thumbs_down_reaction.count > thumbs_up_reaction.count and thumbs_down_reaction.count >= 10:
+            if message.channel == suggestions_channel:
+                await message.delete()
 
     @Cog.listener()
     async def on_message(self, message):
         suggestions_channel = self.bot.get_channel(712655570737299567)
+        banned_links = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://web.roblox.com"]
+        banned_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah", "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger", "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar", "n1gguh", "n1ggress", "n1gette", "negro", "n1bba", "n1ba"]
 
         if not message.author.bot and message.channel == suggestions_channel:
             suggestion_embed = discord.Embed(
@@ -80,13 +80,18 @@ class Log(Cog):
 
             await message.delete()
             another_message = await suggestions_channel.send(embed=suggestion_embed)
+
+            def check(thumbs_up_reaction, count):
+                return thumbs_up_reaction == discord.utils.get(message.reactions, emoji=reaction.emoji)
+
             await another_message.add_reaction("👍")
             await another_message.add_reaction("👎")
+            await self.bot.wait_for("reaction_add", )
 
-        if str("https://web.roblox.com/") in message.content:
+        if tuple(banned_links) in message.content or tuple(banned_words) in message.content:
             ban_embed = discord.Embed(
                 title="**NOTIFICATION**",
-                description=f":bell: *You have been kicked in **{message.guild}** because your Roblox Account seems to be <13 (under 13)*!",
+                description=f":bell: *You have been banned in **{message.guild}** because you've sent something inappropriate, or turned out to be underage!*!",
                 color=0x0064ff,
                 timestamp=datetime.datetime.now(tz=None)
             )
