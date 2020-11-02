@@ -81,14 +81,10 @@ class Log(Cog):
             await message.delete()
             another_message = await suggestions_channel.send(embed=suggestion_embed)
 
-            def check(thumbs_up_reaction, count):
-                return thumbs_up_reaction == discord.utils.get(message.reactions, emoji=reaction.emoji)
-
             await another_message.add_reaction("👍")
             await another_message.add_reaction("👎")
-            await self.bot.wait_for("reaction_add", )
 
-        if tuple(banned_links) in message.content or tuple(banned_words) in message.content:
+        if str(tuple(banned_links)) in message.content or str(tuple(banned_words)) in message.content:
             ban_embed = discord.Embed(
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been banned in **{message.guild}** because you've sent something inappropriate, or turned out to be underage!*!",
