@@ -69,12 +69,15 @@ class Paginator:
 
                 reaction, user = await bot.wait_for("reaction_add", check=check)
 
-                if user != bot:
-                    if str(reaction.emoji) == "👍":
+                if str(reaction.emoji) == "👍":
+                    reaction = discord.utils.get(message.reactions, emoji=reaction.emoji)
+                    if reaction.count >= 2:
                         for v, ok in enumerate(self.messages):
                             await end_channel.send(ok)
                             await ok.delete()
 
-                    elif str(reaction.emoji) == "👎":
+                elif str(reaction.emoji) == "👎":
+                    reaction = discord.utils.get(message.reactions, emoji=reaction.emoji)
+                    if reaction.count >= 2:
                         for v, ok in enumerate(self.messages):
                             await ok.delete()
