@@ -14,11 +14,10 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
-    async def clear(self, ctx, amount=0, *, channel=None):
-        if not channel:
-            await ctx.channel.purge(limit=amount + 1)
-        if channel:
-            await channel.purge(limit=amount + 1)
+    async def clear(self, ctx, amount=0, *, channel: discord.TextChannel):
+        channel = channel or ctx.channel
+
+        await channel.purge(limit=amount+1)
 
     @commands.command()
     @commands.has_permissions(kick_members=True)
@@ -228,14 +227,17 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_guild=True)
-    async def say(self, ctx, *, text):
+    async def say(self, ctx, *, text, channel: discord.TextChannel):
+        channel = channel or ctx.channel
+
         await ctx.message.delete()
-        await ctx.send(text)
+        await channel.send(text)
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def slowmode(self, ctx, channel=None, *, time):
+    async def slowmode(self, ctx, time, channel: discord.TextChannel):
         channel = channel or ctx.channel
+
         channel.slowmode_delay = time
 
     @commands.group()
@@ -244,14 +246,14 @@ class Moderation(commands.Cog):
         pass
 
     @toggle_cmd.command()
-    async def disable(self, ctx, command):
+    async def disable(self, ctx, command: commands.Command):
         try:
             command.enabled = False
         except:
             return
 
     @toggle_cmd.command()
-    async def enable(self, ctx, command):
+    async def enable(self, ctx, command: commands.Command):
         try:
             command.enabled = True
         except:
