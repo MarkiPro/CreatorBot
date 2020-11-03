@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import datetime
 import asyncio
-from paginator import TextSplitter
+from paginator import Paginator
 
 
 class Misc(commands.Cog):
@@ -240,23 +240,9 @@ class Misc(commands.Cog):
                 return
             else:
                 some_channel = self.bot.get_channel(712625020567814157)
-                await some_channel.send("111111111111111111111111111111111")
-                some_long_text = "blah blah blah blah test"
-                text_splitter = TextSplitter(char_per_page=1985, text=some_long_text)
+                pag = Paginator(f"**About the job:** {hiring_details}\n**Payment:** {hiring_payment}\n**Showcase:** {hiring_image}\n**Other:** {hiring_other}\n**Contact:** {ctx.author.mention}({ctx.author})", 1985)
 
-                await some_channel.send("222222222222222222222222222222")
-                for i, entry in enumerate(text_splitter.words_list):
-                    prepared_embed = discord.Embed(
-                        title="A simple Paginated thing")  # do not set the footer and descriping they get overriden.
-
-                    if i != 0:
-                        prepared_embed.title = None
-
-                    prepared_embed.description = discord.utils.escape_mentions(entry)
-                    prepared_embed.set_footer(text=f"Page {i + 1} of {len(text_splitter.words_list)}")
-                    await some_channel.send("33333333333333333333333333333333333")
-                await some_channel.send(embed=prepared_embed)
-                await some_channel.send("44444444444444444444444444444444444444")
+                await pag.send(some_channel)
 
     @commands.command(aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info", "g_i"], description="Displays basic information about the server.")
     async def serverinfo(self, ctx):
