@@ -69,11 +69,12 @@ class Paginator:
 
                 reaction, user = await bot.wait_for("reaction_add", check=check)
 
-                if str(reaction.emoji) == "👍":
-                    for v, ok in enumerate(self.messages):
-                        await end_channel.send(ok)
-                        await ok.delete()
+                if user != bot:
+                    if str(reaction.emoji) == "👍":
+                        for v, ok in enumerate(self.messages):
+                            await end_channel.send(ok)
+                            await ok.delete()
 
-                elif str(reaction.emoji) == "👎":
-                    for v, ok in enumerate(self.messages):
-                        await ok.delete()
+                    elif str(reaction.emoji) == "👎":
+                        for v, ok in enumerate(self.messages):
+                            await ok.delete()
