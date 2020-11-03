@@ -38,21 +38,38 @@ class Paginator:
     def __init__(self, text, char_per_page):
         self.text = text
         self.char_per_page = char_per_page
+        self.messages = []
 
     def paginate(self):
         n = self.char_per_page
         self.words_list = [self.text[i:i + n] for i in range(0, len(self.text), n)]
 
-    async def send(self, channel):
+    async def send(self, bot, channel, end_channel):
         self.paginate()
         for i, entry in enumerate(self.words_list):
             prepared_embed = discord.Embed(description=entry, color=0x0064ff)
 
             if i == 0:
-                prepared_embed.title = "**Hiring Post**"
-            if (i+1) == len(self.words_list):
+                prepared_embed.title = "**Post**"
+            if (i + 1) == len(self.words_list):
                 prepared_embed.timestamp = datetime.datetime.utcnow()
 
             prepared_embed.set_footer(text=f"Page {i + 1}/{len(self.words_list)}")
 
-            await channel.send(embed=prepared_embed)
+            message = await channel.send(embed=prepared_embed)
+
+            self.messages.append(message)
+
+            if (i + 1) == len(self.words_list):
+                await message.add_reaction("👍")
+                await message.add_reaction("👎")
+
+                def check(thumbs_up_reaction, thumbs_down_reaction):
+                    return str(thumbs_up_reaction.emoji) == '👍' and str(thumbs_down_reaction.emoji) == '👎'
+
+                thumbs_up_reaction, thumbs_down_reaction = await bot.wait_for('reaction_add', check=check)
+
+                if thumbs_up_reaction:
+                    for v, ok in enumerate(self.messages):
+                        await end_channel.send(ok)
+                        await ok.delete()
