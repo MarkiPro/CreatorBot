@@ -50,8 +50,6 @@ class Paginator:
 
             if i == 0:
                 prepared_embed.title = "**Hiring Post**"
-            else:
-                prepared_embed.title = None
             if i == entry:
                 prepared_embed.timestamp = datetime.datetime.utcnow()
 
