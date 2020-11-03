@@ -64,21 +64,16 @@ class Paginator:
                 await message.add_reaction("👍")
                 await message.add_reaction("👎")
 
-                def check1(thumbs_up_reaction):
-                    return str(thumbs_up_reaction.emoji) == "👍"
+                def check(reaction, user):
+                    return user == message.author and str(reaction.emoji) in ["👍", "👎"]
 
-                thumbs_up_reaction = await bot.wait_for("reaction_add", check=check1)
+                reaction, user = await bot.wait_for("reaction_add", check=check)
 
-                def check2(thumbs_down_reaction):
-                    return str(thumbs_down_reaction.emoji) == "👎"
-
-                thumbs_down_reaction = await bot.wait_for("reaction_add", check=check2)
-
-                if thumbs_up_reaction:
+                if str(reaction.emoji) == "👍":
                     for v, ok in enumerate(self.messages):
                         await end_channel.send(ok)
                         await ok.delete()
 
-                if thumbs_down_reaction:
+                elif str(reaction.emoji) == "👎":
                     for v, ok in enumerate(self.messages):
                         await ok.delete()
