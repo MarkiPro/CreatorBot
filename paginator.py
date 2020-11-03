@@ -42,8 +42,7 @@ class Paginator:
         n = self.char_per_page
         self.words_list = [self.text[i:i + n] for i in range(0, len(self.text), n)]
 
-
-async def send(self, channel):
-    self.paginate()
-    for i, entry in enumerate(self.words_list):
-        await channel.send(embed=discord.Embed(description=entry))
+    async def send(self, channel):
+        self.paginate()
+        for i, entry in enumerate(self.words_list):
+            await channel.send(embed=discord.Embed(description=entry))
