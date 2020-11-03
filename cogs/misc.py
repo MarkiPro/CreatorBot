@@ -138,7 +138,7 @@ class Misc(commands.Cog):
             
                 **2** - `for-hire`;
             
-                **3** - `suggestions`;
+                **3** - `sell_creations`;
             
                 **4** - `report`;
 
@@ -238,9 +238,20 @@ class Misc(commands.Cog):
             if hiring_other == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            else:
-                some_channel = self.bot.get_channel(712625020567814157)
-                end_channel = self.bot.get_channel(712625020567814157)
+            await ctx.send("Would you like to send this for Post Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+            try:
+                final_choice_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                final_choice = final_choice_message.content
+            except asyncio.TimeoutError:
+                await ctx.author.send(embed=cancel_prompt_embed)
+                return
+            denial_choices = ['0', 'no', 'nO', 'n0', 'No', 'NO', 'N0']
+            if final_choice == tuple(denial_choices):
+                await ctx.author.send(embed=cancel_prompt_embed)
+                return
+            elif final_choice == tuple(['1', 'yes', 'yEs', 'Yes', 'yES', 'yeS', 'YEs', 'YES', 'YeS']):
+                some_channel = self.bot.get_channel(739247560065024050)
+                end_channel = self.bot.get_channel(727550350097252482)
                 pag = Paginator(f"**About the job:** {hiring_details}\n**Payment:** {hiring_payment}\n**Showcase:** {hiring_image}\n**Other:** {hiring_other}\n**Contact:** {ctx.author.mention}({ctx.author})", 1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author)
