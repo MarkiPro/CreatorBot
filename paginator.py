@@ -1,4 +1,5 @@
 import discord
+import datetime
 from discord.ext import commands
 
 
@@ -45,4 +46,15 @@ class Paginator:
     async def send(self, channel):
         self.paginate()
         for i, entry in enumerate(self.words_list):
-            await channel.send(embed=discord.Embed(description=entry))
+            prepared_embed = discord.Embed(description=entry, color=0x0064ff)
+
+            if i == 0:
+                prepared_embed.title = "**Hiring Post**"
+            else:
+                prepared_embed.title = None
+            if i == entry:
+                prepared_embed.timestamp = datetime.datetime.utcnow()
+
+            prepared_embed.footer = f"Page {i}/{entry}"
+
+            await channel.send(embed=prepared_embed)
