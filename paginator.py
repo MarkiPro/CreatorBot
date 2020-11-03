@@ -50,9 +50,9 @@ class Paginator:
 
             if i == 0:
                 prepared_embed.title = "**Hiring Post**"
-            if i == len(self.words_list):
+            if (i+1) == len(self.words_list):
                 prepared_embed.timestamp = datetime.datetime.utcnow()
 
-            prepared_embed.set_footer(text=f"Page **{i + 1}/{len(self.words_list)}**")
+            prepared_embed.set_footer(text=f"Page {i + 1}/{len(self.words_list)}")
 
             await channel.send(embed=prepared_embed)
