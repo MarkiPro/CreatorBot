@@ -245,11 +245,10 @@ class Misc(commands.Cog):
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            denial_choices = ['0', 'no', 'nO', 'n0', 'No', 'NO', 'N0']
-            if final_choice == tuple(denial_choices):
+            if final_choice == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            elif final_choice == tuple(['1', 'yes', 'yEs', 'Yes', 'yES', 'yeS', 'YEs', 'YES', 'YeS']):
+            elif final_choice == ['1']:
                 some_channel = self.bot.get_channel(739247560065024050)
                 end_channel = self.bot.get_channel(727550350097252482)
                 title="**Hiring Post**"
