@@ -248,10 +248,10 @@ class Misc(commands.Cog):
             if final_choice == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            elif final_choice == ['1']:
+            else:
                 some_channel = self.bot.get_channel(739247560065024050)
                 end_channel = self.bot.get_channel(727550350097252482)
-                title="**Hiring Post**"
+                title = "**Hiring Post**"
                 pag = Paginator(f"**About the job:** {hiring_details}\n**Payment:** {hiring_payment}\n**Showcase:** {hiring_image}\n**Other:** {hiring_other}\n**Contact:** {ctx.author.mention}({ctx.author})", 1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
