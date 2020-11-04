@@ -183,7 +183,6 @@ class Misc(commands.Cog):
         except asyncio.TimeoutError:
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-            await ctx.author.send()
         if category == ['0']:
             await ctx.author.send(embed=cancel_prompt_embed)
             return
@@ -272,7 +271,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
-        elif category == ['2']:
+        elif category == "2":
             for_hire_embed1 = discord.Embed(
                 title="**FOR-HIRE POST**",
                 description="***Define your specialties here, like for example a Java programmer, an Artist et cetera.***",
@@ -357,7 +356,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
-        elif category == ['3']:
+        elif category == "3":
             sell_creations_embed1 = discord.Embed(
                 title="**SELL-CREATIONS POST**",
                 description="***Showcase some of your previous work examples here, could be a link portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -429,7 +428,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
-        elif category == ['4']:
+        elif category == "4":
             report_embed1 = discord.Embed(
                 title="**REPORT POST**",
                 description="***Who are you filing this report on? Please provide their Username and Discriminator/Tag. Example: Noob#1234 or MarkiPro#3753***",
