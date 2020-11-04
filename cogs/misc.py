@@ -114,13 +114,13 @@ class Misc(commands.Cog):
 
         markipro_credits_embed = discord.Embed(
             title="**Credits**",
-            description=f"Bot Creator: {markipro}",
+            description=f"Bot Creator: **{markipro}**",
             color=0x0064ff
         )
         markipro_credits_embed.set_thumbnail(url=markipro.avatar_url)
         malware_credits_embed = discord.Embed(
             title="**Credits**",
-            description=f"Huge thank you to {malware}, for being a big part, and helping a lot!",
+            description=f"Huge thank you to **{malware}**, for being a big part, and helping a lot!",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
