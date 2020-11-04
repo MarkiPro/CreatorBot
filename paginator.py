@@ -44,13 +44,13 @@ class Paginator:
         n = self.char_per_page
         self.words_list = [self.text[i:i + n] for i in range(0, len(self.text), n)]
 
-    async def send(self, bot, channel, end_channel, member):
+    async def send(self, bot, channel, end_channel, member, title):
         self.paginate()
         for i, entry in enumerate(self.words_list):
             prepared_embed = discord.Embed(description=entry, color=0x0064ff)
 
             if i == 0:
-                prepared_embed.title = "**Post**"
+                prepared_embed.title = f"{title}"
             if (i + 1) == len(self.words_list):
                 prepared_embed.timestamp = datetime.datetime.utcnow()
 
@@ -71,7 +71,7 @@ class Paginator:
 
                 if str(reaction.emoji) == "👍":
                     for v, ok in enumerate(self.messages):
-                        await end_channel.send(ok)
+                        await end_channel.send(embed=ok.embeds[0])
                         await ok.delete()
 
                 elif str(reaction.emoji) == "👎":
