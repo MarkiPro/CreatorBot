@@ -505,17 +505,17 @@ class Misc(commands.Cog):
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if final_choice == ['0']:
+            if final_choice == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            else:
+            elif final_choice == "1":
                 some_channel = self.bot.get_channel(773637163048239124)
                 title = "**REPORT POST**"
                 pag = Paginator(
                     f"**Subject Information:** {reported_user}\n**Report Reason:** {report_reason}\n**Evidence:** {report_evidence}\n**Other:** {report_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
-                await pag.send(self.bot, some_channel, ctx.author, title)
+                await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title)
 
     @commands.command(aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info", "g_i"], description="Displays basic information about the server.")
     async def serverinfo(self, ctx):
