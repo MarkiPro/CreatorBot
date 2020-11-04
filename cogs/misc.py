@@ -107,6 +107,19 @@ class Misc(commands.Cog):
             await member.send(embed=embed1)
             return
 
+    @commands.command()
+    async def credits(self, ctx):
+        malware = await ctx.bot.fetch_user(730082562868772924)
+        markipro = await ctx.bot.fetch_user(530461779768377357)
+
+        credits_embed = discord.Embed(
+            title="**Credits**",
+            description=f"Bot Creator: {markipro}\n Huge thank you to {malware}, for being a big part, and helping a lot!",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
+        )
+        await ctx.send(embed=credits_embed)
+
     @commands.command(description="This command is used for posting hiring requests.")
     @commands.cooldown(3, 10800, commands.BucketType.member)
     async def post(self, ctx):
