@@ -238,7 +238,7 @@ class Misc(commands.Cog):
             if hiring_other == ['0']:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            await ctx.send("Would you like to send this for Post Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+            await ctx.author.send("Would you like to send this for Post Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
             try:
                 final_choice_message = await self.bot.wait_for('message', check=check, timeout=1000)
                 final_choice = final_choice_message.content
