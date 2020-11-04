@@ -252,9 +252,10 @@ class Misc(commands.Cog):
             elif final_choice == tuple(['1', 'yes', 'yEs', 'Yes', 'yES', 'yeS', 'YEs', 'YES', 'YeS']):
                 some_channel = self.bot.get_channel(739247560065024050)
                 end_channel = self.bot.get_channel(727550350097252482)
+                title="**Hiring Post**"
                 pag = Paginator(f"**About the job:** {hiring_details}\n**Payment:** {hiring_payment}\n**Showcase:** {hiring_image}\n**Other:** {hiring_other}\n**Contact:** {ctx.author.mention}({ctx.author})", 1985)
 
-                await pag.send(self.bot, some_channel, end_channel, ctx.author)
+                await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
 
     @commands.command(aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info", "g_i"], description="Displays basic information about the server.")
     async def serverinfo(self, ctx):
