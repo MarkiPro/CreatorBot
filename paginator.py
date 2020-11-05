@@ -67,31 +67,31 @@ class Paginator:
 
                 if not end_channel:
                     def check(reaction, user):
-                        return user == one_staff_member[0] and str(reaction.emoji) in ["👍", "👎"]
+                        return user == one_staff_member[0:] and str(reaction.emoji) in ["👍", "👎"]
 
                     reaction, user = await bot.wait_for("reaction_add", check=check)
 
-                    if str(reaction.emoji) == "👍":
+                    if str(reaction.emoji) == "👍" and user is not bot:
                         for v, ok in enumerate(self.messages):
                             await ok.delete()
                             return
 
-                    elif str(reaction.emoji) == "👎":
+                    elif str(reaction.emoji) == "👎" and user is not bot:
                         for v, ok in enumerate(self.messages):
                             await ok.delete()
                             return
                     return
 
                 def check(reaction, user):
-                    return user == one_staff_member[0] and str(reaction.emoji) in ["👍", "👎"]
+                    return user == one_staff_member[0:] and str(reaction.emoji) in ["👍", "👎"]
 
                 reaction, user = await bot.wait_for("reaction_add", check=check)
 
-                if str(reaction.emoji) == "👍":
+                if str(reaction.emoji) == "👍" and user is not bot:
                     for _, msgs in enumerate(self.messages):
                         await end_channel.send(embed=msgs.embeds[0])
                         await msgs.delete()
 
-                elif str(reaction.emoji) == "👎":
+                elif str(reaction.emoji) == "👎" and user is not bot:
                     for _, msgs in enumerate(self.messages):
                         await msgs.delete()
