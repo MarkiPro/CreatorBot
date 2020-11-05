@@ -67,15 +67,15 @@ class Paginator:
 
                 if not end_channel:
 
-                    def check(reaction1):
-                        return str(reaction1.emoji) in ["👍", "👎"]
+                    def check(reaction1, user1):
+                        return user1 and str(reaction1.emoji) in ["👍", "👎"]
 
-                    reaction1 = await bot.wait_for("reaction_add", check=check)
+                    reaction1, user1 = await bot.wait_for("reaction_add", check=check)
 
-                    def check(reaction2):
-                        return str(reaction2.emoji) in ["👍", "👎"]
+                    def check(reaction2, user2):
+                        return user2 and str(reaction2.emoji) in ["👍", "👎"]
 
-                    reaction2 = await bot.wait_for("reaction_add", check=check)
+                    reaction2, user2 = await bot.wait_for("reaction_add", check=check)
 
                     if reaction1 and str(reaction2.emoji) == "👍":
                         for v, ok in enumerate(self.messages):
@@ -88,15 +88,15 @@ class Paginator:
                             return
                     return
 
-                def check(reaction1):
-                    return str(reaction1.emoji) in ["👍", "👎"]
+                def check(reaction1, user1):
+                    return user1 and str(reaction1.emoji) in ["👍", "👎"]
 
-                reaction1 = await bot.wait_for("reaction_add", check=check)
+                reaction1, user1 = await bot.wait_for("reaction_add", check=check)
 
-                def check(reaction2):
-                    return str(reaction2.emoji) in ["👍", "👎"]
+                def check(reaction2, user2):
+                    return user2 and str(reaction2.emoji) in ["👍", "👎"]
 
-                reaction2 = await bot.wait_for("reaction_add", check=check)
+                reaction2, user2 = await bot.wait_for("reaction_add", check=check)
 
                 if reaction1 and str(reaction2.emoji) == "👍":
                     for _, msgs in enumerate(self.messages):
