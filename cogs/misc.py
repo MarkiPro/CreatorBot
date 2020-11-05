@@ -123,9 +123,8 @@ class Misc(commands.Cog):
     @commands.command(description="This command is used for posting hiring requests.")
     @commands.cooldown(3, 10800, commands.BucketType.member)
     async def post(self, ctx):
-        global pag, some_channel, title
-        staff = ctx.guild.members
-        one_staff_member = tuple(staff)
+        one_staff_member = ctx.guild.members
+        #one_staff_member = tuple(staff)
         bot_commands = self.bot.get_channel(712659793008918538)
 
         if ctx.channel != bot_commands:
@@ -516,7 +515,7 @@ class Misc(commands.Cog):
                 title = "**REPORT POST**"
                 pag = Paginator(f"**Subject Information:** {reported_user}\n**Report Reason:** {report_reason}\n**Evidence:** {report_evidence}\n**Other:** {report_other}\n**Contact:** {ctx.author.mention}({ctx.author})",1985)
 
-            await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title, one_staff_member=one_staff_member)
+                await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title, one_staff_member=one_staff_member)
 
     @commands.command(aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info", "g_i"], description="Displays basic information about the server.")
     async def serverinfo(self, ctx):
