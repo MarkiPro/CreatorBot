@@ -83,7 +83,7 @@ class Paginator:
                     return
 
                 def check(reaction, user):
-                    return user == tuple(members) and str(reaction.emoji) in ["👍", "👎"]
+                    return user == members and str(reaction.emoji) in ["👍", "👎"]
 
                 reaction, user = await bot.wait_for("reaction_add", check=check)
 
