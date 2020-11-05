@@ -123,7 +123,7 @@ class Misc(commands.Cog):
     @commands.command(description="This command is used for posting hiring requests.")
     @commands.cooldown(3, 10800, commands.BucketType.member)
     async def post(self, ctx):
-        members = ctx.guild.members
+        members = discord.Member
         bot_commands = self.bot.get_channel(712659793008918538)
 
         if ctx.channel != bot_commands:
