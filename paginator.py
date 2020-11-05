@@ -71,12 +71,14 @@ class Paginator:
 
                     reaction, user = await bot.wait_for("reaction_add", check=check)
 
-                    if str(reaction.emoji) == "👍" and not user.bot:
+                    reaction_thing = discord.utils.get(message.reactions, emoji=reaction.emoji)
+
+                    if str(reaction.emoji) == "👍" and reaction_thing.count >= 2:
                         for v, ok in enumerate(self.messages):
                             await ok.delete()
                             return
 
-                    elif str(reaction.emoji) == "👎" and not user.bot:
+                    elif str(reaction.emoji) == "👎" and reaction_thing.count >= 2:
                         for v, ok in enumerate(self.messages):
                             await ok.delete()
                             return
@@ -87,11 +89,13 @@ class Paginator:
 
                 reaction, user = await bot.wait_for("reaction_add", check=check)
 
-                if str(reaction.emoji) == "👍" and not user.bot:
+                reaction_thing = discord.utils.get(message.reactions, emoji=reaction.emoji)
+
+                if str(reaction.emoji) == "👍" and reaction_thing.count >= 2:
                     for _, msgs in enumerate(self.messages):
                         await end_channel.send(embed=msgs.embeds[0])
                         await msgs.delete()
 
-                elif str(reaction.emoji) == "👎" and not user.bot:
+                elif str(reaction.emoji) == "👎" and reaction_thing.count >= 2:
                     for _, msgs in enumerate(self.messages):
                         await msgs.delete()
