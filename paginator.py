@@ -66,32 +66,43 @@ class Paginator:
                 await message.add_reaction("👎")
 
                 if not end_channel:
-                    def check(reaction, user):
-                        return user == members and str(reaction.emoji) in ["👍", "👎"]
 
-                    reaction, user = await bot.wait_for("reaction_add", check=check)
+                    def check(reaction1):
+                        return str(reaction1.emoji) in ["👍", "👎"]
 
-                    if str(reaction.emoji) == "👍" and not user.bot:
+                    reaction1 = await bot.wait_for("reaction_add", check=check)
+
+                    def check(reaction2):
+                        return str(reaction2.emoji) in ["👍", "👎"]
+
+                    reaction2 = await bot.wait_for("reaction_add", check=check)
+
+                    if reaction1 and str(reaction2.emoji) == "👍":
                         for v, ok in enumerate(self.messages):
                             await ok.delete()
                             return
 
-                    elif str(reaction.emoji) == "👎" and not user.bot:
+                    elif reaction1 and str(reaction2.emoji) == "👎":
                         for v, ok in enumerate(self.messages):
                             await ok.delete()
                             return
                     return
 
-                def check(reaction, user):
-                    return user == members and str(reaction.emoji) in ["👍", "👎"]
+                def check(reaction1):
+                    return str(reaction1.emoji) in ["👍", "👎"]
 
-                reaction, user = await bot.wait_for("reaction_add", check=check)
+                reaction1 = await bot.wait_for("reaction_add", check=check)
 
-                if str(reaction.emoji) == "👍" and not user.bot:
+                def check(reaction2):
+                    return str(reaction2.emoji) in ["👍", "👎"]
+
+                reaction2 = await bot.wait_for("reaction_add", check=check)
+
+                if reaction1 and str(reaction2.emoji) == "👍":
                     for _, msgs in enumerate(self.messages):
                         await end_channel.send(embed=msgs.embeds[0])
                         await msgs.delete()
 
-                elif str(reaction.emoji) == "👎" and not user.bot:
+                elif reaction1 and str(reaction2.emoji) == "👎":
                     for _, msgs in enumerate(self.messages):
                         await msgs.delete()
