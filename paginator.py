@@ -67,35 +67,31 @@ class Paginator:
 
                 if not end_channel:
                     def check(reaction, user):
-                        return user and str(reaction.emoji) in ["👍", "👎"]
+                        return user == one_staff_member[0] and str(reaction.emoji) in ["👍", "👎"]
 
                     reaction, user = await bot.wait_for("reaction_add", check=check)
 
-                    reaction_thing = discord.utils.get(message.reactions, emoji=reaction.emoji)
-
-                    if str(reaction.emoji) == "👍" and reaction_thing.count >= 2:
+                    if str(reaction.emoji) == "👍":
                         for v, ok in enumerate(self.messages):
                             await ok.delete()
                             return
 
-                    elif str(reaction.emoji) == "👎" and reaction_thing.count >= 2:
+                    elif str(reaction.emoji) == "👎":
                         for v, ok in enumerate(self.messages):
                             await ok.delete()
                             return
                     return
 
                 def check(reaction, user):
-                    return user and str(reaction.emoji) in ["👍", "👎"]
+                    return user == one_staff_member[0] and str(reaction.emoji) in ["👍", "👎"]
 
                 reaction, user = await bot.wait_for("reaction_add", check=check)
 
-                reaction_thing = discord.utils.get(message.reactions, emoji=reaction.emoji)
-
-                if str(reaction.emoji) == "👍" and reaction_thing.count >= 2:
+                if str(reaction.emoji) == "👍":
                     for _, msgs in enumerate(self.messages):
                         await end_channel.send(embed=msgs.embeds[0])
                         await msgs.delete()
 
-                elif str(reaction.emoji) == "👎" and reaction_thing.count >= 2:
+                elif str(reaction.emoji) == "👎":
                     for _, msgs in enumerate(self.messages):
                         await msgs.delete()
