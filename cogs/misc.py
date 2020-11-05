@@ -123,6 +123,7 @@ class Misc(commands.Cog):
     @commands.command(description="This command is used for posting hiring requests.")
     @commands.cooldown(3, 10800, commands.BucketType.member)
     async def post(self, ctx):
+        members = ctx.guild.members
         bot_commands = self.bot.get_channel(712659793008918538)
 
         if ctx.channel != bot_commands:
@@ -270,7 +271,7 @@ class Misc(commands.Cog):
                     f"**About the job:** {hiring_details}\n**Payment:** {hiring_payment}\n**Showcase:** {hiring_image}\n**Other:** {hiring_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
+                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, members)
         elif category == "2":
             for_hire_embed1 = discord.Embed(
                 title="**FOR-HIRE POST**",
@@ -355,7 +356,7 @@ class Misc(commands.Cog):
                     f"**Specialties:** {for_hire_specialties}\n**Showcase:** {for_hire_showcase}\n**Payment:** {for_hire_showcase}\n**Other:** {for_hire_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
+                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, members)
         elif category == "3":
             sell_creations_embed1 = discord.Embed(
                 title="**SELL-CREATIONS POST**",
@@ -427,7 +428,7 @@ class Misc(commands.Cog):
                     f"**Showcase:** {sell_creations_showcase}\n**Payment:** {sell_creations_payment}\n**Other:** {sell_creations_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
+                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, members)
         elif category == "4":
             report_embed1 = discord.Embed(
                 title="**REPORT POST**",
@@ -513,7 +514,7 @@ class Misc(commands.Cog):
                 title = "**REPORT POST**"
                 pag = Paginator(f"**Subject Information:** {reported_user}\n**Report Reason:** {report_reason}\n**Evidence:** {report_evidence}\n**Other:** {report_other}\n**Contact:** {ctx.author.mention}({ctx.author})",1985)
 
-                await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title)
+                await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title, members=members)
 
     @commands.command(aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info", "g_i"], description="Displays basic information about the server.")
     async def serverinfo(self, ctx):
