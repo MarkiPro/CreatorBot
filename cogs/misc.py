@@ -123,8 +123,8 @@ class Misc(commands.Cog):
     @commands.command(description="This command is used for posting hiring requests.")
     @commands.cooldown(3, 10800, commands.BucketType.member)
     async def post(self, ctx):
-        staff_role = discord.utils.get(ctx.guild.roles, id=756565123350659385)
-        staff = staff_role.members
+        global pag, some_channel, title
+        staff = ctx.guild.members
         one_staff_member = tuple(staff)
         bot_commands = self.bot.get_channel(712659793008918538)
 
@@ -262,10 +262,10 @@ class Misc(commands.Cog):
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if final_choice == ['0']:
+            if final_choice == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            else:
+            elif final_choice == "1":
                 some_channel = self.bot.get_channel(739247560065024050)
                 end_channel = self.bot.get_channel(727550350097252482)
                 title = "**HIRING POST**"
@@ -273,7 +273,7 @@ class Misc(commands.Cog):
                     f"**About the job:** {hiring_details}\n**Payment:** {hiring_payment}\n**Showcase:** {hiring_image}\n**Other:** {hiring_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, one_staff_member)
+                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, one_staff_member=one_staff_member)
         elif category == "2":
             for_hire_embed1 = discord.Embed(
                 title="**FOR-HIRE POST**",
@@ -347,10 +347,10 @@ class Misc(commands.Cog):
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if final_choice == ['0']:
+            if final_choice == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            else:
+            elif final_choice == "1":
                 some_channel = self.bot.get_channel(739247630193786900)
                 end_channel = self.bot.get_channel(727550761801613393)
                 title = "**FOR-HIRE POST**"
@@ -358,7 +358,7 @@ class Misc(commands.Cog):
                     f"**Specialties:** {for_hire_specialties}\n**Showcase:** {for_hire_showcase}\n**Payment:** {for_hire_showcase}\n**Other:** {for_hire_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, one_staff_member)
+                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, one_staff_member=one_staff_member)
         elif category == "3":
             sell_creations_embed1 = discord.Embed(
                 title="**SELL-CREATIONS POST**",
@@ -419,10 +419,10 @@ class Misc(commands.Cog):
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if final_choice == ['0']:
+            if final_choice == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            else:
+            elif final_choice == "1":
                 some_channel = self.bot.get_channel(739247602393940168)
                 end_channel = self.bot.get_channel(727550553806340197)
                 title = "**SELL-CREATIONS POST**"
@@ -430,7 +430,7 @@ class Misc(commands.Cog):
                     f"**Showcase:** {sell_creations_showcase}\n**Payment:** {sell_creations_payment}\n**Other:** {sell_creations_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, one_staff_member)
+                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, one_staff_member=one_staff_member)
         elif category == "4":
             report_embed1 = discord.Embed(
                 title="**REPORT POST**",
@@ -514,11 +514,9 @@ class Misc(commands.Cog):
             elif final_choice == "1":
                 some_channel = self.bot.get_channel(773637163048239124)
                 title = "**REPORT POST**"
-                pag = Paginator(
-                    f"**Subject Information:** {reported_user}\n**Report Reason:** {report_reason}\n**Evidence:** {report_evidence}\n**Other:** {report_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                    1985)
+                pag = Paginator(f"**Subject Information:** {reported_user}\n**Report Reason:** {report_reason}\n**Evidence:** {report_evidence}\n**Other:** {report_other}\n**Contact:** {ctx.author.mention}({ctx.author})",1985)
 
-                await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title, one_staff_member=one_staff_member)
+            await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title, one_staff_member=one_staff_member)
 
     @commands.command(aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info", "g_i"], description="Displays basic information about the server.")
     async def serverinfo(self, ctx):
