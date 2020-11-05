@@ -44,7 +44,7 @@ class Paginator:
         n = self.char_per_page
         self.words_list = [self.text[i:i + n] for i in range(0, len(self.text), n)]
 
-    async def send(self, bot, channel, end_channel=None, member=None, title=None, one_staff_member=None):
+    async def send(self, bot, channel, end_channel=None, member=None, title=None, members=None):
         self.paginate()
         for i, entry in enumerate(self.words_list):
             prepared_embed = discord.Embed(description=entry, color=0x0064ff)
@@ -67,31 +67,31 @@ class Paginator:
 
                 if not end_channel:
                     def check(reaction, user):
-                        return user == one_staff_member[0:] and str(reaction.emoji) in ["👍", "👎"]
+                        return user and str(reaction.emoji) in ["👍", "👎"]
 
                     reaction, user = await bot.wait_for("reaction_add", check=check)
 
-                    if str(reaction.emoji) == "👍" and user is not bot:
+                    if str(reaction.emoji) == "👍" and not user.bot:
                         for v, ok in enumerate(self.messages):
                             await ok.delete()
                             return
 
-                    elif str(reaction.emoji) == "👎" and user is not bot:
+                    elif str(reaction.emoji) == "👎" and not user.bot:
                         for v, ok in enumerate(self.messages):
                             await ok.delete()
                             return
                     return
 
                 def check(reaction, user):
-                    return user == one_staff_member[0:] and str(reaction.emoji) in ["👍", "👎"]
+                    return user and str(reaction.emoji) in ["👍", "👎"]
 
                 reaction, user = await bot.wait_for("reaction_add", check=check)
 
-                if str(reaction.emoji) == "👍" and user is not bot:
+                if str(reaction.emoji) == "👍" and not user.bot:
                     for _, msgs in enumerate(self.messages):
                         await end_channel.send(embed=msgs.embeds[0])
                         await msgs.delete()
 
-                elif str(reaction.emoji) == "👎" and user is not bot:
+                elif str(reaction.emoji) == "👎" and not user.bot:
                     for _, msgs in enumerate(self.messages):
                         await msgs.delete()
