@@ -120,10 +120,115 @@ class Misc(commands.Cog):
         )
         await ctx.send(embed=credits_embed)
 
-    @commands.command(description="This command is used for posting hiring requests.")
+    @commands.command(description="This command is used for applying for appliable roles (STAFF ROLES NOT INCLUDED!).")
+    @commands.cooldown(3, 10800, commands.BucketType.member)
+    async def apply(self, ctx):
+        bot_commands = self.bot.get_channel(712659793008918538)
+
+        if ctx.channel != bot_commands:
+            return
+        else:
+            pass
+        cancel_prompt_embed = discord.Embed(
+            title="**CANCELLED**",
+            description="***The setup has been cancelled.***",
+            color=0xff0000,
+            timestamp=datetime.datetime.now(tz=None)
+        )
+        pre_DM_embed = discord.Embed(
+            title="**POST SETUP**",
+            description="***Please continue the setup in DMs.***",
+            color=0x0064ff,
+            timestamp=datetime.datetime.now(tz=None)
+        )
+        categories = discord.Embed(
+            title="**APPLY SETUP**",
+            description="""
+            ***Which role would you like to apply for? Reply with the number in front of the role you would like to apply for.***
+
+
+                **1** - `Programmer`;
+
+                **2** - `Game Designer`;
+
+                **3** - `3D Modeler`;
+
+                **4** - `YouTuber`;
+                
+                **5** - `Roblox Studio Builder`;
+                
+                **6** - `Twitch Streamer`;
+                
+                **7** - `GFX Designer`;
+                
+                **8** - `Translator`;
+                
+                **9** - `UI Designer`;
+                
+                **10** - `Clothing Designer`;
+                
+                **11** - `Artist`;
+                
+                **12** - `Music Composer`;
+                
+                **13** - `Animator`;
+                
+            """,
+            color=0x0064ff
+        )
+        categories.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+        await ctx.send(embed=pre_DM_embed)
+        await ctx.author.send(embed=categories)
+        def check(m):
+            if isinstance(m.channel, discord.DMChannel):
+                if m.author == ctx.author:
+                    return True
+                else:
+                    return False
+            else:
+                return False
+
+        try:
+            category_message = await self.bot.wait_for('message', check=check, timeout=1000)
+            category = category_message.content
+        except asyncio.TimeoutError:
+            await ctx.author.send(embed=cancel_prompt_embed)
+            return
+        if category == ['0']:
+            await ctx.author.send(embed=cancel_prompt_embed)
+            return
+        elif category == '1':
+            programmer_categories = discord.Embed(
+                title="**APPLY SETUP**",
+                description="""
+                Which Programmer role would you like to apply for? Reply with the number in front of the role you would like to apply for.
+                
+                **1** - `Python Programmer`;
+                
+                **2** - `C# Programmer`;
+                
+                **3** - `Java Programmer`;
+                
+                **4** - `JavaScript Programmer`;
+                
+                **5** - `C++ Programmer`;
+                
+                **6** - `C Programmer`;
+                
+                **7** - `Programmer`;
+                
+                **8** - `Programmer`;
+                
+                **9** - `Programmer`;
+                
+                **10** - `Programmer`;
+                
+                **11** - `Programmer`;"""
+            )
+
+    @commands.command(description="This command is used for posting.")
     @commands.cooldown(3, 10800, commands.BucketType.member)
     async def post(self, ctx):
-        members = discord.Member
         bot_commands = self.bot.get_channel(712659793008918538)
 
         if ctx.channel != bot_commands:
@@ -149,23 +254,17 @@ class Misc(commands.Cog):
 
 
                 **1** - `hiring`;
-            
+
                 **2** - `for-hire`;
-            
+
                 **3** - `sell_creations`;
-            
+
                 **4** - `report`;
 
             """,
             color=0x0064ff
         )
         categories.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-        title_embed = discord.Embed(
-            title="**POST SETUP**",
-            description="***How would you like to name your post?***",
-            color=0x0064ff
-        )
-        title_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
         await ctx.send(embed=categories_embed)
         await ctx.author.send(embed=categories)
 
@@ -271,7 +370,7 @@ class Misc(commands.Cog):
                     f"**About the job:** {hiring_details}\n**Payment:** {hiring_payment}\n**Showcase:** {hiring_image}\n**Other:** {hiring_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, members)
+                await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
         elif category == "2":
             for_hire_embed1 = discord.Embed(
                 title="**FOR-HIRE POST**",
@@ -356,7 +455,7 @@ class Misc(commands.Cog):
                     f"**Specialties:** {for_hire_specialties}\n**Showcase:** {for_hire_showcase}\n**Payment:** {for_hire_showcase}\n**Other:** {for_hire_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, members)
+                await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
         elif category == "3":
             sell_creations_embed1 = discord.Embed(
                 title="**SELL-CREATIONS POST**",
@@ -428,7 +527,7 @@ class Misc(commands.Cog):
                     f"**Showcase:** {sell_creations_showcase}\n**Payment:** {sell_creations_payment}\n**Other:** {sell_creations_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, members)
+                await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
         elif category == "4":
             report_embed1 = discord.Embed(
                 title="**REPORT POST**",
@@ -514,7 +613,7 @@ class Misc(commands.Cog):
                 title = "**REPORT POST**"
                 pag = Paginator(f"**Subject Information:** {reported_user}\n**Report Reason:** {report_reason}\n**Evidence:** {report_evidence}\n**Other:** {report_other}\n**Contact:** {ctx.author.mention}({ctx.author})",1985)
 
-                await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title, members=members)
+                await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title)
 
     @commands.command(aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info", "g_i"], description="Displays basic information about the server.")
     async def serverinfo(self, ctx):
