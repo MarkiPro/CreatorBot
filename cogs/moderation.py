@@ -14,7 +14,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
-    async def clear(self, ctx, amount=0, *, channel: discord.TextChannel = None):
+    async def clear(self, ctx, amount: int = 0, *, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
 
         await channel.purge(limit=amount + 1)
@@ -235,7 +235,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def slowmode(self, ctx, time=0, channel: discord.TextChannel = None):
+    async def slowmode(self, ctx, time: int = 0, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
 
         await channel.edit(slowmode_delay=time)
