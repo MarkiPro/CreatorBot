@@ -31,10 +31,10 @@ class Log(Cog):
         if before.position != after.position:
             return
 
-        if before != after and after != before:
+        if before.permissions != after.permissions:
             log_embed = discord.Embed(
                 title="**Role Updated**",
-                description=f"{role.mention} was just created!",
+                description=f"**{role.mention}** was just updated!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -57,7 +57,7 @@ class Log(Cog):
             if message.channel == suggestions_channel:
                 suggest_embed = discord.Embed(
                     title="**Top Suggestion**",
-                    description=f"[Message link]({message.jump_url})",
+                    description=f"**[Message link]({message.jump_url})**",
                     timestamp=datetime.datetime.utcnow(),
                     color=0x0064ff
                 )
@@ -89,7 +89,7 @@ class Log(Cog):
             await another_message.add_reaction("👍")
             await another_message.add_reaction("👎")
 
-        if str(tuple(banned_links)) in message.content or str(tuple(banned_words)) in message.content:
+        if tuple(banned_links) in message.content or tuple(banned_words) in message.content:
             ban_embed = discord.Embed(
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been banned in **{message.guild}** because you've sent something inappropriate, or turned out to be underage!*!",
@@ -108,12 +108,12 @@ class Log(Cog):
         if not message.author.bot:
             log_embed = discord.Embed(
                 title="**Message Deletion**",
-                description=f"{message.author.mention} Deleted a Message in {message.channel.mention}!",
+                description=f"**{message.author.mention}** Deleted a Message in **{message.channel.mention}**!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
             log_embed.set_thumbnail(url=message.author.avatar_url)
-            log_embed.add_field(name="**Message Content**", value=f"```{message.content}```", inline=True)
+            log_embed.add_field(name="**Message Content**", value=f"```\{message.content}```", inline=True)
             await log_channel.send(embed=log_embed)
 
     @Cog.listener()
@@ -124,12 +124,12 @@ class Log(Cog):
         if not message.author.bot and before.content != after.content:
             log_embed = discord.Embed(
                 title="**Message Edit**",
-                description=f'{message.author.mention} Edited The [Message]({message.jump_url}) in {message.channel.mention}!',
+                description=f'**{message.author.mention}** Edited The **[Message]({message.jump_url})** in **{message.channel.mention}**!',
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            log_embed.add_field(name="**Before**", value=f"```{before.content}```", inline=False)
-            log_embed.add_field(name="**After**", value=f"```{after.content}```", inline=False)
+            log_embed.add_field(name="**Before**", value=f"```\{before.content}```", inline=False)
+            log_embed.add_field(name="**After**", value=f"```\{after.content}```", inline=False)
             log_embed.set_thumbnail(url=before.author.avatar_url)
             await log_channel.send(embed=log_embed)
 
@@ -147,20 +147,20 @@ class Log(Cog):
 
         if before.display_name != after.display_name and after.display_name != before.display_name:
             nick_log_embed = discord.Embed(
-                title="Nickname Update",
-                description=f"Nickname Update for {after.mention}!",
+                title="**Nickname Update**",
+                description=f"Nickname Update for **{after.mention}**!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            nick_log_embed.add_field(name="**Before**", value=f"```{before.display_name}```", inline=False)
-            nick_log_embed.add_field(name="**After**", value=f"```{after.display_name}```", inline=False)
+            nick_log_embed.add_field(name="**Before**", value=f"```\{before.display_name}```", inline=False)
+            nick_log_embed.add_field(name="**After**", value=f"```\{after.display_name}```", inline=False)
 
             await nick_update_log_channel.send(embed=nick_log_embed)
 
         if before_roles != after_roles and after_roles != before_roles and str(before_roles) != "No roles assigned." and str(after_roles) != "No roles assigned.":
             role_log_embed = discord.Embed(
-                title="Role Update",
-                description=f"Role Update for {after.mention}!",
+                title="**Role Update**",
+                description=f"Role Update for **{after.mention}**!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -179,8 +179,8 @@ class Log(Cog):
 
         if after.channel and not before.channel:
             member_joined_vc_log_embed = discord.Embed(
-                title="Member Joined Voice Channel",
-                description=f"{member.mention} just joined the voice channel `{after.channel}`!",
+                title="**Member Joined Voice Channel**",
+                description=f"**{member.mention}** just joined the voice channel **`{after.channel}`**!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -190,8 +190,8 @@ class Log(Cog):
 
         elif before.channel and not after.channel:
             member_left_vc_log_embed = discord.Embed(
-                title="Member Left Voice Channel",
-                description=f"{member.mention} just left the voice channel `{after.channel}`!",
+                title="**Member Left Voice Channel**",
+                description=f"**{member.mention}** just left the voice channel **`{before.channel}`**!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -201,8 +201,8 @@ class Log(Cog):
 
         elif before.channel and after.channel and before.channel != after.channel:
             member_switched_vc_log_embed = discord.Embed(
-                title="Member Switched Voice Channels",
-                description=f"{member.mention} just left {before.channel.mention} and joined {after.channel.mention}!",
+                title="**Member Switched Voice Channels**",
+                description=f"**{member.mention}** just left **`{before.channel.mention}`** and joined **`{after.channel.mention}`**!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -234,7 +234,7 @@ class Log(Cog):
         else:
             log_embed = discord.Embed(
                 title="**Member Joined**",
-                description=f"{member.mention} Joined The Server!\n Account Created {delta_created.days} days ago.",
+                description=f"**{member.mention}** Joined The Server!\n Account Created **{delta_created.days}** days ago.",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -252,10 +252,11 @@ class Log(Cog):
         guild = channel.guild
         log_channel = self.bot.get_channel(736234502816399422)
         delta_created = datetime.datetime.utcnow() - member.created_at
+        delta_joined = datetime.datetime.utcnow() - member.joined_at
 
         log_embed = discord.Embed(
             title="**Member Left**",
-            description=f"{member.mention} Left The Server!\n Account Created {delta_created.days} days ago.",
+            description=f"**{member.mention}** Left The Server!\n Account Created **{delta_created.days}** days ago.\n Member Joined **{delta_joined.days}** days ago.",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
