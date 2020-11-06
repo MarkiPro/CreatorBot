@@ -44,7 +44,7 @@ class Paginator:
         n = self.char_per_page
         self.words_list = [self.text[i:i + n] for i in range(0, len(self.text), n)]
 
-    async def send(self, bot, channel, end_channel=None, member=None, title=None):
+    async def send(self, bot, channel, end_channel=None, member=None, title=None, members=None):
         self.paginate()
         for i, entry in enumerate(self.words_list):
             prepared_embed = discord.Embed(description=entry, color=0x0064ff)
@@ -72,22 +72,35 @@ class Paginator:
 
                     reaction1, user1 = await bot.wait_for("reaction_add", check=check)
 
-                    def check(reaction2, user2):
-                        return user2 and str(reaction2.emoji) in ["👍", "👎"]
+                    if str(user1) == str(bot.user):
+                        def check(reaction2, user2):
+                            return user1 and str(reaction1.emoji) in ["👍", "👎"]
 
-                    reaction2, user2 = await bot.wait_for("reaction_add", check=check)
+                        reaction2, user2 = await bot.wait_for("reaction_add", check=check)
+                        if str(reaction2.emoji):
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send("Your report has been approved of!")
+                                return
 
-                    if reaction1 and str(reaction2.emoji) == "👍":
-                        for v, ok in enumerate(self.messages):
-                            await ok.delete()
-                            await member.send("Your report has been approved!")
-                            return
+                        elif str(reaction2.emoji) == "👎":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send("Your report has been declined!")
+                                return
+                    else:
+                        if str(reaction1.emoji):
+                            for _, msgs in enumerate(self.messages):
+                                await end_channel.send(embed=msgs.embeds[0])
+                                await msgs.delete()
+                                await member.send("Your post has been approved!")
+                                return
 
-                    elif reaction1 and str(reaction2.emoji) == "👎":
-                        for v, ok in enumerate(self.messages):
-                            await ok.delete()
-                            await member.send("Your report has been denied!")
-                            return
+                        elif str(reaction1.emoji) == "👎":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send("Your post has been denied!")
+                                return
                     return
 
                 def check(reaction1, user1):
@@ -95,20 +108,33 @@ class Paginator:
 
                 reaction1, user1 = await bot.wait_for("reaction_add", check=check)
 
-                def check(reaction2, user2):
-                    return user2 and str(reaction2.emoji) in ["👍", "👎"]
+                if str(user1) == str(bot.user):
+                    def check(reaction2, user2):
+                        return user1 and str(reaction1.emoji) in ["👍", "👎"]
 
-                reaction2, user2 = await bot.wait_for("reaction_add", check=check)
+                    reaction2, user2 = await bot.wait_for("reaction_add", check=check)
+                    if str(reaction2.emoji):
+                        for _, msgs in enumerate(self.messages):
+                            await end_channel.send(embed=msgs.embeds[0])
+                            await msgs.delete()
+                            await member.send("Your post has been approved!")
+                            return
 
-                if reaction1 and str(reaction2.emoji) == "👍":
-                    for _, msgs in enumerate(self.messages):
-                        await end_channel.send(embed=msgs.embeds[0])
-                        await msgs.delete()
-                        await member.send("Your post has been approved!")
-                        return
+                    elif str(reaction2.emoji) == "👎":
+                        for _, msgs in enumerate(self.messages):
+                            await msgs.delete()
+                            await member.send("Your post has been denied!")
+                            return
+                else:
+                    if str(reaction1.emoji):
+                        for _, msgs in enumerate(self.messages):
+                            await end_channel.send(embed=msgs.embeds[0])
+                            await msgs.delete()
+                            await member.send("Your post has been approved!")
+                            return
 
-                elif reaction1 and str(reaction2.emoji) == "👎":
-                    for _, msgs in enumerate(self.messages):
-                        await msgs.delete()
-                        await member.send("Your post has been denied!")
-                        return
+                    elif str(reaction1.emoji) == "👎":
+                        for _, msgs in enumerate(self.messages):
+                            await msgs.delete()
+                            await member.send("Your post has been denied!")
+                            return
