@@ -235,29 +235,10 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def slowmode(self, ctx, time, channel: discord.TextChannel = None):
+    async def slowmode(self, ctx, time=0, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
 
-        channel.slowmode_delay = time
-
-    @commands.group()
-    @commands.has_permissions(manage_guild=True)
-    async def toggle_cmd(self, ctx):
-        pass
-
-    @toggle_cmd.command()
-    async def disable(self, ctx, command: commands.Command):
-        try:
-            command.enabled = False
-        except:
-            return
-
-    @toggle_cmd.command()
-    async def enable(self, ctx, command: commands.Command):
-        try:
-            command.enabled = True
-        except:
-            return
+        await channel.edit(slowmode_delay=time)
 
     @commands.group()
     @commands.has_permissions(manage_roles=True)
@@ -275,7 +256,18 @@ class Moderation(commands.Cog):
         await member.add_roles(role)
         embed = discord.Embed(
             title=f"**ROLE GIVEN**",
-            description=f"✅ ***You have successfully given `{role}` to `{member}`!***",
+            description=f"✅ ***You have successfully given {role.mention} to {member.mention}!***",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x3aff00
+        )
+        await ctx.send(embed=embed)
+
+    @add.command()
+    async def category(self, ctx, *, name):
+        await ctx.guild.create_category(name, position=0)
+        embed = discord.Embed(
+            title=f"**CATEGORY CREATED**",
+            description=f"✅ ***You have successfully created the `{name}` category!***",
             timestamp=datetime.datetime.utcnow(),
             color=0x3aff00
         )
@@ -286,7 +278,7 @@ class Moderation(commands.Cog):
         await ctx.guild.create_text_channel(name, category=category)
         embed = discord.Embed(
             title=f"**CHANNEL CREATED**",
-            description=f"✅ ***You have successfully created `{name}` channel!***",
+            description=f"✅ ***You have successfully created the `{name}` channel!***",
             timestamp=datetime.datetime.utcnow(),
             color=0x3aff00
         )
@@ -297,7 +289,18 @@ class Moderation(commands.Cog):
         await ctx.guild.create_voice_channel(name, category=category)
         embed = discord.Embed(
             title=f"**VOICE CHANNEL CREATED**",
-            description=f"✅ ***You have successfully created `{name}` channel!***",
+            description=f"✅ ***You have successfully created the `{name}` channel!***",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x3aff00
+        )
+        await ctx.send(embed=embed)
+
+    @add.command()
+    async def emoji(self, ctx, name, *, image):
+        await ctx.guild.create_custom_emoji(name, image=image)
+        embed = discord.Embed(
+            title=f"**EMOJI ADDED**",
+            description=f"✅ ***You have successfully added the `{name}` emoji!***",
             timestamp=datetime.datetime.utcnow(),
             color=0x3aff00
         )
@@ -319,6 +322,17 @@ class Moderation(commands.Cog):
         embed = discord.Embed(
             title=f"**ROLE REMOVED**",
             description=f"✅ ***You have successfully removed the `{role}` role from `{member}`!***",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x3aff00
+        )
+        await ctx.send(embed=embed)
+
+    @remove.command()
+    async def category(self, ctx, category: discord.CategoryChannel, *, reason=None):
+        await category.delete(reason=reason)
+        embed = discord.Embed(
+            title=f"**CATEGORY DELETED**",
+            description=f"✅ ***You have successfully deleted the `{category}` category!***",
             timestamp=datetime.datetime.utcnow(),
             color=0x3aff00
         )
@@ -346,6 +360,16 @@ class Moderation(commands.Cog):
         )
         await ctx.send(embed=embed)
 
+    @remove.command()
+    async def emoji(self, ctx, emoji: discord.Emoji, *, reason):
+        await emoji.delete(reason=reason)
+        embed = discord.Embed(
+            title=f"**EMOJI REMOVED**",
+            description=f"✅ ***You have successfully removed the `{emoji}` emoji!***",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x3aff00
+        )
+        await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
