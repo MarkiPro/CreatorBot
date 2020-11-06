@@ -45,10 +45,11 @@ class Log(Cog):
         message = reaction.message
         suggestions_channel = self.bot.get_channel(712655570737299567)
         top_suggestions_channel = self.bot.get_channel(771822991256059905)
-        thumbs_up_reaction = discord.utils.get(message.reactions, emoji=reaction.emoji)
-        thumbs_down_reaction = discord.utils.get(message.reactions, emoji=reaction.emoji)
+        reactions = message.reactions
+        reaction1 = reactions[0]
+        reaction2 = reactions[1]
 
-        if reaction == thumbs_up_reaction and thumbs_up_reaction.count > thumbs_down_reaction.count and thumbs_up_reaction.count >= 2:
+        if reaction == reaction1 and reaction1.count > reaction2.count and reaction1.count >= 2:
             if message.channel == suggestions_channel:
                 suggest_embed = discord.Embed(
                     title="**Top Suggestion**",
@@ -58,7 +59,7 @@ class Log(Cog):
                 )
 
                 await top_suggestions_channel.send(embed=suggest_embed)
-        elif reaction == thumbs_down_reaction and thumbs_down_reaction.count > thumbs_up_reaction.count and thumbs_down_reaction.count >= 2:
+        elif reaction == reaction2 and reaction2.count > reaction1.count and reaction2.count >= 2:
             if message.channel == suggestions_channel:
                 await message.delete()
 
