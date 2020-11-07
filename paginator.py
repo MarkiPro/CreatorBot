@@ -77,7 +77,7 @@ class Paginator:
                             return user1 and str(reaction1.emoji) in ["👍", "👎"]
 
                         reaction2, user2 = await bot.wait_for("reaction_add", check=check)
-                        if str(reaction2.emoji):
+                        if str(reaction2.emoji) == "👍":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
                                 await member.send("Your report has been approved of!")
@@ -89,7 +89,7 @@ class Paginator:
                                 await member.send("Your report has been declined!")
                                 return
                     else:
-                        if str(reaction1.emoji):
+                        if str(reaction1.emoji) == "👍":
                             for _, msgs in enumerate(self.messages):
                                 await end_channel.send(embed=msgs.embeds[0])
                                 await msgs.delete()
@@ -113,7 +113,7 @@ class Paginator:
                         return user1 and str(reaction1.emoji) in ["👍", "👎"]
 
                     reaction2, user2 = await bot.wait_for("reaction_add", check=check)
-                    if str(reaction2.emoji):
+                    if str(reaction2.emoji) == "👍":
                         for _, msgs in enumerate(self.messages):
                             await end_channel.send(embed=msgs.embeds[0])
                             await msgs.delete()
@@ -126,7 +126,7 @@ class Paginator:
                             await member.send("Your post has been denied!")
                             return
                 else:
-                    if str(reaction1.emoji):
+                    if str(reaction1.emoji) == "👍":
                         for _, msgs in enumerate(self.messages):
                             await end_channel.send(embed=msgs.embeds[0])
                             await msgs.delete()
