@@ -79,21 +79,24 @@ class Log(Cog):
         banned_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah", "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger", "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar", "n1gguh", "n1ggress", "n1gette", "negro", "n1bba", "n1ba"]
 
         if not message.author.bot and message.channel == suggestions_channel:
-            suggestion_embed = discord.Embed(
-                title="**Suggestion**",
-                description=f"{message.content}",
-                color=0x0064ff,
-                timestamp=datetime.datetime.utcnow()
-            )
+            if message.startswith("//"):
+                return
+            else:
+                suggestion_embed = discord.Embed(
+                    title="**Suggestion**",
+                    description=f"{message.content}",
+                    color=0x0064ff,
+                    timestamp=datetime.datetime.utcnow()
+                )
 
-            suggestion_embed.set_footer(text=f"Suggestion by: {message.author}", icon_url=message.author.avatar_url)
+                suggestion_embed.set_footer(text=f"Suggestion by: {message.author}", icon_url=message.author.avatar_url)
 
-            await message.delete()
-            another_message = await suggestions_channel.send(embed=suggestion_embed)
+                await message.delete()
+                another_message = await suggestions_channel.send(embed=suggestion_embed)
 
-            await another_message.add_reaction("👍")
-            await another_message.add_reaction("👎")
-            await another_message.add_reaction("🚫")
+                await another_message.add_reaction("👍")
+                await another_message.add_reaction("👎")
+                await another_message.add_reaction("🚫")
 
         if tuple(banned_links) in message.content or tuple(banned_words) in message.content:
             ban_embed = discord.Embed(
