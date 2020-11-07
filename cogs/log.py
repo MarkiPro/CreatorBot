@@ -46,12 +46,14 @@ class Log(Cog):
 
     @Cog.listener()
     async def on_reaction_add(self, reaction, user):
+        staff_role = discord.utils.get(user.guild.roles, id=756565123350659385)
         message = reaction.message
         suggestions_channel = self.bot.get_channel(712655570737299567)
         top_suggestions_channel = self.bot.get_channel(771822991256059905)
         reactions = message.reactions
         reaction1 = reactions[0]
         reaction2 = reactions[1]
+        reaction3 = reactions[2]
 
         if reaction == reaction1 and reaction1.count > reaction2.count and reaction1.count >= 10:
             if message.channel == suggestions_channel:
@@ -64,6 +66,9 @@ class Log(Cog):
 
                 await top_suggestions_channel.send(embed=suggest_embed)
         elif reaction == reaction2 and reaction2.count > reaction1.count and reaction2.count >= 10:
+            if message.channel == suggestions_channel:
+                await message.delete()
+        elif reaction == reaction3 and user in staff_role.members:
             if message.channel == suggestions_channel:
                 await message.delete()
 
@@ -88,6 +93,7 @@ class Log(Cog):
 
             await another_message.add_reaction("👍")
             await another_message.add_reaction("👎")
+            await another_message.add_reaction("🚫")
 
         if tuple(banned_links) in message.content or tuple(banned_words) in message.content:
             ban_embed = discord.Embed(
@@ -113,7 +119,7 @@ class Log(Cog):
                 color=0x0064ff
             )
             log_embed.set_thumbnail(url=message.author.avatar_url)
-            log_embed.add_field(name="**Message Content**", value=f"```\{message.content}```", inline=True)
+            log_embed.add_field(name="**Message Content**", value=f"```{message.content}```", inline=True)
             await log_channel.send(embed=log_embed)
 
     @Cog.listener()
@@ -128,8 +134,8 @@ class Log(Cog):
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            log_embed.add_field(name="**Before**", value=f"```\{before.content}```", inline=False)
-            log_embed.add_field(name="**After**", value=f"```\{after.content}```", inline=False)
+            log_embed.add_field(name="**Before**", value=f"```{before.content}```", inline=False)
+            log_embed.add_field(name="**After**", value=f"```{after.content}```", inline=False)
             log_embed.set_thumbnail(url=before.author.avatar_url)
             await log_channel.send(embed=log_embed)
 
@@ -152,8 +158,8 @@ class Log(Cog):
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            nick_log_embed.add_field(name="**Before**", value=f"```\{before.display_name}```", inline=False)
-            nick_log_embed.add_field(name="**After**", value=f"```\{after.display_name}```", inline=False)
+            nick_log_embed.add_field(name="**Before**", value=f"```{before.display_name}```", inline=False)
+            nick_log_embed.add_field(name="**After**", value=f"```{after.display_name}```", inline=False)
 
             await nick_update_log_channel.send(embed=nick_log_embed)
 
@@ -202,7 +208,7 @@ class Log(Cog):
         elif before.channel and after.channel and before.channel != after.channel:
             member_switched_vc_log_embed = discord.Embed(
                 title="**Member Switched Voice Channels**",
-                description=f"**{member.mention}** just left **`{before.channel.mention}`** and joined **`{after.channel.mention}`**!",
+                description=f"**{member.mention}** just left **`{before.channel}`** and joined **`{after.channel}`**!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
