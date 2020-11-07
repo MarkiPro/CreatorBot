@@ -20,7 +20,8 @@ class Moderation(commands.Cog):
         await channel.purge(limit=amount + 1)
 
     @commands.command()
-    @commands.has_permissions(kick_members=True)
+    @commands.guild_only()
+    @commands.has_guild_permissions(kick_members=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         if member.id == ctx.me.id:
