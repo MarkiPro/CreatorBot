@@ -80,7 +80,7 @@ class Log(Cog):
         banned_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah", "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger", "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar", "n1gguh", "n1ggress", "n1gette", "negro", "n1bba", "n1ba"]
 
         if not message.author.bot and message.channel == suggestions_channel:
-            if message.content.startswith("//"):
+            if message.content.startswith("\\"):
                 await message.add_reaction("🚫")
                 return
             else:
