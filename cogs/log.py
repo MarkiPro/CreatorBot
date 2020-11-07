@@ -1,6 +1,7 @@
 import asyncio
 import datetime
 from typing import Optional, Any
+import re
 
 import discord
 from discord.ext.commands import Cog
@@ -80,6 +81,7 @@ class Log(Cog):
 
         if not message.author.bot and message.channel == suggestions_channel:
             if message.startswith("//"):
+                await message.add_reaction("🚫")
                 return
             else:
                 suggestion_embed = discord.Embed(
@@ -98,7 +100,7 @@ class Log(Cog):
                 await another_message.add_reaction("👎")
                 await another_message.add_reaction("🚫")
 
-        if tuple(banned_links) in message.content or tuple(banned_words) in message.content:
+        if re.search(tuple(banned_links), message.content) or re.search(tuple(banned_words), message.content):
             ban_embed = discord.Embed(
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been banned in **{message.guild}** because you've sent something inappropriate, or turned out to be underage!*!",
