@@ -56,13 +56,17 @@ class Log(Cog):
         reaction2 = reactions[1]
         reaction3 = reactions[2]
 
-        if not message.author.bot:
-            reaction3 = reactions[0]
-            if reaction == reaction3 and message.channel == suggestions_channel:
+        if not message.author.bot and message.channel == suggestions_channel:
+            reaction4 = reactions[0]
+            if reaction == reaction4 and user in staff_role.members:
                 await message.delete()
 
         if reaction == reaction1 and reaction1.count > reaction2.count and reaction1.count >= 10:
             if message.channel == suggestions_channel:
+                if user in reaction2.users():
+                    reaction.remove()
+                    await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
+                    return
                 suggest_embed = discord.Embed(
                     title="**Top Suggestion**",
                     description=f"**[Message link]({message.jump_url})**",
@@ -71,9 +75,12 @@ class Log(Cog):
                 )
 
                 await top_suggestions_channel.send(embed=suggest_embed)
-        elif reaction == reaction2 and reaction2.count > reaction1.count and reaction2.count >= 10:
-            if message.channel == suggestions_channel:
-                await message.delete()
+        elif reaction == reaction2 and reaction2.count > reaction1.count and reaction2.count >= 10 and message.channel == suggestions_channel:
+            if user in reaction2.users():
+                reaction.remove()
+                await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
+                return
+            await message.delete()
         elif reaction == reaction3 and user in staff_role.members:
             if message.channel == suggestions_channel:
                 await message.delete()
