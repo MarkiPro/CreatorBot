@@ -110,7 +110,7 @@ class Log(Cog):
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been banned in **{message.guild}** because you've sent something inappropriate, or turned out to be underage!*!",
                 color=0x0064ff,
-                timestamp=datetime.datetime.now(tz=None)
+                timestamp=datetime.datetime.utcnow()
             )
 
             ban_embed.add_field(name="**In case you would like to appeal your ban, go here:**", value=f"https://forms.gle/zs9vRAz5Fw1SFgvR6", inline=False)
@@ -239,7 +239,7 @@ class Log(Cog):
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been kicked in **{guild}** because your account is not even a week old. You may join back once your account is at least one week old*!",
                 color=0x0064ff,
-                timestamp=datetime.datetime.now(tz=None)
+                timestamp=datetime.datetime.utcnow()
             )
             try:
                 await member.send(embed=kick_embed)
