@@ -30,20 +30,20 @@ class Moderation(commands.Cog):
                 title="**OOPS**",
                 description=f"***Sorry bro, not gonna happen :) ***",
                 color=0xffbd00,
-                timestamp=datetime.datetime.now(tz=None)
+                timestamp=datetime.datetime.utcnow()
             )
             await ctx.send(embed=embed1)
         embed1 = discord.Embed(
             title="**SUCCESS**",
             description=f"***:white_check_mark: *** {member.display_name} *** has been kicked for: `{reason}`!***",
             color=0x00fa00,
-            timestamp=datetime.datetime.now(tz=None)
+            timestamp=datetime.datetime.utcnow()
         )
         embed2 = discord.Embed(
             title="**NOTIFICATION**",
             description=f":bell: *You have been kicked in **{ctx.guild}** for:* `{reason}`!",
             color=0x0064ff,
-            timestamp=datetime.datetime.now(tz=None)
+            timestamp=datetime.datetime.utcnow()
         )
         async with ctx.typing():
             try:
@@ -63,20 +63,20 @@ class Moderation(commands.Cog):
                 title="**OOPS**",
                 description=f"***Sorry bro, not gonna happen! :) ***",
                 color=0xffbd00,
-                timestamp=datetime.datetime.now(tz=None)
+                timestamp=datetime.datetime.utcnow()
             )
             await ctx.send(embed=embed1)
         embed1 = discord.Embed(
             title="**SUCCESS**",
             description=f"***:white_check_mark: *** {member.display_name} *** has been perm-banned for: `{reason}`!***",
             color=0x00fa00,
-            timestamp=datetime.datetime.now(tz=None)
+            timestamp=datetime.datetime.utcnow()
         )
         embed2 = discord.Embed(
             title="**NOTIFICATION**",
             description=f":bell: ***You have been perm-banned in **{ctx.guild}** for: `{reason}`***",
             color=0x0064ff,
-            timestamp=datetime.datetime.now(tz=None)
+            timestamp=datetime.datetime.utcnow()
         )
         async with ctx.typing():
             try:
@@ -102,7 +102,7 @@ class Moderation(commands.Cog):
                 title="**OOPS**",
                 description=f"***Sorry bro, not gonna happen! :) ***",
                 color=0xffbd00,
-                timestamp=datetime.datetime.now(tz=None)
+                timestamp=datetime.datetime.utcnow()
             )
             await ctx.send(embed=embed1)
         i = 0
@@ -129,13 +129,13 @@ class Moderation(commands.Cog):
             title="**SUCCESS**",
             description=f"***:white_check_mark: *** {member.display_name} *** has been temp-banned for: `{reason}`, for: {time}!***",
             color=0x00fa00,
-            timestamp=datetime.datetime.now(tz=None)
+            timestamp=datetime.datetime.utcnow()
         )
         embed2 = discord.Embed(
             title="**NOTIFICATION**",
             description=f":bell: ***You have been temp-banned in **{ctx.guild}** for: `{reason}`, for: {time}!***",
             color=0x0064ff,
-            timestamp=datetime.datetime.now(tz=None)
+            timestamp=datetime.datetime.utcnow()
         )
 
         await ctx.send(embed=embed2)
@@ -162,20 +162,20 @@ class Moderation(commands.Cog):
                 title="**OOPS**",
                 description=f"***Sorry bro, not gonna happen :) ***",
                 color=0xffbd00,
-                timestamp=datetime.datetime.now(tz=None)
+                timestamp=datetime.datetime.utcnow()
             )
             await ctx.send(embed=embed1)
         embed1 = discord.Embed(
             title="**SUCCESS**",
             description=f"***:white_check_mark: *** {member.display_name} *** has been soft-banned for: `{reason}`!***",
             color=0x00fa00,
-            timestamp=datetime.datetime.now(tz=None)
+            timestamp=datetime.datetime.utcnow()
         )
         embed2 = discord.Embed(
             title="**NOTIFICATION**",
             description=f":bell: ***You have been soft-banned in **{ctx.guild}** for: `{reason}`!***",
             color=0x0064ff,
-            timestamp=datetime.datetime.now(tz=None)
+            timestamp=datetime.datetime.utcnow()
         )
         async with ctx.typing():
             try:
@@ -198,7 +198,7 @@ class Moderation(commands.Cog):
                 title="**SUCCESS**",
                 description=f"***:white_check_mark: *** {user.display_name} *** has been unbanned for: `{reason}`!***",
                 color=0x00fa00,
-                timestamp=datetime.datetime.now(tz=None)
+                timestamp=datetime.datetime.utcnow()
             )
             try:
                 user_name, user_discriminator = member.split('#')
@@ -219,22 +219,25 @@ class Moderation(commands.Cog):
                     embed2 = discord.Embed(
                         title="**NOTIFICATION**",
                         description=f":bell: ***You have been unbanned from {ctx.guild}, for: `{reason}`!***",
-                        timestamp=datetime.datetime.now(tz=None)
+                        timestamp=datetime.datetime.utcnow()
                     )
                     await user.send(embed=embed2)
                 except discord.Forbidden:
                     break
 
-    @commands.command(description="Sends the provided user's, or the command caller's avatar.")
-    async def avatar(self, ctx, *, user: discord.Member):
+    @commands.command(alises=["av", "pfp"], description="Sends the provided user's, or the command caller's avatar.")
+    async def avatar(self, ctx, *, user: discord.Member = None):
         user = user or ctx.author
 
         embed = discord.Embed(
             title=f"{user} AVATAR",
-            timestamp=datetime.datetime.utcnow()
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
         )
 
         embed.set_image(url=user.avatar_url)
+
+        await ctx.channel.send(embed=embed)
 
     @commands.command()
     @commands.has_permissions(manage_guild=True)
@@ -252,9 +255,12 @@ class Moderation(commands.Cog):
         await channel.edit(slowmode_delay=time)
 
     @commands.group()
-    @commands.has_permissions(manage_roles=True)
     async def add(self, ctx):
-        pass
+        staff_role = discord.utils.get(ctx.guild.roles, id=756565123350659385)
+        if ctx.author in staff_role.members:
+            pass
+        else:
+            return
 
     @add.command()
     async def role(self, ctx, member: discord.Member, *, role: discord.Role):
@@ -319,7 +325,11 @@ class Moderation(commands.Cog):
 
     @commands.group(aliases=['rem'])
     async def remove(self, ctx):
-        pass
+        staff_role = discord.utils.get(ctx.guild.roles, id=756565123350659385)
+        if ctx.author in staff_role.members:
+            pass
+        else:
+            return
 
     @remove.command(name='role')
     async def rem_role(self, ctx, member: discord.Member, *, role: discord.Role):
@@ -339,7 +349,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
 
     @remove.command()
-    async def category(self, ctx, category: discord.CategoryChannel, *, reason=None):
+    async def rem_category(self, ctx, category: discord.CategoryChannel, *, reason=None):
         await category.delete(reason=reason)
         embed = discord.Embed(
             title=f"**CATEGORY DELETED**",
@@ -372,7 +382,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
 
     @remove.command()
-    async def emoji(self, ctx, emoji: discord.Emoji, *, reason):
+    async def rem_emoji(self, ctx, emoji: discord.Emoji, *, reason):
         await emoji.delete(reason=reason)
         embed = discord.Embed(
             title=f"**EMOJI REMOVED**",
