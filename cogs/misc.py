@@ -133,13 +133,13 @@ class Misc(commands.Cog):
             title="**CANCELLED**",
             description="***The setup has been cancelled.***",
             color=0xff0000,
-            timestamp=datetime.datetime.now(tz=None)
+            timestamp=datetime.datetime.utcnow()
         )
         pre_DM_embed = discord.Embed(
             title="**POST SETUP**",
             description="***Please continue the setup in DMs.***",
             color=0x0064ff,
-            timestamp=datetime.datetime.now(tz=None)
+            timestamp=datetime.datetime.utcnow()
         )
         categories = discord.Embed(
             title="**APPLY SETUP**",
@@ -239,13 +239,13 @@ class Misc(commands.Cog):
             title="**CANCELLED**",
             description="***The setup has been cancelled.***",
             color=0xff0000,
-            timestamp=datetime.datetime.now(tz=None)
+            timestamp=datetime.datetime.utcnow()
         )
         categories_embed = discord.Embed(
             title="**POST SETUP**",
             description="***Please continue the setup in DMs.***",
             color=0x0064ff,
-            timestamp=datetime.datetime.now(tz=None)
+            timestamp=datetime.datetime.utcnow()
         )
         categories = discord.Embed(
             title="**POST SETUP**",
@@ -1008,7 +1008,7 @@ class Misc(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command(aliases=["who", "user-info", "userinfo", "ui", "u-i", "who-is", "who_is"], description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
+    @commands.command(aliases=["who", "user-info", "userinfo", "ui", "u-i", "who-is", "who_is", "profile"], description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
     async def whois(self, ctx, user: discord.Member = None):
         bot_commands = self.bot.get_channel(712659793008918538)
 
