@@ -194,7 +194,7 @@ class Misc(commands.Cog):
         except asyncio.TimeoutError:
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        if category == ['0']:
+        if category == "0":
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         elif category == '1':
@@ -266,9 +266,20 @@ class Misc(commands.Cog):
         )
         categories.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
         await ctx.send(embed=categories_embed)
-        await ctx.author.send(embed=categories)
+        category_message = await ctx.author.send(embed=categories)
+        await category_message.add_reaction("0\N{variation selector-16}\N{combining enclosing keycap}")
+        await category_message.add_reaction("1\N{variation selector-16}\N{combining enclosing keycap}")
+        await category_message.add_reaction("2\N{variation selector-16}\N{combining enclosing keycap}")
+        await category_message.add_reaction("3\N{variation selector-16}\N{combining enclosing keycap}")
+        await category_message.add_reaction("4\N{variation selector-16}\N{combining enclosing keycap}")
 
-        def check(m):
+        decline_reaction = category_message.reactions[0]
+        first_category = category_message.reactions[1]
+        second_category = category_message.reactions[2]
+        third_category = category_message.reactions[3]
+        fourth_category = category_message.reactions[4]
+
+        def check_dm(m):
             if isinstance(m.channel, discord.DMChannel):
                 if m.author == ctx.author:
                     return True
@@ -277,16 +288,355 @@ class Misc(commands.Cog):
             else:
                 return False
 
-        try:
-            category_message = await self.bot.wait_for('message', check=check, timeout=1000)
-            category = category_message.content
-        except asyncio.TimeoutError:
+        def check(reaction1, user1):
+            return user1 and str(reaction1.emoji) in ["0\N{variation selector-16}\N{combining enclosing keycap}", "1\N{variation selector-16}\N{combining enclosing keycap}", "2\N{variation selector-16}\N{combining enclosing keycap}", "3\N{variation selector-16}\N{combining enclosing keycap}", "4\N{variation selector-16}\N{combining enclosing keycap}"]
+
+        reaction1, user1 = await self.bot.wait_for("reaction_add", check=check)
+
+        if str(user1) == str(self.bot.user):
+            def check(reaction2, user2):
+                return user1 and str(reaction1.emoji) in ["0\N{variation selector-16}\N{combining enclosing keycap}", "1\N{variation selector-16}\N{combining enclosing keycap}", "2\N{variation selector-16}\N{combining enclosing keycap}", "3\N{variation selector-16}\N{combining enclosing keycap}", "4\N{variation selector-16}\N{combining enclosing keycap}"]
+
+            reaction2, user2 = await self.bot.wait_for("reaction_add", check=check)
+
+            if str(reaction2.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
+                await ctx.author.send(embed=cancel_prompt_embed)
+                return
+            elif str(reaction2.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
+                hiring_embed1 = discord.Embed(
+                    title="**HIRING POST**",
+                    description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.***",
+                    color=0x0064ff
+                )
+                hiring_embed1.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=hiring_embed1)
+                try:
+                    hiring_details_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    hiring_details = hiring_details_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if hiring_details == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                hiring_embed2 = discord.Embed(
+                    title="**HIRING POST**",
+                    description="***Describe the payment to this job.***",
+                    color=0x0064ff
+                )
+                hiring_embed2.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=hiring_embed2)
+                try:
+                    hiring_payment_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    hiring_payment = hiring_payment_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if hiring_payment == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                hiring_embed3 = discord.Embed(
+                    title="**HIRING POST**",
+                    description="***Showcase some of your work here, could be a link to a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                hiring_embed3.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=hiring_embed3)
+                try:
+                    hiring_image_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    hiring_image = hiring_image_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if hiring_image == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                hiring_embed4 = discord.Embed(
+                    title="**HIRING POST**",
+                    description="***In case you have something else that you would like to add onto the previous statements, please provide it now.***",
+                    color=0x0064ff
+                )
+                hiring_embed4.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=hiring_embed4)
+                try:
+                    hiring_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    hiring_other = hiring_other_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if hiring_other == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Post Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    some_channel = self.bot.get_channel(739247560065024050)
+                    end_channel = self.bot.get_channel(727550350097252482)
+                    title = "**HIRING POST**"
+                    pag = Paginator(
+                        f"**About the job:** {hiring_details}\n**Payment:** {hiring_payment}\n**Showcase:** {hiring_image}\n**Other:** {hiring_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
+
+                    await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
+            elif str(reaction2.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
+                for_hire_embed1 = discord.Embed(
+                    title="**FOR-HIRE POST**",
+                    description="***Define your specialties here, like for example a Java programmer, an Artist et cetera.***",
+                    color=0x0064ff
+                )
+                for_hire_embed1.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=for_hire_embed1)
+                try:
+                    for_hire_specialties_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    for_hire_specialties = for_hire_specialties_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if for_hire_specialties == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                for_hire_embed2 = discord.Embed(
+                    title="**FOR-HIRE POST**",
+                    description="***Showcase some of your previous work examples here, could be a link to a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                for_hire_embed2.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=for_hire_embed2)
+                try:
+                    for_hire_showcase_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    for_hire_showcase = for_hire_showcase_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if for_hire_showcase == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                for_hire_embed3 = discord.Embed(
+                    title="**FOR-HIRE POST**",
+                    description="***What is your desired payment for the job? Please define it here.***",
+                    color=0x0064ff
+                )
+                for_hire_embed3.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=for_hire_embed3)
+                try:
+                    for_hire_payment_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    for_hire_payment = for_hire_payment_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if for_hire_payment == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                for_hire_embed4 = discord.Embed(
+                    title="**FOR-HIRE POST**",
+                    description="***In case you have something else that you would like to add onto the previous statements, please provide it now.***",
+                    color=0x0064ff
+                )
+                for_hire_embed4.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=for_hire_embed4)
+                try:
+                    for_hire_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    for_hire_other = for_hire_other_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if for_hire_other == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Post Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    some_channel = self.bot.get_channel(739247630193786900)
+                    end_channel = self.bot.get_channel(727550761801613393)
+                    title = "**FOR-HIRE POST**"
+                    pag = Paginator(
+                        f"**Specialties:** {for_hire_specialties}\n**Showcase:** {for_hire_showcase}\n**Payment:** {for_hire_showcase}\n**Other:** {for_hire_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
+
+                    await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
+            elif str(reaction2.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
+                sell_creations_embed1 = discord.Embed(
+                    title="**SELL-CREATIONS POST**",
+                    description="***Showcase some of your previous work examples here, could be a link portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                sell_creations_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=sell_creations_embed1)
+                try:
+                    sell_creations_showcase_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    sell_creations_showcase = sell_creations_showcase_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if sell_creations_showcase == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                sell_creations_embed2 = discord.Embed(
+                    title="**SELL-CREATIONS POST**",
+                    description="***What is your desired payment for your work? Please define it here.***",
+                    color=0x0064ff
+                )
+                sell_creations_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=sell_creations_embed2)
+                try:
+                    sell_creations_payment_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    sell_creations_payment = sell_creations_payment_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if sell_creations_payment == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                sell_creations_embed3 = discord.Embed(
+                    title="**SELL-CREATIONS POST**",
+                    description="***In case you have something else that you would like to add onto the previous statements, please provide it now.***",
+                    color=0x0064ff
+                )
+                sell_creations_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=sell_creations_embed3)
+                try:
+                    sell_creations_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    sell_creations_other = sell_creations_other_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if sell_creations_other == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Post Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    some_channel = self.bot.get_channel(739247602393940168)
+                    end_channel = self.bot.get_channel(727550553806340197)
+                    title = "**SELL-CREATIONS POST**"
+                    pag = Paginator(
+                        f"**Showcase:** {sell_creations_showcase}\n**Payment:** {sell_creations_payment}\n**Other:** {sell_creations_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
+
+                    await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
+            elif str(reaction2.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
+                report_embed1 = discord.Embed(
+                    title="**REPORT POST**",
+                    description="***Who are you filing this report on? Please provide their Username and Discriminator/Tag. Example: Noob#1234 or MarkiPro#3753***",
+                    color=0x0064ff
+                )
+                report_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=report_embed1)
+                try:
+                    reported_user_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    reported_user = reported_user_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if reported_user == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                report_embed2 = discord.Embed(
+                    title="**REPORT POST**",
+                    description="***What did this person do?***",
+                    color=0x0064ff
+                )
+                report_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=report_embed2)
+                try:
+                    report_reason_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    report_reason = report_reason_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if report_reason == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                report_embed3 = discord.Embed(
+                    title="**REPORT POST**",
+                    description="***Do you have any evidence? If so, provide it here (ATTACHMENTS ARE NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                report_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=report_embed3)
+                try:
+                    report_evidence_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    report_evidence = report_evidence_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if report_evidence == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                report_embed4 = discord.Embed(
+                    title="**REPORT POST**",
+                    description="***In case you have something else you wanted to add onto your current statement, please do.***",
+                    color=0x0064ff
+                )
+                report_embed4.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=report_embed4)
+                try:
+                    report_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    report_other = report_other_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if report_other == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Post Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    some_channel = self.bot.get_channel(773637163048239124)
+                    title = "**REPORT POST**"
+                    pag = Paginator(
+                        f"**Subject Information:** {reported_user}\n**Report Reason:** {report_reason}\n**Evidence:** {report_evidence}\n**Other:** {report_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
+
+                    await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title)
+
+        if str(reaction1.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        if category == ['0']:
-            await ctx.author.send(embed=cancel_prompt_embed)
-            return
-        elif category == "1":
+        elif str(reaction1.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
             hiring_embed1 = discord.Embed(
                 title="**HIRING POST**",
                 description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.***",
@@ -295,12 +645,12 @@ class Misc(commands.Cog):
             hiring_embed1.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed1)
             try:
-                hiring_details_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                hiring_details_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 hiring_details = hiring_details_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if hiring_details == ['0']:
+            if hiring_details == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             hiring_embed2 = discord.Embed(
@@ -311,12 +661,12 @@ class Misc(commands.Cog):
             hiring_embed2.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed2)
             try:
-                hiring_payment_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                hiring_payment_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 hiring_payment = hiring_payment_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if hiring_payment == ['0']:
+            if hiring_payment == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             hiring_embed3 = discord.Embed(
@@ -327,12 +677,12 @@ class Misc(commands.Cog):
             hiring_embed3.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed3)
             try:
-                hiring_image_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                hiring_image_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 hiring_image = hiring_image_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if hiring_image == ['0']:
+            if hiring_image == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             hiring_embed4 = discord.Embed(
@@ -343,18 +693,18 @@ class Misc(commands.Cog):
             hiring_embed4.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=hiring_embed4)
             try:
-                hiring_other_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                hiring_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 hiring_other = hiring_other_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if hiring_other == ['0']:
+            if hiring_other == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             await ctx.author.send(
                 "Would you like to send this for Post Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
             try:
-                final_choice_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 final_choice = final_choice_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
@@ -371,7 +721,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
-        elif category == "2":
+        elif str(reaction1.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
             for_hire_embed1 = discord.Embed(
                 title="**FOR-HIRE POST**",
                 description="***Define your specialties here, like for example a Java programmer, an Artist et cetera.***",
@@ -380,12 +730,12 @@ class Misc(commands.Cog):
             for_hire_embed1.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=for_hire_embed1)
             try:
-                for_hire_specialties_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                for_hire_specialties_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 for_hire_specialties = for_hire_specialties_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if for_hire_specialties == ['0']:
+            if for_hire_specialties == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             for_hire_embed2 = discord.Embed(
@@ -396,12 +746,12 @@ class Misc(commands.Cog):
             for_hire_embed2.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=for_hire_embed2)
             try:
-                for_hire_showcase_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                for_hire_showcase_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 for_hire_showcase = for_hire_showcase_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if for_hire_showcase == ['0']:
+            if for_hire_showcase == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             for_hire_embed3 = discord.Embed(
@@ -412,12 +762,12 @@ class Misc(commands.Cog):
             for_hire_embed3.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=for_hire_embed3)
             try:
-                for_hire_payment_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                for_hire_payment_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 for_hire_payment = for_hire_payment_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if for_hire_payment == ['0']:
+            if for_hire_payment == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             for_hire_embed4 = discord.Embed(
@@ -428,18 +778,18 @@ class Misc(commands.Cog):
             for_hire_embed4.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=for_hire_embed4)
             try:
-                for_hire_other_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                for_hire_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 for_hire_other = for_hire_other_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if for_hire_other == ['0']:
+            if for_hire_other == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             await ctx.author.send(
                 "Would you like to send this for Post Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
             try:
-                final_choice_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 final_choice = final_choice_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
@@ -456,7 +806,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
-        elif category == "3":
+        elif str(reaction1.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
             sell_creations_embed1 = discord.Embed(
                 title="**SELL-CREATIONS POST**",
                 description="***Showcase some of your previous work examples here, could be a link portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -466,12 +816,12 @@ class Misc(commands.Cog):
                 text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=sell_creations_embed1)
             try:
-                sell_creations_showcase_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                sell_creations_showcase_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 sell_creations_showcase = sell_creations_showcase_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if sell_creations_showcase == ['0']:
+            if sell_creations_showcase == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             sell_creations_embed2 = discord.Embed(
@@ -483,12 +833,12 @@ class Misc(commands.Cog):
                 text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=sell_creations_embed2)
             try:
-                sell_creations_payment_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                sell_creations_payment_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 sell_creations_payment = sell_creations_payment_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if sell_creations_payment == ['0']:
+            if sell_creations_payment == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             sell_creations_embed3 = discord.Embed(
@@ -500,18 +850,18 @@ class Misc(commands.Cog):
                 text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=sell_creations_embed3)
             try:
-                sell_creations_other_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                sell_creations_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 sell_creations_other = sell_creations_other_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if sell_creations_other == ['0']:
+            if sell_creations_other == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             await ctx.author.send(
                 "Would you like to send this for Post Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
             try:
-                final_choice_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 final_choice = final_choice_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
@@ -528,7 +878,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
-        elif category == "4":
+        elif str(reaction1.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
             report_embed1 = discord.Embed(
                 title="**REPORT POST**",
                 description="***Who are you filing this report on? Please provide their Username and Discriminator/Tag. Example: Noob#1234 or MarkiPro#3753***",
@@ -538,12 +888,12 @@ class Misc(commands.Cog):
                 text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=report_embed1)
             try:
-                reported_user_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                reported_user_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 reported_user = reported_user_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if reported_user == ['0']:
+            if reported_user == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             report_embed2 = discord.Embed(
@@ -555,12 +905,12 @@ class Misc(commands.Cog):
                 text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=report_embed2)
             try:
-                report_reason_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                report_reason_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 report_reason = report_reason_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if report_reason == ['0']:
+            if report_reason == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             report_embed3 = discord.Embed(
@@ -572,12 +922,12 @@ class Misc(commands.Cog):
                 text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=report_embed3)
             try:
-                report_evidence_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                report_evidence_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 report_evidence = report_evidence_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if report_evidence == ['0']:
+            if report_evidence == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             report_embed4 = discord.Embed(
@@ -589,18 +939,18 @@ class Misc(commands.Cog):
                 text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
             await ctx.author.send(embed=report_embed4)
             try:
-                report_other_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                report_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 report_other = report_other_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if report_other == ['0']:
+            if report_other == "0":
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             await ctx.author.send(
                 "Would you like to send this for Post Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
             try:
-                final_choice_message = await self.bot.wait_for('message', check=check, timeout=1000)
+                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 final_choice = final_choice_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(embed=cancel_prompt_embed)
