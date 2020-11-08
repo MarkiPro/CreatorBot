@@ -56,6 +56,11 @@ class Log(Cog):
         reaction2 = reactions[1]
         reaction3 = reactions[2]
 
+        if not message.author.bot:
+            reaction3 = reactions[0]
+            if reaction == reaction3 and message.channel == suggestions_channel:
+                await message.delete()
+
         if reaction == reaction1 and reaction1.count > reaction2.count and reaction1.count >= 10:
             if message.channel == suggestions_channel:
                 suggest_embed = discord.Embed(
