@@ -12,6 +12,7 @@ class Moderation(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    @commands.guild_only()
     @commands.has_permissions(manage_messages=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def clear(self, ctx, amount: int = 0, *, channel: discord.TextChannel = None):
@@ -53,6 +54,7 @@ class Moderation(commands.Cog):
             await ctx.send(embed=embed1)
 
     @commands.command(aliases=['perm-ban'], description="This command is used for permanently banning.")
+    @commands.guild_only()
     @commands.has_permissions(ban_members=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def permban(self, ctx, member: discord.Member, *, reason=None):
