@@ -464,7 +464,7 @@ class Misc(commands.Cog):
                     end_channel = self.bot.get_channel(727550761801613393)
                     title = "**FOR-HIRE POST**"
                     pag = Paginator(
-                        f"**Specialties:** {for_hire_specialties}\n**Showcase:** {for_hire_showcase}\n**Payment:** {for_hire_showcase}\n**Other:** {for_hire_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        f"**Specialties:** {for_hire_specialties}\n**Showcase:** {for_hire_showcase}\n**Payment:** {for_hire_payment}\n**Other:** {for_hire_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                         1985)
 
                     await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
@@ -802,11 +802,11 @@ class Misc(commands.Cog):
                 end_channel = self.bot.get_channel(727550761801613393)
                 title = "**FOR-HIRE POST**"
                 pag = Paginator(
-                    f"**Specialties:** {for_hire_specialties}\n**Showcase:** {for_hire_showcase}\n**Payment:** {for_hire_showcase}\n**Other:** {for_hire_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                    f"**Specialties:** {for_hire_specialties}\n**Showcase:** {for_hire_showcase}\n**Payment:** {for_hire_payment}\n**Other:** {for_hire_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
-        elif str(reaction2.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
+        elif str(reaction1.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
             sell_creations_embed1 = discord.Embed(
                 title="**SELL-CREATIONS POST**",
                 description="***Showcase some of your previous work examples here, could be a link portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
