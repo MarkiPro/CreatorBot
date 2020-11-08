@@ -47,7 +47,7 @@ class Log(Cog):
 
     @Cog.listener()
     async def on_reaction_add(self, reaction, user):
-        staff_role = discord.utils.get(user.guild.roles, id=756565123350659385)
+        staff_role = discord.utils.get(reaction.message.guild.roles, id=756565123350659385)
         message = reaction.message
         suggestions_channel = self.bot.get_channel(712655570737299567)
         top_suggestions_channel = self.bot.get_channel(771822991256059905)
