@@ -273,12 +273,6 @@ class Misc(commands.Cog):
         await category_message.add_reaction("3\N{variation selector-16}\N{combining enclosing keycap}")
         await category_message.add_reaction("4\N{variation selector-16}\N{combining enclosing keycap}")
 
-        decline_reaction = category_message.reactions[0]
-        first_category = category_message.reactions[1]
-        second_category = category_message.reactions[2]
-        third_category = category_message.reactions[3]
-        fourth_category = category_message.reactions[4]
-
         def check_dm(m):
             if isinstance(m.channel, discord.DMChannel):
                 if m.author == ctx.author:
