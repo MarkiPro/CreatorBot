@@ -225,8 +225,16 @@ class Moderation(commands.Cog):
                 except discord.Forbidden:
                     break
 
-    # @commands.command()
-    # @commands.has_permissions()
+    @commands.command(description="Sends the provided user's, or the command caller's avatar.")
+    async def avatar(self, ctx, *, user: discord.Member):
+        user = user or ctx.author
+
+        embed = discord.Embed(
+            title=f"{user} AVATAR",
+            timestamp=datetime.datetime.utcnow()
+        )
+
+        embed.set_image(url=user.avatar_url)
 
     @commands.command()
     @commands.has_permissions(manage_guild=True)
