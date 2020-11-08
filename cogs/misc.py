@@ -250,7 +250,7 @@ class Misc(commands.Cog):
         categories = discord.Embed(
             title="**POST SETUP**",
             description="""
-            ***What would you like to do? Reply with the number in front of the category you would like to post in.***
+            ***What would you like to do? React with the number in front of the category you would like to post in.***
 
 
                 **1** - `hiring`;
@@ -264,7 +264,7 @@ class Misc(commands.Cog):
             """,
             color=0x0064ff
         )
-        categories.set_footer(text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+        categories.set_footer(text="React to this message within `16 minutes` • Reply with `0` to cancel.")
         await ctx.send(embed=categories_embed)
         category_message = await ctx.author.send(embed=categories)
         await category_message.add_reaction("0\N{variation selector-16}\N{combining enclosing keycap}")
@@ -373,6 +373,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
                     some_channel = self.bot.get_channel(739247560065024050)
                     end_channel = self.bot.get_channel(727550350097252482)
                     title = "**HIRING POST**"
@@ -458,6 +459,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
                     some_channel = self.bot.get_channel(739247630193786900)
                     end_channel = self.bot.get_channel(727550761801613393)
                     title = "**FOR-HIRE POST**"
@@ -469,7 +471,7 @@ class Misc(commands.Cog):
             elif str(reaction2.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
                 sell_creations_embed1 = discord.Embed(
                     title="**SELL-CREATIONS POST**",
-                    description="***Showcase some of your previous work examples here, could be a link portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    description="***Showcase the creation here. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
                     color=0x0064ff
                 )
                 sell_creations_embed1.set_footer(
@@ -530,6 +532,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
                     some_channel = self.bot.get_channel(739247602393940168)
                     end_channel = self.bot.get_channel(727550553806340197)
                     title = "**SELL-CREATIONS POST**"
@@ -619,6 +622,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 elif final_choice == "1":
+                    await ctx.author.send("Sent!")
                     some_channel = self.bot.get_channel(773637163048239124)
                     title = "**REPORT POST**"
                     pag = Paginator(
@@ -707,6 +711,7 @@ class Misc(commands.Cog):
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             elif final_choice == "1":
+                await ctx.author.send("Sent for approval!")
                 some_channel = self.bot.get_channel(739247560065024050)
                 end_channel = self.bot.get_channel(727550350097252482)
                 title = "**HIRING POST**"
@@ -792,6 +797,7 @@ class Misc(commands.Cog):
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             elif final_choice == "1":
+                await ctx.author.send("Sent for approval!")
                 some_channel = self.bot.get_channel(739247630193786900)
                 end_channel = self.bot.get_channel(727550761801613393)
                 title = "**FOR-HIRE POST**"
@@ -800,7 +806,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
-        elif str(reaction1.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
+        elif str(reaction2.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
             sell_creations_embed1 = discord.Embed(
                 title="**SELL-CREATIONS POST**",
                 description="***Showcase some of your previous work examples here, could be a link portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -864,6 +870,7 @@ class Misc(commands.Cog):
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             elif final_choice == "1":
+                await ctx.author.send("Sent for approval!")
                 some_channel = self.bot.get_channel(739247602393940168)
                 end_channel = self.bot.get_channel(727550553806340197)
                 title = "**SELL-CREATIONS POST**"
@@ -953,6 +960,7 @@ class Misc(commands.Cog):
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             elif final_choice == "1":
+                await ctx.author.send("Sent!")
                 some_channel = self.bot.get_channel(773637163048239124)
                 title = "**REPORT POST**"
                 pag = Paginator(f"**Subject Information:** {reported_user}\n**Report Reason:** {report_reason}\n**Evidence:** {report_evidence}\n**Other:** {report_other}\n**Contact:** {ctx.author.mention}({ctx.author})",1985)
