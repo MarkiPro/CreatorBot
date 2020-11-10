@@ -92,7 +92,7 @@ class Log(Cog):
         banned_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah", "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger", "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar", "n1gguh", "n1ggress", "n1gette", "negro", "n1bba", "n1ba"]
 
         if not message.author.bot and message.channel == suggestions_channel:
-            if message.content.startswith("\\"):
+            if message.content.startswith(r"\\"):
                 await message.add_reaction("🚫")
                 return
             else:
@@ -112,7 +112,7 @@ class Log(Cog):
                 await another_message.add_reaction("👎")
                 await another_message.add_reaction("🚫")
 
-        if re.search(f"{tuple(banned_links)}", message.content) or re.search(f"{tuple(banned_words)}", message.content):
+        if re.search(tuple(banned_links), message.content) or re.match(tuple(banned_words), message.content):
             ban_embed = discord.Embed(
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been banned in **{message.guild}** because you've sent something inappropriate, or turned out to be underage!*!",
