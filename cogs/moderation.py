@@ -263,6 +263,7 @@ class Moderation(commands.Cog):
             return
 
     @add.command()
+    @commands.has_permissions(manage_roles=True)
     async def role(self, ctx, member: discord.Member, *, role: discord.Role):
         if ctx.author.top_role < member.top_role:
             return
@@ -280,6 +281,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
 
     @add.command()
+    @commands.has_permissions(manage_channels=True)
     async def category(self, ctx, *, name):
         await ctx.guild.create_category(name, position=0)
         embed = discord.Embed(
@@ -291,6 +293,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
 
     @add.command()
+    @commands.has_permissions(manage_channels=True)
     async def text_channel(self, ctx, category: discord.CategoryChannel = None, *, name):
         await ctx.guild.create_text_channel(name, category=category)
         embed = discord.Embed(
@@ -302,6 +305,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
 
     @add.command()
+    @commands.has_permissions(manage_channels=True)
     async def voice_channel(self, ctx, category: discord.CategoryChannel = None, *, name):
         await ctx.guild.create_voice_channel(name, category=category)
         embed = discord.Embed(
@@ -313,7 +317,8 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
 
     @add.command()
-    async def emoji(self, ctx, name, *, image):
+    @commands.has_permissions(manage_emojis=True)
+    async def emoji(self, ctx, image, *, name):
         await ctx.guild.create_custom_emoji(name, image=image)
         embed = discord.Embed(
             title=f"**EMOJI ADDED**",
@@ -332,6 +337,7 @@ class Moderation(commands.Cog):
             return
 
     @remove.command(name='role')
+    @commands.has_permissions(manage_roles=True)
     async def rem_role(self, ctx, member: discord.Member, *, role: discord.Role):
         if ctx.author.top_role < member.top_role:
             return
@@ -348,8 +354,9 @@ class Moderation(commands.Cog):
         )
         await ctx.send(embed=embed)
 
-    @remove.command()
-    async def rem_category(self, ctx, category: discord.CategoryChannel, *, reason=None):
+    @remove.command(name="category")
+    @commands.has_permissions(manage_channels=True)
+    async def rem_category(self, ctx, reason=None, *, category: discord.CategoryChannel):
         await category.delete(reason=reason)
         embed = discord.Embed(
             title=f"**CATEGORY DELETED**",
@@ -360,7 +367,8 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
 
     @remove.command(name="text_channel")
-    async def rem_text_channel(self, ctx, channel: discord.TextChannel, *, reason=None):
+    @commands.has_permissions(manage_channels=True)
+    async def rem_text_channel(self, ctx, reason=None, *, channel: discord.TextChannel):
         await channel.delete(reason=reason)
         embed = discord.Embed(
             title=f"**CHANNEL DELETED**",
@@ -371,7 +379,8 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
 
     @remove.command(name="voice_channel")
-    async def rem_voice_channel(self, ctx, channel: discord.VoiceChannel, *, reason=None):
+    @commands.has_permissions(manage_channels=True)
+    async def rem_voice_channel(self, ctx,  reason=None, *, channel: discord.VoiceChannel):
         await channel.delete(reason=reason)
         embed = discord.Embed(
             title=f"**CHANNEL DELETED**",
@@ -381,8 +390,9 @@ class Moderation(commands.Cog):
         )
         await ctx.send(embed=embed)
 
-    @remove.command()
-    async def rem_emoji(self, ctx, emoji: discord.Emoji, *, reason):
+    @remove.command(name="emoji")
+    @commands.has_permissions(manage_emojis=True)
+    async def rem_emoji(self, ctx, reason=None, *, emoji: discord.Emoji):
         await emoji.delete(reason=reason)
         embed = discord.Embed(
             title=f"**EMOJI REMOVED**",
