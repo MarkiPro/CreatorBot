@@ -1099,9 +1099,11 @@ class Misc(commands.Cog):
 
         join_pos = sum([m.joined_at < user.joined_at for m in ctx.guild.members if m.joined_at is not None])
         embed = discord.Embed(title=f"**Who is {user}**".upper(),
-                              description=f"{user.status}",
                               timestamp=datetime.datetime.utcnow(),
                               color=0x0064ff)
+        if user.activity and user.activity == discord.CustomActivity:
+            embed.description = f"{user.status}"
+            pass
         format = "%A, %d %B, %Y : %I:%M %p"
         delta_joined = datetime.datetime.utcnow() - user.joined_at
         delta_created = datetime.datetime.utcnow() - user.created_at
