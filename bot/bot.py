@@ -58,7 +58,7 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
                 description = description + f"**{self.get_command_signature(command)}**\n\n"
 
         embed.description = description
-        await self.get_destination().send(embed=embed)
+        await self.context.author.send(embed=embed)
 
     async def send_cog_help(self, cog):
         embed = discord.Embed(title='{0.qualified_name} Commands'.format(cog), colour=self.COLOUR,
