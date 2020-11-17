@@ -122,7 +122,7 @@ class Log(Cog):
 
             ban_embed.add_field(name="**In case you would like to appeal your ban, go here:**", value=f"https://forms.gle/zs9vRAz5Fw1SFgvR6", inline=False)
 
-            await message.author.ban(embed=ban_embed)
+            await message.author.ban(reason="Sent something inappropriate, or turned out to be underage!")
 
     @Cog.listener()
     async def on_message_delete(self, message):
