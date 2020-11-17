@@ -1124,241 +1124,245 @@ class Misc(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def role(self, ctx, role_name):
+    async def role(self, ctx, role_name=None):
         roles = {"former staff": 741728478721736755, "roblox verified": 741735258411499560, "verified": 695328817157373992, "devforum member": 742333164352962581, "devforum regular": 742333167133786124, "devforum top contributor": 742333168576888943, "devforum community champion": 742333169423876106, "first server booster": 712685506424471612, "server booster": 762172204628181023, "animator": 734662028353994752, "music composer": 735497558855516161, "Artist": 734662196025360416, "Clothing Designer": 734177621876801637, "UI Designer": 733274530524561430, "Translator": 734527264657637416, "gfx designer": 733280979921141821, "twitch streamer": 738814393663619182, "builder": 733281281671954442, "YouTuber": 738788543211634756, "3d modeler": 733281157872877629, "game designer": 733281086913773599, "css programmer": 741099963626422322, "xml programmer": 735147383716970507, "ruby programmer": 735147661430227025, "lua programmer": 732376072397783093, "php programmer": 732378321387520092, "c programmer": 732378157449216040, "c++ programmer": 732377777772167188, "js programmer": 732377955669508097, "java programmer": 732379273100263464, "c# programmer": 732377857317142650, "python programmer": 732377712286761001}
         chat_color_roles = {"former staff": 743013368511594569, "roblox verified": 743013370588037191, "verified": 732388199107657828, "devforum member": 743013366515236915, "devforum regular": 743013366880272474, "devforum top contributor": 743013367840768072, "devforum community champion": 743013368134107166, "server booster": 734527854871707762, "animator": 734664243038912552, "music composer": 735497751978311681, "Artist": 734664303327838230, "Clothing Designer": 734527130565738516, "UI Designer": 734150445764837466, "Translator": 734527217350082672, "gfx designer": 734150696944795698, "twitch streamer": 738814580712669214, "builder": 734149969292034208, "YouTuber": 735557139984285706, "3d modeler": 734527020905529375, "game designer": 732402691296198848, "programmer": 732387788493946881}
 
-        if re.match("former staff", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["former staff"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["former staff"])
+        if role_name:
+            if re.match("former staff", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["former staff"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["former staff"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("roblox verified", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["roblox verified"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["roblox verified"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("roblox verified", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["roblox verified"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["roblox verified"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("verified", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["verified"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["verified"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("verified", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["verified"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["verified"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("devforum member", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["devforum member"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum member"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("devforum member", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["devforum member"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum member"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("devforum regular", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["devforum regular"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum regular"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("devforum regular", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["devforum regular"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum regular"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("devforum top contributor", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["devforum top contributor"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum top contributor"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("devforum top contributor", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["devforum top contributor"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum top contributor"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("devforum community champion", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["devforum community champion"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum community champion"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("devforum community champion", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["devforum community champion"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum community champion"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("game designer", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["game designer"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["game designer"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("game designer", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["game designer"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["game designer"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("Roblox Studio Builder", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["builder"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["builder"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("Roblox Studio Builder", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["builder"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["builder"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("ui designer", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["UI Designer"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["UI Designer"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("ui designer", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["UI Designer"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["UI Designer"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("gfx designer", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["gfx designer"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["gfx designer"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("gfx designer", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["gfx designer"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["gfx designer"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("music composer", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["music composer"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["music composer"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("music composer", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["music composer"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["music composer"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("3d modeler", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["3d modeler"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["3d modeler"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("3d modeler", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["3d modeler"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["3d modeler"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("clothing designer", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["Clothing Designer"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["Clothing Designer"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("clothing designer", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["Clothing Designer"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["Clothing Designer"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("youtuber", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["YouTuber"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["YouTuber"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("youtuber", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["YouTuber"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["YouTuber"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("twitch streamer", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["twitch streamer"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["twitch streamer"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("twitch streamer", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["twitch streamer"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["twitch streamer"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("animator", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["animator"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["animator"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("animator", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["animator"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["animator"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("translator", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["Translator"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["Translator"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("translator", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["Translator"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["Translator"])
 
-            if role in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("server booster", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["server booster"])
-            role2 = discord.utils.get(ctx.guild.roles, id=roles["first server booster"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["server booster"])
+                if role in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("server booster", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["server booster"])
+                role2 = discord.utils.get(ctx.guild.roles, id=roles["first server booster"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["server booster"])
 
-            if role in ctx.author.roles or role2 in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
-        elif re.match("programmer", ctx.message.content, re.IGNORECASE):
-            role = discord.utils.get(ctx.guild.roles, id=roles["c programmer"])
-            role2 = discord.utils.get(ctx.guild.roles, id=roles["python programmer"])
-            role3 = discord.utils.get(ctx.guild.roles, id=roles["css programmer"])
-            role4 = discord.utils.get(ctx.guild.roles, id=roles["java programmer"])
-            role5 = discord.utils.get(ctx.guild.roles, id=roles["js programmer"])
-            role6 = discord.utils.get(ctx.guild.roles, id=roles["lua programmer"])
-            role7 = discord.utils.get(ctx.guild.roles, id=roles["php programmer"])
-            role8 = discord.utils.get(ctx.guild.roles, id=roles["ruby programmer"])
-            role9 = discord.utils.get(ctx.guild.roles, id=roles["xml programmer"])
-            role10 = discord.utils.get(ctx.guild.roles, id=roles["c# programmer"])
-            role11 = discord.utils.get(ctx.guild.roles, id=roles["c++ programmer"])
-            chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["former staff"])
+                if role in ctx.author.roles or role2 in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+            elif re.match("programmer", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["c programmer"])
+                role2 = discord.utils.get(ctx.guild.roles, id=roles["python programmer"])
+                role3 = discord.utils.get(ctx.guild.roles, id=roles["css programmer"])
+                role4 = discord.utils.get(ctx.guild.roles, id=roles["java programmer"])
+                role5 = discord.utils.get(ctx.guild.roles, id=roles["js programmer"])
+                role6 = discord.utils.get(ctx.guild.roles, id=roles["lua programmer"])
+                role7 = discord.utils.get(ctx.guild.roles, id=roles["php programmer"])
+                role8 = discord.utils.get(ctx.guild.roles, id=roles["ruby programmer"])
+                role9 = discord.utils.get(ctx.guild.roles, id=roles["xml programmer"])
+                role10 = discord.utils.get(ctx.guild.roles, id=roles["c# programmer"])
+                role11 = discord.utils.get(ctx.guild.roles, id=roles["c++ programmer"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["former staff"])
 
-            if role in ctx.author.roles or role2 in ctx.author.roles or role3 in ctx.author.roles or role4 in ctx.author.roles or role5 in ctx.author.roles or role6 in ctx.author.roles or role7 in ctx.author.roles or role8 in ctx.author.roles or role9 in ctx.author.roles or role10 in ctx.author.roles or role11 in ctx.author.roles:
-                await ctx.author.add_roles(chat_color_role)
-                await ctx.send("Added the chat color role!")
-                return
-            else:
-                await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
-                return
+                if role in ctx.author.roles or role2 in ctx.author.roles or role3 in ctx.author.roles or role4 in ctx.author.roles or role5 in ctx.author.roles or role6 in ctx.author.roles or role7 in ctx.author.roles or role8 in ctx.author.roles or role9 in ctx.author.roles or role10 in ctx.author.roles or role11 in ctx.author.roles:
+                    await ctx.author.add_roles(chat_color_role)
+                    await ctx.send("Added the chat color role!")
+                    return
+                else:
+                    await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
+                    return
+        else:
+            await ctx.send("Get some help!")
+
 
     @commands.command()
     async def boosters(self, ctx):
