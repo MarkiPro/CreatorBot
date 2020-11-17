@@ -90,6 +90,8 @@ class Log(Cog):
         suggestions_channel = self.bot.get_channel(712655570737299567)
         banned_links = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://web.roblox.com"]
         banned_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah", "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger", "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar", "n1gguh", "n1ggress", "n1gette", "negro", "n1bba", "n1ba"]
+        banned_links_v2 = ["https://pornhub.com", "https://porn.com", "https://fuq.com"]
+        log_channel = self.bot.get_channel(712761128895381676)
 
         if not message.author.bot and message.channel == suggestions_channel:
             if message.content.startswith("//"):
@@ -115,14 +117,43 @@ class Log(Cog):
         if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)) or any(re.findall("|".join(banned_links), message.content, re.IGNORECASE)):
             ban_embed = discord.Embed(
                 title="**NOTIFICATION**",
-                description=f":bell: *You have been banned in **{message.guild}** because you've sent something inappropriate, or turned out to be underage!*!",
+                description=f":bell: *You have been banned in **{message.guild}** because you've sent something inappropriate, or turned out to be underage!*",
                 color=0x0064ff,
                 timestamp=datetime.datetime.utcnow()
             )
 
             ban_embed.add_field(name="**In case you would like to appeal your ban, go here:**", value=f"https://forms.gle/zs9vRAz5Fw1SFgvR6", inline=False)
 
+            try:
+                await message.author.send(embed=ban_embed)
+            except Exception:
+                pass
+
             await message.author.ban(reason="Sent something inappropriate, or turned out to be underage!")
+            if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
+                ban_embed_reason = discord.Embed(
+                    title="**Member Banned**",
+                    description=f"*{message.author} has been banned for sending a racial slur/banned word!*",
+                    color=0x0064ff,
+                    timestamp=datetime.datetime.utcnow()
+                )
+                await log_channel.send(embed=ban_embed_reason)
+            if re.match("https://web.roblox.com", message.content, re.IGNORECASE):
+                ban_embed_reason = discord.Embed(
+                    title="**Member Banned**",
+                    description=f"*{message.author} has been banned for sending an underage version of a roblox link!*",
+                    color=0x0064ff,
+                    timestamp=datetime.datetime.utcnow()
+                )
+                await log_channel.send(embed=ban_embed_reason)
+            if any(re.findall("|".join(banned_links_v2), message.content, re.IGNORECASE)):
+                ban_embed_reason = discord.Embed(
+                    title="**Member Banned**",
+                    description=f"*{message.author} has been banned for sending an inappropriate link!*",
+                    color=0x0064ff,
+                    timestamp=datetime.datetime.utcnow()
+                )
+                await log_channel.send(embed=ban_embed_reason)
 
     @Cog.listener()
     async def on_message_delete(self, message):
@@ -162,9 +193,9 @@ class Log(Cog):
         message = await sum_channel.fetch_message(770695658318463007)
         guild = sum_channel.guild
         booster_role = discord.utils.get(guild.roles, id=762172204628181023)
-        exculded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651, 743013370588037191, 732388199107657828, 743013368511594569, 743013366515236915, 743013366880272474, 743013367840768072, 743013368134107166, 732387788493946881, 732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698, 735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516, 735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672, 734527854871707762, 746758563703291938]
-        before_roles = ", ".join(role.mention for role in before.roles if role.id not in exculded_roles) or "No roles assigned."
-        after_roles = ", ".join(role.mention for role in after.roles if role.id not in exculded_roles) or "No roles assigned."
+        excluded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651, 743013370588037191, 732388199107657828, 743013368511594569, 743013366515236915, 743013366880272474, 743013367840768072, 743013368134107166, 732387788493946881, 732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698, 735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516, 735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672, 734527854871707762, 746758563703291938]
+        before_roles = ", ".join(role.mention for role in before.roles if role.id not in excluded_roles) or "No roles assigned."
+        after_roles = ", ".join(role.mention for role in after.roles if role.id not in excluded_roles) or "No roles assigned."
         role_update_log_channel = self.bot.get_channel(770368850679169075)
         nick_update_log_channel = self.bot.get_channel(771465528618254347)
 
@@ -257,7 +288,7 @@ class Log(Cog):
         else:
             log_embed = discord.Embed(
                 title="**Member Joined**",
-                description=f"**{member.mention}** Joined The Server!\n Account Created **{delta_created.days}** days ago.",
+                description=f"**{member.mention}** Joined The Server!\n Account Created **{member.created_at}**.",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -276,14 +307,22 @@ class Log(Cog):
         log_channel = self.bot.get_channel(736234502816399422)
         delta_created = datetime.datetime.utcnow() - member.created_at
         delta_joined = datetime.datetime.utcnow() - member.joined_at
+        excluded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651, 743013370588037191, 732388199107657828, 743013368511594569, 743013366515236915, 743013366880272474, 743013367840768072, 743013368134107166, 732387788493946881, 732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698, 735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516, 735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672, 734527854871707762, 746758563703291938]
+        member_roles = ", ".join(role.mention for role in member.roles if role.id not in excluded_roles) or "No roles assigned."
+
+        if await guild.fetch_ban(user=member):
+            return
+        else:
+            pass
 
         log_embed = discord.Embed(
             title="**Member Left**",
-            description=f"**{member.mention}** Left The Server!\n Account Created **{delta_created.days}** days ago.\n Member Joined **{delta_joined.days}** days ago.",
+            description=f"**{member.mention}** Left The Server!\n Account Created **{member.created_at}**.\n Member Joined **{member.joined_at}**.",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
 
+        log_embed.add_field(name="Roles:", value=f"{member_roles}", inline=False)
         log_embed.set_thumbnail(url=member.avatar_url)
 
         await log_channel.send(embed=log_embed)
