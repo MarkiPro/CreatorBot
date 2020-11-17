@@ -1129,7 +1129,7 @@ class Misc(commands.Cog):
         chat_color_roles = {"former staff": 743013368511594569, "roblox verified": 743013370588037191, "verified": 732388199107657828, "devforum member": 743013366515236915, "devforum regular": 743013366880272474, "devforum top contributor": 743013367840768072, "devforum community champion": 743013368134107166, "server booster": 734527854871707762, "animator": 734664243038912552, "music composer": 735497751978311681, "Artist": 734664303327838230, "Clothing Designer": 734527130565738516, "UI Designer": 734150445764837466, "Translator": 734527217350082672, "gfx designer": 734150696944795698, "twitch streamer": 738814580712669214, "builder": 734149969292034208, "YouTuber": 735557139984285706, "3d modeler": 734527020905529375, "game designer": 732402691296198848, "programmer": 732387788493946881}
 
         if role_name:
-            if re.match("former staff", ctx.message.content, re.IGNORECASE):
+            if re.findall("former staff", ctx.message.content, re.IGNORECASE):
                 await ctx.send("started")
                 role = discord.utils.get(ctx.guild.roles, id=roles["former staff"])
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["former staff"])
@@ -1142,7 +1142,7 @@ class Misc(commands.Cog):
                 else:
                     await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
                     return
-            elif re.match("roblox verified", ctx.message.content, re.IGNORECASE):
+            elif re.findall("roblox verified", ctx.message.content, re.IGNORECASE):
                 role = discord.utils.get(ctx.guild.roles, id=roles["roblox verified"])
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["roblox verified"])
                 await ctx.send("started")
@@ -1154,7 +1154,7 @@ class Misc(commands.Cog):
                 else:
                     await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
                     return
-            elif re.match("verified", ctx.message.content, re.IGNORECASE):
+            elif re.findall("verified", ctx.message.content, re.IGNORECASE):
                 role = discord.utils.get(ctx.guild.roles, id=roles["verified"])
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["verified"])
                 await ctx.send("started")
