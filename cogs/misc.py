@@ -1334,9 +1334,10 @@ class Misc(commands.Cog):
                     await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
                     return
             elif re.match("translator", ctx.message.content, re.IGNORECASE):
+                await ctx.send("started")
                 role = discord.utils.get(ctx.guild.roles, id=roles["Translator"])
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["Translator"])
-                await ctx.send("started")
+                
 
                 if role in ctx.author.roles:
                     await ctx.author.add_roles(chat_color_role)
