@@ -1130,9 +1130,10 @@ class Misc(commands.Cog):
 
         if role_name:
             if re.match("former staff", ctx.message.content, re.IGNORECASE):
+                await ctx.send("started")
                 role = discord.utils.get(ctx.guild.roles, id=roles["former staff"])
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["former staff"])
-                await ctx.send("started")
+
 
                 if role in ctx.author.roles:
                     await ctx.author.add_roles(chat_color_role)
@@ -1337,7 +1338,7 @@ class Misc(commands.Cog):
                 await ctx.send("started")
                 role = discord.utils.get(ctx.guild.roles, id=roles["Translator"])
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["Translator"])
-                
+
 
                 if role in ctx.author.roles:
                     await ctx.author.add_roles(chat_color_role)
