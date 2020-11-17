@@ -112,7 +112,7 @@ class Log(Cog):
                 await another_message.add_reaction("👎")
                 await another_message.add_reaction("🚫")
 
-        if any(re.findall(''.join(banned_words), message.content, re.IGNORECASE)) or any(re.findall(''.join(banned_links), message.content, re.IGNORECASE)):
+        if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)) or any(re.findall("|".join(banned_links), message.content, re.IGNORECASE)):
             ban_embed = discord.Embed(
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been banned in **{message.guild}** because you've sent something inappropriate, or turned out to be underage!*!",
