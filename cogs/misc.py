@@ -1134,10 +1134,12 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["former staff"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
-                    for i in chat_color_roles:
-                        await ctx.send(chat_color_roles[i])
                     return
                 else:
                     await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
@@ -1147,6 +1149,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["roblox verified"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1158,6 +1164,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["verified"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1169,6 +1179,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum member"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1180,6 +1194,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum regular"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1191,6 +1209,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum top contributor"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1202,6 +1224,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum community champion"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1213,6 +1239,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["game designer"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1224,6 +1254,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["builder"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1235,6 +1269,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["UI Designer"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1246,6 +1284,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["gfx designer"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1257,6 +1299,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["music composer"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1268,6 +1314,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["3d modeler"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1279,6 +1329,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["Clothing Designer"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1290,6 +1344,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["YouTuber"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1301,6 +1359,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["twitch streamer"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1312,6 +1374,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["animator"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1323,6 +1389,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["Translator"])
 
                 if role in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1335,6 +1405,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["server booster"])
 
                 if role in ctx.author.roles or role2 in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
@@ -1356,6 +1430,10 @@ class Misc(commands.Cog):
                 chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["former staff"])
 
                 if role in ctx.author.roles or role2 in ctx.author.roles or role3 in ctx.author.roles or role4 in ctx.author.roles or role5 in ctx.author.roles or role6 in ctx.author.roles or role7 in ctx.author.roles or role8 in ctx.author.roles or role9 in ctx.author.roles or role10 in ctx.author.roles or role11 in ctx.author.roles:
+                    for i in chat_color_roles:
+                        another_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[i])
+                        if another_role in ctx.author.roles:
+                            await ctx.author.remove_roles(another_role)
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     return
