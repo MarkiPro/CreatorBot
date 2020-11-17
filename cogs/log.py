@@ -199,30 +199,6 @@ class Log(Cog):
         role_update_log_channel = self.bot.get_channel(770368850679169075)
         nick_update_log_channel = self.bot.get_channel(771465528618254347)
 
-        for i in before_roles:
-            if i not in after_roles:
-                role_log_embed = discord.Embed(
-                    title="**Role Update**",
-                    description=f"Role Update for **{after.mention}**!",
-                    timestamp=datetime.datetime.utcnow(),
-                    color=0x0064ff
-                )
-                role_log_embed.add_field(name="**Roles Added**", value=f"✅ {i}")
-                role_log_embed.set_thumbnail(url=before.avatar_url)
-                await role_update_log_channel.send(embed=role_log_embed)
-
-        for i in after_roles:
-            if i not in before_roles:
-                role_log_embed = discord.Embed(
-                    title="**Role Update**",
-                    description=f"Role Update for **{after.mention}**!",
-                    timestamp=datetime.datetime.utcnow(),
-                    color=0x0064ff
-                )
-                role_log_embed.add_field(name="**Roles Removed**", value=f"❌ {i}")
-                role_log_embed.set_thumbnail(url=before.avatar_url)
-                await role_update_log_channel.send(embed=role_log_embed)
-
         if before.display_name != after.display_name and after.display_name != before.display_name:
             nick_log_embed = discord.Embed(
                 title="**Nickname Update**",
