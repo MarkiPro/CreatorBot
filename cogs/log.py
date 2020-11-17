@@ -199,7 +199,7 @@ class Log(Cog):
         role_update_log_channel = self.bot.get_channel(770368850679169075)
         nick_update_log_channel = self.bot.get_channel(771465528618254347)
 
-        for i, v in before_roles:
+        for i in before_roles:
             if i not in after_roles:
                 role_log_embed = discord.Embed(
                     title="**Role Update**",
@@ -211,7 +211,7 @@ class Log(Cog):
                 role_log_embed.set_thumbnail(url=before.avatar_url)
                 await role_update_log_channel.send(embed=role_log_embed)
 
-        for i, v in after_roles:
+        for i in after_roles:
             if i not in before_roles:
                 role_log_embed = discord.Embed(
                     title="**Role Update**",
