@@ -1101,7 +1101,7 @@ class Misc(commands.Cog):
         embed = discord.Embed(title=f"**Who is {user}**".upper(),
                               timestamp=datetime.datetime.utcnow(),
                               color=0x0064ff)
-        if user.activity and user.activity == discord.CustomActivity:
+        if user.activities and user.activities == discord.ActivityType.custom:
             embed.description = f"{user.status}"
             pass
         format = "%A, %d %B, %Y : %I:%M %p"
