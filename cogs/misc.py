@@ -1137,7 +1137,7 @@ class Misc(commands.Cog):
                     await ctx.author.add_roles(chat_color_role)
                     await ctx.send("Added the chat color role!")
                     for i in chat_color_roles:
-                        await client.send(i)
+                        await ctx.send(i)
                     return
                 else:
                     await ctx.send("You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
