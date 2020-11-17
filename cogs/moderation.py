@@ -78,6 +78,7 @@ class Moderation(commands.Cog):
             color=0x0064ff,
             timestamp=datetime.datetime.utcnow()
         )
+        embed2.add_field(name="**In case you would like to appeal your ban, go here:**", value=f"https://forms.gle/zs9vRAz5Fw1SFgvR6", inline=False)
         async with ctx.typing():
             try:
                 await member.send(embed=embed2)
@@ -137,6 +138,7 @@ class Moderation(commands.Cog):
             color=0x0064ff,
             timestamp=datetime.datetime.utcnow()
         )
+        embed2.add_field(name="**In case you would like to appeal your ban, go here:**", value=f"https://forms.gle/zs9vRAz5Fw1SFgvR6", inline=False)
 
         await ctx.send(embed=embed2)
         try:
