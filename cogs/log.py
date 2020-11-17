@@ -271,6 +271,7 @@ class Log(Cog):
         guild = channel.guild
         log_channel = self.bot.get_channel(736234502816399422)
         delta_created = datetime.datetime.utcnow() - member.created_at
+        format = "%A, %d %B, %Y : %I:%M %p"
 
         if delta_created.days < 7:
             kick_embed = discord.Embed(
@@ -288,7 +289,7 @@ class Log(Cog):
         else:
             log_embed = discord.Embed(
                 title="**Member Joined**",
-                description=f"**{member.mention}** Joined The Server!\n Account Created **{member.created_at}**.",
+                description=f"**{member.mention}** Joined The Server!\n Account Created **{member.created_at.strftime(format)}**.",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -305,19 +306,23 @@ class Log(Cog):
         message = await channel.fetch_message(770695658318463007)
         guild = channel.guild
         log_channel = self.bot.get_channel(736234502816399422)
+        format = "%A, %d %B, %Y : %I:%M %p"
         delta_created = datetime.datetime.utcnow() - member.created_at
         delta_joined = datetime.datetime.utcnow() - member.joined_at
         excluded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651, 743013370588037191, 732388199107657828, 743013368511594569, 743013366515236915, 743013366880272474, 743013367840768072, 743013368134107166, 732387788493946881, 732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698, 735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516, 735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672, 734527854871707762, 746758563703291938]
         member_roles = ", ".join(role.mention for role in member.roles if role.id not in excluded_roles) or "No roles assigned."
 
-        if await guild.fetch_ban(user=member):
-            return
-        else:
+        try:
+            if await guild.fetch_ban(user=member):
+                return
+            else:
+                pass
+        except Exception:
             pass
 
         log_embed = discord.Embed(
             title="**Member Left**",
-            description=f"**{member.mention}** Left The Server!\n Account Created **{member.created_at}**.\n Member Joined **{member.joined_at}**.",
+            description=f"**{member.mention}** Left The Server!\n Account Created **{member.created_at.strftime(format)}**.\n Member Joined **{member.joined_at.strftime(format)}**.",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
