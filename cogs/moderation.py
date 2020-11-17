@@ -356,8 +356,8 @@ class Moderation(commands.Cog):
 
     @remove.command(name="category")
     @commands.has_permissions(manage_channels=True)
-    async def rem_category(self, ctx, reason=None, *, category: discord.CategoryChannel):
-        await category.delete(reason=reason)
+    async def rem_category(self, ctx, *, category: discord.CategoryChannel):
+        await category.delete()
         embed = discord.Embed(
             title=f"**CATEGORY DELETED**",
             description=f"✅ ***You have successfully deleted the `{category}` category!***",
@@ -368,8 +368,8 @@ class Moderation(commands.Cog):
 
     @remove.command(name="text_channel")
     @commands.has_permissions(manage_channels=True)
-    async def rem_text_channel(self, ctx, reason=None, *, channel: discord.TextChannel):
-        await channel.delete(reason=reason)
+    async def rem_text_channel(self, ctx, *, channel: discord.TextChannel):
+        await channel.delete()
         embed = discord.Embed(
             title=f"**CHANNEL DELETED**",
             description=f"✅ ***You have successfully deleted the `{channel}` channel!***",
@@ -380,8 +380,8 @@ class Moderation(commands.Cog):
 
     @remove.command(name="voice_channel")
     @commands.has_permissions(manage_channels=True)
-    async def rem_voice_channel(self, ctx,  reason=None, *, channel: discord.VoiceChannel):
-        await channel.delete(reason=reason)
+    async def rem_voice_channel(self, ctx,  *, channel: discord.VoiceChannel):
+        await channel.delete()
         embed = discord.Embed(
             title=f"**CHANNEL DELETED**",
             description=f"✅ ***You have successfully deleted the `{channel}` channel!***",
@@ -392,8 +392,8 @@ class Moderation(commands.Cog):
 
     @remove.command(name="emoji")
     @commands.has_permissions(manage_emojis=True)
-    async def rem_emoji(self, ctx, reason=None, *, emoji: discord.Emoji):
-        await emoji.delete(reason=reason)
+    async def rem_emoji(self, ctx, *, emoji: discord.Emoji):
+        await emoji.delete()
         embed = discord.Embed(
             title=f"**EMOJI REMOVED**",
             description=f"✅ ***You have successfully removed the `{emoji}` emoji!***",
