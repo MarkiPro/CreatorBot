@@ -60,7 +60,6 @@ class Paginator:
                     else:
                         if str(reaction1.emoji) == "👍":
                             for _, msgs in enumerate(self.messages):
-                                await end_channel.send(embed=msgs.embeds[0])
                                 await msgs.delete()
                                 await member.send("Your application has been approved!")
                                 await member.add_roles(role)
