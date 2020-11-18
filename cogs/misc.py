@@ -233,7 +233,7 @@ class Misc(commands.Cog):
             )
             programmer_categories.set_footer(
                 text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=categories)
+            await ctx.author.send(embed=programmer_categories)
             try:
                 picked_programmer_category_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                 programmer_category = picked_programmer_category_message.content
