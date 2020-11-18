@@ -3053,7 +3053,7 @@ class Misc(commands.Cog):
                 role9 = discord.utils.get(ctx.guild.roles, id=roles["xml programmer"])
                 role10 = discord.utils.get(ctx.guild.roles, id=roles["c# programmer"])
                 role11 = discord.utils.get(ctx.guild.roles, id=roles["c++ programmer"])
-                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["former staff"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["programmer"])
 
                 if role in ctx.author.roles or role2 in ctx.author.roles or role3 in ctx.author.roles or role4 in ctx.author.roles or role5 in ctx.author.roles or role6 in ctx.author.roles or role7 in ctx.author.roles or role8 in ctx.author.roles or role9 in ctx.author.roles or role10 in ctx.author.roles or role11 in ctx.author.roles:
                     for i in chat_color_roles:
