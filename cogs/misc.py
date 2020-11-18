@@ -243,6 +243,7 @@ class Misc(commands.Cog):
                         "13\N{variation selector-16}\N{combining enclosing keycap}"]
 
                 reaction2, user2 = await self.bot.wait_for("reaction_add", check=check)
+
                 if str(reaction2.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
