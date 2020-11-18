@@ -205,8 +205,28 @@ class Misc(commands.Cog):
             else:
                 return False
 
-            def check(reaction1, user1):
-                return user1 and str(reaction1.emoji) in [
+        def check(reaction1, user1):
+            return user1 and str(reaction1.emoji) in [
+                "0\N{variation selector-16}\N{combining enclosing keycap}",
+                "1\N{variation selector-16}\N{combining enclosing keycap}",
+                "2\N{variation selector-16}\N{combining enclosing keycap}",
+                "3\N{variation selector-16}\N{combining enclosing keycap}",
+                "4\N{variation selector-16}\N{combining enclosing keycap}",
+                "5\N{variation selector-16}\N{combining enclosing keycap}",
+                "6\N{variation selector-16}\N{combining enclosing keycap}",
+                "7\N{variation selector-16}\N{combining enclosing keycap}",
+                "8\N{variation selector-16}\N{combining enclosing keycap}",
+                "9\N{variation selector-16}\N{combining enclosing keycap}",
+                "10\N{variation selector-16}\N{combining enclosing keycap}",
+                "11\N{variation selector-16}\N{combining enclosing keycap}",
+                "12\N{variation selector-16}\N{combining enclosing keycap}",
+                "13\N{variation selector-16}\N{combining enclosing keycap}"]
+
+        reaction1, user1 = await self.bot.wait_for("reaction_add", check=check)
+
+        if str(user1) == str(self.bot.user):
+            def check(reaction2, user2):
+                return user2 and str(reaction2.emoji) in [
                     "0\N{variation selector-16}\N{combining enclosing keycap}",
                     "1\N{variation selector-16}\N{combining enclosing keycap}",
                     "2\N{variation selector-16}\N{combining enclosing keycap}",
@@ -222,11 +242,60 @@ class Misc(commands.Cog):
                     "12\N{variation selector-16}\N{combining enclosing keycap}",
                     "13\N{variation selector-16}\N{combining enclosing keycap}"]
 
-            reaction1, user1 = await self.bot.wait_for("reaction_add", check=check)
+            reaction2, user2 = await self.bot.wait_for("reaction_add", check=check)
 
-            if str(user1) == str(self.bot.user):
-                def check(reaction2, user2):
-                    return user2 and str(reaction2.emoji) in [
+            if str(reaction2.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
+                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                await ctx.author.send(embed=cancel_prompt_embed)
+                return
+
+            elif str(reaction2.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
+                programmer_categories = discord.Embed(
+                    title="**APPLY SETUP**",
+                    description="""
+                    Which Programmer role would you like to apply for? Reply with the number in front of the role you would like to apply for.
+
+                    **1** - `Python Programmer`;
+
+                    **2** - `C# Programmer`;
+
+                    **3** - `Java Programmer`;
+
+                    **4** - `JavaScript Programmer`;
+
+                    **5** - `C++ Programmer`;
+
+                    **6** - `C Programmer`;
+
+                    **7** - `PHP Programmer`;
+
+                    **8** - `Lua Programmer`;
+
+                    **9** - `Ruby Programmer`;
+
+                    **10** - `XML Programmer`;
+
+                    **11** - `CSS Programmer`;""",
+                    color=0x0064ff
+                )
+                programmer_categories.set_footer(
+                    text="React to this message within `16 minutes` • React with `0` to cancel.")
+                programmer_category_message = await ctx.author.send(embed=categories)
+                await category_message.add_reaction("0\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("1\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("2\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("3\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("4\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("5\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("6\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("7\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("8\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("9\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("10\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("11\N{variation selector-16}\N{combining enclosing keycap}")
+
+                def check(reaction1, user1):
+                    return user1 and str(reaction1.emoji) in [
                         "0\N{variation selector-16}\N{combining enclosing keycap}",
                         "1\N{variation selector-16}\N{combining enclosing keycap}",
                         "2\N{variation selector-16}\N{combining enclosing keycap}",
@@ -238,63 +307,12 @@ class Misc(commands.Cog):
                         "8\N{variation selector-16}\N{combining enclosing keycap}",
                         "9\N{variation selector-16}\N{combining enclosing keycap}",
                         "10\N{variation selector-16}\N{combining enclosing keycap}",
-                        "11\N{variation selector-16}\N{combining enclosing keycap}",
-                        "12\N{variation selector-16}\N{combining enclosing keycap}",
-                        "13\N{variation selector-16}\N{combining enclosing keycap}"]
+                        "11\N{variation selector-16}\N{combining enclosing keycap}"]
 
-                reaction2, user2 = await self.bot.wait_for("reaction_add", check=check)
+                reaction1, user1 = await self.bot.wait_for("reaction_add", check=check)
 
-                if str(reaction2.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
-                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-
-                elif str(reaction2.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
-                    programmer_categories = discord.Embed(
-                        title="**APPLY SETUP**",
-                        description="""
-                        Which Programmer role would you like to apply for? Reply with the number in front of the role you would like to apply for.
-
-                        **1** - `Python Programmer`;
-
-                        **2** - `C# Programmer`;
-
-                        **3** - `Java Programmer`;
-
-                        **4** - `JavaScript Programmer`;
-
-                        **5** - `C++ Programmer`;
-
-                        **6** - `C Programmer`;
-
-                        **7** - `PHP Programmer`;
-
-                        **8** - `Lua Programmer`;
-
-                        **9** - `Ruby Programmer`;
-
-                        **10** - `XML Programmer`;
-
-                        **11** - `CSS Programmer`;""",
-                        color=0x0064ff
-                    )
-                    programmer_categories.set_footer(
-                        text="React to this message within `16 minutes` • React with `0` to cancel.")
-                    programmer_category_message = await ctx.author.send(embed=categories)
-                    await category_message.add_reaction("0\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("1\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("2\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("3\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("4\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("5\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("6\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("7\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("8\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("9\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("10\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("11\N{variation selector-16}\N{combining enclosing keycap}")
-
-                    def check(reaction1, user1):
+                if str(user1) == str(self.bot.user):
+                    def check(reaction2, user2):
                         return user1 and str(reaction1.emoji) in [
                             "0\N{variation selector-16}\N{combining enclosing keycap}",
                             "1\N{variation selector-16}\N{combining enclosing keycap}",
@@ -309,2956 +327,2956 @@ class Misc(commands.Cog):
                             "10\N{variation selector-16}\N{combining enclosing keycap}",
                             "11\N{variation selector-16}\N{combining enclosing keycap}"]
 
-                    reaction1, user1 = await self.bot.wait_for("reaction_add", check=check)
-
-                    if str(user1) == str(self.bot.user):
-                        def check(reaction2, user2):
-                            return user1 and str(reaction1.emoji) in [
-                                "0\N{variation selector-16}\N{combining enclosing keycap}",
-                                "1\N{variation selector-16}\N{combining enclosing keycap}",
-                                "2\N{variation selector-16}\N{combining enclosing keycap}",
-                                "3\N{variation selector-16}\N{combining enclosing keycap}",
-                                "4\N{variation selector-16}\N{combining enclosing keycap}",
-                                "5\N{variation selector-16}\N{combining enclosing keycap}",
-                                "6\N{variation selector-16}\N{combining enclosing keycap}",
-                                "7\N{variation selector-16}\N{combining enclosing keycap}",
-                                "8\N{variation selector-16}\N{combining enclosing keycap}",
-                                "9\N{variation selector-16}\N{combining enclosing keycap}",
-                                "10\N{variation selector-16}\N{combining enclosing keycap}",
-                                "11\N{variation selector-16}\N{combining enclosing keycap}"]
-
-                        if str(reaction4.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
+                    if str(reaction4.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
+                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                        await ctx.author.send(embed=cancel_prompt_embed)
+                        return
+                    elif str(reaction4.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Python Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
                             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                             await ctx.author.send(embed=cancel_prompt_embed)
                             return
-                        elif str(reaction4.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Python Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Python Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Python Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739229509240225842)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377712286761001)
-                                title = "**Python Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="C# Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="C# Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**C# Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739229541964185772)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377857317142650)
-                                title = "**C# Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Java Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Java Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Java Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233043533004820)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732379273100263464)
-                                title = "**Java Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="JavaScript Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="JavaScript Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**JavaScript Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233060091985951)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377955669508097)
-                                title = "**JavaScript Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "5\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="C++ Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="C++ Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**C++ Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739229568296157184)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377777772167188)
-                                title = "**C++ Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "6\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="C Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="C Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**C Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233448186609756)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732378157449216040)
-                                title = "**C Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "7\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="PHP Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="PHP Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**PHP Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233420827295875)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732378321387520092)
-                                title = "**PHP Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "8\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Lua Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Lua Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Lua Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233077879898123)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732376072397783093)
-                                title = "**Lua Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "9\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Ruby Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Ruby Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Ruby Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233479098761307)
-                                some_role = discord.utils.get(ctx.guild.roles, id=735147661430227025)
-                                title = "**Ruby Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "10\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="XML Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="XML Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**XML Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233397741715507)
-                                some_role = discord.utils.get(ctx.guild.roles, id=735147383716970507)
-                                title = "**XML Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "11\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="CSS Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="CSS Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**CSS Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(778686711810490379)
-                                some_role = discord.utils.get(ctx.guild.roles, id=741099963626422322)
-                                title = "**CSS Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-
-                    else:
-                        if str(reaction3.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
+                        if programmer_work == "0":
                             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                             await ctx.author.send(embed=cancel_prompt_embed)
                             return
-                        elif str(reaction3.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Python Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Python Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Python Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739229509240225842)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377712286761001)
-                                title = "**Python Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
+                        programmer_embed1 = discord.Embed(
+                            title="Python Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Python Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739229509240225842)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377712286761001)
+                            title = "**Python Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
 
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="C# Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="C# Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**C# Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739229541964185772)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377857317142650)
-                                title = "**C# Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="C# Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="C# Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**C# Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739229541964185772)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377857317142650)
+                            title = "**C# Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
 
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Java Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Java Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Java Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233043533004820)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732379273100263464)
-                                title = "**Java Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Java Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Java Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Java Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233043533004820)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732379273100263464)
+                            title = "**Java Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
 
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="JavaScript Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="JavaScript Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**JavaScript Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233060091985951)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377955669508097)
-                                title = "**JavaScript Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="JavaScript Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="JavaScript Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**JavaScript Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233060091985951)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377955669508097)
+                            title = "**JavaScript Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
 
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "5\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="C++ Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="C++ Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**C++ Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739229568296157184)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377777772167188)
-                                title = "**C++ Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "5\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="C++ Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="C++ Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**C++ Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739229568296157184)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377777772167188)
+                            title = "**C++ Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
 
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "6\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="C Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="C Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**C Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233448186609756)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732378157449216040)
-                                title = "**C Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "6\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="C Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="C Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**C Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233448186609756)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732378157449216040)
+                            title = "**C Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
 
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "7\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="PHP Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="PHP Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**PHP Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233420827295875)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732378321387520092)
-                                title = "**PHP Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "7\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="PHP Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="PHP Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**PHP Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233420827295875)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732378321387520092)
+                            title = "**PHP Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
 
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "8\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Lua Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Lua Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Lua Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233077879898123)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732376072397783093)
-                                title = "**Lua Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "8\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Lua Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Lua Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Lua Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233077879898123)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732376072397783093)
+                            title = "**Lua Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
 
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "9\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Ruby Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Ruby Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Ruby Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233479098761307)
-                                some_role = discord.utils.get(ctx.guild.roles, id=735147661430227025)
-                                title = "**Ruby Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "9\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Ruby Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Ruby Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Ruby Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233479098761307)
+                            some_role = discord.utils.get(ctx.guild.roles, id=735147661430227025)
+                            title = "**Ruby Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
 
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "10\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="XML Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="XML Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**XML Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233397741715507)
-                                some_role = discord.utils.get(ctx.guild.roles, id=735147383716970507)
-                                title = "**XML Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "10\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="XML Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="XML Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**XML Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233397741715507)
+                            some_role = discord.utils.get(ctx.guild.roles, id=735147383716970507)
+                            title = "**XML Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
 
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "11\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="CSS Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="CSS Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**CSS Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(778686711810490379)
-                                some_role = discord.utils.get(ctx.guild.roles, id=741099963626422322)
-                                title = "**CSS Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "11\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="CSS Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="CSS Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**CSS Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(778686711810490379)
+                            some_role = discord.utils.get(ctx.guild.roles, id=741099963626422322)
+                            title = "**CSS Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
 
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+
+                else:
+                    if str(reaction3.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
+                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                        await ctx.author.send(embed=cancel_prompt_embed)
+                        return
+                    elif str(reaction3.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Python Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Python Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Python Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739229509240225842)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377712286761001)
+                            title = "**Python Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="C# Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="C# Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**C# Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739229541964185772)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377857317142650)
+                            title = "**C# Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Java Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Java Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Java Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233043533004820)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732379273100263464)
+                            title = "**Java Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="JavaScript Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="JavaScript Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**JavaScript Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233060091985951)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377955669508097)
+                            title = "**JavaScript Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "5\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="C++ Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="C++ Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**C++ Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739229568296157184)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377777772167188)
+                            title = "**C++ Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "6\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="C Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="C Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**C Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233448186609756)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732378157449216040)
+                            title = "**C Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "7\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="PHP Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="PHP Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**PHP Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233420827295875)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732378321387520092)
+                            title = "**PHP Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "8\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Lua Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Lua Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Lua Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233077879898123)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732376072397783093)
+                            title = "**Lua Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "9\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Ruby Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Ruby Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Ruby Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233479098761307)
+                            some_role = discord.utils.get(ctx.guild.roles, id=735147661430227025)
+                            title = "**Ruby Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "10\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="XML Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="XML Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**XML Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233397741715507)
+                            some_role = discord.utils.get(ctx.guild.roles, id=735147383716970507)
+                            title = "**XML Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "11\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="CSS Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="CSS Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**CSS Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(778686711810490379)
+                            some_role = discord.utils.get(ctx.guild.roles, id=741099963626422322)
+                            title = "**CSS Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
 
 
-                elif str(reaction2.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
-                    game_designer_embed1 = discord.Embed(
-                        title="**Game Designer Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    game_designer_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=game_designer_embed1)
-                    try:
-                        game_designer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        game_designer_work = game_designer_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if game_designer_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    game_designer_embed2 = discord.Embed(
-                        title="**Game Designer Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    game_designer_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=game_designer_embed2)
-                    try:
-                        game_designer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                    timeout=1000)
-                        game_designer_information = game_designer_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if game_designer_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    game_designer_embed3 = discord.Embed(
-                        title="**Game Designer Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    game_designer_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=game_designer_embed3)
-                    try:
-                        game_designer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        game_designer_other = game_designer_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if game_designer_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233876446281778)
-                        some_role = discord.utils.get(ctx.guild.roles, id=733281086913773599)
-                        title = "**Game Designer Application**"
-                        pag = Paginator(
-                            f"**Work:** {game_designer_work}\n**Information:** {game_designer_information}\n**Other:** {game_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction2.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
-                    threed_modeler_embed1 = discord.Embed(
-                        title="**3D Modeler Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    threed_modeler_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=threed_modeler_embed1)
-                    try:
-                        threed_modeler_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        threed_modeler_work = threed_modeler_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if threed_modeler_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    threed_modeler_embed2 = discord.Embed(
-                        title="**3D Modeler Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    threed_modeler_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=threed_modeler_embed2)
-                    try:
-                        threed_modeler_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                     timeout=1000)
-                        threed_modeler_information = threed_modeler_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if threed_modeler_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    threed_modeler_embed3 = discord.Embed(
-                        title="**3D Modeler Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    threed_modeler_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=threed_modeler_embed3)
-                    try:
-                        threed_modeler_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        threed_modeler_other = threed_modeler_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if threed_modeler_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233640596111411)
-                        some_role = discord.utils.get(ctx.guild.roles, id=733281157872877629)
-                        title = "**3D Modeler Application**"
-                        pag = Paginator(
-                            f"**Work:** {threed_modeler_work}\n**Information:** {threed_modeler_information}\n**Other:** {threed_modeler_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction2.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
-                    youtuber_embed1 = discord.Embed(
-                        title="**YouTuber Application**",
-                        description="***How many subscribers does your channel have? Minimum needed to apply is 1, 000***",
-                        color=0x0064ff
-                    )
-                    youtuber_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=youtuber_embed1)
-                    try:
-                        youtuber_subs_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        youtuber_subs = youtuber_subs_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if youtuber_subs == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    youtuber_embed2 = discord.Embed(
-                        title="**YouTuber Application**",
-                        description="***Provide us with the link of your YouTube channel here. Also, please make sure you have the YouTube account connected with your discord account. To do that, go to User Settings > Connections, and connect.***",
-                        color=0x0064ff
-                    )
-                    youtuber_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=youtuber_embed2)
-                    try:
-                        youtuber_channel_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        youtuber_channel = youtuber_channel_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if youtuber_channel == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    youtuber_embed3 = discord.Embed(
-                        title="**YouTuber Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    youtuber_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=youtuber_embed3)
-                    try:
-                        youtuber_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        youtuber_other = youtuber_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if youtuber_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(778689200350167123)
-                        some_role = discord.utils.get(ctx.guild.roles, id=738788543211634756)
-                        title = "**YouTuber Application**"
-                        pag = Paginator(
-                            f"**Subscriber Count:** {youtuber_subs}\n**YouTube Channel:** {youtuber_channel}\n**Other:** {youtuber_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-
-                elif str(reaction2.emoji) == "5\N{variation selector-16}\N{combining enclosing keycap}":
-                    builder_embed1 = discord.Embed(
-                        title="**Roblox Builder Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    builder_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=builder_embed1)
-                    try:
-                        builder_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        builder_work = builder_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if builder_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    builder_embed2 = discord.Embed(
-                        title="**Roblox Builder Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    builder_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=builder_embed2)
-                    try:
-                        builder_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        builder_information = builder_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if builder_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    builder_embed3 = discord.Embed(
-                        title="**Roblox Builder Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    builder_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=builder_embed3)
-                    try:
-                        builder_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        builder_other = builder_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if builder_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233671730561124)
-                        some_role = discord.utils.get(ctx.guild.roles, id=733281281671954442)
-                        title = "**Roblox Builder Application**"
-                        pag = Paginator(
-                            f"**Work:** {builder_work}\n**Information:** {builder_information}\n**Other:** {builder_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction2.emoji) == "6\N{variation selector-16}\N{combining enclosing keycap}":
-                    twitch_streamer_embed1 = discord.Embed(
-                        title="**Twitch Streamer Application**",
-                        description="***How many followers does your channel have? Minimum needed to apply is 1, 000***",
-                        color=0x0064ff
-                    )
-                    twitch_streamer_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=twitch_streamer_embed1)
-                    try:
-                        twitch_streamer_follows_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                        twitch_streamer_follows = twitch_streamer_follows_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if twitch_streamer_follows == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    twitch_streamer_embed2 = discord.Embed(
-                        title="**Twitch Streamer Application**",
-                        description="***Provide us with the link of your YouTube channel here. Also, please make sure you have the YouTube account connected with your discord account. To do that, go to User Settings > Connections, and connect.***",
-                        color=0x0064ff
-                    )
-                    twitch_streamer_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=twitch_streamer_embed2)
-                    try:
-                        twitch_streamer_channel_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                        twitch_streamer_channel = twitch_streamer_channel_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if twitch_streamer_channel == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    twitch_streamer_embed3 = discord.Embed(
-                        title="**Twitch Streamer Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    twitch_streamer_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=twitch_streamer_embed3)
-                    try:
-                        twitch_streamer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        twitch_streamer_other = twitch_streamer_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if twitch_streamer_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(778689246729863228)
-                        some_role = discord.utils.get(ctx.guild.roles, id=738814393663619182)
-                        title = "**Twitch Streamer Application**"
-                        pag = Paginator(
-                            f"**Followers Count:** {twitch_streamer_follows}\n**Twitch Channel:** {twitch_streamer_channel}\n**Other:** {twitch_streamer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction2.emoji) == "7\N{variation selector-16}\N{combining enclosing keycap}":
-                    gfx_designer_embed1 = discord.Embed(
-                        title="**GFX Designer Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    gfx_designer_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=gfx_designer_embed1)
-                    try:
-                        gfx_designer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        gfx_designer_work = gfx_designer_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if gfx_designer_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    gfx_designer_embed2 = discord.Embed(
-                        title="**GFX Designer Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    gfx_designer_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=gfx_designer_embed2)
-                    try:
-                        gfx_designer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                        gfx_designer_information = gfx_designer_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if gfx_designer_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    gfx_designer_embed3 = discord.Embed(
-                        title="**GFX Designer Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    gfx_designer_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=gfx_designer_embed3)
-                    try:
-                        gfx_designer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        gfx_designer_other = gfx_designer_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if gfx_designer_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233658556383262)
-                        some_role = discord.utils.get(ctx.guild.roles, id=733280979921141821)
-                        title = "**GFX Designer Application**"
-                        pag = Paginator(
-                            f"**Work:** {gfx_designer_work}\n**Information:** {gfx_designer_information}\n**Other:** {gfx_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction2.emoji) == "8\N{variation selector-16}\N{combining enclosing keycap}":
-                    translator_embed1 = discord.Embed(
-                        title="**Translator Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    translator_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=translator_embed1)
-                    try:
-                        translator_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        translator_work = translator_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if translator_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    translator_embed2 = discord.Embed(
-                        title="**Translator Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    translator_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=translator_embed2)
-                    try:
-                        translator_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                 timeout=1000)
-                        translator_information = translator_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if translator_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    translator_embed3 = discord.Embed(
-                        title="**Translator Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    translator_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=translator_embed3)
-                    try:
-                        translator_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        translator_other = translator_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if translator_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(778690032630235157)
-                        some_role = discord.utils.get(ctx.guild.roles, id=734527264657637416)
-                        title = "**Translator Application**"
-                        pag = Paginator(
-                            f"**Work:** {translator_work}\n**Information:** {translator_information}\n**Other:** {translator_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction2.emoji) == "9\N{variation selector-16}\N{combining enclosing keycap}":
-                    ui_designer_embed1 = discord.Embed(
-                        title="**UI Designer Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    ui_designer_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=ui_designer_embed1)
-                    try:
-                        ui_designer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        ui_designer_work = ui_designer_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if ui_designer_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    ui_designer_embed2 = discord.Embed(
-                        title="**UI Designer Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    ui_designer_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=ui_designer_embed2)
-                    try:
-                        ui_designer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                        ui_designer_information = ui_designer_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if ui_designer_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    ui_designer_embed3 = discord.Embed(
-                        title="**UI Designer Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    ui_designer_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=ui_designer_embed3)
-                    try:
-                        ui_designer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        ui_designer_other = ui_designer_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if ui_designer_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233732342579210)
-                        some_role = discord.utils.get(ctx.guild.roles, id=733274530524561430)
-                        title = "**UI Designer Application**"
-                        pag = Paginator(
-                            f"**Work:** {ui_designer_work}\n**Information:** {ui_designer_information}\n**Other:** {ui_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction2.emoji) == "10\N{variation selector-16}\N{combining enclosing keycap}":
-                    clothing_designer_embed1 = discord.Embed(
-                        title="**Clothing Designer Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    clothing_designer_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=clothing_designer_embed1)
-                    try:
-                        clothing_designer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                 timeout=1000)
-                        clothing_designer_work = clothing_designer_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if clothing_designer_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    clothing_designer_embed2 = discord.Embed(
-                        title="**Clothing Designer Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    clothing_designer_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=clothing_designer_embed2)
-                    try:
-                        clothing_designer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                        timeout=1000)
-                        clothing_designer_information = clothing_designer_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if clothing_designer_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    clothing_designer_embed3 = discord.Embed(
-                        title="**Clothing Designer Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    clothing_designer_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=clothing_designer_embed3)
-                    try:
-                        clothing_designer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                        clothing_designer_other = clothing_designer_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if clothing_designer_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233957417189547)
-                        some_role = discord.utils.get(ctx.guild.roles, id=734177621876801637)
-                        title = "**Clothing Designer Application**"
-                        pag = Paginator(
-                            f"**Work:** {clothing_designer_work}\n**Information:** {clothing_designer_information}\n**Other:** {clothing_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction2.emoji) == "11\N{variation selector-16}\N{combining enclosing keycap}":
-                    artist_embed1 = discord.Embed(
-                        title="**Artist Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    artist_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=artist_embed1)
-                    try:
-                        artist_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        artist_work = artist_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if artist_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    artist_embed2 = discord.Embed(
-                        title="**Artist Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    artist_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=artist_embed2)
-                    try:
-                        artist_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        artist_information = artist_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if artist_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    artist_embed3 = discord.Embed(
-                        title="**Artist Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    artist_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=artist_embed3)
-                    try:
-                        artist_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        artist_other = artist_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if artist_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233626960691221)
-                        some_role = discord.utils.get(ctx.guild.roles, id=734662196025360416)
-                        title = "**Artist Application**"
-                        pag = Paginator(
-                            f"**Work:** {artist_work}\n**Information:** {artist_information}\n**Other:** {artist_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction2.emoji) == "12\N{variation selector-16}\N{combining enclosing keycap}":
-                    music_composer_embed1 = discord.Embed(
-                        title="**Music Composer Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    music_composer_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=music_composer_embed1)
-                    try:
-                        music_composer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        music_composer_work = music_composer_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if music_composer_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    music_composer_embed2 = discord.Embed(
-                        title="**Music Composer Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    music_composer_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=music_composer_embed2)
-                    try:
-                        music_composer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                     timeout=1000)
-                        music_composer_information = music_composer_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if music_composer_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    music_composer_embed3 = discord.Embed(
-                        title="**Music Composer Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    music_composer_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=music_composer_embed3)
-                    try:
-                        music_composer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        music_composer_other = music_composer_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if music_composer_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233898600595597)
-                        some_role = discord.utils.get(ctx.guild.roles, id=735497558855516161)
-                        title = "**Music Composer Application**"
-                        pag = Paginator(
-                            f"**Work:** {music_composer_work}\n**Information:** {music_composer_information}\n**Other:** {music_composer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction2.emoji) == "13\N{variation selector-16}\N{combining enclosing keycap}":
-                    animator_embed1 = discord.Embed(
-                        title="**Animator Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    animator_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=animator_embed1)
-                    try:
-                        animator_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        animator_work = animator_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if animator_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    animator_embed2 = discord.Embed(
-                        title="**Animator Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    animator_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=animator_embed2)
-                    try:
-                        animator_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        animator_information = animator_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if animator_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    animator_embed3 = discord.Embed(
-                        title="**Animator Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    animator_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=animator_embed3)
-                    try:
-                        animator_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        animator_other = animator_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if animator_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233876446281778)
-                        some_role = discord.utils.get(ctx.guild.roles, id=729491617630912613)
-                        title = "**Animator Application**"
-                        pag = Paginator(
-                            f"**Work:** {animator_work}\n**Information:** {animator_information}\n**Other:** {animator_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-
-            else:
-                if str(reaction1.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
+            elif str(reaction2.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
+                game_designer_embed1 = discord.Embed(
+                    title="**Game Designer Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                game_designer_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=game_designer_embed1)
+                try:
+                    game_designer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    game_designer_work = game_designer_work_message.content
+                except asyncio.TimeoutError:
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
+                if game_designer_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                game_designer_embed2 = discord.Embed(
+                    title="**Game Designer Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                game_designer_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=game_designer_embed2)
+                try:
+                    game_designer_information_message = await self.bot.wait_for('message', check=check_dm,
+                                                                                timeout=1000)
+                    game_designer_information = game_designer_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if game_designer_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                game_designer_embed3 = discord.Embed(
+                    title="**Game Designer Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                game_designer_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=game_designer_embed3)
+                try:
+                    game_designer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    game_designer_other = game_designer_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if game_designer_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233876446281778)
+                    some_role = discord.utils.get(ctx.guild.roles, id=733281086913773599)
+                    title = "**Game Designer Application**"
+                    pag = Paginator(
+                        f"**Work:** {game_designer_work}\n**Information:** {game_designer_information}\n**Other:** {game_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                elif str(reaction1.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
-                    programmer_categories = discord.Embed(
-                        title="**APPLY SETUP**",
-                        description="""
-                        Which Programmer role would you like to apply for? Reply with the number in front of the role you would like to apply for.
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction2.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
+                threed_modeler_embed1 = discord.Embed(
+                    title="**3D Modeler Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                threed_modeler_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=threed_modeler_embed1)
+                try:
+                    threed_modeler_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    threed_modeler_work = threed_modeler_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if threed_modeler_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                threed_modeler_embed2 = discord.Embed(
+                    title="**3D Modeler Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                threed_modeler_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=threed_modeler_embed2)
+                try:
+                    threed_modeler_information_message = await self.bot.wait_for('message', check=check_dm,
+                                                                                 timeout=1000)
+                    threed_modeler_information = threed_modeler_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if threed_modeler_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                threed_modeler_embed3 = discord.Embed(
+                    title="**3D Modeler Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                threed_modeler_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=threed_modeler_embed3)
+                try:
+                    threed_modeler_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    threed_modeler_other = threed_modeler_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if threed_modeler_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233640596111411)
+                    some_role = discord.utils.get(ctx.guild.roles, id=733281157872877629)
+                    title = "**3D Modeler Application**"
+                    pag = Paginator(
+                        f"**Work:** {threed_modeler_work}\n**Information:** {threed_modeler_information}\n**Other:** {threed_modeler_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        **1** - `Python Programmer`;
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction2.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
+                youtuber_embed1 = discord.Embed(
+                    title="**YouTuber Application**",
+                    description="***How many subscribers does your channel have? Minimum needed to apply is 1, 000***",
+                    color=0x0064ff
+                )
+                youtuber_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=youtuber_embed1)
+                try:
+                    youtuber_subs_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    youtuber_subs = youtuber_subs_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if youtuber_subs == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                youtuber_embed2 = discord.Embed(
+                    title="**YouTuber Application**",
+                    description="***Provide us with the link of your YouTube channel here. Also, please make sure you have the YouTube account connected with your discord account. To do that, go to User Settings > Connections, and connect.***",
+                    color=0x0064ff
+                )
+                youtuber_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=youtuber_embed2)
+                try:
+                    youtuber_channel_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    youtuber_channel = youtuber_channel_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if youtuber_channel == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                youtuber_embed3 = discord.Embed(
+                    title="**YouTuber Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                youtuber_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=youtuber_embed3)
+                try:
+                    youtuber_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    youtuber_other = youtuber_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if youtuber_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(778689200350167123)
+                    some_role = discord.utils.get(ctx.guild.roles, id=738788543211634756)
+                    title = "**YouTuber Application**"
+                    pag = Paginator(
+                        f"**Subscriber Count:** {youtuber_subs}\n**YouTube Channel:** {youtuber_channel}\n**Other:** {youtuber_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        **2** - `C# Programmer`;
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
 
-                        **3** - `Java Programmer`;
+            elif str(reaction2.emoji) == "5\N{variation selector-16}\N{combining enclosing keycap}":
+                builder_embed1 = discord.Embed(
+                    title="**Roblox Builder Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                builder_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=builder_embed1)
+                try:
+                    builder_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    builder_work = builder_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if builder_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                builder_embed2 = discord.Embed(
+                    title="**Roblox Builder Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                builder_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=builder_embed2)
+                try:
+                    builder_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    builder_information = builder_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if builder_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                builder_embed3 = discord.Embed(
+                    title="**Roblox Builder Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                builder_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=builder_embed3)
+                try:
+                    builder_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    builder_other = builder_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if builder_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233671730561124)
+                    some_role = discord.utils.get(ctx.guild.roles, id=733281281671954442)
+                    title = "**Roblox Builder Application**"
+                    pag = Paginator(
+                        f"**Work:** {builder_work}\n**Information:** {builder_information}\n**Other:** {builder_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        **4** - `JavaScript Programmer`;
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction2.emoji) == "6\N{variation selector-16}\N{combining enclosing keycap}":
+                twitch_streamer_embed1 = discord.Embed(
+                    title="**Twitch Streamer Application**",
+                    description="***How many followers does your channel have? Minimum needed to apply is 1, 000***",
+                    color=0x0064ff
+                )
+                twitch_streamer_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=twitch_streamer_embed1)
+                try:
+                    twitch_streamer_follows_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                    twitch_streamer_follows = twitch_streamer_follows_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if twitch_streamer_follows == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                twitch_streamer_embed2 = discord.Embed(
+                    title="**Twitch Streamer Application**",
+                    description="***Provide us with the link of your YouTube channel here. Also, please make sure you have the YouTube account connected with your discord account. To do that, go to User Settings > Connections, and connect.***",
+                    color=0x0064ff
+                )
+                twitch_streamer_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=twitch_streamer_embed2)
+                try:
+                    twitch_streamer_channel_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                    twitch_streamer_channel = twitch_streamer_channel_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if twitch_streamer_channel == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                twitch_streamer_embed3 = discord.Embed(
+                    title="**Twitch Streamer Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                twitch_streamer_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=twitch_streamer_embed3)
+                try:
+                    twitch_streamer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    twitch_streamer_other = twitch_streamer_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if twitch_streamer_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(778689246729863228)
+                    some_role = discord.utils.get(ctx.guild.roles, id=738814393663619182)
+                    title = "**Twitch Streamer Application**"
+                    pag = Paginator(
+                        f"**Followers Count:** {twitch_streamer_follows}\n**Twitch Channel:** {twitch_streamer_channel}\n**Other:** {twitch_streamer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        **5** - `C++ Programmer`;
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction2.emoji) == "7\N{variation selector-16}\N{combining enclosing keycap}":
+                gfx_designer_embed1 = discord.Embed(
+                    title="**GFX Designer Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                gfx_designer_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=gfx_designer_embed1)
+                try:
+                    gfx_designer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    gfx_designer_work = gfx_designer_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if gfx_designer_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                gfx_designer_embed2 = discord.Embed(
+                    title="**GFX Designer Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                gfx_designer_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=gfx_designer_embed2)
+                try:
+                    gfx_designer_information_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                    gfx_designer_information = gfx_designer_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if gfx_designer_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                gfx_designer_embed3 = discord.Embed(
+                    title="**GFX Designer Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                gfx_designer_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=gfx_designer_embed3)
+                try:
+                    gfx_designer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    gfx_designer_other = gfx_designer_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if gfx_designer_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233658556383262)
+                    some_role = discord.utils.get(ctx.guild.roles, id=733280979921141821)
+                    title = "**GFX Designer Application**"
+                    pag = Paginator(
+                        f"**Work:** {gfx_designer_work}\n**Information:** {gfx_designer_information}\n**Other:** {gfx_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        **6** - `C Programmer`;
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction2.emoji) == "8\N{variation selector-16}\N{combining enclosing keycap}":
+                translator_embed1 = discord.Embed(
+                    title="**Translator Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                translator_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=translator_embed1)
+                try:
+                    translator_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    translator_work = translator_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if translator_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                translator_embed2 = discord.Embed(
+                    title="**Translator Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                translator_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=translator_embed2)
+                try:
+                    translator_information_message = await self.bot.wait_for('message', check=check_dm,
+                                                                             timeout=1000)
+                    translator_information = translator_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if translator_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                translator_embed3 = discord.Embed(
+                    title="**Translator Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                translator_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=translator_embed3)
+                try:
+                    translator_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    translator_other = translator_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if translator_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(778690032630235157)
+                    some_role = discord.utils.get(ctx.guild.roles, id=734527264657637416)
+                    title = "**Translator Application**"
+                    pag = Paginator(
+                        f"**Work:** {translator_work}\n**Information:** {translator_information}\n**Other:** {translator_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        **7** - `PHP Programmer`;
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction2.emoji) == "9\N{variation selector-16}\N{combining enclosing keycap}":
+                ui_designer_embed1 = discord.Embed(
+                    title="**UI Designer Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                ui_designer_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=ui_designer_embed1)
+                try:
+                    ui_designer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    ui_designer_work = ui_designer_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if ui_designer_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                ui_designer_embed2 = discord.Embed(
+                    title="**UI Designer Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                ui_designer_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=ui_designer_embed2)
+                try:
+                    ui_designer_information_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                    ui_designer_information = ui_designer_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if ui_designer_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                ui_designer_embed3 = discord.Embed(
+                    title="**UI Designer Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                ui_designer_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=ui_designer_embed3)
+                try:
+                    ui_designer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    ui_designer_other = ui_designer_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if ui_designer_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233732342579210)
+                    some_role = discord.utils.get(ctx.guild.roles, id=733274530524561430)
+                    title = "**UI Designer Application**"
+                    pag = Paginator(
+                        f"**Work:** {ui_designer_work}\n**Information:** {ui_designer_information}\n**Other:** {ui_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        **8** - `Lua Programmer`;
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction2.emoji) == "10\N{variation selector-16}\N{combining enclosing keycap}":
+                clothing_designer_embed1 = discord.Embed(
+                    title="**Clothing Designer Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                clothing_designer_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=clothing_designer_embed1)
+                try:
+                    clothing_designer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                             timeout=1000)
+                    clothing_designer_work = clothing_designer_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if clothing_designer_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                clothing_designer_embed2 = discord.Embed(
+                    title="**Clothing Designer Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                clothing_designer_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=clothing_designer_embed2)
+                try:
+                    clothing_designer_information_message = await self.bot.wait_for('message', check=check_dm,
+                                                                                    timeout=1000)
+                    clothing_designer_information = clothing_designer_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if clothing_designer_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                clothing_designer_embed3 = discord.Embed(
+                    title="**Clothing Designer Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                clothing_designer_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=clothing_designer_embed3)
+                try:
+                    clothing_designer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                    clothing_designer_other = clothing_designer_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if clothing_designer_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233957417189547)
+                    some_role = discord.utils.get(ctx.guild.roles, id=734177621876801637)
+                    title = "**Clothing Designer Application**"
+                    pag = Paginator(
+                        f"**Work:** {clothing_designer_work}\n**Information:** {clothing_designer_information}\n**Other:** {clothing_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        **9** - `Ruby Programmer`;
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction2.emoji) == "11\N{variation selector-16}\N{combining enclosing keycap}":
+                artist_embed1 = discord.Embed(
+                    title="**Artist Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                artist_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=artist_embed1)
+                try:
+                    artist_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    artist_work = artist_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if artist_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                artist_embed2 = discord.Embed(
+                    title="**Artist Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                artist_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=artist_embed2)
+                try:
+                    artist_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    artist_information = artist_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if artist_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                artist_embed3 = discord.Embed(
+                    title="**Artist Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                artist_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=artist_embed3)
+                try:
+                    artist_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    artist_other = artist_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if artist_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233626960691221)
+                    some_role = discord.utils.get(ctx.guild.roles, id=734662196025360416)
+                    title = "**Artist Application**"
+                    pag = Paginator(
+                        f"**Work:** {artist_work}\n**Information:** {artist_information}\n**Other:** {artist_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        **10** - `XML Programmer`;
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction2.emoji) == "12\N{variation selector-16}\N{combining enclosing keycap}":
+                music_composer_embed1 = discord.Embed(
+                    title="**Music Composer Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                music_composer_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=music_composer_embed1)
+                try:
+                    music_composer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    music_composer_work = music_composer_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if music_composer_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                music_composer_embed2 = discord.Embed(
+                    title="**Music Composer Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                music_composer_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=music_composer_embed2)
+                try:
+                    music_composer_information_message = await self.bot.wait_for('message', check=check_dm,
+                                                                                 timeout=1000)
+                    music_composer_information = music_composer_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if music_composer_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                music_composer_embed3 = discord.Embed(
+                    title="**Music Composer Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                music_composer_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=music_composer_embed3)
+                try:
+                    music_composer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    music_composer_other = music_composer_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if music_composer_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233898600595597)
+                    some_role = discord.utils.get(ctx.guild.roles, id=735497558855516161)
+                    title = "**Music Composer Application**"
+                    pag = Paginator(
+                        f"**Work:** {music_composer_work}\n**Information:** {music_composer_information}\n**Other:** {music_composer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        **11** - `CSS Programmer`;""",
-                        color=0x0064ff
-                    )
-                    programmer_categories.set_footer(
-                        text="React to this message within `16 minutes` • React with `0` to cancel.")
-                    programmer_category_message = await ctx.author.send(embed=categories)
-                    await category_message.add_reaction("0\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("1\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("2\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("3\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("4\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("5\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("6\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("7\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("8\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("9\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("10\N{variation selector-16}\N{combining enclosing keycap}")
-                    await category_message.add_reaction("11\N{variation selector-16}\N{combining enclosing keycap}")
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction2.emoji) == "13\N{variation selector-16}\N{combining enclosing keycap}":
+                animator_embed1 = discord.Embed(
+                    title="**Animator Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                animator_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=animator_embed1)
+                try:
+                    animator_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    animator_work = animator_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if animator_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                animator_embed2 = discord.Embed(
+                    title="**Animator Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                animator_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=animator_embed2)
+                try:
+                    animator_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    animator_information = animator_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if animator_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                animator_embed3 = discord.Embed(
+                    title="**Animator Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                animator_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=animator_embed3)
+                try:
+                    animator_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    animator_other = animator_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if animator_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233876446281778)
+                    some_role = discord.utils.get(ctx.guild.roles, id=729491617630912613)
+                    title = "**Animator Application**"
+                    pag = Paginator(
+                        f"**Work:** {animator_work}\n**Information:** {animator_information}\n**Other:** {animator_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                    def check(reaction3, user3):
-                        return user3 and str(reaction3.emoji) in [
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+
+        else:
+            if str(reaction1.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
+                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                await ctx.author.send(embed=cancel_prompt_embed)
+                return
+
+            elif str(reaction1.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
+                programmer_categories = discord.Embed(
+                    title="**APPLY SETUP**",
+                    description="""
+                    Which Programmer role would you like to apply for? Reply with the number in front of the role you would like to apply for.
+
+                    **1** - `Python Programmer`;
+
+                    **2** - `C# Programmer`;
+
+                    **3** - `Java Programmer`;
+
+                    **4** - `JavaScript Programmer`;
+
+                    **5** - `C++ Programmer`;
+
+                    **6** - `C Programmer`;
+
+                    **7** - `PHP Programmer`;
+
+                    **8** - `Lua Programmer`;
+
+                    **9** - `Ruby Programmer`;
+
+                    **10** - `XML Programmer`;
+
+                    **11** - `CSS Programmer`;""",
+                    color=0x0064ff
+                )
+                programmer_categories.set_footer(
+                    text="React to this message within `16 minutes` • React with `0` to cancel.")
+                programmer_category_message = await ctx.author.send(embed=categories)
+                await category_message.add_reaction("0\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("1\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("2\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("3\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("4\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("5\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("6\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("7\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("8\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("9\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("10\N{variation selector-16}\N{combining enclosing keycap}")
+                await category_message.add_reaction("11\N{variation selector-16}\N{combining enclosing keycap}")
+
+                def check(reaction3, user3):
+                    return user3 and str(reaction3.emoji) in [
+                        "0\N{variation selector-16}\N{combining enclosing keycap}",
+                        "1\N{variation selector-16}\N{combining enclosing keycap}",
+                        "2\N{variation selector-16}\N{combining enclosing keycap}",
+                        "3\N{variation selector-16}\N{combining enclosing keycap}",
+                        "4\N{variation selector-16}\N{combining enclosing keycap}",
+                        "5\N{variation selector-16}\N{combining enclosing keycap}",
+                        "6\N{variation selector-16}\N{combining enclosing keycap}",
+                        "7\N{variation selector-16}\N{combining enclosing keycap}",
+                        "8\N{variation selector-16}\N{combining enclosing keycap}",
+                        "9\N{variation selector-16}\N{combining enclosing keycap}",
+                        "10\N{variation selector-16}\N{combining enclosing keycap}",
+                        "11\N{variation selector-16}\N{combining enclosing keycap}"]
+
+                reaction3, user3 = await self.bot.wait_for("reaction_add", check=check)
+
+                if str(user1) == str(self.bot.user):
+                    def check(reaction4, user4):
+                        return user4 and str(reaction4.emoji) in [
                             "0\N{variation selector-16}\N{combining enclosing keycap}",
                             "1\N{variation selector-16}\N{combining enclosing keycap}",
                             "2\N{variation selector-16}\N{combining enclosing keycap}",
@@ -3272,2902 +3290,2884 @@ class Misc(commands.Cog):
                             "10\N{variation selector-16}\N{combining enclosing keycap}",
                             "11\N{variation selector-16}\N{combining enclosing keycap}"]
 
-                    reaction3, user3 = await self.bot.wait_for("reaction_add", check=check)
-
-                    if str(user1) == str(self.bot.user):
-                        def check(reaction4, user4):
-                            return user4 and str(reaction4.emoji) in [
-                                "0\N{variation selector-16}\N{combining enclosing keycap}",
-                                "1\N{variation selector-16}\N{combining enclosing keycap}",
-                                "2\N{variation selector-16}\N{combining enclosing keycap}",
-                                "3\N{variation selector-16}\N{combining enclosing keycap}",
-                                "4\N{variation selector-16}\N{combining enclosing keycap}",
-                                "5\N{variation selector-16}\N{combining enclosing keycap}",
-                                "6\N{variation selector-16}\N{combining enclosing keycap}",
-                                "7\N{variation selector-16}\N{combining enclosing keycap}",
-                                "8\N{variation selector-16}\N{combining enclosing keycap}",
-                                "9\N{variation selector-16}\N{combining enclosing keycap}",
-                                "10\N{variation selector-16}\N{combining enclosing keycap}",
-                                "11\N{variation selector-16}\N{combining enclosing keycap}"]
-
-                        if str(reaction4.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
-                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                            await ctx.author.send(embed=cancel_prompt_embed)
-                            return
-                        elif str(reaction4.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Python Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Python Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Python Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739229509240225842)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377712286761001)
-                                title = "**Python Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="C# Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="C# Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**C# Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739229541964185772)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377857317142650)
-                                title = "**C# Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Java Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Java Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Java Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233043533004820)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732379273100263464)
-                                title = "**Java Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="JavaScript Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="JavaScript Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**JavaScript Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233060091985951)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377955669508097)
-                                title = "**JavaScript Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "5\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="C++ Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="C++ Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**C++ Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739229568296157184)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377777772167188)
-                                title = "**C++ Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "6\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="C Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="C Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**C Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233448186609756)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732378157449216040)
-                                title = "**C Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "7\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="PHP Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="PHP Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**PHP Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233420827295875)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732378321387520092)
-                                title = "**PHP Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "8\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Lua Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Lua Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Lua Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233077879898123)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732376072397783093)
-                                title = "**Lua Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "9\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Ruby Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Ruby Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Ruby Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233479098761307)
-                                some_role = discord.utils.get(ctx.guild.roles, id=735147661430227025)
-                                title = "**Ruby Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "10\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="XML Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="XML Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**XML Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233397741715507)
-                                some_role = discord.utils.get(ctx.guild.roles, id=735147383716970507)
-                                title = "**XML Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction4.emoji) == "11\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="CSS Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="CSS Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**CSS Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(778686711810490379)
-                                some_role = discord.utils.get(ctx.guild.roles, id=741099963626422322)
-                                title = "**CSS Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-
-                    else:
-                        if str(reaction3.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
-                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                            await ctx.author.send(embed=cancel_prompt_embed)
-                            return
-                        elif str(reaction3.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Python Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Python Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Python Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739229509240225842)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377712286761001)
-                                title = "**Python Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="C# Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="C# Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**C# Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739229541964185772)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377857317142650)
-                                title = "**C# Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Java Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Java Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Java Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233043533004820)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732379273100263464)
-                                title = "**Java Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="JavaScript Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="JavaScript Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**JavaScript Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233060091985951)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377955669508097)
-                                title = "**JavaScript Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "5\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="C++ Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="C++ Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**C++ Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739229568296157184)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732377777772167188)
-                                title = "**C++ Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "6\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="C Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="C Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**C Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233448186609756)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732378157449216040)
-                                title = "**C Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "7\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="PHP Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="PHP Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**PHP Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233420827295875)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732378321387520092)
-                                title = "**PHP Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "8\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Lua Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Lua Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Lua Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233077879898123)
-                                some_role = discord.utils.get(ctx.guild.roles, id=732376072397783093)
-                                title = "**Lua Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "9\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="Ruby Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="Ruby Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**Ruby Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233479098761307)
-                                some_role = discord.utils.get(ctx.guild.roles, id=735147661430227025)
-                                title = "**Ruby Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "10\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="XML Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="XML Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**XML Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(739233397741715507)
-                                some_role = discord.utils.get(ctx.guild.roles, id=735147383716970507)
-                                title = "**XML Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-                        elif str(reaction3.emoji) == "11\N{variation selector-16}\N{combining enclosing keycap}":
-                            programmer_embed1 = discord.Embed(
-                                title="CSS Programmer Post",
-                                description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed1 = discord.Embed(
-                                title="CSS Programmer Post",
-                                description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                                color=0x0064ff
-                            )
-                            programmer_embed1.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed1)
-                            try:
-                                programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                                programmer_work = programmer_work_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_work == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            programmer_embed3 = discord.Embed(
-                                title="**CSS Programmer Application**",
-                                description="***Anything that you've missed that you would like to add onto your current statement?***",
-                                color=0x0064ff
-                            )
-                            programmer_embed3.set_footer(
-                                text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                            await ctx.author.send(embed=programmer_embed3)
-                            try:
-                                programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                                programmer_other = programmer_other_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if programmer_other == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            await ctx.author.send(
-                                "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                            try:
-                                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                                final_choice = final_choice_message.content
-                            except asyncio.TimeoutError:
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            if final_choice == "0":
-                                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                                await ctx.author.send(embed=cancel_prompt_embed)
-                                return
-                            elif final_choice == "1":
-                                await ctx.author.send("Sent for approval!")
-                                some_channel = self.bot.get_channel(778686711810490379)
-                                some_role = discord.utils.get(ctx.guild.roles, id=741099963626422322)
-                                title = "**CSS Programmer Application**"
-                                pag = Paginator(
-                                    f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                                    1985)
-
-                                await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                               title=title)
-
-
-                elif str(reaction1.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
-                    game_designer_embed1 = discord.Embed(
-                        title="**Game Designer Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    game_designer_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=game_designer_embed1)
-                    try:
-                        game_designer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        game_designer_work = game_designer_work_message.content
-                    except asyncio.TimeoutError:
+                    if str(reaction4.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
                         cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                         await ctx.author.send(embed=cancel_prompt_embed)
                         return
-                    if game_designer_work == "0":
+                    elif str(reaction4.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Python Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Python Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Python Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739229509240225842)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377712286761001)
+                            title = "**Python Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="C# Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="C# Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**C# Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739229541964185772)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377857317142650)
+                            title = "**C# Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Java Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Java Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Java Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233043533004820)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732379273100263464)
+                            title = "**Java Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="JavaScript Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="JavaScript Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**JavaScript Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233060091985951)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377955669508097)
+                            title = "**JavaScript Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "5\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="C++ Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="C++ Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**C++ Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739229568296157184)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377777772167188)
+                            title = "**C++ Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "6\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="C Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="C Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**C Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233448186609756)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732378157449216040)
+                            title = "**C Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "7\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="PHP Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="PHP Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**PHP Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233420827295875)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732378321387520092)
+                            title = "**PHP Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "8\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Lua Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Lua Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Lua Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233077879898123)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732376072397783093)
+                            title = "**Lua Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "9\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Ruby Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Ruby Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Ruby Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233479098761307)
+                            some_role = discord.utils.get(ctx.guild.roles, id=735147661430227025)
+                            title = "**Ruby Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "10\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="XML Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="XML Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**XML Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233397741715507)
+                            some_role = discord.utils.get(ctx.guild.roles, id=735147383716970507)
+                            title = "**XML Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction4.emoji) == "11\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="CSS Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="CSS Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**CSS Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(778686711810490379)
+                            some_role = discord.utils.get(ctx.guild.roles, id=741099963626422322)
+                            title = "**CSS Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+
+                else:
+                    if str(reaction3.emoji) == "0\N{variation selector-16}\N{combining enclosing keycap}":
                         cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                         await ctx.author.send(embed=cancel_prompt_embed)
                         return
-                    game_designer_embed2 = discord.Embed(
-                        title="**Game Designer Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    game_designer_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=game_designer_embed2)
-                    try:
-                        game_designer_information_message = await self.bot.wait_for('message', check=check_dm,
+                    elif str(reaction3.emoji) == "1\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Python Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Python Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Python Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739229509240225842)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377712286761001)
+                            title = "**Python Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="C# Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="C# Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**C# Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739229541964185772)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377857317142650)
+                            title = "**C# Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Java Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Java Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Java Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233043533004820)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732379273100263464)
+                            title = "**Java Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="JavaScript Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="JavaScript Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**JavaScript Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233060091985951)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377955669508097)
+                            title = "**JavaScript Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "5\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="C++ Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="C++ Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**C++ Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739229568296157184)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732377777772167188)
+                            title = "**C++ Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "6\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="C Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="C Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**C Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233448186609756)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732378157449216040)
+                            title = "**C Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "7\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="PHP Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="PHP Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**PHP Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233420827295875)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732378321387520092)
+                            title = "**PHP Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "8\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Lua Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Lua Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Lua Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233077879898123)
+                            some_role = discord.utils.get(ctx.guild.roles, id=732376072397783093)
+                            title = "**Lua Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "9\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="Ruby Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="Ruby Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**Ruby Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233479098761307)
+                            some_role = discord.utils.get(ctx.guild.roles, id=735147661430227025)
+                            title = "**Ruby Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "10\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="XML Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="XML Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**XML Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(739233397741715507)
+                            some_role = discord.utils.get(ctx.guild.roles, id=735147383716970507)
+                            title = "**XML Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+                    elif str(reaction3.emoji) == "11\N{variation selector-16}\N{combining enclosing keycap}":
+                        programmer_embed1 = discord.Embed(
+                            title="CSS Programmer Post",
+                            description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed1 = discord.Embed(
+                            title="CSS Programmer Post",
+                            description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                            color=0x0064ff
+                        )
+                        programmer_embed1.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed1)
+                        try:
+                            programmer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                            programmer_work = programmer_work_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_work == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        programmer_embed3 = discord.Embed(
+                            title="**CSS Programmer Application**",
+                            description="***Anything that you've missed that you would like to add onto your current statement?***",
+                            color=0x0064ff
+                        )
+                        programmer_embed3.set_footer(
+                            text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                        await ctx.author.send(embed=programmer_embed3)
+                        try:
+                            programmer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                            programmer_other = programmer_other_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if programmer_other == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        await ctx.author.send(
+                            "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                        try:
+                            final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                            final_choice = final_choice_message.content
+                        except asyncio.TimeoutError:
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        if final_choice == "0":
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            await ctx.author.send(embed=cancel_prompt_embed)
+                            return
+                        elif final_choice == "1":
+                            await ctx.author.send("Sent for approval!")
+                            some_channel = self.bot.get_channel(778686711810490379)
+                            some_role = discord.utils.get(ctx.guild.roles, id=741099963626422322)
+                            title = "**CSS Programmer Application**"
+                            pag = Paginator(
+                                f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                                1985)
+
+                            await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                           title=title)
+
+
+            elif str(reaction1.emoji) == "2\N{variation selector-16}\N{combining enclosing keycap}":
+                game_designer_embed1 = discord.Embed(
+                    title="**Game Designer Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                game_designer_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=game_designer_embed1)
+                try:
+                    game_designer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    game_designer_work = game_designer_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if game_designer_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                game_designer_embed2 = discord.Embed(
+                    title="**Game Designer Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                game_designer_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=game_designer_embed2)
+                try:
+                    game_designer_information_message = await self.bot.wait_for('message', check=check_dm,
+                                                                                timeout=1000)
+                    game_designer_information = game_designer_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if game_designer_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                game_designer_embed3 = discord.Embed(
+                    title="**Game Designer Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                game_designer_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=game_designer_embed3)
+                try:
+                    game_designer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    game_designer_other = game_designer_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if game_designer_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233876446281778)
+                    some_role = discord.utils.get(ctx.guild.roles, id=733281086913773599)
+                    title = "**Game Designer Application**"
+                    pag = Paginator(
+                        f"**Work:** {game_designer_work}\n**Information:** {game_designer_information}\n**Other:** {game_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
+
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction1.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
+                threed_modeler_embed1 = discord.Embed(
+                    title="**3D Modeler Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                threed_modeler_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=threed_modeler_embed1)
+                try:
+                    threed_modeler_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    threed_modeler_work = threed_modeler_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if threed_modeler_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                threed_modeler_embed2 = discord.Embed(
+                    title="**3D Modeler Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                threed_modeler_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=threed_modeler_embed2)
+                try:
+                    threed_modeler_information_message = await self.bot.wait_for('message', check=check_dm,
+                                                                                 timeout=1000)
+                    threed_modeler_information = threed_modeler_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if threed_modeler_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                threed_modeler_embed3 = discord.Embed(
+                    title="**3D Modeler Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                threed_modeler_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=threed_modeler_embed3)
+                try:
+                    threed_modeler_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    threed_modeler_other = threed_modeler_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if threed_modeler_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233640596111411)
+                    some_role = discord.utils.get(ctx.guild.roles, id=733281157872877629)
+                    title = "**3D Modeler Application**"
+                    pag = Paginator(
+                        f"**Work:** {threed_modeler_work}\n**Information:** {threed_modeler_information}\n**Other:** {threed_modeler_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
+
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction1.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
+                youtuber_embed1 = discord.Embed(
+                    title="**YouTuber Application**",
+                    description="***How many subscribers does your channel have? Minimum needed to apply is 1, 000***",
+                    color=0x0064ff
+                )
+                youtuber_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=youtuber_embed1)
+                try:
+                    youtuber_subs_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    youtuber_subs = youtuber_subs_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if youtuber_subs == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                youtuber_embed2 = discord.Embed(
+                    title="**YouTuber Application**",
+                    description="***Provide us with the link of your YouTube channel here. Also, please make sure you have the YouTube account connected with your discord account. To do that, go to User Settings > Connections, and connect.***",
+                    color=0x0064ff
+                )
+                youtuber_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=youtuber_embed2)
+                try:
+                    youtuber_channel_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    youtuber_channel = youtuber_channel_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if youtuber_channel == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                youtuber_embed3 = discord.Embed(
+                    title="**YouTuber Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                youtuber_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=youtuber_embed3)
+                try:
+                    youtuber_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    youtuber_other = youtuber_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if youtuber_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(778689200350167123)
+                    some_role = discord.utils.get(ctx.guild.roles, id=738788543211634756)
+                    title = "**YouTuber Application**"
+                    pag = Paginator(
+                        f"**Subscriber Count:** {youtuber_subs}\n**YouTube Channel:** {youtuber_channel}\n**Other:** {youtuber_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
+
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+
+            elif str(reaction1.emoji) == "5\N{variation selector-16}\N{combining enclosing keycap}":
+                builder_embed1 = discord.Embed(
+                    title="**Roblox Builder Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                builder_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=builder_embed1)
+                try:
+                    builder_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    builder_work = builder_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if builder_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                builder_embed2 = discord.Embed(
+                    title="**Roblox Builder Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                builder_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=builder_embed2)
+                try:
+                    builder_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    builder_information = builder_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if builder_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                builder_embed3 = discord.Embed(
+                    title="**Roblox Builder Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                builder_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=builder_embed3)
+                try:
+                    builder_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    builder_other = builder_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if builder_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233671730561124)
+                    some_role = discord.utils.get(ctx.guild.roles, id=733281281671954442)
+                    title = "**Roblox Builder Application**"
+                    pag = Paginator(
+                        f"**Work:** {builder_work}\n**Information:** {builder_information}\n**Other:** {builder_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
+
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction1.emoji) == "6\N{variation selector-16}\N{combining enclosing keycap}":
+                twitch_streamer_embed1 = discord.Embed(
+                    title="**Twitch Streamer Application**",
+                    description="***How many followers does your channel have? Minimum needed to apply is 1, 000***",
+                    color=0x0064ff
+                )
+                twitch_streamer_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=twitch_streamer_embed1)
+                try:
+                    twitch_streamer_follows_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                    twitch_streamer_follows = twitch_streamer_follows_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if twitch_streamer_follows == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                twitch_streamer_embed2 = discord.Embed(
+                    title="**Twitch Streamer Application**",
+                    description="***Provide us with the link of your YouTube channel here. Also, please make sure you have the YouTube account connected with your discord account. To do that, go to User Settings > Connections, and connect.***",
+                    color=0x0064ff
+                )
+                twitch_streamer_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=twitch_streamer_embed2)
+                try:
+                    twitch_streamer_channel_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                    twitch_streamer_channel = twitch_streamer_channel_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if twitch_streamer_channel == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                twitch_streamer_embed3 = discord.Embed(
+                    title="**Twitch Streamer Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                twitch_streamer_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=twitch_streamer_embed3)
+                try:
+                    twitch_streamer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    twitch_streamer_other = twitch_streamer_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if twitch_streamer_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(778689246729863228)
+                    some_role = discord.utils.get(ctx.guild.roles, id=738814393663619182)
+                    title = "**Twitch Streamer Application**"
+                    pag = Paginator(
+                        f"**Followers Count:** {twitch_streamer_follows}\n**Twitch Channel:** {twitch_streamer_channel}\n**Other:** {twitch_streamer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
+
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction1.emoji) == "7\N{variation selector-16}\N{combining enclosing keycap}":
+                gfx_designer_embed1 = discord.Embed(
+                    title="**GFX Designer Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                gfx_designer_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=gfx_designer_embed1)
+                try:
+                    gfx_designer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    gfx_designer_work = gfx_designer_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if gfx_designer_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                gfx_designer_embed2 = discord.Embed(
+                    title="**GFX Designer Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                gfx_designer_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=gfx_designer_embed2)
+                try:
+                    gfx_designer_information_message = await self.bot.wait_for('message', check=check_dm,
+                                                                               timeout=1000)
+                    gfx_designer_information = gfx_designer_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if gfx_designer_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                gfx_designer_embed3 = discord.Embed(
+                    title="**GFX Designer Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                gfx_designer_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=gfx_designer_embed3)
+                try:
+                    gfx_designer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    gfx_designer_other = gfx_designer_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if gfx_designer_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233658556383262)
+                    some_role = discord.utils.get(ctx.guild.roles, id=733280979921141821)
+                    title = "**GFX Designer Application**"
+                    pag = Paginator(
+                        f"**Work:** {gfx_designer_work}\n**Information:** {gfx_designer_information}\n**Other:** {gfx_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
+
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction1.emoji) == "8\N{variation selector-16}\N{combining enclosing keycap}":
+                translator_embed1 = discord.Embed(
+                    title="**Translator Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                translator_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=translator_embed1)
+                try:
+                    translator_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    translator_work = translator_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if translator_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                translator_embed2 = discord.Embed(
+                    title="**Translator Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                translator_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=translator_embed2)
+                try:
+                    translator_information_message = await self.bot.wait_for('message', check=check_dm,
+                                                                             timeout=1000)
+                    translator_information = translator_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if translator_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                translator_embed3 = discord.Embed(
+                    title="**Translator Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                translator_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=translator_embed3)
+                try:
+                    translator_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    translator_other = translator_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if translator_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(778690032630235157)
+                    some_role = discord.utils.get(ctx.guild.roles, id=734527264657637416)
+                    title = "**Translator Application**"
+                    pag = Paginator(
+                        f"**Work:** {translator_work}\n**Information:** {translator_information}\n**Other:** {translator_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
+
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction1.emoji) == "9\N{variation selector-16}\N{combining enclosing keycap}":
+                ui_designer_embed1 = discord.Embed(
+                    title="**UI Designer Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                ui_designer_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=ui_designer_embed1)
+                try:
+                    ui_designer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    ui_designer_work = ui_designer_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if ui_designer_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                ui_designer_embed2 = discord.Embed(
+                    title="**UI Designer Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                ui_designer_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=ui_designer_embed2)
+                try:
+                    ui_designer_information_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                    ui_designer_information = ui_designer_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if ui_designer_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                ui_designer_embed3 = discord.Embed(
+                    title="**UI Designer Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                ui_designer_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=ui_designer_embed3)
+                try:
+                    ui_designer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    ui_designer_other = ui_designer_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if ui_designer_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233732342579210)
+                    some_role = discord.utils.get(ctx.guild.roles, id=733274530524561430)
+                    title = "**UI Designer Application**"
+                    pag = Paginator(
+                        f"**Work:** {ui_designer_work}\n**Information:** {ui_designer_information}\n**Other:** {ui_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
+
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction1.emoji) == "10\N{variation selector-16}\N{combining enclosing keycap}":
+                clothing_designer_embed1 = discord.Embed(
+                    title="**Clothing Designer Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                clothing_designer_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=clothing_designer_embed1)
+                try:
+                    clothing_designer_work_message = await self.bot.wait_for('message', check=check_dm,
+                                                                             timeout=1000)
+                    clothing_designer_work = clothing_designer_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if clothing_designer_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                clothing_designer_embed2 = discord.Embed(
+                    title="**Clothing Designer Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                clothing_designer_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=clothing_designer_embed2)
+                try:
+                    clothing_designer_information_message = await self.bot.wait_for('message', check=check_dm,
                                                                                     timeout=1000)
-                        game_designer_information = game_designer_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if game_designer_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    game_designer_embed3 = discord.Embed(
-                        title="**Game Designer Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    game_designer_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=game_designer_embed3)
-                    try:
-                        game_designer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        game_designer_other = game_designer_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if game_designer_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233876446281778)
-                        some_role = discord.utils.get(ctx.guild.roles, id=733281086913773599)
-                        title = "**Game Designer Application**"
-                        pag = Paginator(
-                            f"**Work:** {game_designer_work}\n**Information:** {game_designer_information}\n**Other:** {game_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
+                    clothing_designer_information = clothing_designer_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if clothing_designer_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                clothing_designer_embed3 = discord.Embed(
+                    title="**Clothing Designer Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                clothing_designer_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=clothing_designer_embed3)
+                try:
+                    clothing_designer_other_message = await self.bot.wait_for('message', check=check_dm,
+                                                                              timeout=1000)
+                    clothing_designer_other = clothing_designer_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if clothing_designer_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233957417189547)
+                    some_role = discord.utils.get(ctx.guild.roles, id=734177621876801637)
+                    title = "**Clothing Designer Application**"
+                    pag = Paginator(
+                        f"**Work:** {clothing_designer_work}\n**Information:** {clothing_designer_information}\n**Other:** {clothing_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction1.emoji) == "3\N{variation selector-16}\N{combining enclosing keycap}":
-                    threed_modeler_embed1 = discord.Embed(
-                        title="**3D Modeler Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    threed_modeler_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=threed_modeler_embed1)
-                    try:
-                        threed_modeler_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        threed_modeler_work = threed_modeler_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if threed_modeler_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    threed_modeler_embed2 = discord.Embed(
-                        title="**3D Modeler Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    threed_modeler_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=threed_modeler_embed2)
-                    try:
-                        threed_modeler_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                     timeout=1000)
-                        threed_modeler_information = threed_modeler_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if threed_modeler_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    threed_modeler_embed3 = discord.Embed(
-                        title="**3D Modeler Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    threed_modeler_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=threed_modeler_embed3)
-                    try:
-                        threed_modeler_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        threed_modeler_other = threed_modeler_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if threed_modeler_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233640596111411)
-                        some_role = discord.utils.get(ctx.guild.roles, id=733281157872877629)
-                        title = "**3D Modeler Application**"
-                        pag = Paginator(
-                            f"**Work:** {threed_modeler_work}\n**Information:** {threed_modeler_information}\n**Other:** {threed_modeler_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction1.emoji) == "11\N{variation selector-16}\N{combining enclosing keycap}":
+                artist_embed1 = discord.Embed(
+                    title="**Artist Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                artist_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=artist_embed1)
+                try:
+                    artist_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    artist_work = artist_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if artist_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                artist_embed2 = discord.Embed(
+                    title="**Artist Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                artist_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=artist_embed2)
+                try:
+                    artist_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    artist_information = artist_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if artist_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                artist_embed3 = discord.Embed(
+                    title="**Artist Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                artist_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=artist_embed3)
+                try:
+                    artist_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    artist_other = artist_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if artist_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233626960691221)
+                    some_role = discord.utils.get(ctx.guild.roles, id=734662196025360416)
+                    title = "**Artist Application**"
+                    pag = Paginator(
+                        f"**Work:** {artist_work}\n**Information:** {artist_information}\n**Other:** {artist_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction1.emoji) == "4\N{variation selector-16}\N{combining enclosing keycap}":
-                    youtuber_embed1 = discord.Embed(
-                        title="**YouTuber Application**",
-                        description="***How many subscribers does your channel have? Minimum needed to apply is 1, 000***",
-                        color=0x0064ff
-                    )
-                    youtuber_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=youtuber_embed1)
-                    try:
-                        youtuber_subs_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        youtuber_subs = youtuber_subs_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if youtuber_subs == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    youtuber_embed2 = discord.Embed(
-                        title="**YouTuber Application**",
-                        description="***Provide us with the link of your YouTube channel here. Also, please make sure you have the YouTube account connected with your discord account. To do that, go to User Settings > Connections, and connect.***",
-                        color=0x0064ff
-                    )
-                    youtuber_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=youtuber_embed2)
-                    try:
-                        youtuber_channel_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        youtuber_channel = youtuber_channel_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if youtuber_channel == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    youtuber_embed3 = discord.Embed(
-                        title="**YouTuber Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    youtuber_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=youtuber_embed3)
-                    try:
-                        youtuber_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        youtuber_other = youtuber_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if youtuber_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(778689200350167123)
-                        some_role = discord.utils.get(ctx.guild.roles, id=738788543211634756)
-                        title = "**YouTuber Application**"
-                        pag = Paginator(
-                            f"**Subscriber Count:** {youtuber_subs}\n**YouTube Channel:** {youtuber_channel}\n**Other:** {youtuber_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-
-                elif str(reaction1.emoji) == "5\N{variation selector-16}\N{combining enclosing keycap}":
-                    builder_embed1 = discord.Embed(
-                        title="**Roblox Builder Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    builder_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=builder_embed1)
-                    try:
-                        builder_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        builder_work = builder_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if builder_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    builder_embed2 = discord.Embed(
-                        title="**Roblox Builder Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    builder_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=builder_embed2)
-                    try:
-                        builder_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        builder_information = builder_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if builder_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    builder_embed3 = discord.Embed(
-                        title="**Roblox Builder Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    builder_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=builder_embed3)
-                    try:
-                        builder_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        builder_other = builder_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if builder_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233671730561124)
-                        some_role = discord.utils.get(ctx.guild.roles, id=733281281671954442)
-                        title = "**Roblox Builder Application**"
-                        pag = Paginator(
-                            f"**Work:** {builder_work}\n**Information:** {builder_information}\n**Other:** {builder_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction1.emoji) == "6\N{variation selector-16}\N{combining enclosing keycap}":
-                    twitch_streamer_embed1 = discord.Embed(
-                        title="**Twitch Streamer Application**",
-                        description="***How many followers does your channel have? Minimum needed to apply is 1, 000***",
-                        color=0x0064ff
-                    )
-                    twitch_streamer_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=twitch_streamer_embed1)
-                    try:
-                        twitch_streamer_follows_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                        twitch_streamer_follows = twitch_streamer_follows_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if twitch_streamer_follows == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    twitch_streamer_embed2 = discord.Embed(
-                        title="**Twitch Streamer Application**",
-                        description="***Provide us with the link of your YouTube channel here. Also, please make sure you have the YouTube account connected with your discord account. To do that, go to User Settings > Connections, and connect.***",
-                        color=0x0064ff
-                    )
-                    twitch_streamer_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=twitch_streamer_embed2)
-                    try:
-                        twitch_streamer_channel_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                        twitch_streamer_channel = twitch_streamer_channel_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if twitch_streamer_channel == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    twitch_streamer_embed3 = discord.Embed(
-                        title="**Twitch Streamer Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    twitch_streamer_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=twitch_streamer_embed3)
-                    try:
-                        twitch_streamer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        twitch_streamer_other = twitch_streamer_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if twitch_streamer_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(778689246729863228)
-                        some_role = discord.utils.get(ctx.guild.roles, id=738814393663619182)
-                        title = "**Twitch Streamer Application**"
-                        pag = Paginator(
-                            f"**Followers Count:** {twitch_streamer_follows}\n**Twitch Channel:** {twitch_streamer_channel}\n**Other:** {twitch_streamer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction1.emoji) == "7\N{variation selector-16}\N{combining enclosing keycap}":
-                    gfx_designer_embed1 = discord.Embed(
-                        title="**GFX Designer Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    gfx_designer_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=gfx_designer_embed1)
-                    try:
-                        gfx_designer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        gfx_designer_work = gfx_designer_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if gfx_designer_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    gfx_designer_embed2 = discord.Embed(
-                        title="**GFX Designer Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    gfx_designer_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=gfx_designer_embed2)
-                    try:
-                        gfx_designer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                   timeout=1000)
-                        gfx_designer_information = gfx_designer_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if gfx_designer_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    gfx_designer_embed3 = discord.Embed(
-                        title="**GFX Designer Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    gfx_designer_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=gfx_designer_embed3)
-                    try:
-                        gfx_designer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        gfx_designer_other = gfx_designer_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if gfx_designer_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233658556383262)
-                        some_role = discord.utils.get(ctx.guild.roles, id=733280979921141821)
-                        title = "**GFX Designer Application**"
-                        pag = Paginator(
-                            f"**Work:** {gfx_designer_work}\n**Information:** {gfx_designer_information}\n**Other:** {gfx_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction1.emoji) == "8\N{variation selector-16}\N{combining enclosing keycap}":
-                    translator_embed1 = discord.Embed(
-                        title="**Translator Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    translator_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=translator_embed1)
-                    try:
-                        translator_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        translator_work = translator_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if translator_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    translator_embed2 = discord.Embed(
-                        title="**Translator Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    translator_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=translator_embed2)
-                    try:
-                        translator_information_message = await self.bot.wait_for('message', check=check_dm,
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction1.emoji) == "12\N{variation selector-16}\N{combining enclosing keycap}":
+                music_composer_embed1 = discord.Embed(
+                    title="**Music Composer Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                music_composer_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=music_composer_embed1)
+                try:
+                    music_composer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    music_composer_work = music_composer_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if music_composer_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                music_composer_embed2 = discord.Embed(
+                    title="**Music Composer Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                music_composer_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=music_composer_embed2)
+                try:
+                    music_composer_information_message = await self.bot.wait_for('message', check=check_dm,
                                                                                  timeout=1000)
-                        translator_information = translator_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if translator_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    translator_embed3 = discord.Embed(
-                        title="**Translator Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    translator_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=translator_embed3)
-                    try:
-                        translator_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        translator_other = translator_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if translator_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(778690032630235157)
-                        some_role = discord.utils.get(ctx.guild.roles, id=734527264657637416)
-                        title = "**Translator Application**"
-                        pag = Paginator(
-                            f"**Work:** {translator_work}\n**Information:** {translator_information}\n**Other:** {translator_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
+                    music_composer_information = music_composer_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if music_composer_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                music_composer_embed3 = discord.Embed(
+                    title="**Music Composer Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                music_composer_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=music_composer_embed3)
+                try:
+                    music_composer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    music_composer_other = music_composer_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if music_composer_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233898600595597)
+                    some_role = discord.utils.get(ctx.guild.roles, id=735497558855516161)
+                    title = "**Music Composer Application**"
+                    pag = Paginator(
+                        f"**Work:** {music_composer_work}\n**Information:** {music_composer_information}\n**Other:** {music_composer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction1.emoji) == "9\N{variation selector-16}\N{combining enclosing keycap}":
-                    ui_designer_embed1 = discord.Embed(
-                        title="**UI Designer Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    ui_designer_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=ui_designer_embed1)
-                    try:
-                        ui_designer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        ui_designer_work = ui_designer_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if ui_designer_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    ui_designer_embed2 = discord.Embed(
-                        title="**UI Designer Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    ui_designer_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=ui_designer_embed2)
-                    try:
-                        ui_designer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                        ui_designer_information = ui_designer_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if ui_designer_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    ui_designer_embed3 = discord.Embed(
-                        title="**UI Designer Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    ui_designer_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=ui_designer_embed3)
-                    try:
-                        ui_designer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        ui_designer_other = ui_designer_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if ui_designer_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233732342579210)
-                        some_role = discord.utils.get(ctx.guild.roles, id=733274530524561430)
-                        title = "**UI Designer Application**"
-                        pag = Paginator(
-                            f"**Work:** {ui_designer_work}\n**Information:** {ui_designer_information}\n**Other:** {ui_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
+            elif str(reaction1.emoji) == "13\N{variation selector-16}\N{combining enclosing keycap}":
+                animator_embed1 = discord.Embed(
+                    title="**Animator Application**",
+                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                animator_embed1.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=animator_embed1)
+                try:
+                    animator_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    animator_work = animator_work_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if animator_work == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                animator_embed2 = discord.Embed(
+                    title="**Animator Application**",
+                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
+                    color=0x0064ff
+                )
+                animator_embed2.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=animator_embed2)
+                try:
+                    animator_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    animator_information = animator_information_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if animator_information == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                animator_embed3 = discord.Embed(
+                    title="**Animator Application**",
+                    description="***Anything that you've missed that you would like to add onto your current statement?***",
+                    color=0x0064ff
+                )
+                animator_embed3.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
+                await ctx.author.send(embed=animator_embed3)
+                try:
+                    animator_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    animator_other = animator_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if animator_other == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if final_choice == "0":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                elif final_choice == "1":
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739233876446281778)
+                    some_role = discord.utils.get(ctx.guild.roles, id=729491617630912613)
+                    title = "**Animator Application**"
+                    pag = Paginator(
+                        f"**Work:** {animator_work}\n**Information:** {animator_information}\n**Other:** {animator_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
 
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction1.emoji) == "10\N{variation selector-16}\N{combining enclosing keycap}":
-                    clothing_designer_embed1 = discord.Embed(
-                        title="**Clothing Designer Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    clothing_designer_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=clothing_designer_embed1)
-                    try:
-                        clothing_designer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                 timeout=1000)
-                        clothing_designer_work = clothing_designer_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if clothing_designer_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    clothing_designer_embed2 = discord.Embed(
-                        title="**Clothing Designer Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    clothing_designer_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=clothing_designer_embed2)
-                    try:
-                        clothing_designer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                        timeout=1000)
-                        clothing_designer_information = clothing_designer_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if clothing_designer_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    clothing_designer_embed3 = discord.Embed(
-                        title="**Clothing Designer Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    clothing_designer_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=clothing_designer_embed3)
-                    try:
-                        clothing_designer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                  timeout=1000)
-                        clothing_designer_other = clothing_designer_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if clothing_designer_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233957417189547)
-                        some_role = discord.utils.get(ctx.guild.roles, id=734177621876801637)
-                        title = "**Clothing Designer Application**"
-                        pag = Paginator(
-                            f"**Work:** {clothing_designer_work}\n**Information:** {clothing_designer_information}\n**Other:** {clothing_designer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction1.emoji) == "11\N{variation selector-16}\N{combining enclosing keycap}":
-                    artist_embed1 = discord.Embed(
-                        title="**Artist Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    artist_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=artist_embed1)
-                    try:
-                        artist_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        artist_work = artist_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if artist_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    artist_embed2 = discord.Embed(
-                        title="**Artist Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    artist_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=artist_embed2)
-                    try:
-                        artist_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        artist_information = artist_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if artist_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    artist_embed3 = discord.Embed(
-                        title="**Artist Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    artist_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=artist_embed3)
-                    try:
-                        artist_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        artist_other = artist_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if artist_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233626960691221)
-                        some_role = discord.utils.get(ctx.guild.roles, id=734662196025360416)
-                        title = "**Artist Application**"
-                        pag = Paginator(
-                            f"**Work:** {artist_work}\n**Information:** {artist_information}\n**Other:** {artist_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction1.emoji) == "12\N{variation selector-16}\N{combining enclosing keycap}":
-                    music_composer_embed1 = discord.Embed(
-                        title="**Music Composer Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    music_composer_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=music_composer_embed1)
-                    try:
-                        music_composer_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        music_composer_work = music_composer_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if music_composer_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    music_composer_embed2 = discord.Embed(
-                        title="**Music Composer Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    music_composer_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=music_composer_embed2)
-                    try:
-                        music_composer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                                     timeout=1000)
-                        music_composer_information = music_composer_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if music_composer_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    music_composer_embed3 = discord.Embed(
-                        title="**Music Composer Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    music_composer_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=music_composer_embed3)
-                    try:
-                        music_composer_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        music_composer_other = music_composer_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if music_composer_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233898600595597)
-                        some_role = discord.utils.get(ctx.guild.roles, id=735497558855516161)
-                        title = "**Music Composer Application**"
-                        pag = Paginator(
-                            f"**Work:** {music_composer_work}\n**Information:** {music_composer_information}\n**Other:** {music_composer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
-                elif str(reaction1.emoji) == "13\N{variation selector-16}\N{combining enclosing keycap}":
-                    animator_embed1 = discord.Embed(
-                        title="**Animator Application**",
-                        description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                        color=0x0064ff
-                    )
-                    animator_embed1.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=animator_embed1)
-                    try:
-                        animator_work_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        animator_work = animator_work_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if animator_work == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    animator_embed2 = discord.Embed(
-                        title="**Animator Application**",
-                        description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                        color=0x0064ff
-                    )
-                    animator_embed2.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=animator_embed2)
-                    try:
-                        animator_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        animator_information = animator_information_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if animator_information == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    animator_embed3 = discord.Embed(
-                        title="**Animator Application**",
-                        description="***Anything that you've missed that you would like to add onto your current statement?***",
-                        color=0x0064ff
-                    )
-                    animator_embed3.set_footer(
-                        text="Reply to this message within `16 minutes` • Reply with `0` to cancel.")
-                    await ctx.author.send(embed=animator_embed3)
-                    try:
-                        animator_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        animator_other = animator_other_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if animator_other == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    await ctx.author.send(
-                        "Would you like to send this for Application Approval?\n Answer with: \n`1` - yes;\n`0` - no;")
-                    try:
-                        final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        final_choice = final_choice_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    if final_choice == "0":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
-                    elif final_choice == "1":
-                        await ctx.author.send("Sent for approval!")
-                        some_channel = self.bot.get_channel(739233876446281778)
-                        some_role = discord.utils.get(ctx.guild.roles, id=729491617630912613)
-                        title = "**Animator Application**"
-                        pag = Paginator(
-                            f"**Work:** {animator_work}\n**Information:** {animator_information}\n**Other:** {animator_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                            1985)
-
-                        await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                       title=title)
+                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
+                                   title=title)
 
     @commands.command(description="This command is used for posting.")
     @commands.cooldown(3, 10800, commands.BucketType.member)
