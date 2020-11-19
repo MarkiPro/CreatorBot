@@ -2162,8 +2162,8 @@ class Misc(commands.Cog):
                 return
             elif re.findall("yes", final_choice, re.IGNORECASE):
                 await ctx.author.send("Sent for approval!")
-                some_channel = self.bot.get_channel(739233876446281778)
-                some_role = discord.utils.get(ctx.guild.roles, id=729491617630912613)
+                some_channel = self.bot.get_channel(739233745197858855)
+                some_role = discord.utils.get(ctx.guild.roles, id=734662028353994752)
                 title = "**Animator Application**"
                 pag = Paginator(
                     f"**Work:** {animator_work}\n**Information:** {animator_information}\n**Other:** {animator_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
