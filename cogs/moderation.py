@@ -18,8 +18,7 @@ class Moderation(commands.Cog):
     async def clear(self, ctx, amount: int = 0, *, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
 
-        await ctx.message.delete()
-        await channel.purge(limit=amount)
+        await channel.purge(limit=amount + 1)
 
     @commands.command()
     @commands.guild_only()
