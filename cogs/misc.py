@@ -178,7 +178,7 @@ class Misc(commands.Cog):
             """,
             color=0x0064ff
         )
-        categories.set_footer(text="React to this message within `16 minutes` • React with `cancel` to cancel.")
+        categories.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
         await ctx.send(embed=pre_DM_embed)
         await ctx.author.send(embed=categories)
 
@@ -206,7 +206,7 @@ class Misc(commands.Cog):
             programmer_categories = discord.Embed(
                 title="**APPLICATION SETUP**",
                 description="""
-                Which Programmer role would you like to apply for? Reply with the number in front of the role you would like to apply for.
+                Which Programmer role would you like to apply for? Reply with the name of the role you would like to apply for.
 
                 `Python Programmer`;
 
@@ -275,8 +275,7 @@ class Misc(commands.Cog):
                     text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=programmer_embed1)
                 try:
-                    programmer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                      timeout=1000)
+                    programmer_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                     programmer_information = programmer_information_message.content
                 except asyncio.TimeoutError:
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
@@ -785,8 +784,7 @@ class Misc(commands.Cog):
                     text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=programmer_embed1)
                 try:
-                    programmer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                      timeout=1000)
+                    programmer_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                     programmer_information = programmer_information_message.content
                 except asyncio.TimeoutError:
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
@@ -870,8 +868,7 @@ class Misc(commands.Cog):
                     text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=programmer_embed1)
                 try:
-                    programmer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                      timeout=1000)
+                    programmer_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                     programmer_information = programmer_information_message.content
                 except asyncio.TimeoutError:
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
@@ -955,8 +952,7 @@ class Misc(commands.Cog):
                     text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=programmer_embed1)
                 try:
-                    programmer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                      timeout=1000)
+                    programmer_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                     programmer_information = programmer_information_message.content
                 except asyncio.TimeoutError:
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
@@ -1040,8 +1036,7 @@ class Misc(commands.Cog):
                     text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=programmer_embed1)
                 try:
-                    programmer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                      timeout=1000)
+                    programmer_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                     programmer_information = programmer_information_message.content
                 except asyncio.TimeoutError:
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
@@ -1125,8 +1120,7 @@ class Misc(commands.Cog):
                     text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=programmer_embed1)
                 try:
-                    programmer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                      timeout=1000)
+                    programmer_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                     programmer_information = programmer_information_message.content
                 except asyncio.TimeoutError:
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
@@ -2201,7 +2195,7 @@ class Misc(commands.Cog):
         categories = discord.Embed(
             title="**POST SETUP**",
             description="""
-            ***What would you like to do? React with the number in front of the category you would like to post in.***
+            ***What would you like to do? Reply with the name of the category you would like to post in.***
 
 
                 `hiring`;
@@ -2215,9 +2209,9 @@ class Misc(commands.Cog):
             """,
             color=0x0064ff
         )
-        categories.set_footer(text="React to this message within `16 minutes` • Reply with `cancel` to cancel.")
+        categories.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
         await ctx.send(embed=categories_embed)
-        category_message = await ctx.author.send(embed=categories)
+        await ctx.author.send(embed=categories)
 
         def check_dm(m):
             if isinstance(m.channel, discord.DMChannel):
