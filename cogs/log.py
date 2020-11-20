@@ -52,38 +52,43 @@ class Log(Cog):
         suggestions_channel = self.bot.get_channel(712655570737299567)
         top_suggestions_channel = self.bot.get_channel(771822991256059905)
         reactions = message.reactions
-        reaction1 = reactions[0]
-        reaction2 = reactions[1]
-        reaction3 = reactions[2]
 
-        if not message.author.bot and message.channel == suggestions_channel:
+        if not message.author.bot and reactions[0] and message.channel == suggestions_channel:
+            reaction1 = reactions[0]
             if reaction == reaction1 and user in staff_role.members:
                 await message.delete()
-        
-        if reaction == reaction1 and reaction1.count > reaction2.count and reaction1.count >= 10:
-            if message.channel == suggestions_channel:
+        if reactions[0] and reactions[1] and reactions[2]:
+            reaction1 = reactions[0]
+            reaction2 = reactions[1]
+
+            if reaction == reaction1 and reaction1.count > reaction2.count and reaction1.count >= 10:
+                if message.channel == suggestions_channel:
+                    if user in reaction2.users():
+                        reaction.remove()
+                        await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
+                        return
+                    suggest_embed = discord.Embed(
+                        title="**Top Suggestion**",
+                        description=f"**[Message link]({message.jump_url})**",
+                        timestamp=datetime.datetime.utcnow(),
+                        color=0x0064ff
+                    )
+
+                    await top_suggestions_channel.send(embed=suggest_embed)
+
+            elif reaction == reaction2 and reaction2.count > reaction1.count and reaction2.count >= 10 and message.channel == suggestions_channel:
                 if user in reaction2.users():
                     reaction.remove()
                     await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
                     return
-                suggest_embed = discord.Embed(
-                    title="**Top Suggestion**",
-                    description=f"**[Message link]({message.jump_url})**",
-                    timestamp=datetime.datetime.utcnow(),
-                    color=0x0064ff
-                )
-
-                await top_suggestions_channel.send(embed=suggest_embed)
-
-        elif reaction == reaction2 and reaction2.count > reaction1.count and reaction2.count >= 10 and message.channel == suggestions_channel:
-            if user in reaction2.users():
-                reaction.remove()
-                await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
-                return
-            await message.delete()
-        elif reaction == reaction3 and user in staff_role.members:
-            if message.channel == suggestions_channel:
                 await message.delete()
+
+        if reactions[2]:
+            reaction1 = reactions[2]
+
+            if reaction == reaction1 and user in staff_role.members:
+                if message.channel == suggestions_channel:
+                    await message.delete()
 
     @Cog.listener()
     async def on_message(self, message):
