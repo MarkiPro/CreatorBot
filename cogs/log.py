@@ -77,9 +77,9 @@ class Log(Cog):
                     await top_suggestions_channel.send(embed=suggest_embed)
 
             elif reaction == reaction2 and reaction2.count > reaction1.count and reaction2.count >= 10 and message.channel == suggestions_channel:
-                if user in reaction2.users():
+                if user in reaction1.users():
                     reaction.remove()
-                    await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
+                    await user.send("You've already liked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
                     return
                 await message.delete()
         else:
