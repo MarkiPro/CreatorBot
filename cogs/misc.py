@@ -4,6 +4,7 @@ import datetime
 import asyncio
 from paginator import Paginator
 import re
+import time
 
 
 class Misc(commands.Cog):
@@ -197,7 +198,7 @@ class Misc(commands.Cog):
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        if re.findall("cancel", category, re.IGNORECASE):
+        if category.lower() == "cancel":
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
@@ -241,7 +242,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", programmer_category, re.IGNORECASE):
+            if programmer_category.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -262,7 +263,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_work, re.IGNORECASE):
+                if programmer_work.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -281,7 +282,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_information, re.IGNORECASE):
+                if programmer_information.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -301,7 +302,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_other, re.IGNORECASE):
+                if programmer_other.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -346,7 +347,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_work, re.IGNORECASE):
+                if programmer_work.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -366,7 +367,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_information, re.IGNORECASE):
+                if programmer_information.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -386,7 +387,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_other, re.IGNORECASE):
+                if programmer_other.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -431,7 +432,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_work, re.IGNORECASE):
+                if programmer_work.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -451,7 +452,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_information, re.IGNORECASE):
+                if programmer_information.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -470,7 +471,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_other, re.IGNORECASE):
+                if programmer_other.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -515,7 +516,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_work, re.IGNORECASE):
+                if programmer_work.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -535,7 +536,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_information, re.IGNORECASE):
+                if programmer_information.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -555,7 +556,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_other, re.IGNORECASE):
+                if programmer_other.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -601,7 +602,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_work, re.IGNORECASE):
+                if programmer_work.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -621,7 +622,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_information, re.IGNORECASE):
+                if programmer_information.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -641,7 +642,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_other, re.IGNORECASE):
+                if programmer_other.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -686,7 +687,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_work, re.IGNORECASE):
+                if programmer_work.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -706,7 +707,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_information, re.IGNORECASE):
+                if programmer_information.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -726,7 +727,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_other, re.IGNORECASE):
+                if programmer_other.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -743,7 +744,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                elif re.findall("cancel", programmer_other, re.IGNORECASE):
+                elif re.findall("yes", final_choice, re.IGNORECASE):
                     await ctx.author.send("Sent for approval!")
                     some_channel = self.bot.get_channel(739233448186609756)
                     some_role = discord.utils.get(ctx.guild.roles, id=732378157449216040)
@@ -771,7 +772,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_work, re.IGNORECASE):
+                if programmer_work.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -790,7 +791,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_information, re.IGNORECASE):
+                if programmer_information.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -810,7 +811,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_other, re.IGNORECASE):
+                if programmer_other.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -855,7 +856,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_work, re.IGNORECASE):
+                if programmer_work.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -874,7 +875,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_information, re.IGNORECASE):
+                if programmer_information.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -894,7 +895,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_other, re.IGNORECASE):
+                if programmer_other.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -939,7 +940,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_work, re.IGNORECASE):
+                if programmer_work.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -958,7 +959,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_information, re.IGNORECASE):
+                if programmer_information.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -978,7 +979,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_other, re.IGNORECASE):
+                if programmer_other.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -991,11 +992,11 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", final_choice, re.IGNORECASE):
+                if re.findall("no", final_choice, re.IGNORECASE):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                elif re.findall("cancel", final_choice, re.IGNORECASE):
+                elif re.findall("yes", final_choice, re.IGNORECASE):
                     await ctx.author.send("Sent for approval!")
                     some_channel = self.bot.get_channel(739233479098761307)
                     some_role = discord.utils.get(ctx.guild.roles, id=735147661430227025)
@@ -1023,7 +1024,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_work, re.IGNORECASE):
+                if programmer_work.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -1042,7 +1043,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_information, re.IGNORECASE):
+                if programmer_information.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -1062,7 +1063,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_other, re.IGNORECASE):
+                if programmer_other.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -1107,7 +1108,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_work, re.IGNORECASE):
+                if programmer_work.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -1126,7 +1127,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_information, re.IGNORECASE):
+                if programmer_information.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -1146,7 +1147,7 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("cancel", programmer_other, re.IGNORECASE):
+                if programmer_other.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
@@ -1191,7 +1192,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", game_designer_work, re.IGNORECASE):
+            if game_designer_work.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1211,7 +1212,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", game_designer_information, re.IGNORECASE):
+            if game_designer_information.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1230,7 +1231,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", game_designer_other, re.IGNORECASE):
+            if game_designer_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1274,7 +1275,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", threed_modeler_work, re.IGNORECASE):
+            if threed_modeler_work.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1294,7 +1295,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", threed_modeler_information, re.IGNORECASE):
+            if threed_modeler_information.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1313,7 +1314,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", threed_modeler_other, re.IGNORECASE):
+            if threed_modeler_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1357,7 +1358,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", youtuber_subs, re.IGNORECASE):
+            if youtuber_subs.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1376,7 +1377,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", youtuber_channel, re.IGNORECASE):
+            if youtuber_channel.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1395,7 +1396,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", youtuber_other, re.IGNORECASE):
+            if youtuber_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1440,7 +1441,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", builder_work, re.IGNORECASE):
+            if builder_work.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1459,7 +1460,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", builder_information, re.IGNORECASE):
+            if builder_information.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1478,7 +1479,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", builder_other, re.IGNORECASE):
+            if builder_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1523,7 +1524,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", twitch_streamer_follows, re.IGNORECASE):
+            if twitch_streamer_follows.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1543,7 +1544,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", twitch_streamer_channel, re.IGNORECASE):
+            if twitch_streamer_channel.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1562,7 +1563,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", twitch_streamer_other, re.IGNORECASE):
+            if twitch_streamer_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1606,7 +1607,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", gfx_designer_work, re.IGNORECASE):
+            if gfx_designer_work.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1626,7 +1627,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", gfx_designer_information, re.IGNORECASE):
+            if gfx_designer_information.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1689,7 +1690,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", translator_work, re.IGNORECASE):
+            if translator_work.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1709,7 +1710,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", translator_information, re.IGNORECASE):
+            if translator_information.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1728,7 +1729,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", translator_other, re.IGNORECASE):
+            if translator_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1772,7 +1773,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", ui_designer_work, re.IGNORECASE):
+            if ui_designer_work.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1792,7 +1793,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", ui_designer_information, re.IGNORECASE):
+            if ui_designer_information.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1811,7 +1812,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", ui_designer_other, re.IGNORECASE):
+            if ui_designer_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1856,7 +1857,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", clothing_designer_work, re.IGNORECASE):
+            if clothing_designer_work.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1876,7 +1877,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", clothing_designer_information, re.IGNORECASE):
+            if clothing_designer_information.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1896,7 +1897,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", clothing_designer_other, re.IGNORECASE):
+            if clothing_designer_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1940,7 +1941,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", artist_work, re.IGNORECASE):
+            if artist_work.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1959,7 +1960,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", artist_information, re.IGNORECASE):
+            if artist_information.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -1978,7 +1979,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", artist_other, re.IGNORECASE):
+            if artist_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2022,7 +2023,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", music_composer_work, re.IGNORECASE):
+            if music_composer_work.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2042,7 +2043,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", music_composer_information, re.IGNORECASE):
+            if music_composer_information.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2061,7 +2062,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", music_composer_other, re.IGNORECASE):
+            if music_composer_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2105,7 +2106,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", animator_work, re.IGNORECASE):
+            if animator_work.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2124,7 +2125,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", animator_information, re.IGNORECASE):
+            if animator_information.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2143,7 +2144,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", animator_other, re.IGNORECASE):
+            if animator_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2212,6 +2213,7 @@ class Misc(commands.Cog):
         categories.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
         await ctx.send(embed=categories_embed)
         await ctx.author.send(embed=categories)
+        hiring_debounce = True
 
         def check_dm(m):
             if isinstance(m.channel, discord.DMChannel):
@@ -2228,106 +2230,115 @@ class Misc(commands.Cog):
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        if re.findall("cancel", category, re.IGNORECASE):
+        if category.lower() == "cancel":
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         elif re.findall("hiring", category, re.IGNORECASE):
-            hiring_embed1 = discord.Embed(
-                title="**HIRING POST**",
-                description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.***",
-                color=0x0064ff
-            )
-            hiring_embed1.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=hiring_embed1)
-            try:
-                hiring_details_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                hiring_details = hiring_details_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if re.findall("cancel", hiring_details, re.IGNORECASE):
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            hiring_embed2 = discord.Embed(
-                title="**HIRING POST**",
-                description="***Describe the payment to this job.***",
-                color=0x0064ff
-            )
-            hiring_embed2.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=hiring_embed2)
-            try:
-                hiring_payment_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                hiring_payment = hiring_payment_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if re.findall("cancel", hiring_payment, re.IGNORECASE):
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            hiring_embed3 = discord.Embed(
-                title="**HIRING POST**",
-                description="***Showcase some of your work here, could be a link to a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                color=0x0064ff
-            )
-            hiring_embed3.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=hiring_embed3)
-            try:
-                hiring_image_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                hiring_image = hiring_image_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if re.findall("cancel", hiring_image, re.IGNORECASE):
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            hiring_embed4 = discord.Embed(
-                title="**HIRING POST**",
-                description="***In case you have something else that you would like to add onto the previous statements, please provide it now.***",
-                color=0x0064ff
-            )
-            hiring_embed4.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=hiring_embed4)
-            try:
-                hiring_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                hiring_other = hiring_other_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if re.findall("cancel", hiring_other, re.IGNORECASE):
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            await ctx.author.send(
-                "Would you like to send this for Post Approval?\n Reply with `yes` or `no`")
-            try:
-                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                final_choice = final_choice_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if re.findall("no", category, re.IGNORECASE):
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if re.findall("yes", category, re.IGNORECASE):
-                await ctx.author.send("Sent for approval!")
-                some_channel = self.bot.get_channel(739247560065024050)
-                end_channel = self.bot.get_channel(727550350097252482)
-                title = "**HIRING POST**"
-                pag = Paginator(
-                    f"**About the job:** {hiring_details}\n**Payment:** {hiring_payment}\n**Showcase:** {hiring_image}\n**Other:** {hiring_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                    1985)
+            if hiring_debounce == True:
+                hiring_debounce = False
 
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
+                starttime = time.time()
+
+                hiring_embed1 = discord.Embed(
+                    title="**HIRING POST**",
+                    description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.***",
+                    color=0x0064ff
+                )
+                hiring_embed1.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+                await ctx.author.send(embed=hiring_embed1)
+                try:
+                    hiring_details_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    hiring_details = hiring_details_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if hiring_details.lower() == "cancel":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                hiring_embed2 = discord.Embed(
+                    title="**HIRING POST**",
+                    description="***Describe the payment to this job.***",
+                    color=0x0064ff
+                )
+                hiring_embed2.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+                await ctx.author.send(embed=hiring_embed2)
+                try:
+                    hiring_payment_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    hiring_payment = hiring_payment_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if hiring_payment.lower() == "cancel":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                hiring_embed3 = discord.Embed(
+                    title="**HIRING POST**",
+                    description="***Showcase some of your work here, could be a link to a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
+                    color=0x0064ff
+                )
+                hiring_embed3.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+                await ctx.author.send(embed=hiring_embed3)
+                try:
+                    hiring_image_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    hiring_image = hiring_image_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if hiring_image.lower() == "cancel":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                hiring_embed4 = discord.Embed(
+                    title="**HIRING POST**",
+                    description="***In case you have something else that you would like to add onto the previous statements, please provide it now.***",
+                    color=0x0064ff
+                )
+                hiring_embed4.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+                await ctx.author.send(embed=hiring_embed4)
+                try:
+                    hiring_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    hiring_other = hiring_other_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if hiring_other.lower() == "cancel":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                await ctx.author.send(
+                    "Would you like to send this for Post Approval?\n Reply with `yes` or `no`")
+                try:
+                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    final_choice = final_choice_message.content
+                except asyncio.TimeoutError:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if re.findall("no", category, re.IGNORECASE):
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if re.findall("yes", category, re.IGNORECASE):
+                    await ctx.author.send("Sent for approval!")
+                    some_channel = self.bot.get_channel(739247560065024050)
+                    end_channel = self.bot.get_channel(727550350097252482)
+                    title = "**HIRING POST**"
+                    pag = Paginator(
+                        f"**About the job:** {hiring_details}\n**Payment:** {hiring_payment}\n**Showcase:** {hiring_image}\n**Other:** {hiring_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
+                        1985)
+
+                    await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
+                    current_cooldown_time = time.sleep(60.0 - ((time.time() - starttime) % 60.0))
+                    hiring_debounce = True
+            elif hiring_debounce == False:
+                return await ctx.author.send("You are on 3 hour cooldown, wait it out or try another category.")
         elif re.findall("for_hire", category, re.IGNORECASE):
             for_hire_embed1 = discord.Embed(
                 title="**FOR-HIRE POST**",
@@ -2343,7 +2354,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", for_hire_specialties, re.IGNORECASE):
+            if for_hire_specialties.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2361,7 +2372,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", for_hire_showcase, re.IGNORECASE):
+            if for_hire_showcase.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2379,7 +2390,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", for_hire_payment, re.IGNORECASE):
+            if for_hire_payment.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2397,7 +2408,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", for_hire_other, re.IGNORECASE):
+            if for_hire_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2440,7 +2451,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", sell_creations_showcase, re.IGNORECASE):
+            if sell_creations_showcase.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2459,7 +2470,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", sell_creations_payment, re.IGNORECASE):
+            if sell_creations_payment.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2478,7 +2489,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", sell_creations_other, re.IGNORECASE):
+            if sell_creations_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2521,7 +2532,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", reported_user, re.IGNORECASE):
+            if reported_user.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2540,7 +2551,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", report_reason, re.IGNORECASE):
+            if report_reason.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2559,7 +2570,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", report_evidence, re.IGNORECASE):
+            if report_evidence.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
@@ -2578,7 +2589,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            if re.findall("cancel", report_other, re.IGNORECASE):
+            if report_other.lower() == "cancel":
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
