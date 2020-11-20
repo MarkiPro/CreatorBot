@@ -57,6 +57,7 @@ class Log(Cog):
             reaction1 = reactions[0]
             if reaction == reaction1 and user in staff_role.members:
                 await message.delete()
+
         if len(reactions) >= 2:
             reaction1 = reactions[0]
             reaction2 = reactions[1]
@@ -97,7 +98,7 @@ class Log(Cog):
     @Cog.listener()
     async def on_message(self, message):
         suggestions_channel = self.bot.get_channel(712655570737299567)
-        banned_links = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://web.roblox.com"]
+        banned_links = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://web.roblox.com", "https://brazzers.com"]
         banned_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah", "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger", "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar", "n1gguh", "n1ggress", "n1gette", "negro", "n1bba", "n1ba"]
         banned_links_v2 = ["https://pornhub.com", "https://porn.com", "https://fuq.com"]
         log_channel = self.bot.get_channel(712761128895381676)
