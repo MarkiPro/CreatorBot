@@ -57,7 +57,7 @@ class Log(Cog):
             reaction1 = reactions[0]
             if reaction == reaction1 and user in staff_role.members:
                 await message.delete()
-        if reactions[0] and reactions[1] and reactions[2]:
+        if len(reactions) >= 2:
             reaction1 = reactions[0]
             reaction2 = reactions[1]
 
@@ -82,13 +82,17 @@ class Log(Cog):
                     await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
                     return
                 await message.delete()
+        else:
+            return
 
-        if reactions[2]:
+        if len(reactions) >= 2:
             reaction1 = reactions[2]
 
             if reaction == reaction1 and user in staff_role.members:
                 if message.channel == suggestions_channel:
                     await message.delete()
+        else:
+            return
 
     @Cog.listener()
     async def on_message(self, message):
