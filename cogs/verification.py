@@ -19,12 +19,14 @@ class Verification(commands.Cog):
     async def verify(self, ctx):
         verified_role = ctx.guild.get_role(695328817157373992)
         log_channel = ctx.guild.get_channel(745904248461590549)
+        verification_channel = ctx.guild.get_channel(745331129535561758)
 
-        if ctx in verified_role.members:
+        if ctx.author in verified_role.members:
             return ctx.send("You are already verified!")
         else:
             pass
-
+        if ctx.channel != verification_channel:
+            return ctx.send("Please go to verify in <@#745331129535561758>, and if you need assistance, you should first read over <@#713020247543906368>!")
         choice_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
                        "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D",
                        "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X",
