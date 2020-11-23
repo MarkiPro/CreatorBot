@@ -124,10 +124,15 @@ class Misc(commands.Cog):
         await ctx.send(embed=credits_embed)
 
     @commands.command(description="This command is used for applying for appliable roles (STAFF ROLES NOT INCLUDED!).")
-    @commands.cooldown(3, 10800, commands.BucketType.member)
+    @commands.cooldown(3, 3600, commands.BucketType.member)
     async def apply(self, ctx):
         bot_commands = self.bot.get_channel(712659793008918538)
+        applications_muted = ctx.guild.get_role(780494171730477086)
 
+        if ctx.author in applications_muted.members:
+            return await ctx.send("You are restricted from using this command, you have the `Applications Muted` role. Please consult with a staff member about it.")
+        else:
+            pass
         if ctx.channel != bot_commands:
             return
         else:
@@ -2174,10 +2179,15 @@ class Misc(commands.Cog):
                                title=title)
 
     @commands.command(description="This command is used for posting.")
-    @commands.cooldown(3, 10800, commands.BucketType.member)
+    @commands.cooldown(3, 3600, commands.BucketType.member)
     async def post(self, ctx):
         bot_commands = self.bot.get_channel(712659793008918538)
+        post_muted = ctx.guild.get_role(780494155075420262)
 
+        if ctx.author in post_muted.members:
+            return await ctx.send("You are restricted from using this command, you have the `Post Muted` role. Please consult with a staff member about it.")
+        else:
+            pass
         if ctx.channel != bot_commands:
             return
         else:
@@ -2213,7 +2223,6 @@ class Misc(commands.Cog):
         categories.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
         await ctx.send(embed=categories_embed)
         await ctx.author.send(embed=categories)
-        hiring_debounce = True
 
         def check_dm(m):
             if isinstance(m.channel, discord.DMChannel):
@@ -2235,10 +2244,6 @@ class Misc(commands.Cog):
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         elif re.findall("hiring", category, re.IGNORECASE):
-            if hiring_debounce == True:
-                hiring_debounce = False
-
-                starttime = time.time()
 
                 hiring_embed1 = discord.Embed(
                     title="**HIRING POST**",
@@ -2335,10 +2340,6 @@ class Misc(commands.Cog):
                         1985)
 
                     await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
-                    current_cooldown_time = time.sleep(60.0 - ((time.time() - starttime) % 60.0))
-                    hiring_debounce = True
-            elif hiring_debounce == False:
-                return await ctx.author.send("You are on 3 hour cooldown, wait it out or try another category.")
         elif re.findall("for_hire", category, re.IGNORECASE):
             for_hire_embed1 = discord.Embed(
                 title="**FOR-HIRE POST**",
