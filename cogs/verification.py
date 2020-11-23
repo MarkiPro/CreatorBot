@@ -9,6 +9,7 @@ import os
 import asyncio
 import datetime
 import matplotlib.font_manager as fm
+import robloxpy
 
 
 class Verification(commands.Cog):
@@ -104,6 +105,7 @@ class Verification(commands.Cog):
             )
             log_embed2.add_field(name="Looking for", value=f"{code}", inline=True)
             log_embed2.add_field(name="Given", value=f"{answer}", inline=True)
+            await ctx.author.add_roles(verified_role)
             await log_channel.send(embed=log_embed2)
         elif answer != code:
             await ctx.author.send("You failed the captcha, please call the `>verify` command again in <#745331129535561758> and try again.")
