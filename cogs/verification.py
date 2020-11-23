@@ -22,11 +22,11 @@ class Verification(commands.Cog):
         verification_channel = ctx.guild.get_channel(745331129535561758)
 
         if ctx.author in verified_role.members:
-            return ctx.send("You are already verified!")
+            return await ctx.send("You are already verified!")
         else:
             pass
         if ctx.channel != verification_channel:
-            return ctx.send("Please go to verify in <@#745331129535561758>, and if you need assistance, you should first read over <@#713020247543906368>!")
+            return await ctx.send("Please go to verify in <@#745331129535561758>, and if you need assistance, you should first read over <@#713020247543906368>!")
         else:
             pass
         choice_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
@@ -54,7 +54,7 @@ class Verification(commands.Cog):
         blue_text = (1, 5, 48)
         transparent = (0, 0, 0, 0)
 
-        font = ImageFont.truetype(fm.findfont(fm.FontProperties(family="fantasy")), 20)
+        font = ImageFont.truetype(fm.findfont(fm.FontProperties(family="fantasy")), 15)
         wm = Image.new('RGBA', (width, height))
         im = Image.new('RGBA', (width, height))  # Change this line too.
 
