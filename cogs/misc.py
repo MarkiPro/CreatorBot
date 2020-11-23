@@ -134,7 +134,7 @@ class Misc(commands.Cog):
         else:
             pass
         if ctx.channel != bot_commands:
-            return
+            return await ctx.send("Run the command again in <#712659793008918538>")
         else:
             pass
         cancel_prompt_embed = discord.Embed(
@@ -2189,7 +2189,7 @@ class Misc(commands.Cog):
         else:
             pass
         if ctx.channel != bot_commands:
-            return
+            return await ctx.send("Run the command again in <#712659793008918538>")
         else:
             pass
         cancel_prompt_embed = discord.Embed(
