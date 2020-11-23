@@ -6,3 +6,5 @@ pillow~=8.0.1
 aiohttp~=3.7.2
 numpy~=1.19.3
 Augmentor~=0.2.8
+Paginator~=0.5.1
+matplotlib~=3.3.3
