@@ -38,10 +38,8 @@ class Verification(commands.Cog):
         choice6 = choice_list[random.randint(0, 61)]
         choice7 = choice_list[random.randint(0, 61)]
         choice8 = choice_list[random.randint(0, 61)]
-        choice9 = choice_list[random.randint(0, 61)]
-        choice10 = choice_list[random.randint(0, 61)]
 
-        code = (choice1 + choice2 + choice3 + choice4 + choice5 + choice6 + choice7 + choice8 + choice9 + choice10)
+        code = (choice1 + choice2 + choice3 + choice4 + choice5 + choice6 + choice7 + choice8)
 
         width = 150
         height = 75
@@ -67,7 +65,7 @@ class Verification(commands.Cog):
 
         im.save(filename)
 
-        await ctx.send(content="**Welcome to Content Creators**!\nPlease send the captcha code here, you have 16 minutes to do so.\nHello! You are required to complete a captcha before entering the server.\n*NOTE: This is **Case Sensitive***.\n**Why?**\nThis is to protect the server against targeted attacks using automated user accounts.\n**Your Captcha:**", file=discord.File(filename))
+        await ctx.author.send(content="**Welcome to Content Creators**!\nPlease send the captcha code here, you have 16 minutes to do so.\nHello! You are required to complete a captcha before entering the server.\n*NOTE: This is **Case Sensitive***.\n**Why?**\nThis is to protect the server against targeted attacks using automated user accounts.\n**Your Captcha:**", file=discord.File(filename))
 
         def check_dm(m):
             if isinstance(m.channel, discord.DMChannel):
@@ -85,7 +83,7 @@ class Verification(commands.Cog):
             log_embed1 = discord.Embed(
                 title="**Verification Failed**",
                 description=f"Verification for {ctx.author.mention}({ctx.author})",
-                color=0x0064ff,
+                color=0xff0000,
                 timestamp=datetime.datetime.utcnow()
             )
             log_embed1.add_field(name="Looking for", value=f"{code}", inline=True)
@@ -98,7 +96,7 @@ class Verification(commands.Cog):
             log_embed2 = discord.Embed(
                 title="**Verification Success**",
                 description=f"Verification for {ctx.author.mention}({ctx.author})",
-                color=0x0064ff,
+                color=0x00fa00,
                 timestamp=datetime.datetime.utcnow()
             )
             log_embed2.add_field(name="Looking for", value=f"{code}", inline=True)
@@ -110,7 +108,7 @@ class Verification(commands.Cog):
             log_embed3 = discord.Embed(
                 title="**Verification Failed**",
                 description=f"Verification for {ctx.author.mention}({ctx.author})",
-                color=0x0064ff,
+                color=0xff0000,
                 timestamp=datetime.datetime.utcnow()
             )
             log_embed3.add_field(name="Looking for", value=f"{code}", inline=True)
