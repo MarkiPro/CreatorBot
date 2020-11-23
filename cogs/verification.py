@@ -27,6 +27,8 @@ class Verification(commands.Cog):
             pass
         if ctx.channel != verification_channel:
             return ctx.send("Please go to verify in <@#745331129535561758>, and if you need assistance, you should first read over <@#713020247543906368>!")
+        else:
+            pass
         choice_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
                        "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D",
                        "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X",
@@ -81,7 +83,7 @@ class Verification(commands.Cog):
             answer_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
             answer = answer_message.content
         except asyncio.TimeoutError:
-            return await ctx.author.send("You ran out of time, please call the `>verify` command again in <#745331129535561758> and try again.")
+            await ctx.author.send("You ran out of time, please call the `>verify` command again in <#745331129535561758> and try again.")
             log_embed1 = discord.Embed(
                 title="**Verification Failed**",
                 description=f"Verification for {ctx.author.mention}({ctx.author})",
@@ -92,7 +94,6 @@ class Verification(commands.Cog):
             log_embed1.add_field(name="Given", value=f"{answer}", inline=True)
             log_embed1.add_field(name="Reason", value=f"Ran out of time!", inline=True)
             await log_channel.send(embed=log_embed1)
-
         if answer == code:
             await ctx.author.send("You did the captcha correctly! Good job! You now have the verified role and full access to the server.")
             log_embed2 = discord.Embed(
@@ -104,7 +105,6 @@ class Verification(commands.Cog):
             log_embed2.add_field(name="Looking for", value=f"{code}", inline=True)
             log_embed2.add_field(name="Given", value=f"{answer}", inline=True)
             await log_channel.send(embed=log_embed2)
-
         elif answer != code:
             await ctx.author.send("You failed the captcha, please call the `>verify` command again in <#745331129535561758> and try again.")
             log_embed3 = discord.Embed(
@@ -117,7 +117,6 @@ class Verification(commands.Cog):
             log_embed3.add_field(name="Given", value=f"{answer}", inline=True)
             log_embed3.add_field(name="Reason", value=f"Sent the wrong code!", inline=True)
             await log_channel.send(embed=log_embed3)
-
         os.remove(filename)
 
 
