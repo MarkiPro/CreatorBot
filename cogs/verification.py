@@ -9,7 +9,6 @@ import os
 import asyncio
 import datetime
 import matplotlib.font_manager as fm
-import robloxpy
 
 
 class Verification(commands.Cog):
