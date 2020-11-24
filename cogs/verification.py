@@ -74,7 +74,7 @@ class Verification(commands.Cog):
 
         im_url = request.pathname2url(filename)
 
-        print(im_url)
+        print(im_url.geturl())
 
         verif_embed = discord.Embed(
             title="**Welcome to Content Creators**",
@@ -83,7 +83,7 @@ class Verification(commands.Cog):
             color=0x0064ff
         )
 
-        verif_embed.set_image(url=im_url)
+        verif_embed.set_image(url=im_url.geturl())
 
         await ctx.author.send(embed=verif_embed)
 
