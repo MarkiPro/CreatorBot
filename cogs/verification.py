@@ -48,7 +48,7 @@ class Verification(commands.Cog):
         code = (choice1 + choice2 + choice3 + choice4 + choice5 + choice6 + choice7 + choice8 + choice9 + choice10)
 
         width = 300
-        height = 200
+        height = 100
         opacity = 1
         text = code
         filename = f"result{text}.png"
