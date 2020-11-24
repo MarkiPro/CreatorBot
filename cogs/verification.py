@@ -9,6 +9,7 @@ import os
 import asyncio
 import datetime
 import matplotlib.font_manager as fm
+from urllib import request as request
 
 
 class Verification(commands.Cog):
@@ -71,7 +72,18 @@ class Verification(commands.Cog):
 
         im.save(filename)
 
-        await ctx.author.send(content="**Welcome to Content Creators**!\nPlease send the captcha code here, you have 16 minutes to do so.\nHello! You are required to complete a captcha before entering the server.\n*NOTE: This is **Case Sensitive***.\n**Why?**\nThis is to protect the server against targeted attacks using automated user accounts.\n**Your Captcha:**", file=discord.File(filename))
+        im_url = request.pathname2url(filename)
+
+        verif_embed = discord.Embed(
+            title="**Welcome to Content Creators**",
+            description="Please send the captcha code here, you have 16 minutes to do so.\nHello! You are required to complete a captcha before entering the server.\n*NOTE: This is **Case Sensitive***.\n**Why?**\nThis is to protect the server against targeted attacks using automated user accounts.\n**Your Captcha:**",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
+        )
+
+        verif_embed.set_image(url=im_url)
+
+        await ctx.author.send(embed=verif_embed)
 
         def check_dm(m):
             if isinstance(m.channel, discord.DMChannel):
@@ -84,6 +96,30 @@ class Verification(commands.Cog):
         try:
             answer_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
             answer = answer_message.content
+            if answer == code:
+                await ctx.author.send("You did the captcha correctly! Good job! You now have the verified role and full access to the server.")
+                log_embed2 = discord.Embed(
+                    title="**Verification Success**",
+                    description=f"Verification for {ctx.author.mention}({ctx.author})",
+                    color=0x00fa00,
+                    timestamp=datetime.datetime.utcnow()
+                )
+                log_embed2.add_field(name="Looking for", value=f"{code}", inline=True)
+                log_embed2.add_field(name="Given", value=f"{answer}", inline=True)
+                await ctx.author.add_roles(verified_role)
+                await log_channel.send(embed=log_embed2)
+            elif answer != code:
+                await ctx.author.send("You failed the captcha, please call the `>verify` command again in <#745331129535561758> and try again.")
+                log_embed3 = discord.Embed(
+                    title="**Verification Failed**",
+                    description=f"Verification for {ctx.author.mention}({ctx.author})",
+                    color=0xff0000,
+                    timestamp=datetime.datetime.utcnow()
+                )
+                log_embed3.add_field(name="Looking for", value=f"{code}", inline=True)
+                log_embed3.add_field(name="Given", value=f"{answer}", inline=True)
+                log_embed3.add_field(name="Reason", value=f"Sent the wrong code!", inline=True)
+                await log_channel.send(embed=log_embed3)
         except asyncio.TimeoutError:
             await ctx.author.send("You ran out of time, please call the `>verify` command again in <#745331129535561758> and try again.")
             log_embed1 = discord.Embed(
@@ -93,35 +129,8 @@ class Verification(commands.Cog):
                 timestamp=datetime.datetime.utcnow()
             )
             log_embed1.add_field(name="Looking for", value=f"{code}", inline=True)
-            log_embed1.add_field(name="Given", value=f"{answer}", inline=True)
             log_embed1.add_field(name="Reason", value=f"Ran out of time!", inline=True)
             await log_channel.send(embed=log_embed1)
-            os.remove(filename)
-            return
-        if answer == code:
-            await ctx.author.send("You did the captcha correctly! Good job! You now have the verified role and full access to the server.")
-            log_embed2 = discord.Embed(
-                title="**Verification Success**",
-                description=f"Verification for {ctx.author.mention}({ctx.author})",
-                color=0x00fa00,
-                timestamp=datetime.datetime.utcnow()
-            )
-            log_embed2.add_field(name="Looking for", value=f"{code}", inline=True)
-            log_embed2.add_field(name="Given", value=f"{answer}", inline=True)
-            await ctx.author.add_roles(verified_role)
-            await log_channel.send(embed=log_embed2)
-        elif answer != code:
-            await ctx.author.send("You failed the captcha, please call the `>verify` command again in <#745331129535561758> and try again.")
-            log_embed3 = discord.Embed(
-                title="**Verification Failed**",
-                description=f"Verification for {ctx.author.mention}({ctx.author})",
-                color=0xff0000,
-                timestamp=datetime.datetime.utcnow()
-            )
-            log_embed3.add_field(name="Looking for", value=f"{code}", inline=True)
-            log_embed3.add_field(name="Given", value=f"{answer}", inline=True)
-            log_embed3.add_field(name="Reason", value=f"Sent the wrong code!", inline=True)
-            await log_channel.send(embed=log_embed3)
         os.remove(filename)
 
 
