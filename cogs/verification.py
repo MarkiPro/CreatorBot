@@ -62,7 +62,7 @@ class Verification(commands.Cog):
 
         draw = ImageDraw.Draw(wm)
         w, h = draw.textsize(text, font)
-        draw.text(((width - w), (height - h)), text, blue_text, font)
+        draw.text(((width - w)/2, (height - h)/2), text, blue_text, font)
 
         en = ImageEnhance.Brightness(wm)
         # en.putalpha(mask)
