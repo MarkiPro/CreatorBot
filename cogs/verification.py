@@ -72,6 +72,8 @@ class Verification(commands.Cog):
 
         im.save(filename)
 
+        f = discord.File(filename, filename=filename)
+
         verif_embed = discord.Embed(
             title="**Welcome to Content Creators**",
             description="Please send the captcha code here, you have 16 minutes to do so.\nHello! You are required to complete a captcha before entering the server.\n*NOTE: This is **Case Sensitive***.\n**Why?**\nThis is to protect the server against targeted attacks using automated user accounts.\n**Your Captcha:**",
@@ -81,7 +83,7 @@ class Verification(commands.Cog):
 
         verif_embed.set_image(url=f"attachment://{filename}")
 
-        await ctx.author.send(embed=verif_embed)
+        await ctx.author.send(embed=verif_embed, file=f)
 
         def check_dm(m):
             if isinstance(m.channel, discord.DMChannel):
