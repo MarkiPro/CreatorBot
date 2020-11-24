@@ -30,21 +30,69 @@ class Verification(commands.Cog):
             return await ctx.send("Please go to verify in <@#745331129535561758>, and if you need assistance, you should first read over <@#713020247543906368>!")
         else:
             pass
-        choice_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
-                       "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D",
-                       "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X",
-                       "Y", "Z"]
+        choice_list = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
+                       "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ""}
 
         choice1 = choice_list[random.randint(0, 61)]
+        rand_choice1 = random.randint(1, 2)
+        if rand_choice1 == 1:
+            choice1.lower()
+        elif rand_choice1 == 2:
+            choice1.upper()
         choice2 = choice_list[random.randint(0, 61)]
+        rand_choice2 = random.randint(1, 2)
+        if rand_choice2 == 1:
+            choice2.lower()
+        elif rand_choice2 == 2:
+            choice2.upper()
         choice3 = choice_list[random.randint(0, 61)]
+        rand_choice3 = random.randint(1, 2)
+        if rand_choice3 == 1:
+            choice3.lower()
+        elif rand_choice3 == 2:
+            choice3.upper()
         choice4 = choice_list[random.randint(0, 61)]
+        rand_choice4 = random.randint(1, 2)
+        if rand_choice4 == 1:
+            choice4.lower()
+        elif rand_choice4 == 2:
+            choice4.upper()
         choice5 = choice_list[random.randint(0, 61)]
+        rand_choice5 = random.randint(1, 2)
+        if rand_choice5 == 1:
+            choice5.lower()
+        elif rand_choice5 == 2:
+            choice5.upper()
         choice6 = choice_list[random.randint(0, 61)]
+        rand_choice6 = random.randint(1, 2)
+        if rand_choice6 == 1:
+            choice6.lower()
+        elif rand_choice6 == 2:
+            choice6.upper()
         choice7 = choice_list[random.randint(0, 61)]
+        rand_choice7 = random.randint(1, 2)
+        if rand_choice7 == 1:
+            choice7.lower()
+        elif rand_choice7 == 2:
+            choice7.upper()
         choice8 = choice_list[random.randint(0, 61)]
+        rand_choice8 = random.randint(1, 2)
+        if rand_choice8 == 1:
+            choice8.lower()
+        elif rand_choice8 == 2:
+            choice8.upper()
         choice9 = choice_list[random.randint(0, 61)]
+        rand_choice9 = random.randint(1, 2)
+        if rand_choice9 == 1:
+            choice9.lower()
+        elif rand_choice9 == 2:
+            choice9.upper()
         choice10 = choice_list[random.randint(0, 61)]
+        rand_choice10 = random.randint(1, 2)
+        if rand_choice10 == 1:
+            choice10.lower()
+        elif rand_choice10 == 2:
+            choice10.upper()
 
         code = (choice1 + choice2 + choice3 + choice4 + choice5 + choice6 + choice7 + choice8 + choice9 + choice10)
 
@@ -59,7 +107,7 @@ class Verification(commands.Cog):
 
         font = ImageFont.truetype(fm.findfont(fm.FontProperties(family="fantasy")), 25)
         wm = Image.new('RGBA', (width, height))
-        im = Image.new('RGBA', (width, height), blue_background)  # Change this line too.
+        im = Image.open("blue-lightening-backgroundd_105325-58.jpg")  # Change this line too.
 
         draw = ImageDraw.Draw(im)
         w, h = draw.textsize(text, font)
