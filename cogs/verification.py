@@ -47,8 +47,8 @@ class Verification(commands.Cog):
 
         code = (choice1 + choice2 + choice3 + choice4 + choice5 + choice6 + choice7 + choice8 + choice9 + choice10)
 
-        width = 854
-        height = 480
+        width = 300
+        height = 200
         opacity = 1
         text = code
         filename = f"result{text}.png"
@@ -56,13 +56,13 @@ class Verification(commands.Cog):
         blue_text = (1, 5, 48)
         transparent = (0, 0, 0, 0)
 
-        font = ImageFont.truetype(fm.findfont(fm.FontProperties(family="fantasy")), 90)
+        font = ImageFont.truetype(fm.findfont(fm.FontProperties(family="fantasy")), 100)
         wm = Image.new('RGBA', (width, height))
         im = Image.new('RGBA', (width, height), blue_background)  # Change this line too.
 
         draw = ImageDraw.Draw(wm)
         w, h = draw.textsize(text, font)
-        draw.text(((width - w)/1.8093220339, (height - h)/1.8093220339), text, blue_text, font)
+        draw.text(((width - w)/2, (height - h)/2), text, blue_text, font)
 
         en = ImageEnhance.Brightness(wm)
         # en.putalpha(mask)
