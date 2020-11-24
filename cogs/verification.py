@@ -56,7 +56,7 @@ class Verification(commands.Cog):
         blue_text = (1, 5, 48)
         transparent = (0, 0, 0, 0)
 
-        font = ImageFont.truetype(fm.findfont(fm.FontProperties(family="fantasy")), 150)
+        font = ImageFont.truetype(fm.findfont(fm.FontProperties(family="fantasy")), 90)
         wm = Image.new('RGBA', (width, height))
         im = Image.new('RGBA', (width, height), blue_background)  # Change this line too.
 
