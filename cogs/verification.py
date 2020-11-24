@@ -42,8 +42,10 @@ class Verification(commands.Cog):
         choice6 = choice_list[random.randint(0, 61)]
         choice7 = choice_list[random.randint(0, 61)]
         choice8 = choice_list[random.randint(0, 61)]
+        choice9 = choice_list[random.randint(0, 61)]
+        choice10 = choice_list[random.randint(0, 61)]
 
-        code = (choice1 + choice2 + choice3 + choice4 + choice5 + choice6 + choice7 + choice8)
+        code = (choice1 + choice2 + choice3 + choice4 + choice5 + choice6 + choice7 + choice8 + choice9 + choice10)
 
         width = 150
         height = 75
@@ -56,11 +58,11 @@ class Verification(commands.Cog):
 
         font = ImageFont.truetype(fm.findfont(fm.FontProperties(family="fantasy")), 15)
         wm = Image.new('RGBA', (width, height))
-        im = Image.new('RGBA', (width, height))  # Change this line too.
+        im = Image.new('RGBA', (width, height), blue_background)  # Change this line too.
 
         draw = ImageDraw.Draw(wm)
         w, h = draw.textsize(text, font)
-        draw.text(((width - w) / 2, (height - h) / 2), text, blue_text, font)
+        draw.text(((width - w), (height - h)), text, blue_text, font)
 
         en = ImageEnhance.Brightness(wm)
         # en.putalpha(mask)
@@ -94,6 +96,8 @@ class Verification(commands.Cog):
             log_embed1.add_field(name="Given", value=f"{answer}", inline=True)
             log_embed1.add_field(name="Reason", value=f"Ran out of time!", inline=True)
             await log_channel.send(embed=log_embed1)
+            os.remove(filename)
+            return
         if answer == code:
             await ctx.author.send("You did the captcha correctly! Good job! You now have the verified role and full access to the server.")
             log_embed2 = discord.Embed(
