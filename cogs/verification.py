@@ -72,10 +72,6 @@ class Verification(commands.Cog):
 
         im.save(filename)
 
-        im_url = request.pathname2url(filename)
-
-        print(im_url.geturl())
-
         verif_embed = discord.Embed(
             title="**Welcome to Content Creators**",
             description="Please send the captcha code here, you have 16 minutes to do so.\nHello! You are required to complete a captcha before entering the server.\n*NOTE: This is **Case Sensitive***.\n**Why?**\nThis is to protect the server against targeted attacks using automated user accounts.\n**Your Captcha:**",
@@ -83,7 +79,7 @@ class Verification(commands.Cog):
             color=0x0064ff
         )
 
-        verif_embed.set_image(url=im_url.geturl())
+        verif_embed.set_image(url=f"attachment://{filename}")
 
         await ctx.author.send(embed=verif_embed)
 
