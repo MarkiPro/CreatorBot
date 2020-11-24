@@ -59,7 +59,7 @@ class Verification(commands.Cog):
         wm = Image.new('RGBA', (width, height))
         im = Image.new('RGBA', (width, height), blue_background)  # Change this line too.
 
-        draw = ImageDraw.Draw(wm)
+        draw = ImageDraw.Draw(im)
         w, h = draw.textsize(text)
         draw.text(((width - w)/2, (height - h)/2), text, blue_text)
 
