@@ -47,8 +47,8 @@ class Verification(commands.Cog):
 
         code = (choice1 + choice2 + choice3 + choice4 + choice5 + choice6 + choice7 + choice8 + choice9 + choice10)
 
-        width = 150
-        height = 75
+        width = 854
+        height = 480
         opacity = 1
         text = code
         filename = f"result{text}.png"
@@ -56,7 +56,7 @@ class Verification(commands.Cog):
         blue_text = (1, 5, 48)
         transparent = (0, 0, 0, 0)
 
-        font = ImageFont.truetype(fm.findfont(fm.FontProperties(family="fantasy")), 15)
+        font = ImageFont.truetype(fm.findfont(fm.FontProperties(family="fantasy")), 40)
         wm = Image.new('RGBA', (width, height))
         im = Image.new('RGBA', (width, height), blue_background)  # Change this line too.
 
