@@ -61,7 +61,7 @@ class Verification(commands.Cog):
         im = Image.new('RGBA', (width, height), blue_background)  # Change this line too.
 
         draw = ImageDraw.Draw(wm)
-        w, h = draw.textsize(text, font)
+        w, h = draw.textsize(text)
         draw.text(((width - w)/2, (height - h)/2), text, blue_text, font)
 
         en = ImageEnhance.Brightness(wm)
