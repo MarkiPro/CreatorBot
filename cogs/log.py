@@ -70,10 +70,11 @@ class Log(Cog):
         if reaction.message.id == 745281036807700581:
             await user.add_roles(emergency_role)
 
-        if not message.author.bot and reactions[0] and message.channel == suggestions_channel:
-            reaction1 = reactions[0]
-            if reaction == reaction1 and user in staff_role.members:
-                await message.delete()
+        if not message.author.bot:
+            if len(reactions) >= 1:
+                reaction1 = reactions[0]
+                if reaction1 and message.channel == suggestions_channel and reaction == reaction1 and user in staff_role.members:
+                    await message.delete()
 
         if len(reactions) >= 2:
             reaction1 = reactions[0]
@@ -100,14 +101,13 @@ class Log(Cog):
                     if some_user.id == user.id:
                         reaction.remove(user)
                         await user.send("You've already liked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
-                        pass
+                        return
                 if reaction2.count > reaction1.count and reaction2.count >= 10:
-                    pass
-                await message.delete()
+                    await message.delete()
         else:
             return
 
-        if len(reactions) >= 2:
+        if len(reactions) >= 3:
             reaction1 = reactions[2]
 
             if reaction == reaction1 and user in staff_role.members:
