@@ -16,9 +16,9 @@ class Misc(commands.Cog):
                       description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
     @commands.cooldown(1, 300, commands.BucketType.member)
     async def fh(self, ctx):
-        bot_commands = self.bot.get_channel(712659793008918538)
+        allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
-        if ctx.channel != bot_commands:
+        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
             return
         else:
             pass
@@ -65,9 +65,9 @@ class Misc(commands.Cog):
                       description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
     @commands.cooldown(1, 300, commands.BucketType.member)
     async def nfh(self, ctx):
-        bot_commands = self.bot.get_channel(712659793008918538)
+        allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
-        if ctx.channel != bot_commands:
+        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
             return
         else:
             pass
@@ -126,14 +126,14 @@ class Misc(commands.Cog):
     @commands.command(description="This command is used for applying for appliable roles (STAFF ROLES NOT INCLUDED!).")
     @commands.cooldown(3, 3600, commands.BucketType.member)
     async def apply(self, ctx):
-        bot_commands = self.bot.get_channel(712659793008918538)
+        allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
         applications_muted = ctx.guild.get_role(780494171730477086)
 
         if ctx.author in applications_muted.members:
             return await ctx.send("You are restricted from using this command, you have the `Applications Muted` role. Please consult with a staff member about it.")
         else:
             pass
-        if ctx.channel != bot_commands:
+        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
             return await ctx.send("Run the command again in <#712659793008918538>")
         else:
             pass
@@ -2181,14 +2181,15 @@ class Misc(commands.Cog):
     @commands.command(description="This command is used for posting.")
     @commands.cooldown(3, 3600, commands.BucketType.member)
     async def post(self, ctx):
-        bot_commands = self.bot.get_channel(712659793008918538)
+        allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
+
         post_muted = ctx.guild.get_role(780494155075420262)
 
         if ctx.author in post_muted.members:
             return await ctx.send("You are restricted from using this command, you have the `Post Muted` role. Please consult with a staff member about it.")
         else:
             pass
-        if ctx.channel != bot_commands:
+        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
             return await ctx.send("Run the command again in <#712659793008918538>")
         else:
             pass
@@ -2621,9 +2622,9 @@ class Misc(commands.Cog):
         aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info",
                  "g_i"], description="Displays basic information about the server.")
     async def serverinfo(self, ctx):
-        bot_commands = self.bot.get_channel(712659793008918538)
+        allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
-        if ctx.channel != bot_commands:
+        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
             return
         else:
             pass
@@ -2666,9 +2667,9 @@ class Misc(commands.Cog):
     @commands.command(aliases=["who", "user-info", "userinfo", "ui", "u-i", "who-is", "who_is", "profile"],
                       description="Displays basic information about the supplied user. If the user is not provided, it would default to the command requester.")
     async def whois(self, ctx, user: discord.Member = None):
-        bot_commands = self.bot.get_channel(712659793008918538)
+        allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
-        if ctx.channel != bot_commands:
+        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
             return
         else:
             pass
@@ -3080,9 +3081,9 @@ class Misc(commands.Cog):
 
     @commands.command()
     async def boosters(self, ctx):
-        bot_commands = self.bot.get_channel(712659793008918538)
+        allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
-        if ctx.channel != bot_commands:
+        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
             return
         else:
             pass
