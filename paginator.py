@@ -12,7 +12,7 @@ class Paginator:
         n = self.char_per_page
         self.words_list = [self.text[i:i + n] for i in range(0, len(self.text), n)]
 
-    async def send(self, bot, channel, end_channel=None, member=None, title=None, role=None):
+    async def send(self, bot, channel, end_channel=None, member=None, title=None, role=None, mute_role=None):
         self.paginate()
         for i, entry in enumerate(self.words_list):
             prepared_embed = discord.Embed(description=entry, color=0x0064ff)
@@ -32,16 +32,17 @@ class Paginator:
             if (i + 1) == len(self.words_list):
                 await message.add_reaction("👍")
                 await message.add_reaction("👎")
+                await message.add_reaction("🔇")
 
                 if role:
                     def check(reaction1, user1):
-                        return user1 and str(reaction1.emoji) in ["👍", "👎"]
+                        return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
                     reaction1, user1 = await bot.wait_for("reaction_add", check=check)
 
                     if str(user1) == str(bot.user):
                         def check(reaction2, user2):
-                            return user2 and str(reaction2.emoji) in ["👍", "👎"]
+                            return user2 and str(reaction2.emoji) in ["👍", "👎", "🔇"]
 
                         reaction2, user2 = await bot.wait_for("reaction_add", check=check)
                         if str(reaction2.emoji) == "👍":
@@ -56,6 +57,12 @@ class Paginator:
                                 await msgs.delete()
                                 await member.send("Your application has been declined!")
                                 return
+                        elif str(reaction2.emoji) == "🔇":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send("Your application has been denied and you have been muted!")
+                                await member.add_roles(mute_role)
+                                return
                     else:
                         if str(reaction1.emoji) == "👍":
                             for _, msgs in enumerate(self.messages):
@@ -69,18 +76,23 @@ class Paginator:
                                 await msgs.delete()
                                 await member.send("Your application has been declined!")
                                 return
+                        elif str(reaction2.emoji) == "🔇":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send("Your application has been denied and you have been muted!")
+                                await member.add_roles(mute_role)
+                                return
                     return
 
                 if not end_channel:
-
                     def check(reaction1, user1):
-                        return user1 and str(reaction1.emoji) in ["👍", "👎"]
+                        return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
                     reaction1, user1 = await bot.wait_for("reaction_add", check=check)
 
                     if str(user1) == str(bot.user):
                         def check(reaction2, user2):
-                            return user2 and str(reaction2.emoji) in ["👍", "👎"]
+                            return user2 and str(reaction2.emoji) in ["👍", "👎", "🔇"]
 
                         reaction2, user2 = await bot.wait_for("reaction_add", check=check)
                         if str(reaction2.emoji) == "👍":
@@ -94,6 +106,12 @@ class Paginator:
                                 await msgs.delete()
                                 await member.send("Your report has been declined!")
                                 return
+                        elif str(reaction2.emoji) == "🔇":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send("Your report has been denied and you have been muted!")
+                                await member.add_roles(mute_role)
+                                return
                     else:
                         if str(reaction1.emoji) == "👍":
                             for _, msgs in enumerate(self.messages):
@@ -101,22 +119,27 @@ class Paginator:
                                 await msgs.delete()
                                 await member.send("Your post has been approved!")
                                 return
-
                         elif str(reaction1.emoji) == "👎":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
                                 await member.send("Your post has been declined!")
                                 return
+                        elif str(reaction2.emoji) == "🔇":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send("Your report has been denied and you have been muted!")
+                                await member.add_roles(mute_role)
+                                return
                     return
 
                 def check(reaction1, user1):
-                    return user1 and str(reaction1.emoji) in ["👍", "👎"]
+                    return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
                 reaction1, user1 = await bot.wait_for("reaction_add", check=check)
 
                 if str(user1) == str(bot.user):
                     def check(reaction2, user2):
-                        return user2 and str(reaction2.emoji) in ["👍", "👎"]
+                        return user2 and str(reaction2.emoji) in ["👍", "👎", "🔇"]
 
                     reaction2, user2 = await bot.wait_for("reaction_add", check=check)
                     if str(reaction2.emoji) == "👍":
@@ -131,6 +154,12 @@ class Paginator:
                             await msgs.delete()
                             await member.send("Your post has been declined!")
                             return
+                    elif str(reaction2.emoji) == "🔇":
+                        for _, msgs in enumerate(self.messages):
+                            await msgs.delete()
+                            await member.send("Your post has been denied and you have been muted!")
+                            await member.add_roles(mute_role)
+                            return
                 else:
                     if str(reaction1.emoji) == "👍":
                         for _, msgs in enumerate(self.messages):
@@ -143,4 +172,10 @@ class Paginator:
                         for _, msgs in enumerate(self.messages):
                             await msgs.delete()
                             await member.send("Your post has been declined!")
+                            return
+                    elif str(reaction2.emoji) == "🔇":
+                        for _, msgs in enumerate(self.messages):
+                            await msgs.delete()
+                            await member.send("Your post has been denied and you have been muted!")
+                            await member.add_roles(mute_role)
                             return
