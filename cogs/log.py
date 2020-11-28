@@ -63,10 +63,6 @@ class Log(Cog):
             reaction2 = reactions[1]
 
             if reaction == reaction1 and message.channel == suggestions_channel:
-                await message.channel.send(reaction1.users())
-                await message.channel.send(reaction1.users().flatten())
-                await message.channel.send(reaction2.users())
-                await message.channel.send(reaction2.users().flatten())
                 if user in reaction2.users().flatten():
                     reaction.remove()
                     await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
@@ -82,10 +78,6 @@ class Log(Cog):
                     await top_suggestions_channel.send(embed=suggest_embed)
 
             elif reaction == reaction2 and message.channel == suggestions_channel:
-                await message.channel.send(reaction1.users())
-                await message.channel.send(reaction1.users().flatten())
-                await message.channel.send(reaction2.users())
-                await message.channel.send(reaction2.users().flatten())
                 if user in reaction1.users().flatten():
                     reaction.remove()
                     await user.send("You've already liked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
