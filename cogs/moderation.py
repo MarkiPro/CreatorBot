@@ -1,6 +1,5 @@
 import asyncio
 import datetime
-
 import discord
 from discord.ext import commands
 from discord.utils import parse_time
@@ -10,6 +9,42 @@ class Moderation(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+
+    @commands.command(aliases=["emergencyrole", "emergency-role", "emergency", "emergency_toggle", "emergency-toggle"], description="Toggle Emergency role on and off, that way you will be pinged in case of emergencies!")
+    @commands.cooldown(1, 300, commands.BucketType.member)
+    async def emergency_role(self, ctx):
+        allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
+        member = ctx.author
+        staff_role = ctx.guild.get_role(756565123350659385)
+
+        if ctx.channel.id not in allowed_channels:
+            await ctx.send("Run the command again in <#712659793008918538>")
+            return
+        if member not in staff_role.members:
+            await ctx.send("You're not a part of the staff team and therefore cannot use this command!")
+            return
+        else:
+            pass
+        emergency_role = ctx.guild.get_role(722793289119432736)
+
+        embed1 = discord.Embed(
+            title="**ERROR**",
+            description="***:no_entry_sign: You already have the `Emergency` role.***",
+            color=0xff0000
+        )
+        embed2 = discord.Embed(
+            title="**SUCCESS**",
+            description="***:white_check_mark: You now have the `Emergency` role.***",
+            color=0x00fa00
+        )
+
+        if emergency_role not in member.roles:
+            await member.add_roles(emergency_role)
+            await member.send(embed=embed2)
+            return
+        if emergency_role in member.roles:
+            await member.send(embed=embed1)
+            return
 
     @commands.command()
     @commands.guild_only()
