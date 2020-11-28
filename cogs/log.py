@@ -49,6 +49,9 @@ class Log(Cog):
     async def on_reaction_remove(self, reaction, user):
         emergency_role = reaction.message.guild.get_role(722793289119432736)
 
+        if str(user) == str(self.bot.user):
+            return
+
         if reaction.message.id == 745281036807700581 and user in emergency_role.members:
             await user.remove_roles(emergency_role)
 
@@ -61,7 +64,7 @@ class Log(Cog):
         reactions = message.reactions
         emergency_role = reaction.message.guild.get_role(722793289119432736)
 
-        if user.bot.user:
+        if str(user) == str(self.bot.user):
             return
 
         if reaction.message.id == 745281036807700581:
