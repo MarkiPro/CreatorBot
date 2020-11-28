@@ -35,13 +35,13 @@ class Paginator:
 
                 if role:
                     def check(reaction1, user1):
-                        return user1 != bot.user and str(reaction1.emoji) in ["👍", "👎"]
+                        return user1 and str(reaction1.emoji) in ["👍", "👎"]
 
                     reaction1, user1 = await bot.wait_for("reaction_add", check=check)
 
                     if str(user1) == str(bot.user):
                         def check(reaction2, user2):
-                            return user2 != bot.user and str(reaction2.emoji) in ["👍", "👎"]
+                            return user2 and str(reaction2.emoji) in ["👍", "👎"]
 
                         reaction2, user2 = await bot.wait_for("reaction_add", check=check)
                         if str(reaction2.emoji) == "👍":
@@ -74,13 +74,13 @@ class Paginator:
                 if not end_channel:
 
                     def check(reaction1, user1):
-                        return user1 != bot.user and str(reaction1.emoji) in ["👍", "👎"]
+                        return user1 and str(reaction1.emoji) in ["👍", "👎"]
 
                     reaction1, user1 = await bot.wait_for("reaction_add", check=check)
 
                     if str(user1) == str(bot.user):
                         def check(reaction2, user2):
-                            return user2 != bot.user and str(reaction2.emoji) in ["👍", "👎"]
+                            return user2 and str(reaction2.emoji) in ["👍", "👎"]
 
                         reaction2, user2 = await bot.wait_for("reaction_add", check=check)
                         if str(reaction2.emoji) == "👍":
@@ -110,13 +110,13 @@ class Paginator:
                     return
 
                 def check(reaction1, user1):
-                    return user1 != bot.user and str(reaction1.emoji) in ["👍", "👎"]
+                    return user1 and str(reaction1.emoji) in ["👍", "👎"]
 
                 reaction1, user1 = await bot.wait_for("reaction_add", check=check)
 
                 if str(user1) == str(bot.user):
                     def check(reaction2, user2):
-                        return user2 != bot.user and str(reaction2.emoji) in ["👍", "👎"]
+                        return user2 and str(reaction2.emoji) in ["👍", "👎"]
 
                     reaction2, user2 = await bot.wait_for("reaction_add", check=check)
                     if str(reaction2.emoji) == "👍":
