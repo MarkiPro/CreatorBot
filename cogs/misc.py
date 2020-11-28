@@ -331,7 +331,7 @@ class Misc(commands.Cog):
                         1985)
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                   title=title)
+                                   title=title, mute_role=applications_muted)
             elif re.findall("c# programmer", programmer_category, re.IGNORECASE):
                 programmer_embed1 = discord.Embed(
                     title="C# Programmer Post",
@@ -416,7 +416,7 @@ class Misc(commands.Cog):
                         1985)
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                   title=title)
+                                   title=title, mute_role=applications_muted)
             elif re.findall("java programmer", programmer_category, re.IGNORECASE):
                 programmer_embed1 = discord.Embed(
                     title="Java Programmer Post",
@@ -500,7 +500,7 @@ class Misc(commands.Cog):
                         1985)
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                   title=title)
+                                   title=title, mute_role=applications_muted)
             elif re.findall("javascript programmer", programmer_category, re.IGNORECASE):
                 programmer_embed1 = discord.Embed(
                     title="JavaScript Programmer Post",
@@ -585,7 +585,7 @@ class Misc(commands.Cog):
                         1985)
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                   title=title)
+                                   title=title, mute_role=applications_muted)
 
             elif re.findall("cpp programmer", programmer_category, re.IGNORECASE):
                 programmer_embed1 = discord.Embed(
@@ -671,7 +671,7 @@ class Misc(commands.Cog):
                         1985)
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                   title=title)
+                                   title=title, mute_role=applications_muted)
             elif re.findall("c programmer", programmer_category, re.IGNORECASE):
                 programmer_embed1 = discord.Embed(
                     title="C Programmer Post",
@@ -756,7 +756,7 @@ class Misc(commands.Cog):
                         1985)
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                   title=title)
+                                   title=title, mute_role=applications_muted)
             elif re.findall("php programmer", programmer_category, re.IGNORECASE):
                 programmer_embed1 = discord.Embed(
                     title="PHP Programmer Post",
@@ -840,7 +840,7 @@ class Misc(commands.Cog):
                         1985)
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                   title=title)
+                                   title=title, mute_role=applications_muted)
             elif re.findall("lua programmer", programmer_category, re.IGNORECASE):
                 programmer_embed1 = discord.Embed(
                     title="Lua Programmer Post",
@@ -924,7 +924,7 @@ class Misc(commands.Cog):
                         1985)
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                   title=title)
+                                   title=title, mute_role=applications_muted)
             elif re.findall("ruby programmer", programmer_category, re.IGNORECASE):
                 programmer_embed1 = discord.Embed(
                     title="Ruby Programmer Post",
@@ -1008,7 +1008,7 @@ class Misc(commands.Cog):
                         1985)
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                   title=title)
+                                   title=title, mute_role=applications_muted)
             elif re.findall("xml programmer", programmer_category, re.IGNORECASE):
                 programmer_embed1 = discord.Embed(
                     title="XML Programmer Post",
@@ -1092,7 +1092,7 @@ class Misc(commands.Cog):
                         1985)
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                   title=title)
+                                   title=title, mute_role=applications_muted)
             elif re.findall("css programmer", programmer_category, re.IGNORECASE):
                 programmer_embed1 = discord.Embed(
                     title="CSS Programmer Post",
@@ -1176,7 +1176,7 @@ class Misc(commands.Cog):
                         1985)
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                   title=title)
+                                   title=title, mute_role=applications_muted)
 
         elif re.findall("game designer", category, re.IGNORECASE):
             game_designer_embed1 = discord.Embed(
@@ -1260,7 +1260,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                               title=title)
+                               title=title, mute_role=applications_muted)
         elif re.findall("3d modeler", category, re.IGNORECASE):
             threed_modeler_embed1 = discord.Embed(
                 title="**3D Modeler Application**",
@@ -1343,7 +1343,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                               title=title)
+                               title=title, mute_role=applications_muted)
         elif re.findall("youtuber", category, re.IGNORECASE):
             youtuber_embed1 = discord.Embed(
                 title="**YouTuber Application**",
@@ -1425,7 +1425,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                               title=title)
+                               title=title, mute_role=applications_muted)
 
         elif re.findall("roblox studio builder", category, re.IGNORECASE):
             builder_embed1 = discord.Embed(
@@ -1508,7 +1508,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                               title=title)
+                               title=title, mute_role=applications_muted)
         elif re.findall("twitch streamer", category, re.IGNORECASE):
             twitch_streamer_embed1 = discord.Embed(
                 title="**Twitch Streamer Application**",
@@ -1592,7 +1592,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                               title=title)
+                               title=title, mute_role=applications_muted)
         elif re.findall("gfx designer", category, re.IGNORECASE):
             gfx_designer_embed1 = discord.Embed(
                 title="**GFX Designer Application**",
@@ -1675,7 +1675,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                               title=title)
+                               title=title, mute_role=applications_muted)
         elif re.findall("translator", category, re.IGNORECASE):
             translator_embed1 = discord.Embed(
                 title="**Translator Application**",
@@ -1758,7 +1758,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                               title=title)
+                               title=title, mute_role=applications_muted)
         elif re.findall("ui designer", category, re.IGNORECASE):
             ui_designer_embed1 = discord.Embed(
                 title="**UI Designer Application**",
@@ -1841,7 +1841,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                               title=title)
+                               title=title, mute_role=applications_muted)
         elif re.findall("clothing designer", category, re.IGNORECASE):
             clothing_designer_embed1 = discord.Embed(
                 title="**Clothing Designer Application**",
@@ -1926,7 +1926,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                               title=title)
+                               title=title, mute_role=applications_muted)
         elif re.findall("artist", category, re.IGNORECASE):
             artist_embed1 = discord.Embed(
                 title="**Artist Application**",
@@ -2008,7 +2008,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                               title=title)
+                               title=title, mute_role=applications_muted)
         elif re.findall("music composer", category, re.IGNORECASE):
             music_composer_embed1 = discord.Embed(
                 title="**Music Composer Application**",
@@ -2091,7 +2091,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                               title=title)
+                               title=title, mute_role=applications_muted)
         elif re.findall("animator", category, re.IGNORECASE):
             animator_embed1 = discord.Embed(
                 title="**Animator Application**",
@@ -2173,7 +2173,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                               title=title)
+                               title=title, mute_role=applications_muted)
 
     @commands.command(description="This command is used for posting.")
     @commands.cooldown(3, 3600, commands.BucketType.member)
@@ -2336,7 +2336,7 @@ class Misc(commands.Cog):
                         f"**About the job:** {hiring_details}\n**Payment:** {hiring_payment}\n**Showcase:** {hiring_image}\n**Other:** {hiring_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                         1985)
 
-                    await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
+                    await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
         elif re.findall("for_hire", category, re.IGNORECASE):
             for_hire_embed1 = discord.Embed(
                 title="**FOR-HIRE POST**",
@@ -2432,7 +2432,7 @@ class Misc(commands.Cog):
                     f"**Specialties:** {for_hire_specialties}\n**Showcase:** {for_hire_showcase}\n**Payment:** {for_hire_payment}\n**Other:** {for_hire_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
+                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
         elif re.findall("sell_creations", category, re.IGNORECASE):
             sell_creations_embed1 = discord.Embed(
                 title="**SELL-CREATIONS POST**",
@@ -2513,7 +2513,7 @@ class Misc(commands.Cog):
                     f"**Showcase:** {sell_creations_showcase}\n**Payment:** {sell_creations_payment}\n**Other:** {sell_creations_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title)
+                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
         elif re.findall("report", category, re.IGNORECASE):
             report_embed1 = discord.Embed(
                 title="**REPORT POST**",
@@ -2612,7 +2612,7 @@ class Misc(commands.Cog):
                     f"**Subject Information:** {reported_user}\n**Report Reason:** {report_reason}\n**Evidence:** {report_evidence}\n**Other:** {report_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                     1985)
 
-                await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title)
+                await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title, mute_role=post_muted)
 
     @commands.command(
         aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info",
