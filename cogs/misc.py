@@ -18,10 +18,11 @@ class Misc(commands.Cog):
     async def fh(self, ctx):
         allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
-        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
-            return
-        else:
-            pass
+        for channel in allowed_channels:
+            if ctx.channel != self.bot.get_channel(channel):
+                return
+            else:
+                pass
         cc_guild = self.bot.get_guild(id=611227128020598805)
 
         nfh_role = discord.utils.get(cc_guild.roles, id=729491617630912613)
@@ -67,10 +68,11 @@ class Misc(commands.Cog):
     async def nfh(self, ctx):
         allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
-        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
-            return
-        else:
-            pass
+        for channel in allowed_channels:
+            if ctx.channel != self.bot.get_channel(channel):
+                return
+            else:
+                pass
         cc_guild = self.bot.get_guild(id=611227128020598805)
 
         nfh_role = discord.utils.get(cc_guild.roles, id=729491617630912613)
@@ -133,10 +135,12 @@ class Misc(commands.Cog):
             return await ctx.send("You are restricted from using this command, you have the `Applications Muted` role. Please consult with a staff member about it.")
         else:
             pass
-        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
-            return await ctx.send("Run the command again in <#712659793008918538>")
-        else:
-            pass
+        for channel in allowed_channels:
+            if ctx.channel != self.bot.get_channel(channel):
+                await ctx.send("Run the command again in <#712659793008918538>")
+                return
+            else:
+                pass
         cancel_prompt_embed = discord.Embed(
             title="**CANCELLED**",
             description="***The setup has been cancelled.***",
@@ -2189,10 +2193,12 @@ class Misc(commands.Cog):
             return await ctx.send("You are restricted from using this command, you have the `Post Muted` role. Please consult with a staff member about it.")
         else:
             pass
-        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
-            return await ctx.send("Run the command again in <#712659793008918538>")
-        else:
-            pass
+        for channel in allowed_channels:
+            if ctx.channel != self.bot.get_channel(channel):
+                await ctx.send("Run the command again in <#712659793008918538>")
+                return
+            else:
+                pass
         cancel_prompt_embed = discord.Embed(
             title="**CANCELLED**",
             description="***The setup has been cancelled.***",
@@ -2624,10 +2630,11 @@ class Misc(commands.Cog):
     async def serverinfo(self, ctx):
         allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
-        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
-            return
-        else:
-            pass
+        for channel in allowed_channels:
+            if ctx.channel != self.bot.get_channel(channel):
+                return
+            else:
+                pass
 
         guild = ctx.guild
         embed = discord.Embed(
@@ -2669,10 +2676,11 @@ class Misc(commands.Cog):
     async def whois(self, ctx, user: discord.Member = None):
         allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
-        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
-            return
-        else:
-            pass
+        for channel in allowed_channels:
+            if ctx.channel != self.bot.get_channel(channel):
+                return
+            else:
+                pass
         user = user or ctx.author
 
         join_pos = sum([m.joined_at < user.joined_at for m in ctx.guild.members if m.joined_at is not None])
@@ -3083,10 +3091,11 @@ class Misc(commands.Cog):
     async def boosters(self, ctx):
         allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
-        if ctx.channel.id != allowed_channels[0] or ctx.channel.id != allowed_channels[1] or ctx.channel.id != allowed_channels[2] or ctx.channel.id != allowed_channels[3]:
-            return
-        else:
-            pass
+        for channel in allowed_channels:
+            if ctx.channel != self.bot.get_channel(channel):
+                return
+            else:
+                pass
 
         boosters = "\n".join([i.mention for i in ctx.guild.premium_subscribers])
 
