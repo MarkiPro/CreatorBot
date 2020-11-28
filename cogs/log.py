@@ -83,7 +83,7 @@ class Log(Cog):
             if reaction == reaction1 and message.channel == suggestions_channel:
                 async for some_user in reaction2.users():
                     if some_user.id == user.id:
-                        reaction.remove(user)
+                        await reaction.remove(user)
                         await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
                         return
                 if reaction1.count > reaction2.count and reaction1.count >= 10:
@@ -99,7 +99,7 @@ class Log(Cog):
             elif reaction == reaction2 and message.channel == suggestions_channel:
                 async for some_user in reaction2.users():
                     if some_user.id == user.id:
-                        reaction.remove(user)
+                        await reaction.remove(user)
                         await user.send("You've already liked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
                         return
                 if reaction2.count > reaction1.count and reaction2.count >= 10:
