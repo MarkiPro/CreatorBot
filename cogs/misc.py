@@ -31,19 +31,22 @@ class Misc(commands.Cog):
         embed1 = discord.Embed(
             title="**ERROR**",
             description="***:no_entry_sign: You already have the `For Hire` role.***",
-            color=0xff0000
+            color=0xff0000,
+            timestamp=datetime.datetime.utcnow()
         )
 
         embed3 = discord.Embed(
             title="**SUCCESS**",
             description="***:white_check_mark: Removed the `Not For Hire` role.***",
-            color=0x00fa00
+            color=0x00fa00,
+            timestamp=datetime.datetime.utcnow()
         )
 
         embed2 = discord.Embed(
             title="**SUCCESS**",
             description="***:white_check_mark: You now have the `For Hire` role.***",
-            color=0x00fa00
+            color=0x00fa00,
+            timestamp=datetime.datetime.utcnow()
         )
 
         if nfh_role in member.roles:
@@ -79,19 +82,22 @@ class Misc(commands.Cog):
         embed1 = discord.Embed(
             title="**ERROR**",
             description="***:no_entry_sign: You already have the `Not For Hire` role.***",
-            color=0xff0000
+            color=0xff0000,
+            timestamp=datetime.datetime.utcnow()
         )
 
         embed3 = discord.Embed(
             title="**SUCCESS**",
             description="***:white_check_mark: Removed the `For Hire` role.***",
-            color=0x00fa00
+            color=0x00fa00,
+            timestamp=datetime.datetime.utcnow()
         )
 
         embed2 = discord.Embed(
             title="**SUCCESS**",
             description="***:white_check_mark: You now have the `Not For Hire` role.***",
-            color=0x00fa00
+            color=0x00fa00,
+            timestamp=datetime.datetime.utcnow()
         )
 
         if fh_role in member.roles:
@@ -179,7 +185,8 @@ class Misc(commands.Cog):
                 `Animator`;
                 
             """,
-            color=0x0064ff
+            color=0x0064ff,
+            timestamp=datetime.datetime.utcnow()
         )
         categories.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
         await ctx.send(embed=pre_DM_embed)
@@ -232,7 +239,8 @@ class Misc(commands.Cog):
                 `XML Programmer`;
 
                 `CSS Programmer`;""",
-                color=0x0064ff
+                color=0x0064ff,
+                timestamp=datetime.datetime.utcnow()
             )
             programmer_categories.set_footer(
                 text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
@@ -2215,7 +2223,8 @@ class Misc(commands.Cog):
                 `report`;
 
             """,
-            color=0x0064ff
+            color=0x0064ff,
+            timestamp=datetime.datetime.utcnow()
         )
         categories.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
         await ctx.send(embed=categories_embed)
