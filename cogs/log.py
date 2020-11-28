@@ -61,6 +61,9 @@ class Log(Cog):
         reactions = message.reactions
         emergency_role = reaction.message.guild.get_role(722793289119432736)
 
+        if user.bot.user:
+            return
+
         if reaction.message.id == 745281036807700581:
             await user.add_roles(emergency_role)
 
