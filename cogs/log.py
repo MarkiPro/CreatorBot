@@ -14,7 +14,12 @@ class Log(Cog):
     @Cog.listener()
     async def on_guild_role_create(self, role):
         server_management_logs_channel = self.bot.get_channel(771465807276277810)
+        cc_guild = self.bot.get_guild(id=611227128020598805)
 
+        if role.guild != cc_guild:
+            return
+        else:
+            pass
         log_embed = discord.Embed(
             title="**Role Creation**",
             description=f"{role.mention} was just created!",
@@ -28,7 +33,12 @@ class Log(Cog):
     async def on_guild_role_update(self, before, after):
         server_management_logs_channel = self.bot.get_channel(771465807276277810)
         role = before
+        cc_guild = self.bot.get_guild(id=611227128020598805)
 
+        if before.guild != cc_guild and after.guild != cc_guild:
+            return
+        else:
+            pass
         if before.position != after.position:
             return
 
@@ -110,7 +120,12 @@ class Log(Cog):
         banned_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah", "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger", "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar", "n1gguh", "n1ggress", "n1gette", "negro", "n1bba", "n1ba"]
         banned_links_v2 = ["https://pornhub.com", "https://porn.com", "https://fuq.com"]
         log_channel = self.bot.get_channel(712761128895381676)
+        cc_guild = self.bot.get_guild(id=611227128020598805)
 
+        if message.guild != cc_guild:
+            return
+        else:
+            pass
         if not message.author.bot and message.channel == suggestions_channel:
             if message.content.startswith("//"):
                 await message.add_reaction("🚫")
@@ -182,7 +197,12 @@ class Log(Cog):
     @Cog.listener()
     async def on_message_delete(self, message):
         log_channel = self.bot.get_channel(771471454629003314)
+        cc_guild = self.bot.get_guild(id=611227128020598805)
 
+        if message.guild != cc_guild:
+            return
+        else:
+            pass
         if not message.author.bot:
             log_embed = discord.Embed(
                 title="**Message Deletion**",
@@ -198,7 +218,12 @@ class Log(Cog):
     async def on_message_edit(self, before, after):
         log_channel = self.bot.get_channel(771471454629003314)
         message = before
+        cc_guild = self.bot.get_guild(id=611227128020598805)
 
+        if message.guild != cc_guild:
+            return
+        else:
+            pass
         if not message.author.bot and before.content != after.content:
             log_embed = discord.Embed(
                 title="**Message Edit**",
@@ -222,11 +247,12 @@ class Log(Cog):
         after_roles = ", ".join(role.mention for role in after.roles if role.id not in excluded_roles) or "No roles assigned."
         role_update_log_channel = self.bot.get_channel(770368850679169075)
         nick_update_log_channel = self.bot.get_channel(771465528618254347)
+        cc_guild = self.bot.get_guild(id=611227128020598805)
 
-        result_list = before_roles - after_roles
-
-        print(result_list)
-
+        if before.guild != cc_guild and after.guild != cc_guild:
+            return
+        else:
+            pass
         if before.display_name != after.display_name and after.display_name != before.display_name:
             nick_log_embed = discord.Embed(
                 title="**Nickname Update**",
@@ -258,7 +284,12 @@ class Log(Cog):
     @Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         log_channel = self.bot.get_channel(736234713940754432)
+        cc_guild = self.bot.get_guild(id=611227128020598805)
 
+        if before.guild != cc_guild and after.guild != cc_guild:
+            return
+        else:
+            pass
         if after.channel and not before.channel:
             member_joined_vc_log_embed = discord.Embed(
                 title="**Member Joined Voice Channel**",
@@ -300,7 +331,12 @@ class Log(Cog):
         log_channel = self.bot.get_channel(736234502816399422)
         delta_created = datetime.datetime.utcnow() - member.created_at
         format = "%A, %d %B, %Y : %I:%M %p"
+        cc_guild = self.bot.get_guild(id=611227128020598805)
 
+        if member.guild != cc_guild:
+            return
+        else:
+            pass
         if delta_created.days < 7:
             kick_embed = discord.Embed(
                 title="**NOTIFICATION**",
@@ -339,7 +375,12 @@ class Log(Cog):
         delta_joined = datetime.datetime.utcnow() - member.joined_at
         excluded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651, 743013370588037191, 732388199107657828, 743013368511594569, 743013366515236915, 743013366880272474, 743013367840768072, 743013368134107166, 732387788493946881, 732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698, 735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516, 735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672, 734527854871707762, 746758563703291938]
         member_roles = ", ".join(role.mention for role in member.roles if role.id not in excluded_roles) or "No roles assigned."
+        cc_guild = self.bot.get_guild(id=611227128020598805)
 
+        if member.guild != cc_guild:
+            return
+        else:
+            pass
         try:
             if await guild.fetch_ban(user=member):
                 return
