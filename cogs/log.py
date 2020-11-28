@@ -62,12 +62,12 @@ class Log(Cog):
             reaction1 = reactions[0]
             reaction2 = reactions[1]
 
-            if reaction == reaction1 and reaction1.count > reaction2.count and reaction1.count >= 10:
-                if message.channel == suggestions_channel:
-                    if user in reaction2.users():
-                        reaction.remove()
-                        await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
-                        return
+            if reaction == reaction1 and message.channel == suggestions_channel:
+                if user in reaction2.users():
+                    reaction.remove()
+                    await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
+                    return
+                if reaction1.count > reaction2.count and reaction1.count >= 10:
                     suggest_embed = discord.Embed(
                         title="**Top Suggestion**",
                         description=f"**[Message link]({message.jump_url})**",
@@ -77,11 +77,13 @@ class Log(Cog):
 
                     await top_suggestions_channel.send(embed=suggest_embed)
 
-            elif reaction == reaction2 and reaction2.count > reaction1.count and reaction2.count >= 10 and message.channel == suggestions_channel:
+            elif reaction == reaction2 and message.channel == suggestions_channel:
                 if user in reaction1.users():
                     reaction.remove()
                     await user.send("You've already liked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
-                    return
+                    pass
+                if reaction2.count > reaction1.count and reaction2.count >= 10:
+                    pass
                 await message.delete()
         else:
             return
@@ -125,21 +127,27 @@ class Log(Cog):
                 await another_message.add_reaction("🚫")
 
         if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)) or any(re.findall("|".join(banned_links), message.content, re.IGNORECASE)):
-            ban_embed = discord.Embed(
-                title="**NOTIFICATION**",
-                description=f":bell: *You have been banned in **{message.guild}** because you've sent something inappropriate, or turned out to be underage!*",
-                color=0x0064ff,
-                timestamp=datetime.datetime.utcnow()
-            )
+            if message.author.top_role < self.bot.top_role:
+                ban_embed = discord.Embed(
+                    title="**NOTIFICATION**",
+                    description=f":bell: *You have been banned in **{message.guild}** because you've sent something inappropriate, or turned out to be underage!*",
+                    color=0x0064ff,
+                    timestamp=datetime.datetime.utcnow()
+                )
 
-            ban_embed.add_field(name="**In case you would like to appeal your ban, go here:**", value=f"https://forms.gle/zs9vRAz5Fw1SFgvR6", inline=False)
+                ban_embed.add_field(name="**In case you would like to appeal your ban, go here:**", value=f"https://forms.gle/zs9vRAz5Fw1SFgvR6", inline=False)
 
-            try:
-                await message.author.send(embed=ban_embed)
-            except Exception:
-                pass
+                try:
+                    await message.author.send(embed=ban_embed)
+                except Exception:
+                    pass
 
-            await message.author.ban(reason="Sent something inappropriate, or turned out to be underage!")
+                try:
+                    await message.author.ban(reason="Sent something inappropriate, or turned out to be underage!")
+                except:
+                    return
+            else:
+                return
             if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
                 ban_embed_reason = discord.Embed(
                     title="**Member Banned**",
