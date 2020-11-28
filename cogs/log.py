@@ -47,7 +47,7 @@ class Log(Cog):
 
     @Cog.listener()
     async def on_reaction_remove(self, reaction, user):
-        emergency_role = self.bot.get_role(722793289119432736)
+        emergency_role = reaction.message.guild.get_role(722793289119432736)
 
         if reaction.message.id == 745281036807700581 and user in emergency_role.members:
             await user.remove_roles(emergency_role)
@@ -59,7 +59,7 @@ class Log(Cog):
         suggestions_channel = self.bot.get_channel(712655570737299567)
         top_suggestions_channel = self.bot.get_channel(771822991256059905)
         reactions = message.reactions
-        emergency_role = self.bot.get_role(722793289119432736)
+        emergency_role = reaction.message.guild.get_role(722793289119432736)
 
         if reaction.message.id == 745281036807700581:
             await user.add_roles(emergency_role)
