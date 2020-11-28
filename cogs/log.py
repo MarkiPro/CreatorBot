@@ -64,7 +64,7 @@ class Log(Cog):
 
             if reaction == reaction1 and message.channel == suggestions_channel:
                 if user in reaction2.users().flatten():
-                    reaction.remove()
+                    reaction.remove(user)
                     await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
                     return
                 if reaction1.count > reaction2.count and reaction1.count >= 10:
@@ -79,7 +79,7 @@ class Log(Cog):
 
             elif reaction == reaction2 and message.channel == suggestions_channel:
                 if user in reaction1.users().flatten():
-                    reaction.remove()
+                    reaction.remove(user)
                     await user.send("You've already liked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
                     pass
                 if reaction2.count > reaction1.count and reaction2.count >= 10:
