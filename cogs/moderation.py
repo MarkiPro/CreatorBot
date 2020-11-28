@@ -28,14 +28,16 @@ class Moderation(commands.Cog):
         emergency_role = ctx.guild.get_role(722793289119432736)
 
         embed1 = discord.Embed(
-            title="**ERROR**",
-            description="***:no_entry_sign: You already have the `Emergency` role.***",
-            color=0xff0000
+            title="**SUCCESS**",
+            description="***:white_check_mark: Removed the `Emergency` role.***",
+            color=0x00fa00,
+            timestamp=datetime.datetime.utcnow()
         )
         embed2 = discord.Embed(
             title="**SUCCESS**",
             description="***:white_check_mark: You now have the `Emergency` role.***",
-            color=0x00fa00
+            color=0x00fa00,
+            timestamp=datetime.datetime.utcnow()
         )
 
         if emergency_role not in member.roles:
@@ -43,6 +45,7 @@ class Moderation(commands.Cog):
             await member.send(embed=embed2)
             return
         if emergency_role in member.roles:
+            await member.remove_roles(emergency_role)
             await member.send(embed=embed1)
             return
 
