@@ -46,17 +46,6 @@ class Log(Cog):
             await server_management_logs_channel.send(embed=log_embed)
 
     @Cog.listener()
-    async def on_reaction_remove(self, reaction, user):
-        emergency_role = reaction.message.guild.get_role(722793289119432736)
-        that_message = await reaction.message.channel.fetch_message(745281036807700581)
-
-        if str(user) == str(self.bot.user):
-            return
-
-        if reaction.message.id == that_message and user in emergency_role.members:
-            await user.remove_roles(emergency_role)
-
-    @Cog.listener()
     async def on_reaction_add(self, reaction, user):
         staff_role = discord.utils.get(reaction.message.guild.roles, id=756565123350659385)
         message = reaction.message
@@ -64,13 +53,9 @@ class Log(Cog):
         suggestions_channel = self.bot.get_channel(712655570737299567)
         top_suggestions_channel = self.bot.get_channel(771822991256059905)
         reactions = message.reactions
-        emergency_role = reaction.message.guild.get_role(722793289119432736)
 
         if str(user) == str(self.bot.user):
             return
-
-        if reaction.message == that_message:
-            await user.add_roles(emergency_role)
 
         if not message.author.bot:
             if len(reactions) >= 1:
