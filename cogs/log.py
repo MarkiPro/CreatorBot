@@ -157,7 +157,7 @@ class Log(Cog):
             if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
                 ban_embed_reason = discord.Embed(
                     title="**Member Banned**",
-                    description=f"*{message.author} has been banned for sending a racial slur/banned word!*",
+                    description=f"***{message.author}** has been banned for sending a racial slur/banned word!*",
                     color=0x0064ff,
                     timestamp=datetime.datetime.utcnow()
                 )
@@ -165,7 +165,7 @@ class Log(Cog):
             if re.match("https://web.roblox.com", message.content, re.IGNORECASE):
                 ban_embed_reason = discord.Embed(
                     title="**Member Banned**",
-                    description=f"*{message.author} has been banned for sending an underage version of a roblox link!*",
+                    description=f"***{message.author}** has been banned for sending an underage version of a roblox link!*",
                     color=0x0064ff,
                     timestamp=datetime.datetime.utcnow()
                 )
@@ -173,7 +173,7 @@ class Log(Cog):
             if any(re.findall("|".join(banned_links_v2), message.content, re.IGNORECASE)):
                 ban_embed_reason = discord.Embed(
                     title="**Member Banned**",
-                    description=f"*{message.author} has been banned for sending an inappropriate link!*",
+                    description=f"***{message.author}** has been banned for sending an inappropriate link!*",
                     color=0x0064ff,
                     timestamp=datetime.datetime.utcnow()
                 )
@@ -222,6 +222,10 @@ class Log(Cog):
         after_roles = ", ".join(role.mention for role in after.roles if role.id not in excluded_roles) or "No roles assigned."
         role_update_log_channel = self.bot.get_channel(770368850679169075)
         nick_update_log_channel = self.bot.get_channel(771465528618254347)
+
+        result_list = before_roles - after_roles
+
+        print(result_list)
 
         if before.display_name != after.display_name and after.display_name != before.display_name:
             nick_log_embed = discord.Embed(
