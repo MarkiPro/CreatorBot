@@ -2323,11 +2323,11 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("no", category, re.IGNORECASE):
+                if re.findall("no", final_choice, re.IGNORECASE):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if re.findall("yes", category, re.IGNORECASE):
+                if re.findall("yes", final_choice, re.IGNORECASE):
                     await ctx.author.send("Sent for approval!")
                     some_channel = self.bot.get_channel(739247560065024050)
                     end_channel = self.bot.get_channel(727550350097252482)
