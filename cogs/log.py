@@ -46,12 +46,23 @@ class Log(Cog):
             await server_management_logs_channel.send(embed=log_embed)
 
     @Cog.listener()
+    async def on_reaction_remove(self, reaction, user):
+        emergency_role = self.bot.get_role(722793289119432736)
+
+        if reaction.message.id == 745281036807700581 and user in emergency_role.members:
+            await user.remove_roles(emergency_role)
+
+    @Cog.listener()
     async def on_reaction_add(self, reaction, user):
         staff_role = discord.utils.get(reaction.message.guild.roles, id=756565123350659385)
         message = reaction.message
         suggestions_channel = self.bot.get_channel(712655570737299567)
         top_suggestions_channel = self.bot.get_channel(771822991256059905)
         reactions = message.reactions
+        emergency_role = self.bot.get_role(722793289119432736)
+
+        if reaction.message.id == 745281036807700581:
+            await user.add_roles(emergency_role)
 
         if not message.author.bot and reactions[0] and message.channel == suggestions_channel:
             reaction1 = reactions[0]
@@ -63,10 +74,11 @@ class Log(Cog):
             reaction2 = reactions[1]
 
             if reaction == reaction1 and message.channel == suggestions_channel:
-                if user in reaction2.users().flatten():
-                    reaction.remove(user)
-                    await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
-                    return
+                async for some_user in reaction2.users():
+                    if some_user.id == user.id:
+                        reaction.remove(user)
+                        await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
+                        return
                 if reaction1.count > reaction2.count and reaction1.count >= 10:
                     suggest_embed = discord.Embed(
                         title="**Top Suggestion**",
@@ -78,10 +90,11 @@ class Log(Cog):
                     await top_suggestions_channel.send(embed=suggest_embed)
 
             elif reaction == reaction2 and message.channel == suggestions_channel:
-                if user in reaction1.users().flatten():
-                    reaction.remove(user)
-                    await user.send("You've already liked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
-                    pass
+                async for some_user in reaction2.users():
+                    if some_user.id == user.id:
+                        reaction.remove(user)
+                        await user.send("You've already liked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
+                        pass
                 if reaction2.count > reaction1.count and reaction2.count >= 10:
                     pass
                 await message.delete()
