@@ -204,14 +204,20 @@ class Log(Cog):
         else:
             pass
         if not message.author.bot:
+            matches = re.findall("```", message.content)
+            if len(matches) >= 0:
+                message_content = message.content.replace("```", " ")
+            else:
+                pass
+            new_message_content = message_content or message.content
             log_embed = discord.Embed(
                 title="**Message Deletion**",
-                description=f"**{message.author.mention}** Deleted a Message in **{message.channel.mention}**!",
+                description=f"Message sent by **{message.author.mention}** deleted in **{message.channel.mention}**!",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
             log_embed.set_thumbnail(url=message.author.avatar_url)
-            log_embed.add_field(name="**Message Content**", value=f"```{message.content}```", inline=True)
+            log_embed.add_field(name="**Message Content**", value=f"```{new_message_content}```", inline=True)
             await log_channel.send(embed=log_embed)
 
     @Cog.listener()
@@ -264,38 +270,35 @@ class Log(Cog):
             nick_log_embed.add_field(name="**After**", value=f"```{after.display_name}```", inline=False)
 
             await nick_update_log_channel.send(embed=nick_log_embed)
-        if after_roles > before_roles:
-            for role in after_roles:
-                if role not in before_roles:
-                    added_role = after_roles[role]
-                    if before_roles != after_roles and after_roles != before_roles and str(
-                            before_roles) != "No roles assigned." and str(after_roles) != "No roles assigned.":
-                        role_log_embed = discord.Embed(
-                            title="**Role Update**",
-                            description=f"**Role Added for **{after.mention}**!",
-                            timestamp=datetime.datetime.utcnow(),
-                            color=0x0064ff
-                        )
-                        role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {added_role}", inline=False)
-                        role_log_embed.set_thumbnail(url=before.avatar_url)
-                        await role_update_log_channel.send(embed=role_log_embed)
-                        await asyncio.sleep(60)
-        elif before_roles > after_roles:
-            for role in before_roles:
-                if role not in after_roles:
-                    removed_role = before_roles[role]
-                    if before_roles != after_roles and after_roles != before_roles and str(
-                            before_roles) != "No roles assigned." and str(after_roles) != "No roles assigned.":
-                        role_log_embed = discord.Embed(
-                            title="**Role Update**",
-                            description=f"**Role Removed for **{after.mention}**!",
-                            timestamp=datetime.datetime.utcnow(),
-                            color=0x0064ff
-                        )
-                        role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: {removed_role}", inline=False)
-                        role_log_embed.set_thumbnail(url=before.avatar_url)
-                        await role_update_log_channel.send(embed=role_log_embed)
-                        await asyncio.sleep(60)
+        if str(after_roles) != "No roles assigned." and str(before_roles) != "No roles assigned.":
+            if len(after_roles) > len(before_roles):
+                for role in after_roles:
+                    if role not in before_roles:
+                        added_role = role
+                        if before_roles != after_roles and after_roles != before_roles:
+                            role_log_embed = discord.Embed(
+                                title="**Role Update**",
+                                description=f"**Role Added for **{after.mention}**!",
+                                timestamp=datetime.datetime.utcnow(),
+                                color=0x0064ff
+                            )
+                            role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {added_role}", inline=False)
+                            role_log_embed.set_thumbnail(url=before.avatar_url)
+                            await role_update_log_channel.send(embed=role_log_embed)
+            elif len(before_roles) > len(after_roles):
+                for role in before_roles:
+                    if role not in after_roles:
+                        removed_role = role
+                        if before_roles != after_roles and after_roles != before_roles:
+                            role_log_embed = discord.Embed(
+                                title="**Role Update**",
+                                description=f"**Role Removed for **{after.mention}**!",
+                                timestamp=datetime.datetime.utcnow(),
+                                color=0x0064ff
+                            )
+                            role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: {removed_role}", inline=False)
+                            role_log_embed.set_thumbnail(url=before.avatar_url)
+                            await role_update_log_channel.send(embed=role_log_embed)
 
         if booster_role in before.roles and booster_role not in after.roles:
             await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.""")
