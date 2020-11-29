@@ -353,7 +353,6 @@ class Log(Cog):
 
             member_joined_vc_log_embed.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_joined_vc_log_embed)
-
         elif before.channel and not after.channel:
             member_left_vc_log_embed = discord.Embed(
                 title="**Member Left Voice Channel**",
@@ -364,7 +363,6 @@ class Log(Cog):
 
             member_left_vc_log_embed.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_left_vc_log_embed)
-
         elif before.channel and after.channel and before.channel != after.channel:
             member_switched_vc_log_embed = discord.Embed(
                 title="**Member Switched Voice Channels**",
