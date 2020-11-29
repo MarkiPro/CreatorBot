@@ -1,6 +1,6 @@
 import datetime
 import os
-
+import asyncio
 import discord
 from discord.ext import commands
 
@@ -134,7 +134,11 @@ async def on_command_error(ctx, error):
         description=f"***:no_entry_sign: {error}***",
         color=0xff0000
     )
-    await ctx.send(embed=embed)
+    error_msg = await ctx.send(embed=embed)
+
+    await asyncio.sleep(10)
+    
+    await error_msg.delete(reason="Just an error message, nothing to worry about.")
 
 
 bot.run(token)
