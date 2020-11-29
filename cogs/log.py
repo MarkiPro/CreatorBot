@@ -303,6 +303,9 @@ class Log(Cog):
 
             await nick_update_log_channel.send(embed=nick_log_embed)
         if str(after_roles) != "No roles assigned." and str(before_roles) != "No roles assigned.":
+            return
+        else:
+            pass
             if len(after_roles) > len(before_roles):
                 for role in after_roles:
                     if role not in before_roles:
