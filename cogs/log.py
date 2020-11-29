@@ -281,8 +281,8 @@ class Log(Cog):
         guild = sum_channel.guild
         booster_role = discord.utils.get(guild.roles, id=762172204628181023)
         excluded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651, 743013370588037191, 732388199107657828, 743013368511594569, 743013366515236915, 743013366880272474, 743013367840768072, 743013368134107166, 732387788493946881, 732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698, 735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516, 735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672, 734527854871707762, 746758563703291938]
-        before_roles = {", ".join(role.mention for role in before.roles if role.id not in excluded_roles) or "No roles assigned."}
-        after_roles = {", ".join(role.mention for role in after.roles if role.id not in excluded_roles) or "No roles assigned."}
+        before_roles = [", ".join(role.mention for role in before.roles if role.id not in excluded_roles) or "No roles assigned."]
+        after_roles = [", ".join(role.mention for role in after.roles if role.id not in excluded_roles) or "No roles assigned."]
         role_update_log_channel = self.bot.get_channel(770368850679169075)
         nick_update_log_channel = self.bot.get_channel(771465528618254347)
         cc_guild = self.bot.get_guild(id=611227128020598805)
@@ -309,7 +309,7 @@ class Log(Cog):
             pass
         for i in range(len(after_roles)):
             for role in after_roles:
-                if role not in before_roles:
+                if role not in before_roles and role in after_roles:
                     print(role)
         """
         if after_roles_list > before_roles_list:
