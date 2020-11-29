@@ -37,6 +37,20 @@ class Fun(commands.Cog):
         except:
             return await ctx.send("There was an issue with loading the image.")
 
+    @commands.command(pass_context=True)
+    async def meme(self, ctx):
+        await ctx.send("Generating a meme for you!")
+        try:
+            embed = discord.Embed(title="A funny meme for you!", color=0xe700ff)
+
+            async with aiohttp.ClientSession() as cs:
+                async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
+                    res = await r.json()
+                    embed.set_image(url=res['data']['children'][random.randint(0, 25)]['data']['url'])
+                    await ctx.send(embed=embed)
+        except:
+            return await ctx.send("There was an issue with loading the image.")
+
     @commands.command()
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def rps(self, ctx, *, choice):
