@@ -307,8 +307,8 @@ class Log(Cog):
             return
         else:
             pass
-        after_roles_list = list(set(after_roles)) - set(before_roles)
-        before_roles_list = list(set(before_roles)) - set(after_roles)
+        after_roles_list = list(set(after_roles)) - list(set(before_roles))
+        before_roles_list = list(set(before_roles)) - list(set(after_roles))
         if after_roles_list > before_roles_list:
             role_log_embed = discord.Embed(
                 title="**Role Update**",
