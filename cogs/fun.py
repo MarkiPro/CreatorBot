@@ -90,10 +90,7 @@ class Fun(commands.Cog):
     async def randomnumber(self, ctx, *, digits: int = 1):
         number = ""
         if digits > 250:
-            for i in 250:
-                number += str(random.randint(0, 9))
-                await ctx.send(number)
-                return
+            return await ctx.send("Cannot go higher than 250, as it slows the bot down when it is too high!")
         for i in range(digits):
             number += str(random.randint(0, 9))
         await ctx.send(number)
