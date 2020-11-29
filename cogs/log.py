@@ -309,7 +309,7 @@ class Log(Cog):
             if len(after_roles) > len(before_roles):
                 for role in after_roles:
                     if role not in before_roles:
-                        added_role = role
+                        added_role = after_roles[role]
                         if before_roles != after_roles and after_roles != before_roles:
                             role_log_embed = discord.Embed(
                                 title="**Role Update**",
@@ -323,7 +323,7 @@ class Log(Cog):
             elif len(before_roles) > len(after_roles):
                 for role in before_roles:
                     if role not in after_roles:
-                        removed_role = role
+                        removed_role = before_roles[role]
                         if before_roles != after_roles and after_roles != before_roles:
                             role_log_embed = discord.Embed(
                                 title="**Role Update**",
