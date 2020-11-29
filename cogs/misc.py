@@ -121,7 +121,7 @@ class Misc(commands.Cog):
 
         credits_embed = discord.Embed(
             title="**Credits**",
-            description=f"Bot Creator: **{markipro}**\nHuge thank you to **{malware}**!\nWho contributed a lot!",
+            description=f"Bot Creator: **{markipro}**\nHuge thank you to **{malware}**!",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
