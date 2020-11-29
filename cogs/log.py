@@ -205,7 +205,8 @@ class Log(Cog):
         if not message.author.bot:
             matches = re.findall("```", message.content)
             if len(matches) >= 0:
-                message_content = message.content.replace("```", "")
+                pre_message_content = message.content.replace("```", "")
+                message_content = pre_message_content.replace("`", "")
             else:
                 pass
             new_message_content = message_content or message.content
@@ -230,15 +231,17 @@ class Log(Cog):
         else:
             pass
         if not message.author.bot and before.content != after.content:
-            matches1 = re.findall("```", before.content)
+            matches1 = re.findall("```|`", before.content)
             if len(matches1) >= 0:
-                before_message_content = before.content.replace("```", "")
+                pre_before_message_content = before.content.replace("```", "")
+                before_message_content = pre_before_message_content.replace("`", "")
             else:
                 pass
             before_new_message_content = before_message_content or before.content
-            matches2 = re.findall("```", after.content)
+            matches2 = re.findall("```|`", after.content)
             if len(matches2) >= 0:
-                after_message_content = after.content.replace("```", "")
+                pre_after_message_content = after.content.replace("```", "")
+                after_message_content = pre_after_message_content.replace("`", "")
             else:
                 pass
             after_new_message_content = after_message_content or after.content
