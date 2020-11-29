@@ -206,7 +206,7 @@ class Log(Cog):
         if not message.author.bot:
             matches = re.findall("```", message.content)
             if len(matches) >= 0:
-                message_content = message.content.replace("```", " ")
+                message_content = message.content.replace("```", "")
             else:
                 pass
             new_message_content = message_content or message.content
@@ -231,14 +231,26 @@ class Log(Cog):
         else:
             pass
         if not message.author.bot and before.content != after.content:
+            matches1 = re.findall("```", before.content)
+            if len(matches1) >= 0:
+                before_message_content = before.content.replace("```", "")
+            else:
+                pass
+            before_new_message_content = before_message_content or before.content
+            matches2 = re.findall("```", after.content)
+            if len(matches2) >= 0:
+                after_message_content = after.content.replace("```", "")
+            else:
+                pass
+            after_new_message_content = after_message_content or after.content
             log_embed = discord.Embed(
                 title="**Message Edit**",
                 description=f'**{message.author.mention}** Edited The **[Message]({message.jump_url})** in **{message.channel.mention}**!',
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            log_embed.add_field(name="**Before**", value=f"```{before.content}```", inline=False)
-            log_embed.add_field(name="**After**", value=f"```{after.content}```", inline=False)
+            log_embed.add_field(name="**Before**", value=f"```{before_new_message_content}```", inline=False)
+            log_embed.add_field(name="**After**", value=f"```{after_new_message_content}```", inline=False)
             log_embed.set_thumbnail(url=before.author.avatar_url)
             await log_channel.send(embed=log_embed)
 
