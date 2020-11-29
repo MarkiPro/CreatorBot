@@ -309,7 +309,8 @@ class Log(Cog):
             pass
         for i in range(len(after_roles)):
             for role in after_roles:
-                print(role)
+                if role not in before_roles:
+                    print(role)
         """
         if after_roles_list > before_roles_list:
             role_log_embed = discord.Embed(
