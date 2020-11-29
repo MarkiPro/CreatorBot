@@ -281,7 +281,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_guild=True)
-    async def say(self, ctx, *, text, channel: discord.TextChannel):
+    async def say(self, ctx, channel: discord.TextChannel = None, *, text):
         channel = channel or ctx.channel
 
         await ctx.message.delete()
