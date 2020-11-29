@@ -137,8 +137,8 @@ async def on_command_error(ctx, error):
     error_msg = await ctx.send(embed=embed)
 
     await asyncio.sleep(10)
-    
-    await error_msg.delete(reason="Just an error message, nothing to worry about.")
+
+    await error_msg.delete()
 
 
 bot.run(token)
