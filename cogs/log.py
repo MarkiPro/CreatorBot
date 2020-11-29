@@ -308,9 +308,9 @@ class Log(Cog):
         else:
             pass
         if len(after_roles) > len(before_roles):
-            for role in after_roles:
-                if role not in before_roles:
-                    added_role = role
+            for role_number in len(after_roles):
+                if role_number not in len(before_roles):
+                    added_role = after_roles[role_number]
                     print(added_role)
                     role_log_embed = discord.Embed(
                         title="**Role Update**",
@@ -322,9 +322,9 @@ class Log(Cog):
                     role_log_embed.set_thumbnail(url=before.avatar_url)
                     await role_update_log_channel.send(embed=role_log_embed)
         elif len(before_roles) > len(after_roles):
-            for role in before_roles:
-                if role not in after_roles:
-                    removed_role = role
+            for role_number in len(before_roles):
+                if role_number not in len(after_roles):
+                    removed_role = before_roles[role_number]
                     print(removed_role)
                     role_log_embed = discord.Embed(
                         title="**Role Update**",
