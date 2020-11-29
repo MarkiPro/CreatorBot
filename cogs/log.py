@@ -230,14 +230,13 @@ class Log(Cog):
             return
         else:
             pass
-        if not messages.author.bot:
-            log_embed = discord.Embed(
-                title="**Message Bulk Deletion**",
-                description=f'*Deleted **{len(messages)}** in **{messages.channel.mention}***!',
-                timestamp=datetime.datetime.utcnow(),
-                color=0x0064ff
-            )
-            await log_channel.send(embed=log_embed)
+        log_embed = discord.Embed(
+            title="**Message Bulk Deletion**",
+            description=f'*Deleted **{len(messages)}** in **{messages.channel.mention}***!',
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
+        )
+        await log_channel.send(embed=log_embed)
 
     @Cog.listener()
     async def on_message_edit(self, before, after):
