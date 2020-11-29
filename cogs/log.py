@@ -232,7 +232,7 @@ class Log(Cog):
             pass
         log_embed = discord.Embed(
             title="**Message Bulk Deletion**",
-            description=f'*Deleted **{len(messages)}** in **{first_message.channel.mention}***!',
+            description=f'*Deleted **{len(messages)}** messages in **{first_message.channel.mention}***!',
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
