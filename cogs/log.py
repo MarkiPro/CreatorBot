@@ -307,8 +307,10 @@ class Log(Cog):
             return
         else:
             pass
-        after_roles_list = list(set(after_roles)) - list(set(before_roles))
-        before_roles_list = list(set(before_roles)) - list(set(after_roles))
+        for i in range(len(after_roles)):
+            for role in after_roles:
+                print(role)
+        """
         if after_roles_list > before_roles_list:
             role_log_embed = discord.Embed(
                 title="**Role Update**",
@@ -331,7 +333,7 @@ class Log(Cog):
                                      inline=False)
             role_log_embed.set_thumbnail(url=before.avatar_url)
             await role_update_log_channel.send(embed=role_log_embed)
-
+        """
         if booster_role in before.roles and booster_role not in after.roles:
             await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.""")
 
