@@ -307,10 +307,10 @@ class Log(Cog):
             return
         else:
             pass
-        for i in range(len(after_roles)):
-            for role in list(set(after_roles)):
+        for i in range(len(after.roles)):
+            for role in list(set(after.roles)):
                 print(role)
-                if role not in before_roles:
+                if role not in before.roles:
                     role_log_embed = discord.Embed(
                         title="**Role Update**",
                         description=f"**Role Added for **{after.mention}**!",
