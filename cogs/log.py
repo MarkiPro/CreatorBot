@@ -310,7 +310,16 @@ class Log(Cog):
         for i in range(len(after_roles)):
             for role in after_roles:
                 if role not in before_roles and role in after_roles:
-                    print(role)
+                    role_log_embed = discord.Embed(
+                        title="**Role Update**",
+                        description=f"**Role Added for **{after.mention}**!",
+                        timestamp=datetime.datetime.utcnow(),
+                        color=0x0064ff
+                    )
+                    role_log_embed.add_field(name="**Added Role(s)**", value=f":white_check_mark: {role}",
+                                             inline=False)
+                    role_log_embed.set_thumbnail(url=before.avatar_url)
+                    await role_update_log_channel.send(embed=role_log_embed)
         """
         if after_roles_list > before_roles_list:
             role_log_embed = discord.Embed(
