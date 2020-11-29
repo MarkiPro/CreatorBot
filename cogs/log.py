@@ -309,7 +309,7 @@ class Log(Cog):
             pass
         for i in range(len(after_roles)):
             for role in list(set(after_roles)):
-                actual_role_s = role.replace(before_roles, "")
+                actual_role_s = re.sub(pattern="|".join(before_roles), string="")
                 if role not in before_roles:
                     role_log_embed = discord.Embed(
                         title="**Role Update**",
@@ -317,8 +317,7 @@ class Log(Cog):
                         timestamp=datetime.datetime.utcnow(),
                         color=0x0064ff
                     )
-                    role_log_embed.add_field(name="**Added Role(s)**", value=f":white_check_mark: {role}",
-                                             inline=False)
+                    role_log_embed.add_field(name="**Added Role(s)**", value=f":white_check_mark: {actual_role_s}", inline=False)
                     role_log_embed.set_thumbnail(url=before.avatar_url)
                     await role_update_log_channel.send(embed=role_log_embed)
         """
