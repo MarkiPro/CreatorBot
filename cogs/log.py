@@ -221,6 +221,24 @@ class Log(Cog):
             await log_channel.send(embed=log_embed)
 
     @Cog.listener()
+    async def on_bulk_message_delete(self, messages):
+        log_channel = self.bot.get_channel(771471454629003314)
+        cc_guild = self.bot.get_guild(id=611227128020598805)
+
+        if messages.guild != cc_guild:
+            return
+        else:
+            pass
+        if not messages.author.bot:
+            log_embed = discord.Embed(
+                title="**Message Bulk Deletion**",
+                description=f'*Messages bulk deletion in **{messages.channel.mention}***!',
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            await log_channel.send(embed=log_embed)
+
+    @Cog.listener()
     async def on_message_edit(self, before, after):
         log_channel = self.bot.get_channel(771471454629003314)
         message = before
