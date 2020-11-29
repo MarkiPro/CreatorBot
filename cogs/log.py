@@ -308,7 +308,6 @@ class Log(Cog):
         else:
             pass
         for role in list(set(after.roles)):
-            print(role)
             if role not in before.roles:
                 actual_role = discord.utils.get(cc_guild.roles, name=f"{role}")
                 role_log_embed = discord.Embed(
@@ -317,11 +316,10 @@ class Log(Cog):
                     timestamp=datetime.datetime.utcnow(),
                     color=0x0064ff
                 )
-                role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {actual_role}", inline=False)
+                role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {actual_role.mention}", inline=False)
                 role_log_embed.set_thumbnail(url=before.avatar_url)
                 await role_update_log_channel.send(embed=role_log_embed)
         for role in list(set(before.roles)):
-            print(role)
             if role not in after.roles:
                 actual_role = discord.utils.get(cc_guild.roles, name=f"{role}")
                 role_log_embed = discord.Embed(
@@ -330,7 +328,7 @@ class Log(Cog):
                     timestamp=datetime.datetime.utcnow(),
                     color=0x0064ff
                 )
-                role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: {actual_role}", inline=False)
+                role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: {actual_role.mention}", inline=False)
                 role_log_embed.set_thumbnail(url=before.avatar_url)
                 await role_update_log_channel.send(embed=role_log_embed)
         if booster_role in before.roles and booster_role not in after.roles:
