@@ -291,7 +291,7 @@ class Moderation(commands.Cog):
     @commands.guild_only()
     @commands.has_permissions(manage_messages=True)
     @commands.cooldown(1, 5, commands.BucketType.member)
-    async def slowmode(self, ctx, time: int = 0, channel: discord.TextChannel = None):
+    async def slowmode(self, ctx, time: int = 0, *, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
 
         await channel.edit(slowmode_delay=time)
