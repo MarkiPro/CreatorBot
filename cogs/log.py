@@ -309,7 +309,7 @@ class Log(Cog):
             pass
         for i in range(len(after_roles)):
             for role in list(set(after_roles)):
-                actual_role_s = re.sub(pattern="|".join(before_roles), string="")
+                actual_role_s = re.sub("|".join(before_roles), "")
                 if role not in before_roles:
                     role_log_embed = discord.Embed(
                         title="**Role Update**",
