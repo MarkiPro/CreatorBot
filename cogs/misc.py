@@ -2680,9 +2680,9 @@ class Misc(commands.Cog):
         embed = discord.Embed(title=f"**Who is {user}({user.mention})**",
                               timestamp=datetime.datetime.utcnow(),
                               color=0x0064ff)
-        print(user.activities[3])
-        if user.activities and user.activities[3]:
-            activity = user.activities[3]
+        print(user.activities[0])
+        if user.activities and user.activities[0]:
+            activity = user.activities[0]
             embed.description = f"{activity}"
             print(activity['name'])
             pass
