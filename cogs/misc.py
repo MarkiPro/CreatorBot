@@ -2681,9 +2681,14 @@ class Misc(commands.Cog):
                               timestamp=datetime.datetime.utcnow(),
                               color=0x0064ff)
         print(user.activities[0])
-        if user.activities and user.activities[0]:
-            activity = user.activities[0]
-            embed.description = f"{activity}"
+        try:
+            if user.activities and user.activities[0]:
+                activity = user.activities[0]
+                embed.description = f"{activity}"
+                pass
+            else:
+                pass
+        except Exception:
             pass
         format = "%A, %d %B, %Y : %I:%M %p"
         delta_joined = datetime.datetime.utcnow() - user.joined_at
