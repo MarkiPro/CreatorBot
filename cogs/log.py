@@ -390,6 +390,10 @@ class Log(Cog):
         else:
             pass
         for role in list(set(after.roles)):
+            if role.id in excluded_roles:
+                return
+            else:
+                pass
             if role not in before.roles:
                 actual_role = discord.utils.get(cc_guild.roles, name=f"{role}")
                 role_log_embed = discord.Embed(
