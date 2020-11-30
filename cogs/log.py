@@ -21,8 +21,89 @@ class Log(Cog):
         else:
             pass
         log_embed = discord.Embed(
+            title="**Role Deletion**",
+            description=f"***`{role.name}`** was just deleted!*",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
+        )
+
+        await server_management_logs_channel.send(embed=log_embed)
+
+    @Cog.listener()
+    async def on_guild_channel_update(self, before, after):
+        server_management_logs_channel = self.bot.get_channel(771465807276277810)
+        channel = before
+        cc_guild = self.bot.get_guild(id=611227128020598805)
+
+        if before.guild != cc_guild and after.guild != cc_guild:
+            return
+        else:
+            pass
+        if before.position != after.position:
+            return
+        print(before.permissions)
+        print(after.permissions)
+        if before.permissions != after.permissions:
+            log_embed = discord.Embed(
+                title="**Role Updated**",
+                description=f"***{channel.mention}`({channel.name})`** was just updated!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+
+            log_embed.add_field(name="**Before**", value=f"{before}", inline=True)
+            log_embed.add_field(name="**After**", value=f"{after}", inline=True)
+
+            await server_management_logs_channel.send(embed=log_embed)
+
+    @Cog.listener()
+    async def on_guild_channel_delete(self, channel):
+        server_management_logs_channel = self.bot.get_channel(771465807276277810)
+        cc_guild = self.bot.get_guild(id=611227128020598805)
+
+        if channel.guild != cc_guild:
+            return
+        else:
+            pass
+        log_embed = discord.Embed(
+            title="**Role Deletion**",
+            description=f"***`{channel.name}`** was just deleted!*",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
+        )
+
+        await server_management_logs_channel.send(embed=log_embed)
+
+    @Cog.listener()
+    async def on_guild_channel_create(self, channel):
+        server_management_logs_channel = self.bot.get_channel(771465807276277810)
+        cc_guild = self.bot.get_guild(id=611227128020598805)
+
+        if channel.guild != cc_guild:
+            return
+        else:
+            pass
+        log_embed = discord.Embed(
+            title="**Channel Creation**",
+            description=f"***{channel.mention}`({channel.name})`** was just created!*",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
+        )
+
+        await server_management_logs_channel.send(embed=log_embed)
+
+    @Cog.listener()
+    async def on_guild_role_create(self, role):
+        server_management_logs_channel = self.bot.get_channel(771465807276277810)
+        cc_guild = self.bot.get_guild(id=611227128020598805)
+
+        if role.guild != cc_guild:
+            return
+        else:
+            pass
+        log_embed = discord.Embed(
             title="**Role Creation**",
-            description=f"{role.mention} was just created!",
+            description=f"***{role.mention}`({role.name})`** was just created!*",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
@@ -41,11 +122,12 @@ class Log(Cog):
             pass
         if before.position != after.position:
             return
-
+        print(before.permissions)
+        print(after.permissions)
         if before.permissions != after.permissions:
             log_embed = discord.Embed(
                 title="**Role Updated**",
-                description=f"**{role.mention}** was just updated!",
+                description=f"***{role.mention}`({role.name})`** was just updated!*",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -373,6 +455,127 @@ class Log(Cog):
 
             member_switched_vc_log_embed.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_switched_vc_log_embed)
+        if before != after:
+            if after.self_mute:
+                member_self_muted_log_embed1 = discord.Embed(
+                    title="**Member Self-Muted**",
+                    description=f"**{member.mention}** just self-muted themselves in **`{after.channel}`**!",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+
+                member_self_muted_log_embed1.set_thumbnail(url=member.avatar_url)
+                await log_channel.send(embed=member_self_muted_log_embed1)
+            elif after.mute:
+                member_muted_log_embed1 = discord.Embed(
+                    title="**Member Muted**",
+                    description=f"**{member.mention}** just got muted in **`{after.channel}`**!",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+
+                member_muted_log_embed1.set_thumbnail(url=member.avatar_url)
+                await log_channel.send(embed=member_muted_log_embed1)
+            elif after.deaf:
+                member_deaf_log_embed1 = discord.Embed(
+                    title="**Member Deafened**",
+                    description=f"**{member.mention}** just got deafened in **`{after.channel}`**!",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+
+                member_deaf_log_embed1.set_thumbnail(url=member.avatar_url)
+                await log_channel.send(embed=member_deaf_log_embed1)
+            elif after.self_deaf:
+                member_self_deaf_log_embed1 = discord.Embed(
+                    title="**Member Self-Deafened**",
+                    description=f"**{member.mention}** just self-deafened in **`{after.channel}`**!",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+
+                member_self_deaf_log_embed1.set_thumbnail(url=member.avatar_url)
+                await log_channel.send(embed=member_self_deaf_log_embed1)
+            elif after.self_stream:
+                member_self_stream_log_embed1 = discord.Embed(
+                    title="**Member Started Streaming**",
+                    description=f"**{member.mention}** just started streaming in **`{after.channel}`**!",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+
+                member_self_stream_log_embed1.set_thumbnail(url=member.avatar_url)
+                await log_channel.send(embed=member_self_stream_log_embed1)
+            elif after.self_video:
+                member_self_video_log_embed1 = discord.Embed(
+                    title="**Member Turned Camera On**",
+                    description=f"**{member.mention}** just turned their camera on in **`{after.channel}`**!",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+
+                member_self_video_log_embed1.set_thumbnail(url=member.avatar_url)
+                await log_channel.send(embed=member_self_video_log_embed1)
+            elif before.self_mute:
+                member_self_muted_log_embed2 = discord.Embed(
+                    title="**Member Un-Self-Muted**",
+                    description=f"**{member.mention}** just un-self-muted themselves in **`{after.channel}`**!",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+
+                member_self_muted_log_embed2.set_thumbnail(url=member.avatar_url)
+                await log_channel.send(embed=member_self_muted_log_embed2)
+            elif before.mute:
+                member_muted_log_embed2 = discord.Embed(
+                    title="**Member Un-Muted**",
+                    description=f"**{member.mention}** just got un-muted in **`{after.channel}`**!",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+
+                member_muted_log_embed2.set_thumbnail(url=member.avatar_url)
+                await log_channel.send(embed=member_muted_log_embed2)
+            elif before.deaf:
+                member_deaf_log_embed2 = discord.Embed(
+                    title="**Member Un-Deafened**",
+                    description=f"**{member.mention}** just got un-deafened in **`{after.channel}`**!",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+
+                member_deaf_log_embed2.set_thumbnail(url=member.avatar_url)
+                await log_channel.send(embed=member_deaf_log_embed2)
+            elif before.self_deaf:
+                member_self_deaf_log_embed2 = discord.Embed(
+                    title="**Member Un-Self-Deafened**",
+                    description=f"**{member.mention}** just un-self-deafened in **`{after.channel}`**!",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+
+                member_self_deaf_log_embed2.set_thumbnail(url=member.avatar_url)
+                await log_channel.send(embed=member_self_deaf_log_embed2)
+            elif before.self_stream:
+                member_self_stream_log_embed2 = discord.Embed(
+                    title="**Member Stopped Streaming**",
+                    description=f"**{member.mention}** just stopped streaming in **`{after.channel}`**!",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+
+                member_self_stream_log_embed2.set_thumbnail(url=member.avatar_url)
+                await log_channel.send(embed=member_self_stream_log_embed2)
+            elif before.self_video:
+                member_self_video_log_embed2 = discord.Embed(
+                    title="**Member Turned Camera Off**",
+                    description=f"**{member.mention}** just turned their camera off in **`{after.channel}`**!",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+
+                member_self_video_log_embed2.set_thumbnail(url=member.avatar_url)
+                await log_channel.send(embed=member_self_video_log_embed2)
 
     @Cog.listener()
     async def on_member_join(self, member):
