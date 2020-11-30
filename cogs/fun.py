@@ -84,10 +84,13 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def rate(self, ctx, user: discord.User = None):
+        markipro = await ctx.bot.fetch_user(530461779768377357)
         if user is None or user.id == ctx.author.id:
             await ctx.send(f"In my eyes, you're a **{random.randint(0, 10)}/10**! :eyes:")
         elif user == self.bot.user:
             await ctx.send("Well, obviously, I'm a **10/10**! :wink: :wink:")
+        elif user == markipro:
+            await ctx.send("He's my creator!!! If I don't say he's a **10/10** which he is, I'm a goner! :eyes:")
         else:
             await ctx.send(f"I see them as a solid **{random.randint(0, 10)}/10**! :eyes:")
 
