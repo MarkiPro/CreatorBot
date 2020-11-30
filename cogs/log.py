@@ -421,7 +421,7 @@ class Log(Cog):
         log_channel = self.bot.get_channel(736234713940754432)
         cc_guild = self.bot.get_guild(id=611227128020598805)
 
-        if before.guild != cc_guild and after.guild != cc_guild:
+        if before.channel.guild != cc_guild and after.channel.guild != cc_guild:
             return
         else:
             pass
