@@ -2680,16 +2680,6 @@ class Misc(commands.Cog):
         embed = discord.Embed(title=f"**Who is {user}**",
                               timestamp=datetime.datetime.utcnow(),
                               color=0x0064ff)
-        print(user.activities[0])
-        try:
-            if user.activities and user.activities[0]:
-                activity = user.activities[0]
-                embed.description = f"{activity}"
-                pass
-            else:
-                pass
-        except Exception:
-            pass
         format = "%A, %d %B, %Y : %I:%M %p"
         delta_joined = datetime.datetime.utcnow() - user.joined_at
         delta_created = datetime.datetime.utcnow() - user.created_at
