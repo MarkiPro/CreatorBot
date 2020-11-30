@@ -2680,10 +2680,11 @@ class Misc(commands.Cog):
         embed = discord.Embed(title=f"**Who is {user}({user.mention})**",
                               timestamp=datetime.datetime.utcnow(),
                               color=0x0064ff)
-        print(user.activities)
-        if user.activities and user.activities['CustomActivity']:
-            activity = user.activities['CustomActivity']
+        print(user.activities[3])
+        if user.activities and user.activities[3]:
+            activity = user.activities[3]
             embed.description = f"{activity}"
+            print(activity['name'])
             pass
         format = "%A, %d %B, %Y : %I:%M %p"
         delta_joined = datetime.datetime.utcnow() - user.joined_at
