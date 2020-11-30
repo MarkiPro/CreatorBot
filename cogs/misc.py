@@ -2684,7 +2684,6 @@ class Misc(commands.Cog):
         if user.activities and user.activities[0]:
             activity = user.activities[0]
             embed.description = f"{activity}"
-            print(activity['name'])
             pass
         format = "%A, %d %B, %Y : %I:%M %p"
         delta_joined = datetime.datetime.utcnow() - user.joined_at
