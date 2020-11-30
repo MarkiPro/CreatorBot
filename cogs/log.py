@@ -151,7 +151,13 @@ class Log(Cog):
         if not message.author.bot:
             if len(reactions) >= 1:
                 reaction1 = reactions[0]
-                if reaction1 and message.channel == suggestions_channel and reaction == reaction1 and user in staff_role.members:
+                if reaction1 and message.channel == suggestions_channel and reaction == reaction1:
+                    if user in staff_role.members:
+                        pass
+                    else:
+                        await user.send("This is staff-only!")
+                        await reaction.remove(user)
+                        return
                     await message.delete()
 
         if len(reactions) >= 2:
@@ -188,9 +194,14 @@ class Log(Cog):
         if len(reactions) >= 3:
             reaction1 = reactions[2]
 
-            if reaction == reaction1 and user in staff_role.members:
-                if message.channel == suggestions_channel:
-                    await message.delete()
+            if reaction == reaction1 and message.channel == suggestions_channel:
+                if user in staff_role.members and user is not self.bot.user:
+                    pass
+                else:
+                    await user.send("This is staff-only!")
+                    await reaction.remove(user)
+                    return
+                await message.delete()
         else:
             return
 
