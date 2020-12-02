@@ -418,9 +418,15 @@ class Log(Cog):
         log_channel = self.bot.get_channel(736234713940754432)
         cc_guild = self.bot.get_guild(id=611227128020598805)
 
-        if before.channel.guild != cc_guild and after.channel.guild != cc_guild:
-            return
-        else:
+        try:
+            if before.channel:
+                if before.channel.guild != cc_guild and after.channel.guild != cc_guild:
+                    return
+                else:
+                    pass
+            else:
+                pass
+        except Exception:
             pass
         if after.channel and not before.channel:
             member_joined_vc_log_embed = discord.Embed(
