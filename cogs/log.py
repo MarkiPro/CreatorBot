@@ -223,7 +223,7 @@ class Log(Cog):
                 await another_message.add_reaction("🚫")
 
         if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)) or any(re.findall("|".join(banned_links), message.content, re.IGNORECASE)):
-            if message.author in staff_role.members:
+            if message.author not in staff_role.members:
                 await message.delete()
                 ban_embed = discord.Embed(
                     title="**NOTIFICATION**",
