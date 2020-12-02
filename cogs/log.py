@@ -12,24 +12,6 @@ class Log(Cog):
         self.bot = bot
 
     @Cog.listener()
-    async def on_guild_role_create(self, role):
-        server_management_logs_channel = self.bot.get_channel(771465807276277810)
-        cc_guild = self.bot.get_guild(id=611227128020598805)
-
-        if role.guild != cc_guild:
-            return
-        else:
-            pass
-        log_embed = discord.Embed(
-            title="**Role Deletion**",
-            description=f"***`{role.name}`** was just deleted!*",
-            timestamp=datetime.datetime.utcnow(),
-            color=0x0064ff
-        )
-
-        await server_management_logs_channel.send(embed=log_embed)
-
-    @Cog.listener()
     async def on_guild_channel_update(self, before, after):
         server_management_logs_channel = self.bot.get_channel(771465807276277810)
         channel = before
@@ -241,6 +223,7 @@ class Log(Cog):
 
         if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)) or any(re.findall("|".join(banned_links), message.content, re.IGNORECASE)):
             if message.author.top_role < self.bot.top_role:
+                await message.delete()
                 ban_embed = discord.Embed(
                     title="**NOTIFICATION**",
                     description=f":bell: *You have been banned in **{message.guild}** because you've sent something inappropriate, or turned out to be underage!*",
@@ -254,7 +237,6 @@ class Log(Cog):
                     await message.author.send(embed=ban_embed)
                 except Exception:
                     pass
-
                 try:
                     await message.author.ban(reason="Sent something inappropriate, or turned out to be underage!")
                 except:
@@ -269,7 +251,7 @@ class Log(Cog):
                     timestamp=datetime.datetime.utcnow()
                 )
                 await log_channel.send(embed=ban_embed_reason)
-            if re.match("https://web.roblox.com", message.content, re.IGNORECASE):
+            if re.findall("https://web.roblox.com", message.content, re.IGNORECASE):
                 ban_embed_reason = discord.Embed(
                     title="**Member Banned**",
                     description=f"***{message.author}** has been banned for sending an underage version of a roblox link!*",
