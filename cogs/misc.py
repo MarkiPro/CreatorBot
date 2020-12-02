@@ -3099,6 +3099,24 @@ class Misc(commands.Cog):
 
         await ctx.send(embed=embed)
 
+    @commands.command()
+    async def members(self, ctx, role: discord.Role = None):
+        role_members = "\n".join([i.mention for i in role.members])
+        allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
+
+        if ctx.channel.id not in allowed_channels:
+            await ctx.send("Run the command again in <#712659793008918538>")
+            return
+        else:
+            pass
+        if role_members == "":
+            await ctx.send("There are no members with this role!")
+            return
+        else:
+            pass
+        pag = Paginator(f"Members with the role {role} are displayed below:\n\n {role_members}", 1985)
+        await pag.send(bot=self.bot, channel=ctx.channel)
+
 
 def setup(bot):
     bot.add_cog(Misc(bot))
