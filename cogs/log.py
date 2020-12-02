@@ -195,6 +195,7 @@ class Log(Cog):
         banned_links_v2 = ["https://pornhub.com", "https://porn.com", "https://fuq.com"]
         log_channel = self.bot.get_channel(712761128895381676)
         cc_guild = self.bot.get_guild(id=611227128020598805)
+        staff_role = discord.utils.get(cc_guild.roles, id=756565123350659385)
 
         if message.guild != cc_guild:
             return
@@ -222,7 +223,7 @@ class Log(Cog):
                 await another_message.add_reaction("🚫")
 
         if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)) or any(re.findall("|".join(banned_links), message.content, re.IGNORECASE)):
-            if message.author.top_role.position < self.bot.user.top_role.position:
+            if message.author in staff_role.members:
                 await message.delete()
                 ban_embed = discord.Embed(
                     title="**NOTIFICATION**",
