@@ -84,7 +84,7 @@ class Paginator:
                                 return
                     return
 
-                if not end_channel:
+                if not end_channel and mute_role is not None:
                     def check(reaction1, user1):
                         return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
@@ -131,51 +131,51 @@ class Paginator:
                                 await member.add_roles(mute_role)
                                 return
                     return
+                if end_channel:
+                    def check(reaction1, user1):
+                        return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
-                def check(reaction1, user1):
-                    return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
+                    reaction1, user1 = await bot.wait_for("reaction_add", check=check)
 
-                reaction1, user1 = await bot.wait_for("reaction_add", check=check)
+                    if str(user1) == str(bot.user):
+                        def check(reaction2, user2):
+                            return user2 and str(reaction2.emoji) in ["👍", "👎", "🔇"]
 
-                if str(user1) == str(bot.user):
-                    def check(reaction2, user2):
-                        return user2 and str(reaction2.emoji) in ["👍", "👎", "🔇"]
+                        reaction2, user2 = await bot.wait_for("reaction_add", check=check)
+                        if str(reaction2.emoji) == "👍":
+                            for _, msgs in enumerate(self.messages):
+                                await end_channel.send(embed=msgs.embeds[0])
+                                await msgs.delete()
+                                await member.send("Your post has been approved!")
+                                return
 
-                    reaction2, user2 = await bot.wait_for("reaction_add", check=check)
-                    if str(reaction2.emoji) == "👍":
-                        for _, msgs in enumerate(self.messages):
-                            await end_channel.send(embed=msgs.embeds[0])
-                            await msgs.delete()
-                            await member.send("Your post has been approved!")
-                            return
+                        elif str(reaction2.emoji) == "👎":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send("Your post has been declined!")
+                                return
+                        elif str(reaction2.emoji) == "🔇":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send("Your post has been denied and you have been muted!")
+                                await member.add_roles(mute_role)
+                                return
+                    else:
+                        if str(reaction1.emoji) == "👍":
+                            for _, msgs in enumerate(self.messages):
+                                await end_channel.send(embed=msgs.embeds[0])
+                                await msgs.delete()
+                                await member.send("Your post has been approved!")
+                                return
 
-                    elif str(reaction2.emoji) == "👎":
-                        for _, msgs in enumerate(self.messages):
-                            await msgs.delete()
-                            await member.send("Your post has been declined!")
-                            return
-                    elif str(reaction2.emoji) == "🔇":
-                        for _, msgs in enumerate(self.messages):
-                            await msgs.delete()
-                            await member.send("Your post has been denied and you have been muted!")
-                            await member.add_roles(mute_role)
-                            return
-                else:
-                    if str(reaction1.emoji) == "👍":
-                        for _, msgs in enumerate(self.messages):
-                            await end_channel.send(embed=msgs.embeds[0])
-                            await msgs.delete()
-                            await member.send("Your post has been approved!")
-                            return
-
-                    elif str(reaction1.emoji) == "👎":
-                        for _, msgs in enumerate(self.messages):
-                            await msgs.delete()
-                            await member.send("Your post has been declined!")
-                            return
-                    elif str(reaction2.emoji) == "🔇":
-                        for _, msgs in enumerate(self.messages):
-                            await msgs.delete()
-                            await member.send("Your post has been denied and you have been muted!")
-                            await member.add_roles(mute_role)
-                            return
+                        elif str(reaction1.emoji) == "👎":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send("Your post has been declined!")
+                                return
+                        elif str(reaction2.emoji) == "🔇":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send("Your post has been denied and you have been muted!")
+                                await member.add_roles(mute_role)
+                                return
