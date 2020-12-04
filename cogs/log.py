@@ -103,6 +103,7 @@ class Log(Cog):
 
         if before and after:
             if before.guild != cc_guild and after.guild != cc_guild:
+                print("returned!")
                 return
             else:
                 pass
@@ -371,6 +372,7 @@ class Log(Cog):
 
         if before and after:
             if before.guild != cc_guild and after.guild != cc_guild:
+                print("returned!")
                 return
             else:
                 pass
@@ -431,6 +433,7 @@ class Log(Cog):
         try:
             if before.channel:
                 if before.channel.guild != cc_guild and after.channel.guild != cc_guild:
+                    print("returned!")
                     return
                 else:
                     pass
