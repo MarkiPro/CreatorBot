@@ -411,6 +411,10 @@ class Log(Cog):
                 role_log_embed.set_thumbnail(url=before.avatar_url)
                 await role_update_log_channel.send(embed=role_log_embed)
         for role in list(set(before.roles)):
+            if role.id in excluded_roles:
+                return
+            else:
+                pass
             if role not in after.roles:
                 actual_role = discord.utils.get(cc_guild.roles, name=f"{role}")
                 role_log_embed = discord.Embed(
