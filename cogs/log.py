@@ -17,7 +17,7 @@ class Log(Cog):
         channel = before
         cc_guild = self.bot.get_guild(id=611227128020598805)
 
-        if before.guild != cc_guild and after.guild != cc_guild:
+        if before.guild != cc_guild or after.guild != cc_guild:
             return
         else:
             pass
@@ -98,7 +98,7 @@ class Log(Cog):
         role = before
         cc_guild = self.bot.get_guild(id=611227128020598805)
 
-        if before.guild != cc_guild and after.guild != cc_guild:
+        if before.guild != cc_guild or after.guild != cc_guild:
             return
         else:
             pass
@@ -363,7 +363,7 @@ class Log(Cog):
         nick_update_log_channel = self.bot.get_channel(771465528618254347)
         cc_guild = self.bot.get_guild(id=611227128020598805)
 
-        if before.guild != cc_guild and after.guild != cc_guild:
+        if before.guild != cc_guild or after.guild != cc_guild:
             return
         else:
             pass
