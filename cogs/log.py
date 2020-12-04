@@ -394,7 +394,7 @@ class Log(Cog):
             return
         else:
             pass
-        for role in list(set(after.roles)):
+        for role in after.roles:
             if role.id in excluded_roles:
                 return
             else:
@@ -410,7 +410,7 @@ class Log(Cog):
                 role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {actual_role.mention}", inline=False)
                 role_log_embed.set_thumbnail(url=before.avatar_url)
                 await role_update_log_channel.send(embed=role_log_embed)
-        for role in list(set(before.roles)):
+        for role in before.roles:
             if role.id in excluded_roles:
                 return
             else:
