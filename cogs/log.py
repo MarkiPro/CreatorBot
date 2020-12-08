@@ -368,7 +368,6 @@ class Log(Cog):
         after_roles = {(role.mention for role in after.roles if role.id not in excluded_roles) or "No roles assigned."}
         role_update_log_channel = self.bot.get_channel(770368850679169075)
         nick_update_log_channel = self.bot.get_channel(771465528618254347)
-        cc_guild = self.bot.get_guild(id=611227128020598805)
 
         if before.display_name != after.display_name and after.display_name != before.display_name:
             nick_log_embed = discord.Embed(
@@ -381,11 +380,6 @@ class Log(Cog):
             nick_log_embed.add_field(name="**After**", value=f"```{after.display_name}```", inline=False)
 
             await nick_update_log_channel.send(embed=nick_log_embed)
-        if str(after_roles) == "No roles assigned." or str(after_roles) == "No roles assigned." and str(before_roles) == "No roles assigned.":
-            print("returned!")
-            return
-        else:
-            pass
         if len(after_roles) > len(before_roles):
             print("well hello there")
             actual_role = after_roles.difference(before_roles)
@@ -398,7 +392,7 @@ class Log(Cog):
             role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {actual_role}", inline=False)
             role_log_embed.set_thumbnail(url=before.avatar_url)
             await role_update_log_channel.send(embed=role_log_embed)
-        if len(before_roles) > len(after_roles):
+        elif len(before_roles) > len(after_roles):
             print("hi!")
             actual_role = before_roles.difference(after_roles)
             role_log_embed = discord.Embed(
@@ -410,6 +404,9 @@ class Log(Cog):
             role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: {actual_role}", inline=False)
             role_log_embed.set_thumbnail(url=before.avatar_url)
             await role_update_log_channel.send(embed=role_log_embed)
+        elif len(before_roles) == len(after_roles):
+            print("E!!!!!!!!!")
+            return
         if booster_role in before.roles and booster_role not in after.roles:
             await message.edit(content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
 
