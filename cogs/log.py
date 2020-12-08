@@ -364,8 +364,8 @@ class Log(Cog):
         guild = sum_channel.guild
         booster_role = discord.utils.get(guild.roles, id=762172204628181023)
         excluded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651, 743013370588037191, 732388199107657828, 743013368511594569, 743013366515236915, 743013366880272474, 743013367840768072, 743013368134107166, 732387788493946881, 732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698, 735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516, 735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672, 734527854871707762, 746758563703291938]
-        before_roles = (role.mention for role in before.roles if role.id not in excluded_roles) or "No roles assigned."
-        after_roles = (role.mention for role in after.roles if role.id not in excluded_roles) or "No roles assigned."
+        before_roles = {(role.mention for role in before.roles if role.id not in excluded_roles) or "No roles assigned."}
+        after_roles = {(role.mention for role in after.roles if role.id not in excluded_roles) or "No roles assigned."}
         role_update_log_channel = self.bot.get_channel(770368850679169075)
         nick_update_log_channel = self.bot.get_channel(771465528618254347)
         cc_guild = self.bot.get_guild(id=611227128020598805)
@@ -386,38 +386,28 @@ class Log(Cog):
             return
         else:
             pass
-        for role in list(set(after_roles)):
-            if role in after.roles:
-                pass
-            if role not in before.roles:
-                pass
-            if role not in list(set(before_roles)):
-                role_log_embed = discord.Embed(
-                    title="**Role Update**",
-                    description=f"*Role Added for **{after.mention}***!",
-                    timestamp=datetime.datetime.utcnow(),
-                    color=0x0064ff
-                )
-                role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {role}", inline=False)
-                role_log_embed.set_thumbnail(url=before.avatar_url)
-                await role_update_log_channel.send(embed=role_log_embed)
-                return
-        for role in list(set(before_roles)):
-            if role in before.roles:
-                pass
-            if role not in after.roles:
-                pass
-            if role not in list(set(after_roles)):
-                role_log_embed = discord.Embed(
-                    title="**Role Update**",
-                    description=f"*Role removed for **{after.mention}***!",
-                    timestamp=datetime.datetime.utcnow(),
-                    color=0x0064ff
-                )
-                role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: {role}", inline=False)
-                role_log_embed.set_thumbnail(url=before.avatar_url)
-                await role_update_log_channel.send(embed=role_log_embed)
-                return
+        if after_roles > before_roles:
+            actual_role = after_roles.difference(before_roles)
+            role_log_embed = discord.Embed(
+                title="**Role Update**",
+                description=f"*Role Added for **{after.mention}***!",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {actual_role.mention}", inline=False)
+            role_log_embed.set_thumbnail(url=before.avatar_url)
+            await role_update_log_channel.send(embed=role_log_embed)
+        if before_roles > after_roles:
+            actual_role = before_roles.difference(after_roles)
+            role_log_embed = discord.Embed(
+                title="**Role Update**",
+                description=f"*Role removed for **{after.mention}***!",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: {actual_role.mention}", inline=False)
+            role_log_embed.set_thumbnail(url=before.avatar_url)
+            await role_update_log_channel.send(embed=role_log_embed)
         if booster_role in before.roles and booster_role not in after.roles:
             await message.edit(content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
 
