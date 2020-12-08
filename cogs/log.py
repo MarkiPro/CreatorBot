@@ -371,11 +371,11 @@ class Log(Cog):
         cc_guild = self.bot.get_guild(id=611227128020598805)
         first_role = before.roles[0]
 
-        if first_role.guild == cc_guild:
+        try:
+            cc_guild.get_role(first_role.id)
+        except:
             print("returned!")
             return
-        else:
-            pass
         if before.display_name != after.display_name and after.display_name != before.display_name:
             nick_log_embed = discord.Embed(
                 title="**Nickname Update**",
