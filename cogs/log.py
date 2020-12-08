@@ -203,7 +203,7 @@ class Log(Cog):
         log_channel = self.bot.get_channel(712761128895381676)
         cc_guild = self.bot.get_guild(id=611227128020598805)
         staff_role = discord.utils.get(cc_guild.roles, id=756565123350659385)
-        banned_words = ["porn", "fuck", "shit", "ass", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger", "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob"]
+        banned_words = ["porn", "fuck", "shit", "ass", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger", "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "unflavored"]
         if message.guild != cc_guild:
             return
         else:
@@ -268,6 +268,7 @@ class Log(Cog):
                 )
                 await log_channel.send(embed=ban_embed_reason)
             if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
+                await message.delete()
                 banned_word = re.findall("|".join(banned_words), message.content, re.IGNORECASE)
                 await message.author.send("Greetings! I've detected a banned word in your message, right now, it is up to our wonderful staff members to decide whether or not this is well-deserved of a punishment.")
                 await message.author.send(f"The word(s) in particular is/are [**`{banned_word}`**], in the following message content: {message.content}")
