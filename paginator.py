@@ -34,6 +34,47 @@ class Paginator:
                 await message.add_reaction("👎")
                 await message.add_reaction("🔇")
 
+                if end_channel == discord.Member:
+                    def check(reaction1, user1):
+                        return user1 and str(reaction1.emoji) in ["👍", "👎"]
+
+                    reaction1, user1 = await bot.wait_for("reaction_add", check=check)
+
+                    if str(user1) == str(bot.user):
+                        def check(reaction2, user2):
+                            return user2 and str(reaction2.emoji) in ["👍", "👎"]
+
+                        reaction2, user2 = await bot.wait_for("reaction_add", check=check)
+
+                        if str(reaction2.emoji) == "👍":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send(
+                                    "The action was claimed to be mistaken, and without further punishments, you may continue on with your day!")
+                                return
+
+                        elif str(reaction2.emoji) == "👎":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send(
+                                    "The action taken against you was claimed to be the right thing, and soon enough, you will recieve your punishment!")
+                                return
+                    else:
+                        if str(reaction1.emoji) == "👍":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send(
+                                    "The action was claimed to be mistaken, and without further punishments, you may continue on with your day!")
+                                return
+
+                        elif str(reaction1.emoji) == "👎":
+                            for _, msgs in enumerate(self.messages):
+                                await msgs.delete()
+                                await member.send(
+                                    "The action taken against you was claimed to be the right thing, and soon enough, you will recieve your punishment!")
+                                return
+
+
                 if role:
                     def check(reaction1, user1):
                         return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
