@@ -364,18 +364,12 @@ class Log(Cog):
         guild = sum_channel.guild
         booster_role = discord.utils.get(guild.roles, id=762172204628181023)
         excluded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651, 743013370588037191, 732388199107657828, 743013368511594569, 743013366515236915, 743013366880272474, 743013367840768072, 743013368134107166, 732387788493946881, 732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698, 735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516, 735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672, 734527854871707762, 746758563703291938]
-        before_roles = [(role.mention for role in before.roles if role.id not in excluded_roles) or "No roles assigned."]
-        after_roles = [(role.mention for role in after.roles if role.id not in excluded_roles) or "No roles assigned."]
+        before_roles = (role.mention for role in before.roles if role.id not in excluded_roles) or "No roles assigned."
+        after_roles = (role.mention for role in after.roles if role.id not in excluded_roles) or "No roles assigned."
         role_update_log_channel = self.bot.get_channel(770368850679169075)
         nick_update_log_channel = self.bot.get_channel(771465528618254347)
         cc_guild = self.bot.get_guild(id=611227128020598805)
-        first_role = before.roles[0]
 
-        try:
-            cc_guild.get_role(first_role.id)
-        except:
-            print("returned!")
-            return
         if before.display_name != after.display_name and after.display_name != before.display_name:
             nick_log_embed = discord.Embed(
                 title="**Nickname Update**",
@@ -392,12 +386,12 @@ class Log(Cog):
             return
         else:
             pass
-        for role in after.roles:
+        for role in list(set(after_roles)):
             if role.id in excluded_roles:
                 return
             else:
                 pass
-            if role not in before.roles:
+            if role not in list(set(before_roles)):
                 actual_role = discord.utils.get(cc_guild.roles, name=f"{role}")
                 role_log_embed = discord.Embed(
                     title="**Role Update**",
@@ -408,12 +402,12 @@ class Log(Cog):
                 role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {actual_role.mention}", inline=False)
                 role_log_embed.set_thumbnail(url=before.avatar_url)
                 await role_update_log_channel.send(embed=role_log_embed)
-        for role in before.roles:
+        for role in list(set(before_roles)):
             if role.id in excluded_roles:
                 return
             else:
                 pass
-            if role not in after.roles:
+            if role not in list(set(after_roles)):
                 actual_role = discord.utils.get(cc_guild.roles, name=f"{role}")
                 role_log_embed = discord.Embed(
                     title="**Role Update**",
