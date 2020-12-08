@@ -369,13 +369,11 @@ class Log(Cog):
         role_update_log_channel = self.bot.get_channel(770368850679169075)
         nick_update_log_channel = self.bot.get_channel(771465528618254347)
         cc_guild = self.bot.get_guild(id=611227128020598805)
+        first_role = before.roles[0]
 
-        if before and after:
-            if before.guild != cc_guild and after.guild != cc_guild:
-                print("returned!")
-                return
-            else:
-                pass
+        if first_role.guild == cc_guild:
+            print("returned!")
+            return
         else:
             pass
         if before.display_name != after.display_name and after.display_name != before.display_name:
