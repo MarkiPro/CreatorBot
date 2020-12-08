@@ -387,10 +387,6 @@ class Log(Cog):
         else:
             pass
         for role in list(set(after_roles)):
-            if role.id in excluded_roles:
-                return
-            else:
-                pass
             if role not in list(set(before_roles)):
                 actual_role = discord.utils.get(cc_guild.roles, name=f"{role}")
                 role_log_embed = discord.Embed(
@@ -403,10 +399,6 @@ class Log(Cog):
                 role_log_embed.set_thumbnail(url=before.avatar_url)
                 await role_update_log_channel.send(embed=role_log_embed)
         for role in list(set(before_roles)):
-            if role.id in excluded_roles:
-                return
-            else:
-                pass
             if role not in list(set(after_roles)):
                 actual_role = discord.utils.get(cc_guild.roles, name=f"{role}")
                 role_log_embed = discord.Embed(
