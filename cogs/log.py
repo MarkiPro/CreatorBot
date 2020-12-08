@@ -387,6 +387,7 @@ class Log(Cog):
         else:
             pass
         if len(after_roles) > len(before_roles):
+            print("well hello there")
             actual_role = after_roles.difference(before_roles)
             role_log_embed = discord.Embed(
                 title="**Role Update**",
@@ -398,6 +399,7 @@ class Log(Cog):
             role_log_embed.set_thumbnail(url=before.avatar_url)
             await role_update_log_channel.send(embed=role_log_embed)
         if len(before_roles) > len(after_roles):
+            print("hi!")
             actual_role = before_roles.difference(after_roles)
             role_log_embed = discord.Embed(
                 title="**Role Update**",
