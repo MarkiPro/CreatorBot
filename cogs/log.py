@@ -394,9 +394,10 @@ class Log(Cog):
                     timestamp=datetime.datetime.utcnow(),
                     color=0x0064ff
                 )
-                role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: `{role}`", inline=False)
+                role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {role}", inline=False)
                 role_log_embed.set_thumbnail(url=before.avatar_url)
                 await role_update_log_channel.send(embed=role_log_embed)
+                return
         for role in list(set(before_roles)):
             if role not in list(set(after_roles)):
                 role_log_embed = discord.Embed(
@@ -405,9 +406,10 @@ class Log(Cog):
                     timestamp=datetime.datetime.utcnow(),
                     color=0x0064ff
                 )
-                role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: `{role}`", inline=False)
+                role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: {role}", inline=False)
                 role_log_embed.set_thumbnail(url=before.avatar_url)
                 await role_update_log_channel.send(embed=role_log_embed)
+                return
         if booster_role in before.roles and booster_role not in after.roles:
             await message.edit(content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
 
