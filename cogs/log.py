@@ -389,8 +389,6 @@ class Log(Cog):
         for role in list(set(after_roles)):
             if role in after.roles and role not in before.roles:
                 pass
-            else:
-                return
             if role not in list(set(before_roles)):
                 role_log_embed = discord.Embed(
                     title="**Role Update**",
@@ -405,8 +403,6 @@ class Log(Cog):
         for role in list(set(before_roles)):
             if role in before.roles and role not in after.roles:
                 pass
-            else:
-                return
             if role not in list(set(after_roles)):
                 role_log_embed = discord.Embed(
                     title="**Role Update**",
