@@ -380,7 +380,7 @@ class Log(Cog):
             nick_log_embed.add_field(name="**After**", value=f"```{after.display_name}```", inline=False)
 
             await nick_update_log_channel.send(embed=nick_log_embed)
-        if len(after_roles) > len(before_roles):
+        if len(after.roles) > len(before.roles):
             print("well hello there")
             actual_role = after_roles.difference(before_roles)
             role_log_embed = discord.Embed(
@@ -392,7 +392,7 @@ class Log(Cog):
             role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {actual_role}", inline=False)
             role_log_embed.set_thumbnail(url=before.avatar_url)
             await role_update_log_channel.send(embed=role_log_embed)
-        elif len(before_roles) > len(after_roles):
+        elif len(before.roles) > len(after.roles):
             print("hi!")
             actual_role = before_roles.difference(after_roles)
             role_log_embed = discord.Embed(
