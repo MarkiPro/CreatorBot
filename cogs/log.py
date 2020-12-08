@@ -383,8 +383,8 @@ class Log(Cog):
         if len(after.roles) > len(before.roles):
             print("well hello there")
             role = set(after.roles).difference(set(before.roles))
-            for _role in role:
-                actual_role = discord.utils.get(guild.roles, name=str(_role))
+            for first_role in role:
+                actual_role = discord.utils.get(guild.roles, name=str(first_role))
                 role_log_embed = discord.Embed(
                     title="**Role Update**",
                     description=f"*Role Added for **{after.mention}***!",
@@ -397,8 +397,8 @@ class Log(Cog):
         elif len(before.roles) > len(after.roles):
             print("hi!")
             role = set(before.roles).difference(set(after.roles))
-            for _role in role:
-                actual_role = discord.utils.get(guild.roles, name=str(_role))
+            for first_role in role:
+                actual_role = discord.utils.get(guild.roles, name=str(first_role))
                 role_log_embed = discord.Embed(
                     title="**Role Update**",
                     description=f"*Role removed for **{after.mention}***!",
@@ -408,9 +408,6 @@ class Log(Cog):
                 role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: {actual_role.mention}", inline=False)
                 role_log_embed.set_thumbnail(url=before.avatar_url)
                 await role_update_log_channel.send(embed=role_log_embed)
-        elif len(before_roles) == len(after_roles):
-            print("E!!!!!!!!!")
-            return
         if booster_role in before.roles and booster_role not in after.roles:
             await message.edit(content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
 
