@@ -457,7 +457,7 @@ class Log(Cog):
 
             member_switched_vc_log_embed.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_switched_vc_log_embed)
-        if after.self_mute and after.voice.channel:
+        if after.self_mute:
             member_self_muted_log_embed1 = discord.Embed(
                 title="**Member Self-Muted**",
                 description=f"**{member.mention}** just self-muted themselves in **`{after.channel}`**!",
@@ -467,7 +467,7 @@ class Log(Cog):
 
             member_self_muted_log_embed1.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_self_muted_log_embed1)
-        elif after.mute and after.voice.channel:
+        elif after.mute:
             member_muted_log_embed1 = discord.Embed(
                 title="**Member Muted**",
                 description=f"**{member.mention}** just got muted in **`{after.channel}`**!",
@@ -477,7 +477,7 @@ class Log(Cog):
 
             member_muted_log_embed1.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_muted_log_embed1)
-        elif after.deaf and after.voice.channel:
+        elif after.deaf:
             member_deaf_log_embed1 = discord.Embed(
                 title="**Member Deafened**",
                 description=f"**{member.mention}** just got deafened in **`{after.channel}`**!",
@@ -487,7 +487,7 @@ class Log(Cog):
 
             member_deaf_log_embed1.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_deaf_log_embed1)
-        elif after.self_deaf and after.voice.channel:
+        elif after.self_deaf:
             member_self_deaf_log_embed1 = discord.Embed(
                 title="**Member Self-Deafened**",
                 description=f"**{member.mention}** just self-deafened in **`{after.channel}`**!",
@@ -497,7 +497,7 @@ class Log(Cog):
 
             member_self_deaf_log_embed1.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_self_deaf_log_embed1)
-        elif after.self_stream and after.voice.channel:
+        elif after.self_stream:
             member_self_stream_log_embed1 = discord.Embed(
                 title="**Member Started Streaming**",
                 description=f"**{member.mention}** just started streaming in **`{after.channel}`**!",
@@ -507,7 +507,7 @@ class Log(Cog):
 
             member_self_stream_log_embed1.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_self_stream_log_embed1)
-        elif after.self_video and after.voice.channel:
+        elif after.self_video:
             member_self_video_log_embed1 = discord.Embed(
                 title="**Member Turned Camera On**",
                 description=f"**{member.mention}** just turned their camera on in **`{after.channel}`**!",
@@ -517,7 +517,7 @@ class Log(Cog):
 
             member_self_video_log_embed1.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_self_video_log_embed1)
-        elif before.self_mute and before.voice.channel:
+        elif before.self_mute:
             member_self_muted_log_embed2 = discord.Embed(
                 title="**Member Un-Self-Muted**",
                 description=f"**{member.mention}** just un-self-muted themselves in **`{after.channel}`**!",
@@ -527,7 +527,7 @@ class Log(Cog):
 
             member_self_muted_log_embed2.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_self_muted_log_embed2)
-        elif before.mute and before.voice.channel:
+        elif before.mute:
             member_muted_log_embed2 = discord.Embed(
                 title="**Member Un-Muted**",
                 description=f"**{member.mention}** just got un-muted in **`{after.channel}`**!",
@@ -537,7 +537,7 @@ class Log(Cog):
 
             member_muted_log_embed2.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_muted_log_embed2)
-        elif before.deaf and before.voice.channel:
+        elif before.deaf:
             member_deaf_log_embed2 = discord.Embed(
                 title="**Member Un-Deafened**",
                 description=f"**{member.mention}** just got un-deafened in **`{after.channel}`**!",
@@ -547,7 +547,7 @@ class Log(Cog):
 
             member_deaf_log_embed2.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_deaf_log_embed2)
-        elif before.self_deaf and before.voice.channel:
+        elif before.self_deaf:
             member_self_deaf_log_embed2 = discord.Embed(
                 title="**Member Un-Self-Deafened**",
                 description=f"**{member.mention}** just un-self-deafened in **`{after.channel}`**!",
@@ -557,7 +557,7 @@ class Log(Cog):
 
             member_self_deaf_log_embed2.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_self_deaf_log_embed2)
-        elif before.self_stream and before.voice.channel:
+        elif before.self_stream:
             member_self_stream_log_embed2 = discord.Embed(
                 title="**Member Stopped Streaming**",
                 description=f"**{member.mention}** just stopped streaming in **`{after.channel}`**!",
@@ -567,7 +567,7 @@ class Log(Cog):
 
             member_self_stream_log_embed2.set_thumbnail(url=member.avatar_url)
             await log_channel.send(embed=member_self_stream_log_embed2)
-        elif before.self_video and before.voice.channel:
+        elif before.self_video:
             member_self_video_log_embed2 = discord.Embed(
                 title="**Member Turned Camera Off**",
                 description=f"**{member.mention}** just turned their camera off in **`{after.channel}`**!",
