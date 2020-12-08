@@ -389,7 +389,7 @@ class Log(Cog):
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {actual_role}", inline=False)
+            role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {actual_role[0]}", inline=False)
             role_log_embed.set_thumbnail(url=before.avatar_url)
             await role_update_log_channel.send(embed=role_log_embed)
         elif len(before.roles) > len(after.roles):
@@ -401,7 +401,7 @@ class Log(Cog):
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: {actual_role}", inline=False)
+            role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: {actual_role[0]}", inline=False)
             role_log_embed.set_thumbnail(url=before.avatar_url)
             await role_update_log_channel.send(embed=role_log_embed)
         elif len(before_roles) == len(after_roles):
