@@ -2,7 +2,7 @@ import asyncio
 import datetime
 from typing import Optional, Any
 import re
-
+from paginator import Paginator
 import discord
 from discord.ext.commands import Cog
 
@@ -198,12 +198,12 @@ class Log(Cog):
     async def on_message(self, message):
         suggestions_channel = self.bot.get_channel(712655570737299567)
         banned_links = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://web.roblox.com", "https://brazzers.com"]
-        banned_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah", "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger", "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar", "n1gguh", "n1ggress", "n1gette", "negro", "n1bba", "n1ba"]
+        banned_racial_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah", "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger", "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar", "n1gguh", "n1ggress", "n1gette", "negro", "n1bba", "n1ba"]
         banned_links_v2 = ["https://pornhub.com", "https://porn.com", "https://fuq.com"]
         log_channel = self.bot.get_channel(712761128895381676)
         cc_guild = self.bot.get_guild(id=611227128020598805)
         staff_role = discord.utils.get(cc_guild.roles, id=756565123350659385)
-
+        banned_words = ["porn", "fuck", "shit", "ass", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger", "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob"]
         if message.guild != cc_guild:
             return
         else:
@@ -229,7 +229,7 @@ class Log(Cog):
                 await another_message.add_reaction("👎")
                 await another_message.add_reaction("🚫")
 
-        if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)) or any(re.findall("|".join(banned_links), message.content, re.IGNORECASE)):
+        if any(re.findall("|".join(banned_racial_words), message.content, re.IGNORECASE)) or any(re.findall("|".join(banned_links), message.content, re.IGNORECASE)):
             if message.author not in staff_role.members:
                 await message.delete()
                 ban_embed = discord.Embed(
@@ -251,7 +251,7 @@ class Log(Cog):
                     return
             else:
                 return
-            if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
+            if any(re.findall("|".join(banned_racial_words), message.content, re.IGNORECASE)):
                 ban_embed_reason = discord.Embed(
                     title="**Member Banned**",
                     description=f"***{message.author}** has been banned for sending a racial slur/banned word!*",
@@ -267,6 +267,33 @@ class Log(Cog):
                     timestamp=datetime.datetime.utcnow()
                 )
                 await log_channel.send(embed=ban_embed_reason)
+            if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
+                banned_word = re.findall("|".join(banned_words), message.content, re.IGNORECASE)
+                await message.author.send("Greetings! I've detected a banned word in your message, right now, it is up to our wonderful staff members to decide whether or not this is well-deserved of a punishment.")
+                await message.author.send(f"The word(s) in particular is/are [**`{banned_word}`**], in the following message content: {message.content}")
+                auto_reports = cc_guild.get_channel(786007666329124874)
+
+                matches = re.findall("```", message.content)
+                if len(matches) >= 0:
+                    pre_message_content = message.content.replace("```", "")
+                    message_content = pre_message_content.replace("`", "")
+                else:
+                    pass
+                new_message_content = message_content or message.content
+
+                embed = discord.Embed(
+                    title="**AUTO-REPORTED MESSAGE**",
+                    description=f"Word(s) [**`{banned_words}`**] found in:\n\n```{new_message_content}```",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+
+                pag = Paginator(f"Word(s) [**`{banned_words}`**] found in:\n\n```{new_message_content}```", 1985)
+
+                await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author, title="**AUTO-REPORTED MESSAGE**")
+
+                await auto_reports.send(embed=embed)
+
             if any(re.findall("|".join(banned_links_v2), message.content, re.IGNORECASE)):
                 ban_embed_reason = discord.Embed(
                     title="**Member Banned**",
