@@ -382,7 +382,7 @@ class Log(Cog):
             await nick_update_log_channel.send(embed=nick_log_embed)
         if len(after.roles) > len(before.roles):
             print("well hello there")
-            actual_role = after_roles.difference(before_roles)
+            actual_role = after.roles.difference(before.roles)
             role_log_embed = discord.Embed(
                 title="**Role Update**",
                 description=f"*Role Added for **{after.mention}***!",
@@ -394,7 +394,7 @@ class Log(Cog):
             await role_update_log_channel.send(embed=role_log_embed)
         elif len(before.roles) > len(after.roles):
             print("hi!")
-            actual_role = before_roles.difference(after_roles)
+            actual_role = before.roles.difference(after.roles)
             role_log_embed = discord.Embed(
                 title="**Role Update**",
                 description=f"*Role removed for **{after.mention}***!",
