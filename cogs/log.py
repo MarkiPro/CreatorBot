@@ -274,10 +274,9 @@ class Log(Cog):
             if len(matches) >= 0:
                 pre_message_content = message.content.replace("```", "")
                 message_content = pre_message_content.replace("`", "")
-                actual_message_content = message_content.replace(banned_word, f"**{banned_word}**")
             else:
                 pass
-            new_message_content = actual_message_content or message.content
+            new_message_content = message_content or message.content
             await message.author.send("Greetings! I've detected a banned word in your message, right now, it is up to our wonderful staff members to decide whether or not this is well-deserved of a punishment.")
             await message.author.send(f"The word(s) in particular is/are **`{banned_word}`**, in the following message content:\n\n ```{new_message_content}```")
             auto_reports = cc_guild.get_channel(786007666329124874)
