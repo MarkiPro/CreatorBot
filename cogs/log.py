@@ -268,6 +268,10 @@ class Log(Cog):
                 )
                 await log_channel.send(embed=ban_embed_reason)
         if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
+            if message.author in staff_role.members:
+                return
+            else:
+                pass
             await message.delete()
             banned_word = re.findall("|".join(banned_words), message.content, re.IGNORECASE)
             matches = re.findall("```", message.content)
