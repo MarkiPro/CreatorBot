@@ -2251,7 +2251,7 @@ class Misc(commands.Cog):
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         elif re.findall("hiring", category, re.IGNORECASE):
-            if self.hiring_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.hiring_cool.cooldown_start_time) < 3600:
+            if self.hiring_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.hiring_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.hiring_cool.time_it(user=ctx.author)
                 return
             hiring_embed1 = discord.Embed(
