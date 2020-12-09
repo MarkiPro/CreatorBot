@@ -268,6 +268,14 @@ class Log(Cog):
                     timestamp=datetime.datetime.utcnow()
                 )
                 await log_channel.send(embed=ban_embed_reason)
+            if any(re.findall("|".join(banned_links_v2), message.content, re.IGNORECASE)):
+                ban_embed_reason = discord.Embed(
+                    title="**Member Banned**",
+                    description=f"***{message.author}** has been banned for sending an inappropriate link!*",
+                    color=0x0064ff,
+                    timestamp=datetime.datetime.utcnow()
+                )
+                await log_channel.send(embed=ban_embed_reason)
         if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
             if message.author in staff_role.members:
                 return
@@ -287,16 +295,7 @@ class Log(Cog):
 
             pag = Paginator(f"Word(s) [**`{banned_word}`**] found in:\n\n```{new_message_content}```", 1985)
 
-            await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author, title="**AUTO-REPORTED MESSAGE**", autoreport=True, message=message)
-
-            if any(re.findall("|".join(banned_links_v2), message.content, re.IGNORECASE)):
-                ban_embed_reason = discord.Embed(
-                    title="**Member Banned**",
-                    description=f"***{message.author}** has been banned for sending an inappropriate link!*",
-                    color=0x0064ff,
-                    timestamp=datetime.datetime.utcnow()
-                )
-                await log_channel.send(embed=ban_embed_reason)
+            await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author, another_channel=log_channel, title="**AUTO-REPORTED MESSAGE**", autoreport=True, message=message)
 
     @Cog.listener()
     async def on_message_delete(self, message):
