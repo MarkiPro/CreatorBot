@@ -49,28 +49,28 @@ class Paginator:
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
                                 await member.send(
-                                    "The action was claimed to be mistaken, and without further punishments, you may continue on with your day!")
+                                    "The action taken against you was claimed to be the right thing, and soon enough, you will recieve your punishment!")
                                 return
 
                         elif str(reaction2.emoji) == "👎":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
                                 await member.send(
-                                    "The action taken against you was claimed to be the right thing, and soon enough, you will recieve your punishment!")
+                                    "The action was claimed to be mistaken, and without further punishments, you may continue on with your day!")
                                 return
                     else:
                         if str(reaction1.emoji) == "👍":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
                                 await member.send(
-                                    "The action was claimed to be mistaken, and without further punishments, you may continue on with your day!")
+                                    "The action taken against you was claimed to be the right thing, and soon enough, you will recieve your punishment!")
                                 return
 
                         elif str(reaction1.emoji) == "👎":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
                                 await member.send(
-                                    "The action taken against you was claimed to be the right thing, and soon enough, you will recieve your punishment!")
+                                    "The action was claimed to be mistaken, and without further punishments, you may continue on with your day!")
                                 return
 
 
