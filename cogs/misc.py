@@ -12,7 +12,7 @@ class Misc(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.help_command.cog = self
-        self.hiring_cool = Cooldown(time=0)
+        self.hiring_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
 
     @commands.command(aliases=["for-hire", "forhire"],
                       description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
