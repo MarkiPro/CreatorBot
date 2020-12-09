@@ -32,7 +32,6 @@ class Paginator:
             if (i + 1) == len(self.words_list):
                 await message.add_reaction("👍")
                 await message.add_reaction("👎")
-                await message.add_reaction("🔇")
 
                 if autoreport:
                     def check(reaction1, user1):
@@ -76,6 +75,7 @@ class Paginator:
 
 
                 if role and not autoreport:
+                    await message.add_reaction("🔇")
                     def check(reaction1, user1):
                         return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
@@ -126,6 +126,7 @@ class Paginator:
                     return
 
                 if not end_channel and mute_role is not None and not autoreport:
+                    await message.add_reaction("🔇")
                     def check(reaction1, user1):
                         return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
@@ -173,6 +174,7 @@ class Paginator:
                                 return
                     return
                 if end_channel and not autoreport:
+                    await message.add_reaction("🔇")
                     def check(reaction1, user1):
                         return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
