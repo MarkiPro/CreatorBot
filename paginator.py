@@ -75,7 +75,7 @@ class Paginator:
                                 return
 
 
-                if role:
+                if role and not autoreport:
                     def check(reaction1, user1):
                         return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
@@ -125,7 +125,7 @@ class Paginator:
                                 return
                     return
 
-                if not end_channel and mute_role is not None:
+                if not end_channel and mute_role is not None and not autoreport:
                     def check(reaction1, user1):
                         return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
@@ -172,7 +172,7 @@ class Paginator:
                                 await member.add_roles(mute_role)
                                 return
                     return
-                if end_channel:
+                if end_channel and not autoreport:
                     def check(reaction1, user1):
                         return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
