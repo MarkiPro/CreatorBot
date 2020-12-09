@@ -12,7 +12,7 @@ class Paginator:
         n = self.char_per_page
         self.words_list = [self.text[i:i + n] for i in range(0, len(self.text), n)]
 
-    async def send(self, bot, channel, end_channel=None, member=None, title=None, role=None, mute_role=None, autoreport=None):
+    async def send(self, bot, channel, end_channel=None, member=None, title=None, role=None, mute_role=None, autoreport=None, messagee=None):
         self.paginate()
         for i, entry in enumerate(self.words_list):
             prepared_embed = discord.Embed(description=entry, color=0x0064ff)
@@ -48,6 +48,7 @@ class Paginator:
                         if str(reaction2.emoji) == "👍":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
+                                await messagee.delete()
                                 await member.send(
                                     "The action taken against you was claimed to be the right thing, and soon enough, you will recieve your punishment!")
                                 return
@@ -62,6 +63,7 @@ class Paginator:
                         if str(reaction1.emoji) == "👍":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
+                                await messagee.delete()
                                 await member.send(
                                     "The action taken against you was claimed to be the right thing, and soon enough, you will recieve your punishment!")
                                 return
