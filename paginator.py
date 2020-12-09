@@ -12,7 +12,7 @@ class Paginator:
         n = self.char_per_page
         self.words_list = [self.text[i:i + n] for i in range(0, len(self.text), n)]
 
-    async def send(self, bot, channel, end_channel=None, member=None, title=None, role=None, mute_role=None):
+    async def send(self, bot, channel, end_channel=None, member=None, title=None, role=None, mute_role=None, autoreport=None):
         self.paginate()
         for i, entry in enumerate(self.words_list):
             prepared_embed = discord.Embed(description=entry, color=0x0064ff)
@@ -34,7 +34,7 @@ class Paginator:
                 await message.add_reaction("👎")
                 await message.add_reaction("🔇")
 
-                if end_channel == discord.Member:
+                if autoreport:
                     def check(reaction1, user1):
                         return user1 and str(reaction1.emoji) in ["👍", "👎"]
 
