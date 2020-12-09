@@ -4,6 +4,7 @@ import datetime
 import asyncio
 from paginator import Paginator
 import re
+from cooldown import Cooldown
 import time
 
 
@@ -11,10 +12,7 @@ class Misc(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.help_command.cog = self
-        self.last_timeStamp_for_post_choice1 = datetime.datetime.utcfromtimestamp(0)
-        self.last_timeStamp_for_post_choice2 = datetime.datetime.utcfromtimestamp(0)
-        self.last_timeStamp_for_post_choice3 = datetime.datetime.utcfromtimestamp(0)
-        self.last_timeStamp_for_post_choice4 = datetime.datetime.utcfromtimestamp(0)
+        hiring_cool = Cooldown(time=0)
 
     @commands.command(aliases=["for-hire", "forhire"],
                       description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
@@ -132,7 +130,6 @@ class Misc(commands.Cog):
         await ctx.send(embed=credits_embed)
 
     @commands.command(description="This command is used for applying for appliable roles (STAFF ROLES NOT INCLUDED!).")
-    @commands.cooldown(3, 3600, commands.BucketType.member)
     async def apply(self, ctx):
         allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
         applications_muted = ctx.guild.get_role(780494171730477086)
@@ -2254,12 +2251,7 @@ class Misc(commands.Cog):
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         elif re.findall("hiring", category, re.IGNORECASE):
-            time_difference1 = (datetime.datetime.utcnow() - self.last_timeStamp_for_post_choice1).total_seconds()
-            if time_difference1 < 3600:
-                await ctx.author.send("You are on cooldown for this category which lasts for 1 hour!")
-                return
-            else:
-                pass
+            hiring_cool.time_it(user=ctx.author)
             hiring_embed1 = discord.Embed(
                 title="**HIRING POST**",
                 description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.***",
@@ -2355,7 +2347,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
-                self.last_timeStamp_for_post_choice1 = datetime.datetime.utcnow()
+                hiring_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("for_hire", category, re.IGNORECASE):
             time_difference2 = (datetime.datetime.utcnow() - self.last_timeStamp_for_post_choice2).total_seconds()
             if time_difference2 < 3600:
@@ -2548,12 +2540,6 @@ class Misc(commands.Cog):
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
                 self.last_timeStamp_for_post_choice3 = datetime.datetime.utcnow()
         elif re.findall("report", category, re.IGNORECASE):
-            time_difference4 = (datetime.datetime.utcnow() - self.last_timeStamp_for_post_choice4).total_seconds()
-            if time_difference4 < 3600:
-                await ctx.author.send("You are on cooldown for this category which lasts for 1 hour!")
-                return
-            else:
-                pass
             report_embed1 = discord.Embed(
                 title="**REPORT POST**",
                 description="***Who are you filing this report on? Please provide their Username and Discriminator/Tag. Example: Noob#1234 or MarkiPro#3753***",
@@ -2652,7 +2638,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title, mute_role=post_muted)
-                self.last_timeStamp_for_post_choice4 = datetime.datetime.utcnow()
+
     @commands.command(
         aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info",
                  "g_i"], description="Displays basic information about the server.")
