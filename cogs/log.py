@@ -3,6 +3,7 @@ import datetime
 from typing import Optional, Any
 import re
 from paginator import Paginator
+from cooldown import Cooldown
 import discord
 from discord.ext.commands import Cog
 
@@ -10,6 +11,7 @@ from discord.ext.commands import Cog
 class Log(Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.message_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
 
     @Cog.listener()
     async def on_guild_channel_update(self, before, after):
@@ -228,7 +230,8 @@ class Log(Cog):
                 await another_message.add_reaction("👍")
                 await another_message.add_reaction("👎")
                 await another_message.add_reaction("🚫")
-
+        if self.message_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.message_cool.cooldown_start_time).total_seconds() < 3600:
+            await self.message_cool.time_it(user=message.author, message=message)
         if any(re.findall("|".join(banned_racial_words), message.content, re.IGNORECASE)) or any(re.findall("|".join(banned_links), message.content, re.IGNORECASE)):
             if message.author not in staff_role.members:
                 await message.delete()
@@ -296,6 +299,7 @@ class Log(Cog):
                     timestamp=datetime.datetime.utcnow()
                 )
                 await log_channel.send(embed=ban_embed_reason)
+        self.message_cool = Cooldown(time=datetime.datetime.utcnow())
 
     @Cog.listener()
     async def on_message_delete(self, message):
