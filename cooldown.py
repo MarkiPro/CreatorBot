@@ -3,7 +3,7 @@ import datetime
 
 class Cooldown:
     def __init__(self, time):
-        self.cooldown_start_time = datetime.datetime.utcfromtimestamp(time)
+        self.cooldown_start_time = time
 
     async def time_it(self, user):
         current_time = datetime.datetime.utcnow()
