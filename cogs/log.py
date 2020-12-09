@@ -281,7 +281,7 @@ class Log(Cog):
             await message.author.send(f"The word(s) in particular is/are [**`{banned_word}`**], in the following message content:\n\n ```{new_message_content}```")
             auto_reports = cc_guild.get_channel(786007666329124874)
 
-            pag = Paginator(f"Word(s) [**`{banned_words}`**] found in:\n\n```{new_message_content}```", 1985)
+            pag = Paginator(f"Word(s) [**`{banned_word}`**] found in:\n\n```{new_message_content}```", 1985)
 
             await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author, title="**AUTO-REPORTED MESSAGE**", autoreport=True)
 
