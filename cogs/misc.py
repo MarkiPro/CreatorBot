@@ -2251,7 +2251,7 @@ class Misc(commands.Cog):
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         elif re.findall("hiring", category, re.IGNORECASE):
-            self.hiring_cool.time_it(user=ctx.author)
+            await self.hiring_cool.time_it(user=ctx.author)
             hiring_embed1 = discord.Embed(
                 title="**HIRING POST**",
                 description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.***",
