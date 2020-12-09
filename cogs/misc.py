@@ -197,7 +197,7 @@ class Misc(commands.Cog):
 
                 `YouTuber`;
                 
-                `Roblox Studio Builder`;
+                `Roblox Builder`;
                 
                 `Twitch Streamer`;
                 
@@ -288,6 +288,10 @@ class Misc(commands.Cog):
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
             elif re.findall("python programmer", programmer_category, re.IGNORECASE):
+                if self.python_programmer_cool.cooldown_start_time != 0 and (
+                        datetime.datetime.utcnow() - self.python_programmer_cool.cooldown_start_time).total_seconds() < 3600:
+                    await self.python_programmer_cool.time_it(user=ctx.author)
+                    return
                 programmer_embed1 = discord.Embed(
                     title="Python Programmer Post",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -371,7 +375,12 @@ class Misc(commands.Cog):
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                    title=title, mute_role=applications_muted)
+                    self.python_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
             elif re.findall("c# programmer", programmer_category, re.IGNORECASE):
+                if self.csharp_programmer_cool.cooldown_start_time != 0 and (
+                        datetime.datetime.utcnow() - self.csharp_programmer_cool.cooldown_start_time).total_seconds() < 3600:
+                    await self.csharp_programmer_cool.time_it(user=ctx.author)
+                    return
                 programmer_embed1 = discord.Embed(
                     title="C# Programmer Post",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -456,7 +465,12 @@ class Misc(commands.Cog):
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                    title=title, mute_role=applications_muted)
+                    self.csharp_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
             elif re.findall("java programmer", programmer_category, re.IGNORECASE):
+                if self.java_programmer_cool.cooldown_start_time != 0 and (
+                        datetime.datetime.utcnow() - self.java_programmer_cool.cooldown_start_time).total_seconds() < 3600:
+                    await self.java_programmer_cool.time_it(user=ctx.author)
+                    return
                 programmer_embed1 = discord.Embed(
                     title="Java Programmer Post",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -540,7 +554,12 @@ class Misc(commands.Cog):
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                    title=title, mute_role=applications_muted)
+                    self.java_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
             elif re.findall("javascript programmer", programmer_category, re.IGNORECASE):
+                if self.javascript_programmer_cool.cooldown_start_time != 0 and (
+                        datetime.datetime.utcnow() - self.javascript_programmer_cool.cooldown_start_time).total_seconds() < 3600:
+                    await self.javascript_programmer_cool.time_it(user=ctx.author)
+                    return
                 programmer_embed1 = discord.Embed(
                     title="JavaScript Programmer Post",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -625,8 +644,12 @@ class Misc(commands.Cog):
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                    title=title, mute_role=applications_muted)
-
+                    self.javascript_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
             elif re.findall("cpp programmer", programmer_category, re.IGNORECASE):
+                if self.cpp_programmer_cool.cooldown_start_time != 0 and (
+                        datetime.datetime.utcnow() - self.cpp_programmer_cool.cooldown_start_time).total_seconds() < 3600:
+                    await self.cpp_programmer_cool.time_it(user=ctx.author)
+                    return
                 programmer_embed1 = discord.Embed(
                     title="CPP Programmer Post",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -711,7 +734,12 @@ class Misc(commands.Cog):
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                    title=title, mute_role=applications_muted)
+                    self.cpp_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
             elif re.findall("c programmer", programmer_category, re.IGNORECASE):
+                if self.c_programmer_cool.cooldown_start_time != 0 and (
+                        datetime.datetime.utcnow() - self.c_programmer_cool.cooldown_start_time).total_seconds() < 3600:
+                    await self.c_programmer_cool.time_it(user=ctx.author)
+                    return
                 programmer_embed1 = discord.Embed(
                     title="C Programmer Post",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -796,7 +824,12 @@ class Misc(commands.Cog):
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                    title=title, mute_role=applications_muted)
+                    self.c_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
             elif re.findall("php programmer", programmer_category, re.IGNORECASE):
+                if self.php_programmer_cool.cooldown_start_time != 0 and (
+                        datetime.datetime.utcnow() - self.php_programmer_cool.cooldown_start_time).total_seconds() < 3600:
+                    await self.php_programmer_cool.time_it(user=ctx.author)
+                    return
                 programmer_embed1 = discord.Embed(
                     title="PHP Programmer Post",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -880,7 +913,12 @@ class Misc(commands.Cog):
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                    title=title, mute_role=applications_muted)
+                    self.php_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
             elif re.findall("lua programmer", programmer_category, re.IGNORECASE):
+                if self.lua_programer_cool.cooldown_start_time != 0 and (
+                        datetime.datetime.utcnow() - self.lua_programer_cool.cooldown_start_time).total_seconds() < 3600:
+                    await self.lua_programer_cool.time_it(user=ctx.author)
+                    return
                 programmer_embed1 = discord.Embed(
                     title="Lua Programmer Post",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -964,7 +1002,12 @@ class Misc(commands.Cog):
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                    title=title, mute_role=applications_muted)
+                    self.lua_programer_cool = Cooldown(time=datetime.datetime.utcnow())
             elif re.findall("ruby programmer", programmer_category, re.IGNORECASE):
+                if self.ruby_programmer_cool.cooldown_start_time != 0 and (
+                        datetime.datetime.utcnow() - self.ruby_programmer_cool.cooldown_start_time).total_seconds() < 3600:
+                    await self.ruby_programmer_cool.time_it(user=ctx.author)
+                    return
                 programmer_embed1 = discord.Embed(
                     title="Ruby Programmer Post",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -1048,7 +1091,15 @@ class Misc(commands.Cog):
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                    title=title, mute_role=applications_muted)
+                    if self.ruby_programmer_cool.cooldown_start_time != 0 and (
+                            datetime.datetime.utcnow() - self.ruby_programmer_cool.cooldown_start_time).total_seconds() < 3600:
+                        await self.ruby_programmer_cool.time_it(user=ctx.author)
+                        return
             elif re.findall("xml programmer", programmer_category, re.IGNORECASE):
+                if self.xml_programmer_cool.cooldown_start_time != 0 and (
+                        datetime.datetime.utcnow() - self.xml_programmer_cool.cooldown_start_time).total_seconds() < 3600:
+                    await self.xml_programmer_cool.time_it(user=ctx.author)
+                    return
                 programmer_embed1 = discord.Embed(
                     title="XML Programmer Post",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -1132,7 +1183,12 @@ class Misc(commands.Cog):
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                    title=title, mute_role=applications_muted)
+                    self.xml_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
             elif re.findall("css programmer", programmer_category, re.IGNORECASE):
+                if self.css_programmer_cool.cooldown_start_time != 0 and (
+                        datetime.datetime.utcnow() - self.css_programmer_cool.cooldown_start_time).total_seconds() < 3600:
+                    await self.css_programmer_cool.time_it(user=ctx.author)
+                    return
                 programmer_embed1 = discord.Embed(
                     title="CSS Programmer Post",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -1216,8 +1272,11 @@ class Misc(commands.Cog):
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                    title=title, mute_role=applications_muted)
-
+                    self.css_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("game designer", category, re.IGNORECASE):
+            if self.game_designer_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.game_designer_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.game_designer_cool.time_it(user=ctx.author)
+                return
             game_designer_embed1 = discord.Embed(
                 title="**Game Designer Application**",
                 description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -1300,7 +1359,11 @@ class Misc(commands.Cog):
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                title=title, mute_role=applications_muted)
+                self.game_designer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("3d modeler", category, re.IGNORECASE):
+            if self.threed_modeler_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.threed_modeler_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.threed_modeler_cool.time_it(user=ctx.author)
+                return
             threed_modeler_embed1 = discord.Embed(
                 title="**3D Modeler Application**",
                 description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -1383,7 +1446,11 @@ class Misc(commands.Cog):
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                title=title, mute_role=applications_muted)
+                self.threed_modeler_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("youtuber", category, re.IGNORECASE):
+            if self.youtuber_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.youtuber_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.youtuber_cool.time_it(user=ctx.author)
+                return
             youtuber_embed1 = discord.Embed(
                 title="**YouTuber Application**",
                 description="***How many subscribers does your channel have? Minimum needed to apply is 1, 000***",
@@ -1465,8 +1532,11 @@ class Misc(commands.Cog):
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                title=title, mute_role=applications_muted)
-
-        elif re.findall("roblox studio builder", category, re.IGNORECASE):
+                self.youtuber_cool = Cooldown(time=datetime.datetime.utcnow())
+        elif re.findall("roblox builder", category, re.IGNORECASE):
+            if self.roblox_studio_builder_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.roblox_studio_builder_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.roblox_studio_builder_cool.time_it(user=ctx.author)
+                return
             builder_embed1 = discord.Embed(
                 title="**Roblox Builder Application**",
                 description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -1548,7 +1618,11 @@ class Misc(commands.Cog):
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                title=title, mute_role=applications_muted)
+                self.roblox_studio_builder_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("twitch streamer", category, re.IGNORECASE):
+            if self.twitch_streamer_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.twitch_streamer_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.twitch_streamer_cool.time_it(user=ctx.author)
+                return
             twitch_streamer_embed1 = discord.Embed(
                 title="**Twitch Streamer Application**",
                 description="***How many followers does your channel have? Minimum needed to apply is 1, 000***",
@@ -1632,7 +1706,11 @@ class Misc(commands.Cog):
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                title=title, mute_role=applications_muted)
+                self.twitch_streamer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("gfx designer", category, re.IGNORECASE):
+            if self.gfx_designer_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.gfx_designer_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.gfx_designer_cool.time_it(user=ctx.author)
+                return
             gfx_designer_embed1 = discord.Embed(
                 title="**GFX Designer Application**",
                 description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -1715,7 +1793,11 @@ class Misc(commands.Cog):
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                title=title, mute_role=applications_muted)
+                self.gfx_designer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("translator", category, re.IGNORECASE):
+            if self.translator_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.translator_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.translator_cool.time_it(user=ctx.author)
+                return
             translator_embed1 = discord.Embed(
                 title="**Translator Application**",
                 description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -1798,7 +1880,11 @@ class Misc(commands.Cog):
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                title=title, mute_role=applications_muted)
+                self.translator_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("ui designer", category, re.IGNORECASE):
+            if self.ui_designer_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.ui_designer_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.ui_designer_cool.time_it(user=ctx.author)
+                return
             ui_designer_embed1 = discord.Embed(
                 title="**UI Designer Application**",
                 description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -1881,7 +1967,11 @@ class Misc(commands.Cog):
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                title=title, mute_role=applications_muted)
+                self.ui_designer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("clothing designer", category, re.IGNORECASE):
+            if self.clothing_designer_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.clothing_designer_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.clothing_designer_cool.time_it(user=ctx.author)
+                return
             clothing_designer_embed1 = discord.Embed(
                 title="**Clothing Designer Application**",
                 description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -1966,7 +2056,11 @@ class Misc(commands.Cog):
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                title=title, mute_role=applications_muted)
+                self.clothing_designer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("artist", category, re.IGNORECASE):
+            if self.artist_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.artist_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.artist_cool.time_it(user=ctx.author)
+                return
             artist_embed1 = discord.Embed(
                 title="**Artist Application**",
                 description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -2048,7 +2142,11 @@ class Misc(commands.Cog):
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                title=title, mute_role=applications_muted)
+                self.artist_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("music composer", category, re.IGNORECASE):
+            if self.music_composer_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.music_composer_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.music_composer_cool.time_it(user=ctx.author)
+                return
             music_composer_embed1 = discord.Embed(
                 title="**Music Composer Application**",
                 description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -2131,7 +2229,11 @@ class Misc(commands.Cog):
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                title=title, mute_role=applications_muted)
+                self.music_composer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("animator", category, re.IGNORECASE):
+            if self.animator_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.animator_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.animator_cool.time_it(user=ctx.author)
+                return
             animator_embed1 = discord.Embed(
                 title="**Animator Application**",
                 description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -2213,6 +2315,7 @@ class Misc(commands.Cog):
 
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                title=title, mute_role=applications_muted)
+                self.animator_cool = Cooldown(time=datetime.datetime.utcnow())
 
     @commands.command(description="This command is used for posting.")
     async def post(self, ctx):
