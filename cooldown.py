@@ -11,3 +11,4 @@ class Cooldown:
         time_difference = (current_time - self.cooldown_start_time).total_seconds()
         if time_difference < 3600:
             await user.send("You are on cooldown for this category which lasts for 1 hour!")
+
