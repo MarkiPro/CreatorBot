@@ -13,6 +13,9 @@ class Misc(commands.Cog):
         self.bot = bot
         self.bot.help_command.cog = self
         self.hiring_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.for_hire_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.sell_creations_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.report_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
 
     @commands.command(aliases=["for-hire", "forhire"],
                       description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
@@ -2351,12 +2354,9 @@ class Misc(commands.Cog):
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
                 self.hiring_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("for_hire", category, re.IGNORECASE):
-            time_difference2 = (datetime.datetime.utcnow() - self.last_timeStamp_for_post_choice2).total_seconds()
-            if time_difference2 < 3600:
-                await ctx.author.send("You are on cooldown for this category which lasts for 1 hour!")
+            if self.for_hire_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.for_hire_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.for_hire_cool.time_it(user=ctx.author)
                 return
-            else:
-                pass
             for_hire_embed1 = discord.Embed(
                 title="**FOR-HIRE POST**",
                 description="***Define your specialties here, like for example a Java programmer, an Artist et cetera.***",
@@ -2442,7 +2442,7 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-            elif re.findall("no", final_choice, re.IGNORECASE):
+            elif re.findall("yes", final_choice, re.IGNORECASE):
                 await ctx.author.send("Sent for approval!")
                 some_channel = self.bot.get_channel(739247630193786900)
                 end_channel = self.bot.get_channel(727550761801613393)
@@ -2452,14 +2452,11 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
-                self.last_timeStamp_for_post_choice2 = datetime.datetime.utcnow()
+                self.for_hire_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("sell_creations", category, re.IGNORECASE):
-            time_difference3 = (datetime.datetime.utcnow() - self.last_timeStamp_for_post_choice3).total_seconds()
-            if time_difference3 < 3600:
-                await ctx.author.send("You are on cooldown for this category which lasts for 1 hour!")
+            if self.sell_creations_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.sell_creations_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.sell_creations_cool.time_it(user=ctx.author)
                 return
-            else:
-                pass
             sell_creations_embed1 = discord.Embed(
                 title="**SELL-CREATIONS POST**",
                 description="***Showcase the creation here. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
@@ -2540,8 +2537,11 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
-                self.last_timeStamp_for_post_choice3 = datetime.datetime.utcnow()
+                self.sell_creations_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("report", category, re.IGNORECASE):
+            if self.report_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.report_cool.cooldown_start_time).total_seconds() < 3600:
+                await self.report_cool.time_it(user=ctx.author)
+                return
             report_embed1 = discord.Embed(
                 title="**REPORT POST**",
                 description="***Who are you filing this report on? Please provide their Username and Discriminator/Tag. Example: Noob#1234 or MarkiPro#3753***",
@@ -2640,6 +2640,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title, mute_role=post_muted)
+                self.report_cool = Cooldown(time=datetime.datetime.utcnow())
 
     @commands.command(
         aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info",
