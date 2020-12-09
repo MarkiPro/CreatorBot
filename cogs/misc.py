@@ -16,6 +16,33 @@ class Misc(commands.Cog):
         self.for_hire_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.sell_creations_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.report_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.cpp_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.lua_programer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.csharp_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.java_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.python_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.javascript_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.xml_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.css_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.ruby_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.c_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.php_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.music_composer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.artist_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.twitch_streamer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.youtuber_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.translator_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.roblox_studio_builder_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.ui_designer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.animator_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.game_designer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.threed_modeler_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.clothing_designer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.gfx_designer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+
+
+
+
 
     @commands.command(aliases=["for-hire", "forhire"],
                       description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
