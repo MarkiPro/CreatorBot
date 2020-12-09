@@ -2188,7 +2188,6 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
 
     @commands.command(description="This command is used for posting.")
-    @commands.cooldown(3, 3600, commands.BucketType.member)
     async def post(self, ctx):
         allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
