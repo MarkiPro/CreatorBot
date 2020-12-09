@@ -269,11 +269,6 @@ class Log(Cog):
                 await log_channel.send(embed=ban_embed_reason)
         if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
             await message.delete()
-            banned_word = re.findall("|".join(banned_words), message.content, re.IGNORECASE)
-            await message.author.send("Greetings! I've detected a banned word in your message, right now, it is up to our wonderful staff members to decide whether or not this is well-deserved of a punishment.")
-            await message.author.send(f"The word(s) in particular is/are [**`{banned_word}`**], in the following message content: {message.content}")
-            auto_reports = cc_guild.get_channel(786007666329124874)
-
             matches = re.findall("```", message.content)
             if len(matches) >= 0:
                 pre_message_content = message.content.replace("```", "")
@@ -281,19 +276,14 @@ class Log(Cog):
             else:
                 pass
             new_message_content = message_content or message.content
-
-            embed = discord.Embed(
-                title="**AUTO-REPORTED MESSAGE**",
-                description=f"Word(s) [**`{banned_words}`**] found in:\n\n```{new_message_content}```",
-                timestamp=datetime.datetime.utcnow(),
-                color=0x0064ff
-            )
+            banned_word = re.findall("|".join(banned_words), message.content, re.IGNORECASE)
+            await message.author.send("Greetings! I've detected a banned word in your message, right now, it is up to our wonderful staff members to decide whether or not this is well-deserved of a punishment.")
+            await message.author.send(f"The word(s) in particular is/are [**`{banned_word}`**], in the following message content:\n\n ```{new_message_content}```")
+            auto_reports = cc_guild.get_channel(786007666329124874)
 
             pag = Paginator(f"Word(s) [**`{banned_words}`**] found in:\n\n```{new_message_content}```", 1985)
 
-            await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author, title="**AUTO-REPORTED MESSAGE**")
-
-            await auto_reports.send(embed=embed)
+            await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author, title="**AUTO-REPORTED MESSAGE**", autoreport=True)
 
             if any(re.findall("|".join(banned_links_v2), message.content, re.IGNORECASE)):
                 ban_embed_reason = discord.Embed(
