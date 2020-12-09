@@ -2251,7 +2251,7 @@ class Misc(commands.Cog):
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         elif re.findall("hiring", category, re.IGNORECASE):
-            hiring_cool.time_it(user=ctx.author)
+            self.hiring_cool.time_it(user=ctx.author)
             hiring_embed1 = discord.Embed(
                 title="**HIRING POST**",
                 description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.***",
@@ -2347,7 +2347,7 @@ class Misc(commands.Cog):
                     1985)
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
-                hiring_cool = Cooldown(time=datetime.datetime.utcnow())
+                self.hiring_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("for_hire", category, re.IGNORECASE):
             time_difference2 = (datetime.datetime.utcnow() - self.last_timeStamp_for_post_choice2).total_seconds()
             if time_difference2 < 3600:
