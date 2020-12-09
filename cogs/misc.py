@@ -2349,7 +2349,7 @@ class Misc(commands.Cog):
 
                 `hiring`;
 
-                `for-hire`;
+                `for_hire`;
 
                 `sell_creations`;
 
@@ -2482,7 +2482,7 @@ class Misc(commands.Cog):
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
                 self.hiring_cool = Cooldown(time=datetime.datetime.utcnow())
-        elif re.findall("for_hire", category, re.IGNORECASE):
+        elif re.findall("for_hire|for hire|for-hire", category, re.IGNORECASE):
             if self.for_hire_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.for_hire_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.for_hire_cool.time_it(user=ctx.author)
                 return
@@ -2582,7 +2582,7 @@ class Misc(commands.Cog):
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
                 self.for_hire_cool = Cooldown(time=datetime.datetime.utcnow())
-        elif re.findall("sell_creations", category, re.IGNORECASE):
+        elif re.findall("sell_creations|sell creations|sell-creations", category, re.IGNORECASE):
             if self.sell_creations_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.sell_creations_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.sell_creations_cool.time_it(user=ctx.author)
                 return
