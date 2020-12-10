@@ -5,7 +5,6 @@ import asyncio
 from paginator import Paginator
 import re
 from cooldown import Cooldown
-import time
 
 
 class Misc(commands.Cog):
@@ -39,10 +38,6 @@ class Misc(commands.Cog):
         self.threed_modeler_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.clothing_designer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.gfx_designer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
-
-
-
-
 
     @commands.command(aliases=["for-hire", "forhire"],
                       description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
@@ -410,8 +405,7 @@ class Misc(commands.Cog):
                     text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=programmer_embed1)
                 try:
-                    programmer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                      timeout=1000)
+                    programmer_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                     programmer_information = programmer_information_message.content
                 except asyncio.TimeoutError:
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
@@ -500,8 +494,7 @@ class Misc(commands.Cog):
                     text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=programmer_embed1)
                 try:
-                    programmer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                      timeout=1000)
+                    programmer_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                     programmer_information = programmer_information_message.content
                 except asyncio.TimeoutError:
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
@@ -589,8 +582,7 @@ class Misc(commands.Cog):
                     text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=programmer_embed1)
                 try:
-                    programmer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                      timeout=1000)
+                    programmer_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                     programmer_information = programmer_information_message.content
                 except asyncio.TimeoutError:
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
@@ -679,8 +671,7 @@ class Misc(commands.Cog):
                     text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=programmer_embed1)
                 try:
-                    programmer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                      timeout=1000)
+                    programmer_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                     programmer_information = programmer_information_message.content
                 except asyncio.TimeoutError:
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
@@ -769,8 +760,7 @@ class Misc(commands.Cog):
                     text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=programmer_embed1)
                 try:
-                    programmer_information_message = await self.bot.wait_for('message', check=check_dm,
-                                                                      timeout=1000)
+                    programmer_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
                     programmer_information = programmer_information_message.content
                 except asyncio.TimeoutError:
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
@@ -2482,7 +2472,7 @@ class Misc(commands.Cog):
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
                 self.hiring_cool = Cooldown(time=datetime.datetime.utcnow())
-        elif re.findall("for_hire|for hire|for-hire", category, re.IGNORECASE):
+        elif re.findall("for_hire|for hire|for-hire|forhire", category, re.IGNORECASE):
             if self.for_hire_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.for_hire_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.for_hire_cool.time_it(user=ctx.author)
                 return
@@ -2582,7 +2572,7 @@ class Misc(commands.Cog):
 
                 await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
                 self.for_hire_cool = Cooldown(time=datetime.datetime.utcnow())
-        elif re.findall("sell_creations|sell creations|sell-creations", category, re.IGNORECASE):
+        elif re.findall("sell_creations|sell creations|sell-creations|sellcreations", category, re.IGNORECASE):
             if self.sell_creations_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.sell_creations_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.sell_creations_cool.time_it(user=ctx.author)
                 return
