@@ -102,7 +102,7 @@ class Verification(commands.Cog):
         filename = f"result{text}.png"
         blue_background = (95, 104, 222)
         blue_text = (1, 5, 48)
-        transparent = (0, 0, 0, 0)
+        # transparent = (0, 0, 0, 0)
 
         font = ImageFont.truetype(fm.findfont(fm.FontProperties(family='Computer Modern')), 25)
         wm = Image.new('RGBA', (width, height))
