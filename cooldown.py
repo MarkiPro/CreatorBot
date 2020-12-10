@@ -16,10 +16,10 @@ class Cooldown:
             await user.add_roles(mute_role)
             self.muteable_offence = 0
 
-        if message and self.message_count and channel:
+        if message and channel:
             self.message_count += 1
             time_difference = (current_time - self.cooldown_start_time).total_seconds()
-            if time_difference < 2.5 and self.message_count > 5:
+            if time_difference < 5 < self.message_count:
                 await user.send(f"{user.mention} you've sent over 5 messages in under 2.5 seconds!")
                 log_embed = discord.Embed(
                     title="**Message Spam**",
