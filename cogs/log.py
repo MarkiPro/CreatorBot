@@ -1,11 +1,11 @@
-import asyncio
 import datetime
-from typing import Optional, Any
 import re
-from paginator import Paginator
-from cooldown import Cooldown
+
 import discord
 from discord.ext.commands import Cog
+
+from cooldown import Cooldown
+from paginator import Paginator
 
 
 class Log(Cog):
@@ -159,7 +159,8 @@ class Log(Cog):
                 async for some_user in reaction2.users():
                     if some_user.id == user.id:
                         await reaction.remove(user)
-                        await user.send("You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
+                        await user.send(
+                            "You've already disliked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
                         return
                 if reaction1.count > reaction2.count and reaction1.count >= 10:
                     suggest_embed = discord.Embed(
@@ -175,7 +176,8 @@ class Log(Cog):
                 async for some_user in reaction1.users():
                     if some_user.id == user.id:
                         await reaction.remove(user)
-                        await user.send("You've already liked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
+                        await user.send(
+                            "You've already liked this suggestion, if you wanna change your vote, you have to remove your previous reaction.")
                         return
                 if reaction2.count > reaction1.count and reaction2.count >= 10:
                     await message.delete()
@@ -198,14 +200,21 @@ class Log(Cog):
 
     @Cog.listener()
     async def on_message(self, message):
+        global message_content
         suggestions_channel = self.bot.get_channel(712655570737299567)
-        banned_links = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://web.roblox.com", "https://brazzers.com"]
-        banned_racial_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah", "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger", "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar", "n1gguh", "n1ggress", "n1gette", "negro", "n1bba", "n1ba"]
+        banned_links = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://web.roblox.com",
+                        "https://brazzers.com"]
+        banned_racial_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah",
+                               "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger",
+                               "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar",
+                               "n1gguh", "n1ggress", "n1gette", "negro", "n1bba", "n1ba"]
         banned_links_v2 = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://brazzers.com"]
         log_channel = self.bot.get_channel(712761128895381676)
         cc_guild = self.bot.get_guild(id=611227128020598805)
         staff_role = discord.utils.get(cc_guild.roles, id=756565123350659385)
-        banned_words = ["porn", "fuck", "shit", "ass", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger", "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "sex", "seggz", "segz"]
+        banned_words = ["porn", "fuck", "shit", "ass", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger",
+                        "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "sex",
+                        "seggz", "segz"]
         mute_role = discord.utils.get(cc_guild.roles, id=712730274412232807)
 
         if message.guild != cc_guild:
@@ -236,7 +245,8 @@ class Log(Cog):
             return
         else:
             pass
-        if any(re.findall("|".join(banned_racial_words), message.content, re.IGNORECASE)) or any(re.findall("|".join(banned_links), message.content, re.IGNORECASE)):
+        if any(re.findall("|".join(banned_racial_words), message.content, re.IGNORECASE)) or any(
+                re.findall("|".join(banned_links), message.content, re.IGNORECASE)):
             await message.delete()
             ban_embed = discord.Embed(
                 title="**NOTIFICATION**",
@@ -245,7 +255,8 @@ class Log(Cog):
                 timestamp=datetime.datetime.utcnow()
             )
 
-            ban_embed.add_field(name="**In case you would like to appeal your ban, go here:**", value=f"https://forms.gle/zs9vRAz5Fw1SFgvR6", inline=False)
+            ban_embed.add_field(name="**In case you would like to appeal your ban, go here:**",
+                                value=f"https://forms.gle/zs9vRAz5Fw1SFgvR6", inline=False)
 
             try:
                 await message.author.send(embed=ban_embed)
@@ -300,16 +311,18 @@ class Log(Cog):
             else:
                 pass
             new_message_content = message_content or message.content
-            await message.author.send("Greetings! I've detected a banned word in your message, right now, it is up to our wonderful staff members to decide whether or not this is well-deserved of a punishment.")
-            await message.author.send(f"The word(s) in particular is/are **`{banned_word}`**, in the following message content:\n\n ```{new_message_content}```")
+            await message.author.send(
+                "Greetings! I've detected a banned word in your message, right now, it is up to our wonderful staff members to decide whether or not this is well-deserved of a punishment.")
+            await message.author.send(
+                f"The word(s) in particular is/are **`{banned_word}`**, in the following message content:\n\n ```{new_message_content}```")
             auto_reports = cc_guild.get_channel(786007666329124874)
-
             pag = Paginator(f"Word(s) **`{banned_word}`** found in:\n\n```{new_message_content}```", 1985)
-
             await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author, another_channel=log_channel, title="**AUTO-REPORTED MESSAGE**", autoreport=True, message=message)
+        await self.message_cool.time_it(user=message.author, message=message, channel=log_channel, mute_role=mute_role)
 
     @Cog.listener()
     async def on_message_delete(self, message):
+        global message_content
         log_channel = self.bot.get_channel(771471454629003314)
         cc_guild = self.bot.get_guild(id=611227128020598805)
 
@@ -355,6 +368,7 @@ class Log(Cog):
 
     @Cog.listener()
     async def on_message_edit(self, before, after):
+        global after_message_content, before_message_content
         log_channel = self.bot.get_channel(771471454629003314)
         message = before
         cc_guild = self.bot.get_guild(id=611227128020598805)
@@ -395,8 +409,15 @@ class Log(Cog):
         message = await sum_channel.fetch_message(770695658318463007)
         guild = sum_channel.guild
         booster_role = discord.utils.get(guild.roles, id=762172204628181023)
-        excluded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651, 743013370588037191, 732388199107657828, 743013368511594569, 743013366515236915, 743013366880272474, 743013367840768072, 743013368134107166, 732387788493946881, 732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698, 735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516, 735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672, 734527854871707762, 746758563703291938]
-        before_roles = {(role.mention for role in before.roles if role.id not in excluded_roles) or "No roles assigned."}
+        excluded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651,
+                          743013370588037191, 732388199107657828, 743013368511594569, 743013366515236915,
+                          743013366880272474, 743013367840768072, 743013368134107166, 732387788493946881,
+                          732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698,
+                          735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516,
+                          735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672,
+                          734527854871707762, 746758563703291938]
+        before_roles = {
+            (role.mention for role in before.roles if role.id not in excluded_roles) or "No roles assigned."}
         after_roles = {(role.mention for role in after.roles if role.id not in excluded_roles) or "No roles assigned."}
         role_update_log_channel = self.bot.get_channel(770368850679169075)
         nick_update_log_channel = self.bot.get_channel(771465528618254347)
@@ -417,15 +438,17 @@ class Log(Cog):
             role_difference_set = set(after.roles).difference(set(before.roles))
             for first_role in role_difference_set:
                 actual_role = discord.utils.get(guild.roles, name=str(first_role))
-                role_log_embed = discord.Embed(
-                    title="**Role Update**",
-                    description=f"*Role Added for **{after.mention}***!",
-                    timestamp=datetime.datetime.utcnow(),
-                    color=0x0064ff
-                )
-                role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {actual_role.mention}", inline=False)
-                role_log_embed.set_thumbnail(url=before.avatar_url)
-                await role_update_log_channel.send(embed=role_log_embed)
+                if not actual_role.id in excluded_roles:
+                    role_log_embed = discord.Embed(
+                        title="**Role Update**",
+                        description=f"*Role Added for **{after.mention}***!",
+                        timestamp=datetime.datetime.utcnow(),
+                        color=0x0064ff
+                    )
+                    role_log_embed.add_field(name="**Added Role**", value=f":white_check_mark: {actual_role.mention}",
+                                             inline=False)
+                    role_log_embed.set_thumbnail(url=before.avatar_url)
+                    await role_update_log_channel.send(embed=role_log_embed)
         elif len(before.roles) > len(after.roles):
             print("hi!")
             role_difference_set = set(before.roles).difference(set(after.roles))
@@ -437,11 +460,13 @@ class Log(Cog):
                     timestamp=datetime.datetime.utcnow(),
                     color=0x0064ff
                 )
-                role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: {actual_role.mention}", inline=False)
+                role_log_embed.add_field(name="**Removed Role**", value=f":no_entry_sign: {actual_role.mention}",
+                                         inline=False)
                 role_log_embed.set_thumbnail(url=before.avatar_url)
                 await role_update_log_channel.send(embed=role_log_embed)
         if booster_role in before.roles and booster_role not in after.roles:
-            await message.edit(content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
+            await message.edit(
+                content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
 
     @Cog.listener()
     async def on_voice_state_update(self, member, before, after):
@@ -649,7 +674,8 @@ class Log(Cog):
 
             await log_channel.send(embed=log_embed)
 
-            await message.edit(content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
+            await message.edit(
+                content=f"Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.")
 
     @Cog.listener()
     async def on_member_remove(self, member):
@@ -660,8 +686,15 @@ class Log(Cog):
         format = "%A, %d %B, %Y : %I:%M %p"
         delta_created = datetime.datetime.utcnow() - member.created_at
         delta_joined = datetime.datetime.utcnow() - member.joined_at
-        excluded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651, 743013370588037191, 732388199107657828, 743013368511594569, 743013366515236915, 743013366880272474, 743013367840768072, 743013368134107166, 732387788493946881, 732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698, 735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516, 735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672, 734527854871707762, 746758563703291938]
-        member_roles = ", ".join(role.mention for role in member.roles if role.id not in excluded_roles) or "No roles assigned."
+        excluded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651,
+                          743013370588037191, 732388199107657828, 743013368511594569, 743013366515236915,
+                          743013366880272474, 743013367840768072, 743013368134107166, 732387788493946881,
+                          732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698,
+                          735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516,
+                          735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672,
+                          734527854871707762, 746758563703291938]
+        member_roles = ", ".join(
+            role.mention for role in member.roles if role.id not in excluded_roles) or "No roles assigned."
         cc_guild = self.bot.get_guild(id=611227128020598805)
 
         if member.guild != cc_guild:
@@ -688,7 +721,8 @@ class Log(Cog):
 
         await log_channel.send(embed=log_embed)
 
-        await message.edit(content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.""")
+        await message.edit(
+            content=f"""Currently, there are a total of **{guild.member_count}** Members in this server,\n**{guild.premium_subscription_count}** Boosters,\nBoosting Level for this server is currently **{guild.premium_tier}**.""")
 
 
 def setup(bot):
