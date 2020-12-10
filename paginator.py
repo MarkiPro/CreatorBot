@@ -12,7 +12,8 @@ class Paginator:
         n = self.char_per_page
         self.words_list = [self.text[i:i + n] for i in range(0, len(self.text), n)]
 
-    async def send(self, bot, channel, end_channel=None, member=None, title=None, another_channel=None, role=None, mute_role=None, autoreport=None, messagee=None):
+    async def send(self, bot, channel, end_channel=None, member=None, title=None, another_channel=None, role=None,
+                   mute_role=None, autoreport=None, messagee=None):
         self.paginate()
         for i, entry in enumerate(self.words_list):
             prepared_embed = discord.Embed(description=entry, color=0x0064ff)
@@ -77,9 +78,9 @@ class Paginator:
                                     "The action was claimed to be mistaken, and without further punishments, you may continue on with your day!")
                                 return
 
-
                 if role and not autoreport:
                     await message.add_reaction("🔇")
+
                     def check(reaction1, user1):
                         return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
@@ -131,6 +132,7 @@ class Paginator:
 
                 if not end_channel and mute_role is not None and not autoreport:
                     await message.add_reaction("🔇")
+
                     def check(reaction1, user1):
                         return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
@@ -179,6 +181,7 @@ class Paginator:
                     return
                 if end_channel and not autoreport:
                     await message.add_reaction("🔇")
+
                     def check(reaction1, user1):
                         return user1 and str(reaction1.emoji) in ["👍", "👎", "🔇"]
 
