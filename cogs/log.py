@@ -245,7 +245,7 @@ class Log(Cog):
         inv_str = "discord.gg/"
         matched_inv = re.findall(inv_str, message.content, re.IGNORECASE)
         if matched_inv:
-            matched_invite = matched_inv.group()
+            matched_invite = re.search(inv_str, message.content).group()
             print(matched_invite)
             invite = self.bot.fetch_invite(matched_invite)
             if invite.guild is not cc_guild:
