@@ -198,12 +198,12 @@ class Log(Cog):
         else:
             return
 
-    @tasks.loop(seconds=1200)
+    @tasks.loop(seconds=3)
     async def check_message_count(self):
         if self.message_count > 0:
             self.message_count = 0
 
-    @tasks.loop(seconds=3600)
+    @tasks.loop(seconds=600)
     async def check_muteable_offence(self):
         if self.muteable_offence > 0:
             self.muteable_offence = 0
@@ -330,9 +330,8 @@ class Log(Cog):
 
         self.message_count += 1
         self.cooldown = datetime.datetime.utcnow()
-
         time_difference = (datetime.datetime.utcnow() - self.cooldown).total_seconds()
-        if time_difference < 5 < self.message_count:
+        if time_difference < 3 and self.message_count > 6:
             await message.author.send(f"{message.author.mention} you've sent over 5 messages in under 5 seconds!")
             log_embed = discord.Embed(
                 title="**Message Spam**",
