@@ -36,12 +36,12 @@ class Verification(commands.Cog):
 
         for i in range(random.randint(8, 11)):
             choice = choice_list[random.randint(0, 74)]
-            code.append(choice)
+            code.append()
 
         width = 300
         height = 100
         opacity = 1
-        text = code
+        text = str(code)
         filename = f"result{text}.png"
         blue_background = (95, 104, 222)
         blue_text = (1, 5, 48)
