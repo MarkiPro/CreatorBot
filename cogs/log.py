@@ -243,9 +243,12 @@ class Log(Cog):
                 await another_message.add_reaction("👎")
                 await another_message.add_reaction("🚫")
         inv_str = "discord.gg/"
-        if re.findall(inv_str, message.content, re.IGNORECASE):
-            match = re.findall(inv_str, message.content, re.IGNORECASE)
-            if match is discord.Invite and discord.Invite.guild != cc_guild:
+        matched_inv = re.findall(inv_str, message.content, re.IGNORECASE)
+        if matched_inv:
+            matched_invite = matched_inv.group()
+            print(matched_invite)
+            invite = self.bot.fetch_invite(matched_invite)
+            if invite.guild is not cc_guild:
                 await message.delete()
         if message.author in staff_role.members:
             return
