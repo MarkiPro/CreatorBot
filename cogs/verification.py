@@ -30,70 +30,13 @@ class Verification(commands.Cog):
         else:
             pass
         choice_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
-                       "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+                       "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#", "/", "@", "!", "$", "%", "^", "&", "*", "+", "=", "_", "-"]
 
-        choice_1 = choice_list[random.randint(0, 35)]
-        rand_choice1 = random.randint(1, 2)
-        if rand_choice1 == 1:
-            choice1 = choice_1.lower()
-        elif rand_choice1 == 2:
-            choice1 = choice_1.upper()
-        choice_2 = choice_list[random.randint(0, 35)]
-        rand_choice2 = random.randint(1, 3)
-        if rand_choice2 == 1:
-            choice2 = choice_2.lower()
-        elif rand_choice2 == 2:
-            choice2 = choice_2.upper()
-        choice_3 = choice_list[random.randint(0, 35)]
-        rand_choice3 = random.randint(1, 2)
-        if rand_choice3 == 1:
-            choice3 = choice_3.lower()
-        elif rand_choice3 == 2:
-            choice3 = choice_3.upper()
-        choice_4 = choice_list[random.randint(0, 35)]
-        rand_choice4 = random.randint(1, 2)
-        if rand_choice4 == 1:
-            choice4 = choice_4.lower()
-        elif rand_choice4 == 2:
-            choice4 = choice_4.upper()
-        choice_5 = choice_list[random.randint(0, 35)]
-        rand_choice5 = random.randint(1, 2)
-        if rand_choice5 == 1:
-            choice5 = choice_5.lower()
-        elif rand_choice5 == 2:
-            choice5 = choice_5.upper()
-        choice_6 = choice_list[random.randint(0, 35)]
-        rand_choice6 = random.randint(1, 2)
-        if rand_choice6 == 1:
-            choice6 = choice_6.lower()
-        elif rand_choice6 == 2:
-            choice6 = choice_6.upper()
-        choice_7 = choice_list[random.randint(0, 35)]
-        rand_choice7 = random.randint(1, 2)
-        if rand_choice7 == 1:
-            choice7 = choice_7.lower()
-        elif rand_choice7 == 2:
-            choice7 = choice_7.upper()
-        choice_8 = choice_list[random.randint(0, 35)]
-        rand_choice8 = random.randint(1, 2)
-        if rand_choice8 == 1:
-            choice8 = choice_8.lower()
-        elif rand_choice8 == 2:
-            choice8 = choice_8.upper()
-        choice_9 = choice_list[random.randint(0, 35)]
-        rand_choice9 = random.randint(1, 2)
-        if rand_choice9 == 1:
-            choice9 = choice_9.lower()
-        elif rand_choice9 == 2:
-            choice9 = choice_9.upper()
-        choice_10 = choice_list[random.randint(0, 35)]
-        rand_choice10 = random.randint(1, 2)
-        if rand_choice10 == 1:
-            choice10 = choice_10.lower()
-        elif rand_choice10 == 2:
-            choice10 = choice_10.upper()
+        code = []
 
-        code = (choice1 + choice2 + choice3 + choice4 + choice5 + choice6 + choice7 + choice8 + choice9 + choice10)
+        for i in range(random.randint(8, 11)):
+            choice = choice_list[random.randint(0, 74)]
+            code.append(choice)
 
         width = 300
         height = 100
