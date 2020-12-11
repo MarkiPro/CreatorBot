@@ -200,21 +200,6 @@ class Log(Cog):
         else:
             return
 
-    @tasks.loop(seconds=3)
-    async def check_message_count(self):
-        if self.message_count > 0:
-            self.message_count = 0
-
-    @tasks.loop(seconds=600)
-    async def check_muteable_offence(self):
-        if self.muteable_offence > 0:
-            self.muteable_offence = 0
-
-    @tasks.loop(seconds=3600)
-    async def check_kickable_offence(self):
-        if self.kickable_offence > 0:
-            self.kickable_offence = 0
-
     @Cog.listener()
     async def on_message(self, message):
         suggestions_channel = self.bot.get_channel(712655570737299567)
@@ -233,10 +218,10 @@ class Log(Cog):
                         "seggz", "segz"]
         mute_role = discord.utils.get(cc_guild.roles, id=712730274412232807)
 
+        if message.author is self.bot.user:
+            return
         if message.guild != cc_guild:
             return
-        else:
-            pass
         if not message.author.bot and message.channel == suggestions_channel:
             if message.content.startswith("//"):
                 await message.add_reaction("🚫")
@@ -257,6 +242,11 @@ class Log(Cog):
                 await another_message.add_reaction("👍")
                 await another_message.add_reaction("👎")
                 await another_message.add_reaction("🚫")
+        inv_str = "discord.gg/"
+        if re.findall(inv_str, message.content, re.IGNORECASE):
+            match = re.findall(inv_str, message.content, re.IGNORECASE)
+            if match is discord.Invite and discord.Invite.guild != cc_guild:
+                await message.delete()
         if message.author in staff_role.members:
             return
         else:
@@ -334,69 +324,6 @@ class Log(Cog):
             auto_reports = cc_guild.get_channel(786007666329124874)
             pag = Paginator(f"Word(s) **`{banned_word}`** found in:\n\n```{new_message_content}```", 1985)
             await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author, another_channel=log_channel, title="**AUTO-REPORTED MESSAGE**", autoreport=True, message=message)
-
-        self.message_count += 1
-        self.cooldown = datetime.datetime.utcnow()
-        time_difference = (datetime.datetime.utcnow() - self.cooldown).total_seconds()
-        if time_difference < 3 and self.message_count > 6:
-            await message.author.send(f"{message.author.mention} you've sent over 5 messages in under 5 seconds!")
-            log_embed = discord.Embed(
-                title="**Message Spam**",
-                description=f"*{message.author.mention} **`({message.author})`** has just sent over 5 messages in under 5 seconds in {message.channel.mention}!*",
-                timestamp=datetime.datetime.utcnow(),
-                color=0x0064ff
-            )
-            try:
-                log_embed.set_thumbnail(url=message.author.avatar_url)
-            except:
-                pass
-            await log_channel.send(embed=log_embed)
-            self.message_count = 0
-            self.muteable_offence += 1
-        elif self.message_count > 5 and not time_difference < 2.5:
-            self.message_count = 0
-
-        if self.muteable_offence >= 3:
-            self.kickable_offence += 1
-            log_embed_muted = discord.Embed(
-                title="**Member Auto-Muted**",
-                description=f"*{message.author.mention} **`({message.author})`** has just been auto-muted for spamming in {message.channel.mention}!*",
-                timestamp=datetime.datetime.utcnow(),
-                color=0x0064ff
-            )
-            try:
-                log_embed_muted.set_thumbnail(url=message.author.avatar_url)
-            except:
-                pass
-            await log_channel.send(embed=log_embed_muted)
-            await message.author.add_roles(mute_role)
-            self.muteable_offence = 0
-            await asyncio.sleep(1800)
-            await message.author.remove_roles(mute_role)
-        if self.kickable_offence >= 3:
-            kick_embed = discord.Embed(
-                title="**NOTIFICATION**",
-                description=f":bell: *You have been kicked in **{log_channel.guild}** for spamming*!",
-                color=0x0064ff,
-                timestamp=datetime.datetime.utcnow()
-            )
-            try:
-                await message.author.send(embed=kick_embed)
-            except:
-                pass
-            log_embed_kicked = discord.Embed(
-                title="**Member Kicked**",
-                description=f"*{message.author.mention} **`({message.author})`** has just been kicked for spamming in {message.channel.mention}!*",
-                timestamp=datetime.datetime.utcnow(),
-                color=0x0064ff
-            )
-            try:
-                log_embed_kicked.set_thumbnail(url=message.author.avatar_url)
-            except:
-                pass
-            await log_channel.send(embed=log_embed_kicked)
-            self.kickable_offence = 0
-            await message.author.kick(reason=f"Spamming!")
 
     @Cog.listener()
     async def on_message_delete(self, message):
