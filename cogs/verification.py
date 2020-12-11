@@ -32,11 +32,18 @@ class Verification(commands.Cog):
         choice_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
                        "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#", "/", "@", "!", "$", "%", "^", "&", "*", "+", "=", "_", "-"]
 
-        code = []
+        choice1 = choice_list[random.randint(0, 61)]
+        choice2 = choice_list[random.randint(0, 61)]
+        choice3 = choice_list[random.randint(0, 61)]
+        choice4 = choice_list[random.randint(0, 61)]
+        choice5 = choice_list[random.randint(0, 61)]
+        choice6 = choice_list[random.randint(0, 61)]
+        choice7 = choice_list[random.randint(0, 61)]
+        choice8 = choice_list[random.randint(0, 61)]
+        choice9 = choice_list[random.randint(0, 61)]
+        choice10 = choice_list[random.randint(0, 61)]
 
-        for i in range(random.randint(8, 11)):
-            choice = choice_list[random.randint(0, 74)]
-            code.append(choice)
+        code = (choice1 + choice2 + choice3 + choice4 + choice5 + choice6 + choice7 + choice8 + choice9 + choice10)
 
         width = 300
         height = 100
