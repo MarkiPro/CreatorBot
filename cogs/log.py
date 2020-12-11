@@ -11,7 +11,9 @@ from paginator import Paginator
 class Log(Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.message_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0), message_count=0)
+        self.cooldown = datetime.datetime.utcfromtimestamp(0)
+        self.message_count = 0
+        self.muteable_offence = 0
 
     @Cog.listener()
     async def on_guild_channel_update(self, before, after):
@@ -317,7 +319,32 @@ class Log(Cog):
             auto_reports = cc_guild.get_channel(786007666329124874)
             pag = Paginator(f"Word(s) **`{banned_word}`** found in:\n\n```{new_message_content}```", 1985)
             await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author, another_channel=log_channel, title="**AUTO-REPORTED MESSAGE**", autoreport=True, message=message)
-        await self.message_cool.time_it(user=message.author, message=message, channel=log_channel, mute_role=mute_role)
+
+        self.message_count += 1
+        self.cooldown = datetime.datetime.utcnow()
+
+        time_difference = (datetime.datetime.utcnow() - self.cooldown_start_time).total_seconds()
+        if time_difference < 5 < self.message_count:
+            await message.author.send(f"{message.author.mention} you've sent over 5 messages in under 5 seconds!")
+            log_embed = discord.Embed(
+                title="**Message Spam**",
+                description=f"*{message.author.mention} **`({message.author})`** has just sent over 5 messages in under 5 seconds in {message.channel.mention}!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            try:
+                log_embed.set_thumbnail(url=message.author.avatar_url)
+            except:
+                pass
+            await log_channel.send(embed=log_embed)
+            self.message_count = 0
+            self.muteable_offence += 1
+        elif self.message_count > 5 and not time_difference < 2.5:
+            self.message_count = 0
+
+        if self.muteable_offence >= 3:
+            await message.author.add_roles(mute_role)
+            self.muteable_offence = 0
 
     @Cog.listener()
     async def on_message_delete(self, message):
