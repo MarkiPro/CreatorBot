@@ -4,6 +4,7 @@ from discord.ext import tasks
 import discord
 from discord.ext.commands import Cog
 from paginator import Paginator
+import asyncio
 
 
 class Log(Cog):
@@ -12,6 +13,7 @@ class Log(Cog):
         self.cooldown = datetime.datetime.utcfromtimestamp(0)
         self.message_count = 0
         self.muteable_offence = 0
+        self.kickable_offence = 0
 
     @Cog.listener()
     async def on_guild_channel_update(self, before, after):
@@ -208,6 +210,11 @@ class Log(Cog):
         if self.muteable_offence > 0:
             self.muteable_offence = 0
 
+    @tasks.loop(seconds=3600)
+    async def check_kickable_offence(self):
+        if self.kickable_offence > 0:
+            self.kickable_offence = 0
+
     @Cog.listener()
     async def on_message(self, message):
         suggestions_channel = self.bot.get_channel(712655570737299567)
@@ -350,8 +357,46 @@ class Log(Cog):
             self.message_count = 0
 
         if self.muteable_offence >= 3:
+            self.kickable_offence += 1
+            log_embed_muted = discord.Embed(
+                title="**Member Auto-Muted**",
+                description=f"*{message.author.mention} **`({message.author})`** has just been auto-muted for spamming in {message.channel.mention}!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            try:
+                log_embed_muted.set_thumbnail(url=message.author.avatar_url)
+            except:
+                pass
+            await log_channel.send(embed=log_embed_muted)
             await message.author.add_roles(mute_role)
             self.muteable_offence = 0
+            await asyncio.sleep(1800)
+            await message.author.remove_roles(mute_role)
+        if self.kickable_offence >= 3:
+            kick_embed = discord.Embed(
+                title="**NOTIFICATION**",
+                description=f":bell: *You have been kicked in **{log_channel.guild}** for spamming*!",
+                color=0x0064ff,
+                timestamp=datetime.datetime.utcnow()
+            )
+            try:
+                await message.author.send(embed=kick_embed)
+            except:
+                pass
+            log_embed_kicked = discord.Embed(
+                title="**Member Kicked**",
+                description=f"*{message.author.mention} **`({message.author})`** has just been kicked for spamming in {message.channel.mention}!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            try:
+                log_embed_kicked.set_thumbnail(url=message.author.avatar_url)
+            except:
+                pass
+            await log_channel.send(embed=log_embed_kicked)
+            self.kickable_offence = 0
+            await message.author.kick(reason=f"Spamming!")
 
     @Cog.listener()
     async def on_message_delete(self, message):
