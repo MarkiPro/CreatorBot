@@ -50,13 +50,13 @@ class Verification(commands.Cog):
         font_name = 'fonts/himalaya.ttf'
         font = ImageFont.truetype(font=font_name, size=50)
         w, h = draw.textsize(captcha_str, font)
-        draw.text(((300 - w) / 2, (100 - h) / 2), captcha_str, fill=text_color, font=font)
+        draw.text(((300 - random.randint(5, 200)) / 2, (100 - random.randint(5, 50)) / 2), captcha_str, fill=text_color, font=font)
 
         for i in range(5, random.randrange(10, 25)):
-            draw.line(((300 - w) / 2, (100 - h) / 2), fill=random.choice(fill_color), width=random.randrange(8, 16))
+            draw.line((random.randrange(0, 300), random.randrange(0, 100)), fill=random.choice(fill_color), width=random.randrange(8, 16))
 
         for i in range(50, random.randrange(100, 300)):
-            draw.point(((300 - w) / 2, (100 - h) / 2), fill=color)
+            draw.point((random.randrange(0, 300), random.randrange(0, 100)), fill=color)
 
         img.save(file_name)
 
