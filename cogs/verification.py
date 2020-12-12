@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 import os
 import asyncio
 import datetime
-from cv2 import blur
+import cv2
 
 
 class Verification(commands.Cog):
@@ -54,7 +54,7 @@ class Verification(commands.Cog):
         font = ImageFont.truetype('Chiller.ttf', height)
         wm = Image.new('RGBA', (width, height))
         im = Image.new('RGBA', (width, height), blue_background)
-        im = blur(im, (int(height / random.randint(5, 10)), int(height / random.randint(5, 10))))
+        im = cv2.blur(im, (int(height / random.randint(5, 10)), int(height / random.randint(5, 10))))
         draw = ImageDraw.Draw(im)
         draw.line([(random.choice(range(width * height)), random.choice(range((height * 2) + 5))), (random.choice(range(width * height)), random.choice(range((height * 2) + 5)))], width=1, fill=(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
         w, h = draw.textsize(text, font)
