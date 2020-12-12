@@ -48,7 +48,7 @@ class Verification(commands.Cog):
             draw = ImageDraw.Draw(img)
 
             text_color = color
-            font_name = "Chiller.ttf"
+            font_name = "himalaya.ttf"
             font = ImageFont.truetype(font=font_name, size=18)
             draw.text((20, 20), captcha_str, fill=text_color, font=font)
 
