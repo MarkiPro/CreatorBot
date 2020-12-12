@@ -118,7 +118,7 @@ for file in os.listdir('cogs/'):
         print(f"LOADED {file}")
         bot.load_extension(f'cogs.{file[:-3]}')
 
-
+"""
 @bot.event
 async def on_command_error(ctx, error):
     blocked_list = [">:", ">;", ">0", ">1", ">2", ">3", ">4", ">5", ">6", ">7", ">8", ">9", ">/", ">|", ">_", ">?", "><", ">.", ">,", ">>", ">=", ">-", ">`", ">!", ">@", ">#", ">$", ">%", ">^", ">&", ">*", ">(", ">)"]
@@ -139,6 +139,6 @@ async def on_command_error(ctx, error):
     await asyncio.sleep(10)
 
     await error_msg.delete()
-
+"""
 
 bot.run(token)
