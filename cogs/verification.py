@@ -28,7 +28,7 @@ class Verification(commands.Cog):
         else:
             pass
 
-        getit = lambda: (random.randrange(5, 100), random.randrange(5, 300))
+        getit = lambda: (random.randrange(5, 85), random.randrange(5, 55))
 
         color = (190, 190, 190)
 
@@ -43,15 +43,20 @@ class Verification(commands.Cog):
         captcha_str = random_string()
         file_name = f"result{captcha_str}.png"
 
-        img = Image.new('RGB', (300, 100), color=(95, 104, 222))
+        img = Image.new('RGB', (90, 60), color=(95, 104, 222))
         draw = ImageDraw.Draw(img)
 
         text_color = color
         font_name = 'fonts/himalaya.ttf'
-        font = ImageFont.truetype(font_name, 100)
-        draw.text((100/2, 300/2), captcha_str, fill=text_color, font=font)
+        font = ImageFont.truetype(font=font_name, size=18)
+        draw.text((20, 20), captcha_str, fill=text_color, font=font)
 
+        for i in range(5, random.randrange(6, 10)):
+            draw.line((getit(), getit()), fill=random.choice(fill_color), width=random.randrange(1, 3))
 
+        for i in range(10, random.randrange(11, 20)):
+            draw.point((getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit()),
+                       fill=color)
 
         img.save(file_name)
 
