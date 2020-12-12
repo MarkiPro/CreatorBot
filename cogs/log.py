@@ -269,6 +269,7 @@ class Log(Cog):
             print(matched_invite)
             invite = await self.bot.fetch_invite(matched_invite)
             if invite.guild is not cc_guild and not message.author is self.bot.user:
+                await message.author.send("No advertising allowed!")
                 log_embed_punished = discord.Embed(
                     title="**Member Advertising**",
                     description=f"*{message.author.mention} **`({message.author})`** has just advertised another server in {message.channel.mention}!*",
@@ -566,6 +567,7 @@ class Log(Cog):
             print(matched_invite)
             invite = await self.bot.fetch_invite(matched_invite)
             if invite.guild is not cc_guild:
+                await message.author.send("No advertising allowed!")
                 log_embed_punished = discord.Embed(
                     title="**Member Advertising**",
                     description=f"*{message.author.mention} **`({message.author})`** has just advertised another server in {message.channel.mention}!*",
