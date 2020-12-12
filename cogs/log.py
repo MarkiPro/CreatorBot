@@ -236,7 +236,7 @@ class Log(Cog):
         staff_role = discord.utils.get(cc_guild.roles, id=756565123350659385)
         banned_words = ["porn", "fuck", "shit", "ass", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger",
                         "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "sex",
-                        "seggz", "segz"]
+                        "seggz", "segz", "cnut", ""]
         mute_role = discord.utils.get(cc_guild.roles, id=712730274412232807)
 
         if message.author == self.bot.user:
