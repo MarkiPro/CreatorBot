@@ -61,6 +61,8 @@ class Verification(commands.Cog):
 
             img.save(file_name)
 
+        gen_captcha_img()
+
         f = discord.File(file_name, filename=file_name)
 
         verif_embed = discord.Embed(
