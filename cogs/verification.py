@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 import os
 import asyncio
 import datetime
-# from cv2 import blur
+from cv2 import blur
 
 
 class Verification(commands.Cog):
