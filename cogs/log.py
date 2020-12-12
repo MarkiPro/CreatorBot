@@ -325,7 +325,6 @@ class Log(Cog):
             await log_channel.send(embed=log_embed_kicked)
             self.invite_kickable_offence = 0
             await message.author.kick(reason=f"Sending Invite links to other servers!")
-
         if message.author in staff_role.members:
             return
         else:
@@ -531,7 +530,9 @@ class Log(Cog):
                         "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "sex",
                         "seggz", "segz"]
         mute_role = discord.utils.get(cc_guild.roles, id=712730274412232807)
-
+        
+        if message.author is self.bot.user:
+            return
         if message.guild != cc_guild:
             return
         else:
