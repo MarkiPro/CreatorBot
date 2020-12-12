@@ -47,7 +47,7 @@ class Verification(commands.Cog):
         draw = ImageDraw.Draw(img)
 
         text_color = color
-        font = ImageFont.truetype(font='himalaya.ttf', size=18)
+        font = ImageFont.truetype(font='himalaya', size=18)
         draw.text((20, 20), captcha_str, fill=text_color, font=font)
 
         for i in range(5, random.randrange(6, 10)):
