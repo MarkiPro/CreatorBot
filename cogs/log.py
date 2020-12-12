@@ -14,6 +14,8 @@ class Log(Cog):
         self.message_count = 0
         self.muteable_offence = 0
         self.kickable_offence = 0
+        self.invite_muteable_offence = 0
+        self.invite_kickable_offence = 0
 
     @Cog.listener()
     async def on_guild_channel_update(self, before, after):
@@ -200,6 +202,25 @@ class Log(Cog):
         else:
             return
 
+    @tasks.loop(seconds=3)
+    async def clear_message_count(self):
+        if self.message_count > 0:
+            self.message_count = 0
+
+    @tasks.loop(seconds=600)
+    async def clear_muteable_offences(self):
+        if self.muteable_offence > 0:
+            self.muteable_offence = 0
+        if self.invite_muteable_offence > 0:
+            self.invite_muteable_offence = 0
+
+    @tasks.loop(seconds=2000)
+    async def clear_kickable_offences(self):
+        if self.kickable_offence > 0:
+            self.kickable_offence = 0
+        if self.invite_kickable_offence > 0:
+            self.invite_kickable_offence = 0
+
     @Cog.listener()
     async def on_message(self, message):
         suggestions_channel = self.bot.get_channel(712655570737299567)
@@ -242,14 +263,68 @@ class Log(Cog):
                 await another_message.add_reaction("👍")
                 await another_message.add_reaction("👎")
                 await another_message.add_reaction("🚫")
-        inv_str = "discord.gg/"
-        matched_inv = re.findall(inv_str, message.content, re.IGNORECASE)
+        matched_inv = re.findall("discord.gg/|discord.com/invite/", message.content, re.IGNORECASE)
         if matched_inv:
-            matched_invite = re.search("discord.gg/\w+", message.content).group()
+            matched_invite = re.search("discord.gg/\w+|discord.com/invite/\w+", message.content).group()
             print(matched_invite)
             invite = await self.bot.fetch_invite(matched_invite)
             if invite.guild is not cc_guild:
+                log_embed_punished = discord.Embed(
+                    title="**Member Advertising**",
+                    description=f"*{message.author.mention} **`({message.author})`** has just advertised another server in {message.channel.mention}!*",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+                try:
+                    log_embed_punished.set_thumbnail(url=message.author.avatar_url)
+                except:
+                    pass
+                await log_channel.send(embed=log_embed_punished)
+                self.invite_muteable_offence += 1
                 await message.delete()
+        if self.invite_muteable_offence >= 3:
+            self.invite_kickable_offence += 1
+            log_embed_muted = discord.Embed(
+                title="**Member Auto-Muted**",
+                description=f"*{message.author.mention} **`({message.author})`** has just been auto-muted for advertising other servers in {message.channel.mention}!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            try:
+                log_embed_muted.set_thumbnail(url=message.author.avatar_url)
+            except:
+                pass
+            await log_channel.send(embed=log_embed_muted)
+            await message.author.add_roles(mute_role)
+            self.invite_muteable_offence = 0
+            await asyncio.sleep(1800)
+            await message.author.remove_roles(mute_role)
+
+        if self.invite_kickable_offence >= 3:
+            kick_embed = discord.Embed(
+                title="**NOTIFICATION**",
+                description=f":bell: *You have been kicked in **{log_channel.guild}** for advertising other servers!*",
+                color=0x0064ff,
+                timestamp=datetime.datetime.utcnow()
+            )
+            try:
+                await message.author.send(embed=kick_embed)
+            except:
+                pass
+            log_embed_kicked = discord.Embed(
+                title="**Member Kicked**",
+                description=f"*{message.author.mention} **`({message.author})`** has just been kicked for advertising other servers in {message.channel.mention}!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            try:
+                log_embed_kicked.set_thumbnail(url=message.author.avatar_url)
+            except:
+                pass
+            await log_channel.send(embed=log_embed_kicked)
+            self.invite_kickable_offence = 0
+            await message.author.kick(reason=f"Sending Invite links to other servers!")
+
         if message.author in staff_role.members:
             return
         else:
@@ -326,7 +401,71 @@ class Log(Cog):
                 f"The word(s) in particular is/are **`{banned_word}`**, in the following message content:\n\n ```{new_message_content}```")
             auto_reports = cc_guild.get_channel(786007666329124874)
             pag = Paginator(f"Word(s) **`{banned_word}`** found in:\n\n```{new_message_content}```", 1985)
-            await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author, another_channel=log_channel, title="**AUTO-REPORTED MESSAGE**", autoreport=True, message=message)
+            await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author,
+                           another_channel=log_channel, title="**AUTO-REPORTED MESSAGE**", autoreport=True,
+                           message=message)
+        self.message_count += 1
+        self.cooldown = datetime.datetime.utcnow()
+        time_difference = (datetime.datetime.utcnow() - self.cooldown).total_seconds()
+        if time_difference < 3 and self.message_count > 6:
+            await message.author.send(f"{message.author.mention} you've sent over 6 messages in under 3 seconds!")
+            log_embed = discord.Embed(
+                title="**Message Spam**",
+                description=f"*{message.author.mention} **`({message.author})`** has just sent over 6 messages in under 3 seconds in {message.channel.mention}!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            try:
+                log_embed.set_thumbnail(url=message.author.avatar_url)
+            except:
+                pass
+            await log_channel.send(embed=log_embed)
+            self.message_count = 0
+            self.muteable_offence += 1
+        elif self.message_count > 5 and not time_difference < 2.5:
+            self.message_count = 0
+
+        if self.muteable_offence >= 3:
+            self.kickable_offence += 1
+            log_embed_muted = discord.Embed(
+                title="**Member Auto-Muted**",
+                description=f"*{message.author.mention} **`({message.author})`** has just been auto-muted for spamming in {message.channel.mention}!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            try:
+                log_embed_muted.set_thumbnail(url=message.author.avatar_url)
+            except:
+                pass
+            await log_channel.send(embed=log_embed_muted)
+            await message.author.add_roles(mute_role)
+            self.muteable_offence = 0
+            await asyncio.sleep(1800)
+            await message.author.remove_roles(mute_role)
+        if self.kickable_offence >= 3:
+            kick_embed = discord.Embed(
+                title="**NOTIFICATION**",
+                description=f":bell: *You have been kicked in **{log_channel.guild}** for spamming*!",
+                color=0x0064ff,
+                timestamp=datetime.datetime.utcnow()
+            )
+            try:
+                await message.author.send(embed=kick_embed)
+            except:
+                pass
+            log_embed_kicked = discord.Embed(
+                title="**Member Kicked**",
+                description=f"*{message.author.mention} **`({message.author})`** has just been kicked for spamming in {message.channel.mention}!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            try:
+                log_embed_kicked.set_thumbnail(url=message.author.avatar_url)
+            except:
+                pass
+            await log_channel.send(embed=log_embed_kicked)
+            self.kickable_offence = 0
+            await message.author.kick(reason=f"Spamming!")
 
     @Cog.listener()
     async def on_message_delete(self, message):
@@ -375,9 +514,22 @@ class Log(Cog):
 
     @Cog.listener()
     async def on_message_edit(self, before, after):
-        log_channel = self.bot.get_channel(771471454629003314)
-        message = before
+        messages_log_channel = self.bot.get_channel(771471454629003314)
+        message = after
+        banned_links = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://web.roblox.com",
+                        "https://brazzers.com"]
+        banned_racial_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah",
+                               "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger",
+                               "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar",
+                               "n1gguh", "n1ggress", "n1gette", "negro", "n1bba", "n1ba"]
+        banned_links_v2 = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://brazzers.com"]
+        log_channel = self.bot.get_channel(712761128895381676)
         cc_guild = self.bot.get_guild(id=611227128020598805)
+        staff_role = discord.utils.get(cc_guild.roles, id=756565123350659385)
+        banned_words = ["porn", "fuck", "shit", "ass", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger",
+                        "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "sex",
+                        "seggz", "segz"]
+        mute_role = discord.utils.get(cc_guild.roles, id=712730274412232807)
 
         if message.guild != cc_guild:
             return
@@ -407,7 +559,210 @@ class Log(Cog):
             log_embed.add_field(name="**Before**", value=f"```{before_new_message_content}```", inline=False)
             log_embed.add_field(name="**After**", value=f"```{after_new_message_content}```", inline=False)
             log_embed.set_thumbnail(url=before.author.avatar_url)
+            await messages_log_channel.send(embed=log_embed)
+        matched_inv = re.findall("discord.gg/|discord.com/invite/", message.content, re.IGNORECASE)
+        if matched_inv:
+            matched_invite = re.search("discord.gg/\w+|discord.com/invite/\w+", message.content).group()
+            print(matched_invite)
+            invite = await self.bot.fetch_invite(matched_invite)
+            if invite.guild is not cc_guild:
+                log_embed_punished = discord.Embed(
+                    title="**Member Advertising**",
+                    description=f"*{message.author.mention} **`({message.author})`** has just advertised another server in {message.channel.mention}!*",
+                    timestamp=datetime.datetime.utcnow(),
+                    color=0x0064ff
+                )
+                try:
+                    log_embed_punished.set_thumbnail(url=message.author.avatar_url)
+                except:
+                    pass
+                await log_channel.send(embed=log_embed_punished)
+                self.invite_muteable_offence += 1
+                await message.delete()
+        if self.invite_muteable_offence >= 3:
+            self.invite_kickable_offence += 1
+            log_embed_muted = discord.Embed(
+                title="**Member Auto-Muted**",
+                description=f"*{message.author.mention} **`({message.author})`** has just been auto-muted for advertising other servers in {message.channel.mention}!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            try:
+                log_embed_muted.set_thumbnail(url=message.author.avatar_url)
+            except:
+                pass
+            await log_channel.send(embed=log_embed_muted)
+            await message.author.add_roles(mute_role)
+            self.invite_muteable_offence = 0
+            await asyncio.sleep(1800)
+            await message.author.remove_roles(mute_role)
+
+        if self.invite_kickable_offence >= 3:
+            kick_embed = discord.Embed(
+                title="**NOTIFICATION**",
+                description=f":bell: *You have been kicked in **{log_channel.guild}** for advertising other servers!*",
+                color=0x0064ff,
+                timestamp=datetime.datetime.utcnow()
+            )
+            try:
+                await message.author.send(embed=kick_embed)
+            except:
+                pass
+            log_embed_kicked = discord.Embed(
+                title="**Member Kicked**",
+                description=f"*{message.author.mention} **`({message.author})`** has just been kicked for advertising other servers in {message.channel.mention}!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            try:
+                log_embed_kicked.set_thumbnail(url=message.author.avatar_url)
+            except:
+                pass
+            await log_channel.send(embed=log_embed_kicked)
+            self.invite_kickable_offence = 0
+            await message.author.kick(reason=f"Sending Invite links to other servers!")
+
+        if message.author in staff_role.members:
+            return
+        else:
+            pass
+        if any(re.findall("|".join(banned_racial_words), message.content, re.IGNORECASE)) or any(
+                re.findall("|".join(banned_links), message.content, re.IGNORECASE)):
+            await message.delete()
+            ban_embed = discord.Embed(
+                title="**NOTIFICATION**",
+                description=f":bell: *You have been banned in **{message.guild}** because you've sent something inappropriate, or turned out to be underage!*",
+                color=0x0064ff,
+                timestamp=datetime.datetime.utcnow()
+            )
+
+            ban_embed.add_field(name="**In case you would like to appeal your ban, go here:**",
+                                value=f"https://forms.gle/zs9vRAz5Fw1SFgvR6", inline=False)
+
+            try:
+                await message.author.send(embed=ban_embed)
+            except:
+                pass
+            try:
+                await message.author.ban(reason="Sent something inappropriate, or turned out to be underage!")
+            except:
+                return
+            if any(re.findall("|".join(banned_racial_words), message.content, re.IGNORECASE)):
+                ban_embed_reason = discord.Embed(
+                    title="**Member Banned**",
+                    description=f"***{message.author}** has been banned for sending a racial slur/banned word!*",
+                    color=0x0064ff,
+                    timestamp=datetime.datetime.utcnow()
+                )
+                try:
+                    ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
+                except:
+                    pass
+                await log_channel.send(embed=ban_embed_reason)
+            if re.findall("https://web.roblox.com", message.content, re.IGNORECASE):
+                ban_embed_reason = discord.Embed(
+                    title="**Member Banned**",
+                    description=f"***{message.author}** has been banned for sending an underage version of a roblox link!*",
+                    color=0x0064ff,
+                    timestamp=datetime.datetime.utcnow()
+                )
+                try:
+                    ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
+                except:
+                    pass
+                await log_channel.send(embed=ban_embed_reason)
+            if any(re.findall("|".join(banned_links_v2), message.content, re.IGNORECASE)):
+                ban_embed_reason = discord.Embed(
+                    title="**Member Banned**",
+                    description=f"***{message.author}** has been banned for sending an inappropriate link!*",
+                    color=0x0064ff,
+                    timestamp=datetime.datetime.utcnow()
+                )
+                try:
+                    ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
+                except:
+                    pass
+                await log_channel.send(embed=ban_embed_reason)
+        if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
+            banned_word = re.findall("|".join(banned_words), message.content, re.IGNORECASE)
+            matches = re.findall("`|```", message.content)
+            if len(matches) >= 0:
+                pre_message_content = message.content.replace("```", "")
+                message_content = pre_message_content.replace("`", "")
+            else:
+                pass
+            new_message_content = message_content or message.content
+            await message.author.send(
+                "Greetings! I've detected a banned word in your message, right now, it is up to our wonderful staff members to decide whether or not this is well-deserved of a punishment.")
+            await message.author.send(
+                f"The word(s) in particular is/are **`{banned_word}`**, in the following message content:\n\n ```{new_message_content}```")
+            auto_reports = cc_guild.get_channel(786007666329124874)
+            pag = Paginator(f"Word(s) **`{banned_word}`** found in:\n\n```{new_message_content}```", 1985)
+            await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author,
+                           another_channel=log_channel, title="**AUTO-REPORTED MESSAGE**", autoreport=True,
+                           message=message)
+        self.message_count += 1
+        self.cooldown = datetime.datetime.utcnow()
+        time_difference = (datetime.datetime.utcnow() - self.cooldown).total_seconds()
+        if time_difference < 3 and self.message_count > 6:
+            await message.author.send(f"{message.author.mention} you've sent over 6 messages in under 3 seconds!")
+            log_embed = discord.Embed(
+                title="**Message Spam**",
+                description=f"*{message.author.mention} **`({message.author})`** has just sent over 6 messages in under 3 seconds in {message.channel.mention}!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            try:
+                log_embed.set_thumbnail(url=message.author.avatar_url)
+            except:
+                pass
             await log_channel.send(embed=log_embed)
+            self.message_count = 0
+            self.muteable_offence += 1
+        elif self.message_count > 5 and not time_difference < 2.5:
+            self.message_count = 0
+
+        if self.muteable_offence >= 3:
+            self.kickable_offence += 1
+            log_embed_muted = discord.Embed(
+                title="**Member Auto-Muted**",
+                description=f"*{message.author.mention} **`({message.author})`** has just been auto-muted for spamming in {message.channel.mention}!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            try:
+                log_embed_muted.set_thumbnail(url=message.author.avatar_url)
+            except:
+                pass
+            await log_channel.send(embed=log_embed_muted)
+            await message.author.add_roles(mute_role)
+            self.muteable_offence = 0
+            await asyncio.sleep(1800)
+            await message.author.remove_roles(mute_role)
+        if self.kickable_offence >= 3:
+            kick_embed = discord.Embed(
+                title="**NOTIFICATION**",
+                description=f":bell: *You have been kicked in **{log_channel.guild}** for spamming*!",
+                color=0x0064ff,
+                timestamp=datetime.datetime.utcnow()
+            )
+            try:
+                await message.author.send(embed=kick_embed)
+            except:
+                pass
+            log_embed_kicked = discord.Embed(
+                title="**Member Kicked**",
+                description=f"*{message.author.mention} **`({message.author})`** has just been kicked for spamming in {message.channel.mention}!*",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            try:
+                log_embed_kicked.set_thumbnail(url=message.author.avatar_url)
+            except:
+                pass
+            await log_channel.send(embed=log_embed_kicked)
+            self.kickable_offence = 0
+            await message.author.kick(reason=f"Spamming!")
 
     @Cog.listener()
     async def on_member_update(self, before, after):
