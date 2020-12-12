@@ -1,11 +1,11 @@
 import discord
 from discord.ext import commands
 import random
-from PIL import Image, ImageDraw, ImageFont, ImageEnhance
+from PIL import Image, ImageDraw, ImageFont
 import os
 import asyncio
 import datetime
-import cv2
+import string
 
 
 class Verification(commands.Cog):
@@ -23,51 +23,45 @@ class Verification(commands.Cog):
         else:
             pass
         if ctx.channel != verification_channel:
-            return await ctx.send("Please go to verify in <@#745331129535561758>, and if you need assistance, you should first read over <@#713020247543906368>!")
+            return await ctx.send(
+                "Please go to verify in <@#745331129535561758>, and if you need assistance, you should first read over <@#713020247543906368>!")
         else:
             pass
-        choice_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
-                       "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#", "/", "@", "!", "$", "%", "^", "&", "*", "+", "=", "_", "-"]
 
-        choice1 = choice_list[random.randint(0, 61)]
-        choice2 = choice_list[random.randint(0, 61)]
-        choice3 = choice_list[random.randint(0, 61)]
-        choice4 = choice_list[random.randint(0, 61)]
-        choice5 = choice_list[random.randint(0, 61)]
-        choice6 = choice_list[random.randint(0, 61)]
-        choice7 = choice_list[random.randint(0, 61)]
-        choice8 = choice_list[random.randint(0, 61)]
-        choice9 = choice_list[random.randint(0, 61)]
-        choice10 = choice_list[random.randint(0, 61)]
+        getit = lambda: (random.randrange(5, 85), random.randrange(5, 55))
 
-        code = (choice1 + choice2 + choice3 + choice4 + choice5 + choice6 + choice7 + choice8 + choice9 + choice10)
+        colors = ["black", "red", "blue", "green", (64, 107, 76), (0, 87, 128), (0, 3, 82)]
 
-        width = 300
-        height = 100
-        opacity = 1
-        text = str(code)
-        filename = f"result{text}.png"
-        blue_background = (95, 104, 222)
-        blue_text = (1, 5, 48)
-        # transparent = (0, 0, 0, 0)
+        fill_color = [(64, 107, 76), (0, 87, 128), (0, 3, 82), (191, 0, 255), (72, 189, 0), (189, 107, 0), (189, 41, 0)]
 
-        font = ImageFont.truetype('Chiller.ttf', height)
-        wm = Image.new('RGBA', (width, height))
-        im = Image.new('RGBA', (width, height), blue_background)
-        im = cv2.blur(im, (int(height / random.randint(5, 10)), int(height / random.randint(5, 10))))
-        draw = ImageDraw.Draw(im)
-        draw.line([(random.choice(range(width * height)), random.choice(range((height * 2) + 5))), (random.choice(range(width * height)), random.choice(range((height * 2) + 5)))], width=1, fill=(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
-        w, h = draw.textsize(text, font)
-        draw.text((5, 10), text, font=font, fill=(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+        def random_string():
+            N = 5
+            s = string.ascii_uppercase + string.ascii_lowercase + string.digits
+            random_string = ''.join(random.choices(s, k=N))
+            return random_string
 
-        en = ImageEnhance.Brightness(wm)
-        # en.putalpha(mask)
-        mask = en.enhance(1 - opacity)
-        im.paste(wm, (25, 25), mask)
+        captcha_str = random_string()
+        file_name = f"{captcha_str}.png"
 
-        im.save(filename)
+        def gen_captcha_img():
+            img = Image.new('RGB', (90, 60), color=(95, 104, 222))
+            draw = ImageDraw.Draw(img)
 
-        f = discord.File(filename, filename=filename)
+            text_colors = random.choice(colors)
+            font_name = "Chiller.ttf"
+            font = ImageFont.truetype(font_name, 18)
+            draw.text((20, 20), captcha_str, fill=text_colors, font=font)
+
+            for i in range(5, random.randrange(6, 10)):
+                draw.line((getit(), getit()), fill=random.choice(fill_color), width=random.randrange(1, 3))
+
+            for i in range(10, random.randrange(11, 20)):
+                draw.point((getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit()),
+                           fill=random.choice(colors))
+
+            img.save(file_name)
+
+        f = discord.File(file_name, filename=file_name)
 
         verif_embed = discord.Embed(
             title="**Welcome to Content Creators**",
@@ -76,7 +70,7 @@ class Verification(commands.Cog):
             color=0x0064ff
         )
 
-        verif_embed.set_image(url=f"attachment://{filename}")
+        verif_embed.set_image(url=f"attachment://{file_name}")
 
         await ctx.author.send(embed=verif_embed, file=f)
 
@@ -88,45 +82,49 @@ class Verification(commands.Cog):
                     return False
             else:
                 return False
+
         try:
             answer_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
             answer = answer_message.content
-            if answer == code:
-                await ctx.author.send("You did the captcha correctly! Good job! You now have the verified role and full access to the server.")
+            if answer == captcha_str:
+                await ctx.author.send(
+                    "You did the captcha correctly! Good job! You now have the verified role and full access to the server.")
                 log_embed2 = discord.Embed(
                     title="**Verification Success**",
                     description=f"Verification for {ctx.author.mention}({ctx.author})",
                     color=0x00fa00,
                     timestamp=datetime.datetime.utcnow()
                 )
-                log_embed2.add_field(name="Looking for", value=f"{code}", inline=True)
+                log_embed2.add_field(name="Looking for", value=f"{captcha_str}", inline=True)
                 log_embed2.add_field(name="Given", value=f"{answer}", inline=True)
                 await ctx.author.add_roles(verified_role)
                 await log_channel.send(embed=log_embed2)
-            elif answer != code:
-                await ctx.author.send("You failed the captcha, please call the `>verify` command again in <#745331129535561758> and try again.")
+            elif answer != captcha_str:
+                await ctx.author.send(
+                    "You failed the captcha, please call the `>verify` command again in <#745331129535561758> and try again.")
                 log_embed3 = discord.Embed(
                     title="**Verification Failed**",
                     description=f"Verification for {ctx.author.mention}({ctx.author})",
                     color=0xff0000,
                     timestamp=datetime.datetime.utcnow()
                 )
-                log_embed3.add_field(name="Looking for", value=f"{code}", inline=True)
+                log_embed3.add_field(name="Looking for", value=f"{captcha_str}", inline=True)
                 log_embed3.add_field(name="Given", value=f"{answer}", inline=True)
                 log_embed3.add_field(name="Reason", value=f"Sent the wrong code!", inline=True)
                 await log_channel.send(embed=log_embed3)
         except asyncio.TimeoutError:
-            await ctx.author.send("You ran out of time, please call the `>verify` command again in <#745331129535561758> and try again.")
+            await ctx.author.send(
+                "You ran out of time, please call the `>verify` command again in <#745331129535561758> and try again.")
             log_embed1 = discord.Embed(
                 title="**Verification Failed**",
                 description=f"Verification for {ctx.author.mention}({ctx.author})",
                 color=0xff0000,
                 timestamp=datetime.datetime.utcnow()
             )
-            log_embed1.add_field(name="Looking for", value=f"{code}", inline=True)
+            log_embed1.add_field(name="Looking for", value=f"{captcha_str}", inline=True)
             log_embed1.add_field(name="Reason", value=f"Ran out of time!", inline=True)
             await log_channel.send(embed=log_embed1)
-        os.remove(filename)
+        os.remove(file_name)
 
 
 def setup(bot):
