@@ -49,7 +49,7 @@ class Verification(commands.Cog):
 
             text_color = color
             font_name = "Chiller.ttf"
-            font = ImageFont.truetype(font_name, 18)
+            font = ImageFont.truetype(font=font_name, size=18)
             draw.text((20, 20), captcha_str, fill=text_color, font=font)
 
             for i in range(5, random.randrange(6, 10)):
