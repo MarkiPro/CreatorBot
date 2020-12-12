@@ -51,12 +51,7 @@ class Verification(commands.Cog):
         font = ImageFont.truetype(font_name, 100)
         draw.text((100/2, 300/2), captcha_str, fill=text_color, font=font)
 
-        for i in range(5, random.randrange(25, 50)):
-            draw.line((getit(), getit(), getit(), getit(), getit(), getit()), fill=random.choice(fill_color), width=random.randrange(50, 100))
 
-        for i in range(10, random.randrange(50, 100)):
-            draw.point((getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit()),
-                       fill=color)
 
         img.save(file_name)
 
