@@ -268,7 +268,7 @@ class Log(Cog):
             matched_invite = re.search("discord.gg/\w+|discord.com/invite/\w+", message.content).group()
             print(matched_invite)
             invite = await self.bot.fetch_invite(matched_invite)
-            if invite.guild is not cc_guild:
+            if invite.guild is not cc_guild and not message.author is self.bot.user:
                 log_embed_punished = discord.Embed(
                     title="**Member Advertising**",
                     description=f"*{message.author.mention} **`({message.author})`** has just advertised another server in {message.channel.mention}!*",
@@ -282,7 +282,7 @@ class Log(Cog):
                 await log_channel.send(embed=log_embed_punished)
                 self.invite_muteable_offence += 1
                 await message.delete()
-        if self.invite_muteable_offence >= 3:
+        if self.invite_muteable_offence >= 3 and not message.author is self.bot.user:
             self.invite_kickable_offence += 1
             log_embed_muted = discord.Embed(
                 title="**Member Auto-Muted**",
@@ -300,7 +300,7 @@ class Log(Cog):
             await asyncio.sleep(1800)
             await message.author.remove_roles(mute_role)
 
-        if self.invite_kickable_offence >= 3:
+        if self.invite_kickable_offence >= 3 and not message.author is self.bot.user:
             kick_embed = discord.Embed(
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been kicked in **{log_channel.guild}** for advertising other servers!*",
@@ -422,10 +422,10 @@ class Log(Cog):
             await log_channel.send(embed=log_embed)
             self.message_count = 0
             self.muteable_offence += 1
-        elif self.message_count > 5 and not time_difference < 2.5:
+        elif self.message_count > 5 and not time_difference < 2.5 and not message.author is self.bot.user:
             self.message_count = 0
 
-        if self.muteable_offence >= 3:
+        if self.muteable_offence >= 3 and not message.author is self.bot.user:
             self.kickable_offence += 1
             log_embed_muted = discord.Embed(
                 title="**Member Auto-Muted**",
@@ -442,7 +442,7 @@ class Log(Cog):
             self.muteable_offence = 0
             await asyncio.sleep(1800)
             await message.author.remove_roles(mute_role)
-        if self.kickable_offence >= 3:
+        if self.kickable_offence >= 3 and not message.author is self.bot.user:
             kick_embed = discord.Embed(
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been kicked in **{log_channel.guild}** for spamming*!",
@@ -579,7 +579,7 @@ class Log(Cog):
                 await log_channel.send(embed=log_embed_punished)
                 self.invite_muteable_offence += 1
                 await message.delete()
-        if self.invite_muteable_offence >= 3:
+        if self.invite_muteable_offence >= 3 and not message.author is self.bot.user:
             self.invite_kickable_offence += 1
             log_embed_muted = discord.Embed(
                 title="**Member Auto-Muted**",
@@ -597,7 +597,7 @@ class Log(Cog):
             await asyncio.sleep(1800)
             await message.author.remove_roles(mute_role)
 
-        if self.invite_kickable_offence >= 3:
+        if self.invite_kickable_offence >= 3 and not message.author is self.bot.user:
             kick_embed = discord.Embed(
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been kicked in **{log_channel.guild}** for advertising other servers!*",
@@ -722,7 +722,7 @@ class Log(Cog):
         elif self.message_count > 5 and not time_difference < 2.5:
             self.message_count = 0
 
-        if self.muteable_offence >= 3:
+        if self.muteable_offence >= 3 and not message.author is self.bot.user:
             self.kickable_offence += 1
             log_embed_muted = discord.Embed(
                 title="**Member Auto-Muted**",
@@ -739,7 +739,7 @@ class Log(Cog):
             self.muteable_offence = 0
             await asyncio.sleep(1800)
             await message.author.remove_roles(mute_role)
-        if self.kickable_offence >= 3:
+        if self.kickable_offence >= 3 and not message.author is self.bot.user:
             kick_embed = discord.Embed(
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been kicked in **{log_channel.guild}** for spamming*!",
