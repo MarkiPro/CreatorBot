@@ -41,7 +41,7 @@ class Verification(commands.Cog):
             return random_string
 
         captcha_str = random_string()
-        file_name = f"result{captcha_str}.png"
+        file_name = f"{ctx.message.id}.png"
 
         img = Image.new('RGB', (300, 100), color=(95, 104, 222))
         draw = ImageDraw.Draw(img)
@@ -64,7 +64,7 @@ class Verification(commands.Cog):
 
         verif_embed = discord.Embed(
             title="**Welcome to Content Creators**",
-            description="Please send the captcha code here, you have 16 minutes to do so.\n\nHello! You are required to complete a captcha before entering the server.\n\n*NOTE: This is **Case Sensitive***.\n\n**Why?**\nThis is to protect the server against targeted attacks using automated user accounts.\n\n**Your Captcha:**",
+            description="Please send the captcha code here, you have 5 minutes to do so.\n\nHello! You are required to complete a captcha before entering the server.\n\n*NOTE: This is **Case Sensitive***.\n\n**Why?**\nThis is to protect the server against targeted attacks using automated user accounts.\n\n**Your Captcha:**",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
@@ -83,7 +83,7 @@ class Verification(commands.Cog):
                 return False
 
         try:
-            answer_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+            answer_message = await self.bot.wait_for('message', check=check_dm, timeout=300)
             answer = answer_message.content
             if answer == captcha_str:
                 await ctx.author.send(
