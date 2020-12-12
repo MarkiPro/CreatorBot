@@ -35,7 +35,7 @@ class Verification(commands.Cog):
         fill_color = [(64, 107, 76), (0, 87, 128), (0, 3, 82), (191, 0, 255), (72, 189, 0), (189, 107, 0), (189, 41, 0)]
 
         def random_string():
-            N = 5
+            N = 10
             s = string.ascii_uppercase + string.ascii_lowercase + string.digits
             random_string = ''.join(random.choices(s, k=N))
             return random_string
@@ -43,12 +43,12 @@ class Verification(commands.Cog):
         captcha_str = random_string()
         file_name = f"result{captcha_str}.png"
 
-        img = Image.new('RGB', (90, 60), color=(95, 104, 222))
+        img = Image.new('RGB', (100, 300), color=(95, 104, 222))
         draw = ImageDraw.Draw(img)
 
         text_color = color
         font_name = 'fonts/himalaya.ttf'
-        font = ImageFont.truetype(font=font_name, size=18)
+        font = ImageFont.truetype(font=font_name, size=20)
         draw.text((20, 20), captcha_str, fill=text_color, font=font)
 
         for i in range(5, random.randrange(6, 10)):
