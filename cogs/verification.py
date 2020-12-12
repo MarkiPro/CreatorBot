@@ -43,7 +43,7 @@ class Verification(commands.Cog):
         captcha_str = random_string()
         file_name = f"result{captcha_str}.png"
 
-        img = Image.new('RGB', (100, 300), color=(95, 104, 222))
+        img = Image.new('RGB', (300, 100), color=(95, 104, 222))
         draw = ImageDraw.Draw(img)
 
         text_color = color
