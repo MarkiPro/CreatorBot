@@ -53,9 +53,9 @@ class Verification(commands.Cog):
         draw.text(((300 - w)/2, (100 - h)/2), captcha_str, fill=text_color, font=font)
 
         for i in range(5, random.randrange(6, 10)):
-            draw.line((getit(), getit()), fill=random.choice(fill_color), width=random.randrange(1, 3))
+            draw.line((getit(), getit()), fill=random.choice(fill_color), width=random.randrange(25, 50))
 
-        for i in range(10, random.randrange(25, 50)):
+        for i in range(50, random.randrange(100, 300)):
             draw.point((getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit()),
                        fill=color)
 
