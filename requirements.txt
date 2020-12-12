@@ -8,3 +8,4 @@ numpy~=1.19.3
 Augmentor~=0.2.8
 Paginator~=0.5.1
 matplotlib~=3.3.3
+opencv-python~=4.4.0.46
