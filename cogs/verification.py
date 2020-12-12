@@ -41,26 +41,23 @@ class Verification(commands.Cog):
             return random_string
 
         captcha_str = random_string()
-        file_name = f"{captcha_str}.png"
+        file_name = f"result{captcha_str}.png"
 
-        def gen_captcha_img():
-            img = Image.new('RGB', (90, 60), color=(95, 104, 222))
-            draw = ImageDraw.Draw(img)
+        img = Image.new('RGB', (90, 60), color=(95, 104, 222))
+        draw = ImageDraw.Draw(img)
 
-            text_color = color
-            font = ImageFont.truetype(font='himalaya.ttf', size=18)
-            draw.text((20, 20), captcha_str, fill=text_color, font=font)
+        text_color = color
+        font = ImageFont.truetype(font='himalaya.ttf', size=18)
+        draw.text((20, 20), captcha_str, fill=text_color, font=font)
 
-            for i in range(5, random.randrange(6, 10)):
-                draw.line((getit(), getit()), fill=random.choice(fill_color), width=random.randrange(1, 3))
+        for i in range(5, random.randrange(6, 10)):
+            draw.line((getit(), getit()), fill=random.choice(fill_color), width=random.randrange(1, 3))
 
-            for i in range(10, random.randrange(11, 20)):
-                draw.point((getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit()),
-                           fill=color)
+        for i in range(10, random.randrange(11, 20)):
+            draw.point((getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit()),
+                       fill=color)
 
-            img.save(file_name)
-
-        gen_captcha_img()
+        img.save(file_name)
 
         f = discord.File(file_name, filename=file_name)
 
