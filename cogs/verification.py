@@ -5,7 +5,6 @@ from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 import os
 import asyncio
 import datetime
-import matplotlib.font_manager as fm
 import numpy as np
 import cv2
 
