@@ -28,7 +28,7 @@ class Verification(commands.Cog):
         else:
             pass
 
-        getit = lambda: (random.randrange(5, 85), random.randrange(5, 55))
+        getit = lambda: (random.randrange(5, 100), random.randrange(5, 300))
 
         color = (190, 190, 190)
 
@@ -51,10 +51,10 @@ class Verification(commands.Cog):
         font = ImageFont.truetype(font_name, 100)
         draw.text((200, 200), captcha_str, fill=text_color, font=font)
 
-        for i in range(5, random.randrange(100, 300)):
-            draw.line((getit(), getit(), getit(), getit(), getit(), getit()), fill=random.choice(fill_color), width=random.randrange(1, 3))
+        for i in range(5, random.randrange(25, 50)):
+            draw.line((getit(), getit(), getit(), getit(), getit(), getit()), fill=random.choice(fill_color), width=random.randrange(50, 100))
 
-        for i in range(10, random.randrange(11, 20)):
+        for i in range(10, random.randrange(50, 100)):
             draw.point((getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit(), getit()),
                        fill=color)
 
