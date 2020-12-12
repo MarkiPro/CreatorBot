@@ -49,7 +49,7 @@ class Verification(commands.Cog):
         text_color = color
         font_name = 'fonts/himalaya.ttf'
         font = ImageFont.truetype(font_name, 100)
-        draw.text((200, 200), captcha_str, fill=text_color, font=font)
+        draw.text((100/2, 300/2), captcha_str, fill=text_color, font=font)
 
         for i in range(5, random.randrange(25, 50)):
             draw.line((getit(), getit(), getit(), getit(), getit(), getit()), fill=random.choice(fill_color), width=random.randrange(50, 100))
