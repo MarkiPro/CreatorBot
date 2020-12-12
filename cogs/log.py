@@ -239,7 +239,7 @@ class Log(Cog):
                         "seggz", "segz"]
         mute_role = discord.utils.get(cc_guild.roles, id=712730274412232807)
 
-        if message.author is self.bot.user:
+        if message.author == self.bot.user:
             return
         if message.guild != cc_guild:
             return
@@ -530,8 +530,8 @@ class Log(Cog):
                         "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "sex",
                         "seggz", "segz"]
         mute_role = discord.utils.get(cc_guild.roles, id=712730274412232807)
-        
-        if message.author is self.bot.user:
+
+        if message.author == self.bot.user:
             return
         if message.guild != cc_guild:
             return
