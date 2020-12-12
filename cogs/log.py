@@ -247,7 +247,7 @@ class Log(Cog):
         if matched_inv:
             matched_invite = re.search(inv_str, message.content).group()
             print(matched_invite)
-            invite = self.bot.fetch_invite(matched_invite)
+            invite = await self.bot.fetch_invite(matched_invite)
             if invite.guild is not cc_guild:
                 await message.delete()
         if message.author in staff_role.members:
