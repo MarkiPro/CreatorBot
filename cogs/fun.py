@@ -28,7 +28,7 @@ class Fun(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.get('https://devforum.roblox.com/u/markipr0.json') as j:
                 res_j = await j.json()
-                trust_level = res_j['trust_level']
+                trust_level = res_j['user_badges']
                 print(trust_level)
 
     @commands.command()
