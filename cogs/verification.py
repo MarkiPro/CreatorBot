@@ -105,7 +105,7 @@ class Verification(commands.Cog):
                 await log_channel.send(embed=log_embed2)
             elif answer != captcha_str:
                 await ctx.author.send(
-                    "You failed the captcha, please call the `>verify` command again in <#745331129535561758> and try again.")
+                    "You failed the captcha, please run the `>verify` command again in <#745331129535561758> and try again.")
                 log_embed3 = discord.Embed(
                     title="**Verification Failed**",
                     description=f"Verification for {ctx.author.mention}({ctx.author})",
@@ -118,7 +118,7 @@ class Verification(commands.Cog):
                 await log_channel.send(embed=log_embed3)
         except asyncio.TimeoutError:
             await ctx.author.send(
-                "You ran out of time, please call the `>verify` command again in <#745331129535561758> and try again.")
+                "You ran out of time, please run the `>verify` command again in <#745331129535561758> and try again.")
             log_embed1 = discord.Embed(
                 title="**Verification Failed**",
                 description=f"Verification for {ctx.author.mention}({ctx.author})",
