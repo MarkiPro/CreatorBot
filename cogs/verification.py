@@ -58,7 +58,7 @@ class Verification(commands.Cog):
         for i in range(5, random.randrange(10, 20)):
             start = (0, (100 - random.randrange(0, 101)))
             end = (300, (100 - random.randrange(0, 101)))
-            draw.line((), fill=shadow_color, width=2)
+            draw.line((start, end), fill=shadow_color, width=2)
 
         for i in range(50, random.randrange(100, 300)):
             draw.point((random.randrange(0, 300), random.randrange(0, 100)), fill=color)
