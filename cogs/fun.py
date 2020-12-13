@@ -31,7 +31,7 @@ class Fun(commands.Cog):
                 try:
                     trust_level = res_j['user_badges']['badges']['users']['user']
                 except:
-                    trust_level = res_j['user']
+                    trust_level = res_j['user']['trust_level']
                 print(trust_level)
 
     @commands.command()
