@@ -133,6 +133,9 @@ class Verification(commands.Cog):
     @commands.command()
     async def rblx_verify(self, ctx):
         command_caller = ctx.author
+        verified_role = self.bot.get_role(741735258411499560)
+        log_channel = self.bot.get_channel(745240151063789578)
+
         call_embed = discord.Embed(
             title="**Welcome to Content Creators**",
             description="Please respond in under 5 minutes!\n\nHello, please respond with your Roblox Username!\n\n*NOTE: This is **Case Sensitive!***",
@@ -156,8 +159,6 @@ class Verification(commands.Cog):
         except asyncio.TimeoutError:
             await ctx.author.send("You ran out of time, please run the `>rblx_verify` command again in <#741733794536751114> and try again.")
         if robloxpy.DoesNameExist(roblox_name):
-
-            user = robloxpy.GetUserInfo
             N = 30
             s = string.ascii_uppercase + string.ascii_lowercase + string.digits
             code = ''.join(random.choices(s, k=N))
@@ -178,15 +179,43 @@ class Verification(commands.Cog):
                 pass
             else:
                 return await ctx.send("Prompt Cancelled. Reason: User hadn't responded appropriately.")
+            roblox_id = robloxpy.NameToID(roblox_name)
         try:
             async with aiohttp.ClientSession() as session:
-                async with session.get('https://users.roblox.com/v1/users/1239087921/') as user:
-                    user_desc = await user.json()
-                    print(user_desc)
-                    print(user_desc['description'])
-
+                async with session.get(f'https://users.roblox.com/v1/users/{roblox_id}/') as user:
+                    user_json = await user.json()
+                    user_desc = user_json['description']
+                    if user_desc == f"{code}":
+                        await command_caller.add_roles(verified_role)
+                    else:
+                        return await ctx.send("Description either unidentified or set incorrect!")
         except:
-            return await ctx.send("Could not find the description!")
+            return await command_caller.send("Could not identify the description!")
+        await command_caller.send("You've been successfully verified!")
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f'https://devforum.roblox.com/u/{str(roblox_name).lower()}.json') as _user_json:
+                    user_json = await _user_json.json()
+                    user = user_json['user']
+                    user_trust_level = user['trust_level']
+                    role_per_level = ["DevForum Member", "DevForum Regular", "DevForum Editor", "DevForum Leader"]
+                    for i in len(role_per_level):
+                        contained_role_name = role_per_level[i]
+                        contained_role = discord.utils.get(ctx.guild.roles, name=contained_role_name)
+                        if command_caller in contained_role.members:
+                            await command_caller.remove_roles(contained_role)
+                    role_name = role_per_level[user_trust_level]
+                    role = discord.utils.get(ctx.guild.roles, name=role_name)
+                    await command_caller.add_roles(role)
+        except:
+            pass
+        log_embed = discord.Embed(
+            title="**Roblox Verified**",
+            description=f"{command_caller.mention} just verified their Roblox account under [{roblox_name}](https://www.roblox.com/users/{roblox_id}/profile)",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
+        )
+        await log_channel.send(embed=log_embed)
 
 
 def setup(bot):
