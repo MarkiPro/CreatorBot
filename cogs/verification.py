@@ -35,7 +35,7 @@ class Verification(commands.Cog):
         line_color = (50, 50, 50)
 
         def random_string():
-            N = 10
+            N = 8
             s = string.ascii_uppercase + string.ascii_lowercase + string.digits
             random_string = ''.join(random.choices(s, k=N))
             return random_string
