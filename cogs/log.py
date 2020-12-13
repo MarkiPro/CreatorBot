@@ -516,8 +516,7 @@ class Log(Cog):
     async def on_message_edit(self, before, after):
         messages_log_channel = self.bot.get_channel(771471454629003314)
         message = after
-        banned_links = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://web.roblox.com",
-                        "https://brazzers.com"]
+        banned_links = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://web.roblox.com", "https://brazzers.com"]
         banned_racial_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah",
                                "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger",
                                "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar",
