@@ -29,7 +29,7 @@ class Fun(commands.Cog):
             async with session.get('https://devforum.roblox.com/u/markipr0.json') as j:
                 res_j = await j.json()
                 try:
-                    trust_level = res_j['user_badges']['badges']
+                    trust_level = res_j['user_badges']['badges']['users']['user']
                 except:
                     trust_level = res_j['badges']
                 print(trust_level)
