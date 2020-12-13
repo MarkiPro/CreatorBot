@@ -47,7 +47,7 @@ class Verification(commands.Cog):
         draw = ImageDraw.Draw(img)
 
         text_color = color
-        font_name = 'fonts/himalaya.ttf'
+        font_name = 'fonts/langar.ttf'
         font = ImageFont.truetype(font=font_name, size=50)
         w, h = draw.textsize(captcha_str, font)
         draw.text(((300 - w) / 2, (100 - h) / 2), captcha_str, fill=text_color, font=font)
