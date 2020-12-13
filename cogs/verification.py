@@ -159,7 +159,7 @@ class Verification(commands.Cog):
         except asyncio.TimeoutError:
             await ctx.author.send("You ran out of time, please run the `>rblx_verify` command again in <#741733794536751114> and try again.")
         if robloxpy.DoesNameExist(roblox_name):
-            N = 30
+            N = 10
             s = string.ascii_uppercase + string.ascii_lowercase + string.digits
             code = ''.join(random.choices(s, k=N))
             code_embed = discord.Embed(
