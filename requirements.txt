@@ -8,3 +8,4 @@ numpy~=1.19.4
 Augmentor~=0.2.8
 Paginator~=0.5.1
 opencv-python~=4.4.0.46
+robloxpy~=0.1.7
