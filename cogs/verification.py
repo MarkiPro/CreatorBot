@@ -32,7 +32,7 @@ class Verification(commands.Cog):
 
         color = (200, 200, 200)
 
-        line_color = (100, 100, 100)
+        line_color = (50, 50, 50)
 
         def random_string():
             N = 10
@@ -53,7 +53,7 @@ class Verification(commands.Cog):
         draw.text(((300 - w) / 2, (100 - h) / 2), captcha_str, fill=text_color, font=font)
 
         for i in range(5, random.randrange(10, 20)):
-            draw.line((getit(), getit()), fill=line_color, width=random.randrange(2, 5))
+            draw.line((getit(), getit()), fill=line_color, width=2)
 
         for i in range(50, random.randrange(100, 300)):
             draw.point((random.randrange(0, 300), random.randrange(0, 100)), fill=color)
