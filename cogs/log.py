@@ -236,7 +236,7 @@ class Log(Cog):
         staff_role = discord.utils.get(cc_guild.roles, id=756565123350659385)
         banned_words = ["porn", "fuck", "shit", "ass", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger",
                         "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "sex",
-                        "seggz", "segz", "cnut", ""]
+                        "seggz", "segz", "cnut", "fcuk", "penis", "fück", "cünt", "fúck", "cúnt", "fùck", "cùnt", "fŭck", "cŭnt", "fûck", "cûnt", "fǔck", "cǔnt", "fůck", "cůnt", "fǘck", "cǘnt", "fǜck", "cǜnt", "fǚck", "cǚnt", "fǖck", "cǖnt", "fűck", "cűnt", "fũck", "cũnt", "fṹck", "cṹnt", "fųck", "cųnt", "fų́ck", "cų́nt", "fų̃ck", "cų̃nt", "fūck", "cūnt", "fṻck", "cṻnt", "fū̀ck", "cū̀nt", "fū́ck", "cū́nt", "fū̃ck", "cū̃nt", "fủck", "củnt", "fȕck", "cȕnt", "fȗck", "cȗnt", "fưck", "cưnt", "fứck", "cứnt", "fừck", "cừnt", "fữck", "cữnt", "fửck", "cửnt", "fựck", "cựnt", "fụck", "cụnt", "fṳck", "cṳnt", "fṷck", "cṷnt", "fṵck", "cṵnt", "fʉck", "cʉnt", "fᶙck", "cᶙnt", "fꭒck", "cꭒnt"]
         mute_role = discord.utils.get(cc_guild.roles, id=712730274412232807)
 
         if message.author == self.bot.user:
@@ -528,7 +528,7 @@ class Log(Cog):
         staff_role = discord.utils.get(cc_guild.roles, id=756565123350659385)
         banned_words = ["porn", "fuck", "shit", "ass", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger",
                         "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "sex",
-                        "seggz", "segz"]
+                        "seggz", "segz", "cnut", "fcuk", "penis", "fück", "cünt", "fúck", "cúnt", "fùck", "cùnt", "fŭck", "cŭnt", "fûck", "cûnt", "fǔck", "cǔnt", "fůck", "cůnt", "fǘck", "cǘnt", "fǜck", "cǜnt", "fǚck", "cǚnt", "fǖck", "cǖnt", "fűck", "cűnt", "fũck", "cũnt", "fṹck", "cṹnt", "fųck", "cųnt", "fų́ck", "cų́nt", "fų̃ck", "cų̃nt", "fūck", "cūnt", "fṻck", "cṻnt", "fū̀ck", "cū̀nt", "fū́ck", "cū́nt", "fū̃ck", "cū̃nt", "fủck", "củnt", "fȕck", "cȕnt", "fȗck", "cȗnt", "fưck", "cưnt", "fứck", "cứnt", "fừck", "cừnt", "fữck", "cữnt", "fửck", "cửnt", "fựck", "cựnt", "fụck", "cụnt", "fṳck", "cṳnt", "fṷck", "cṷnt", "fṵck", "cṵnt", "fʉck", "cʉnt", "fᶙck", "cᶙnt", "fꭒck", "cꭒnt"]
         mute_role = discord.utils.get(cc_guild.roles, id=712730274412232807)
 
         if message.author == self.bot.user:
