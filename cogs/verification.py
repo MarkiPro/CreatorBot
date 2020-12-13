@@ -133,7 +133,7 @@ class Verification(commands.Cog):
     @commands.command()
     async def rblx_verify(self, ctx):
         command_caller = ctx.author
-        verified_role = self.bot.get_role(741735258411499560)
+        verified_role = discord.utils.get(ctx.guild.roles, id=741735258411499560)
         log_channel = self.bot.get_channel(745240151063789578)
 
         call_embed = discord.Embed(
