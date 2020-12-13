@@ -198,9 +198,8 @@ class Verification(commands.Cog):
                     user = user_json['user']
                     user_trust_level = user['trust_level']
                     role_per_level = ["DevForum Member", "DevForum Regular", "DevForum Editor", "DevForum Leader"]
-                    for i, v in role_per_level:
-                        contained_role_name = role_per_level[i]
-                        contained_role = discord.utils.get(ctx.guild.roles, name=contained_role_name)
+                    for trust_level_role in role_per_level:
+                        contained_role = discord.utils.get(ctx.guild.roles, name=trust_level_role)
                         if command_caller in contained_role.members:
                             await command_caller.remove_roles(contained_role)
                     role_name = role_per_level[user_trust_level]
@@ -208,6 +207,7 @@ class Verification(commands.Cog):
                     await command_caller.add_roles(role)
         except:
             pass
+        await command_caller.send("You've been successfully verified!")
         log_embed = discord.Embed(
             title="**Roblox Verified**",
             description=f"{command_caller.mention} just verified their Roblox account under [{roblox_name}](https://www.roblox.com/users/{roblox_id}/profile)",
