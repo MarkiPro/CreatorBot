@@ -197,7 +197,7 @@ class Verification(commands.Cog):
                 user = user_json['user']
                 user_trust_level = user['trust_level']
                 role_per_level = ["DevForum Member", "DevForum Regular", "DevForum Editor", "DevForum Leader"]
-                for i in len(role_per_level):
+                for i in range(role_per_level):
                     contained_role_name = role_per_level[i]
                     contained_role = discord.utils.get(ctx.guild.roles, name=contained_role_name)
                     if command_caller in contained_role.members:
