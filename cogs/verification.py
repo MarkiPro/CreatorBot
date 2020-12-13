@@ -31,6 +31,7 @@ class Verification(commands.Cog):
         getit = lambda: (random.randrange(5, 295), random.randrange(5, 95))
 
         color = (200, 200, 200)
+        shadow_color = (0, 0, 0)
 
         line_color = (50, 50, 50)
 
@@ -47,10 +48,11 @@ class Verification(commands.Cog):
         draw = ImageDraw.Draw(img)
 
         text_color = color
-        choices = ["langar.ttf", "Cookie-Regular.ttf", "NerkoOne-Regular.ttf", "Pacifico-Regular.ttf", "PermanentMarker-Regular.ttf", "SpecialElite-Regular.ttf", "Yellowtail-Regular.ttf"]
-        font_name = f'fonts/{random.choice(choices)}'
+        font = "langar.ttf"
+        font_name = f'fonts/{font}'
         font = ImageFont.truetype(font=font_name, size=50)
         w, h = draw.textsize(captcha_str, font)
+        draw.text(((300 - w) / 2 + 10, (100 - h) / 2 + 10), captcha_str, fill=shadow_color, font=font)
         draw.text(((300 - w) / 2, (100 - h) / 2), captcha_str, fill=text_color, font=font)
 
         for i in range(5, random.randrange(10, 20)):
