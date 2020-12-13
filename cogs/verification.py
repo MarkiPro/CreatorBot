@@ -164,7 +164,7 @@ class Verification(commands.Cog):
             code = ''.join(random.choices(s, k=N))
             code_embed = discord.Embed(
                 title="**Welcome to Content Creators**",
-                description=f"Please respond in under 5 minutes!\n\nHello, please copy the given code, and paste it in your Roblox Bio/Description, and once you're done, respond with `done`!\n\n*NOTE: This is **Case Sensitive!***\n\n\n**Your Code:***\n**{code}**",
+                description=f"Please respond in under 5 minutes!\n\nHello, please copy the given code, and paste it in your Roblox Bio/Description, and once you're done, respond with `done`!\n\n*NOTE: This is **Case Sensitive!***\n\n\n**Your Code:**\n**{code}**",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
