@@ -25,14 +25,22 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def print(self, ctx):
-        async with aiohttp.ClientSession() as session:
-            async with session.get('https://devforum.roblox.com/u/markipr0.json') as j:
-                res_j = await j.json()
-                try:
-                    trust_level = res_j['user_badges']['badges']['users']['user']
-                except:
-                    trust_level = res_j['user']['trust_level']
-                print(trust_level)
+        try:
+            #async with aiohttp.ClientSession() as session:
+                #async with session.get('https://devforum.roblox.com/u/markipr0.json') as j:
+                    #res_j = await j.json()
+                    #trust_level = res_j['user']['trust_level']
+                    #if trust_level >= 0:
+                    #    if trust_level == 1:
+            async with aiohttp.ClientSession() as session:
+                async with session.get('https://users.roblox.com/v1/users/1239087921/') as user:
+                    user_desc = await user.json()
+                    print(user_desc)
+                    print(user_desc['description'])
+
+        except:
+            return await ctx.send("Could not find you on the devforum!")
+
 
     @commands.command()
     @commands.cooldown(1, 5, commands.BucketType.member)
