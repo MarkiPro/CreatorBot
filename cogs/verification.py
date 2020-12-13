@@ -6,6 +6,8 @@ import os
 import asyncio
 import datetime
 import string
+import robloxpy
+import aiohttp
 
 
 class Verification(commands.Cog):
@@ -32,8 +34,6 @@ class Verification(commands.Cog):
 
         color = (200, 200, 200)
         shadow_color = (0, 0, 0)
-
-        line_color = (50, 50, 50)
 
         def random_string():
             N = 8
@@ -129,6 +129,64 @@ class Verification(commands.Cog):
             log_embed1.add_field(name="Reason", value=f"Ran out of time!", inline=True)
             await log_channel.send(embed=log_embed1)
         os.remove(file_name)
+
+    @commands.command()
+    async def rblx_verify(self, ctx):
+        command_caller = ctx.author
+        call_embed = discord.Embed(
+            title="**Welcome to Content Creators**",
+            description="Please respond in under 5 minutes!\n\nHello, please respond with your Roblox Username!\n\n*NOTE: This is **Case Sensitive!***",
+            timestamp=datetime.datetime.utcnow(),
+            color=0x0064ff
+        )
+        await command_caller.send(embed=call_embed)
+
+        def check_dm(m):
+            if isinstance(m.channel, discord.DMChannel):
+                if m.author == ctx.author:
+                    return True
+                else:
+                    return False
+            else:
+                return False
+
+        try:
+            roblox_name_message = await self.bot.wait_for('message', check=check_dm, timeout=300)
+            roblox_name = roblox_name_message.content
+        except asyncio.TimeoutError:
+            await ctx.author.send("You ran out of time, please run the `>rblx_verify` command again in <#741733794536751114> and try again.")
+        if robloxpy.DoesNameExist(roblox_name):
+
+            user = robloxpy.GetUserInfo
+            N = 30
+            s = string.ascii_uppercase + string.ascii_lowercase + string.digits
+            code = ''.join(random.choices(s, k=N))
+            code_embed = discord.Embed(
+                title="**Welcome to Content Creators**",
+                description=f"Please respond in under 5 minutes!\n\nHello, please copy the given code, and paste it in your Roblox Bio/Description, and once you're done, respond with `done`!\n\n*NOTE: This is **Case Sensitive!***\n\n\n**Your Code:***\n**{code}**",
+                timestamp=datetime.datetime.utcnow(),
+                color=0x0064ff
+            )
+            await command_caller.send(embed=code_embed)
+            try:
+                roblox_desc_message = await self.bot.wait_for('message', check=check_dm, timeout=300)
+                roblox_desc = roblox_desc_message.content
+            except asyncio.TimeoutError:
+                await ctx.author.send(
+                    "You ran out of time, please run the `>rblx_verify` command again in <#741733794536751114> and try again.")
+            if str(roblox_desc).lower() == "done" or str(roblox_desc).lower() == "yes" or str(roblox_desc).lower() == "ok":
+                pass
+            else:
+                return await ctx.send("Prompt Cancelled. Reason: User hadn't responded appropriately.")
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get('https://users.roblox.com/v1/users/1239087921/') as user:
+                    user_desc = await user.json()
+                    print(user_desc)
+                    print(user_desc['description'])
+
+        except:
+            return await ctx.send("Could not find the description!")
 
 
 def setup(bot):
