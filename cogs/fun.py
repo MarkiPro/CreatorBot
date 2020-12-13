@@ -24,6 +24,14 @@ class Fun(commands.Cog):
             return await ctx.send("There was an issue with loading the image.")
 
     @commands.command()
+    async def print(self, ctx):
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://devforum.roblox.com/u/markipr0.json') as j:
+                res_j = await j.json()
+                trust_level = res_j['trust_level']
+                print(trust_level)
+
+    @commands.command()
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def cat(self, ctx):
         await ctx.send("Generating a cat image for you!")
