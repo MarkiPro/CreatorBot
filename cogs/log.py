@@ -403,7 +403,7 @@ class Log(Cog):
             pag = Paginator(f"Word(s) **`{banned_word}`** found in:\n\n```{new_message_content}```", 1985)
             await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author,
                            another_channel=log_channel, title="**AUTO-REPORTED MESSAGE**", autoreport=True,
-                           message=message)
+                           messagee=message)
         self.message_count += 1
         self.cooldown = datetime.datetime.utcnow()
         time_difference = (datetime.datetime.utcnow() - self.cooldown).total_seconds()
@@ -703,7 +703,7 @@ class Log(Cog):
             pag = Paginator(f"Word(s) **`{banned_word}`** found in:\n\n```{new_message_content}```", 1985)
             await pag.send(bot=self.bot, channel=auto_reports, member=message.author, end_channel=message.author,
                            another_channel=log_channel, title="**AUTO-REPORTED MESSAGE**", autoreport=True,
-                           message=message)
+                           messagee=message)
         self.message_count += 1
         self.cooldown = datetime.datetime.utcnow()
         time_difference = (datetime.datetime.utcnow() - self.cooldown).total_seconds()
