@@ -2852,8 +2852,8 @@ class Misc(commands.Cog):
     async def role(self, ctx, *, role_name=None):
         roles = {"former staff": 741728478721736755, "roblox verified": 741735258411499560,
                  "verified": 695328817157373992, "devforum member": 742333164352962581,
-                 "devforum regular": 742333167133786124, "devforum top contributor": 742333168576888943,
-                 "devforum community sage": 742333169423876106, "first server booster": 712685506424471612,
+                 "devforum regular": 742333167133786124, "devforum editor": 742333168576888943,
+                 "devforum leader": 742333169423876106, "first server booster": 712685506424471612,
                  "server booster": 762172204628181023, "animator": 734662028353994752,
                  "music composer": 735497558855516161, "Artist": 734662196025360416,
                  "Clothing Designer": 734177621876801637, "UI Designer": 733274530524561430,
@@ -2868,8 +2868,8 @@ class Misc(commands.Cog):
                  "python programmer": 732377712286761001}
         chat_color_roles = {"former staff": 743013368511594569, "roblox verified": 743013370588037191,
                             "verified": 732388199107657828, "devforum member": 743013366515236915,
-                            "devforum regular": 743013366880272474, "devforum top contributor": 743013367840768072,
-                            "devforum community sage": 743013368134107166, "server booster": 734527854871707762,
+                            "devforum regular": 743013366880272474, "devforum editor": 743013367840768072,
+                            "devforum leader": 743013368134107166, "server booster": 734527854871707762,
                             "animator": 734664243038912552, "music composer": 735497751978311681,
                             "Artist": 734664303327838230, "Clothing Designer": 734527130565738516,
                             "UI Designer": 734150445764837466, "Translator": 734527217350082672,
@@ -2959,9 +2959,9 @@ class Misc(commands.Cog):
                     await ctx.send(
                         "You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
                     return
-            elif re.findall("devforum top contributor", ctx.message.content, re.IGNORECASE):
-                role = discord.utils.get(ctx.guild.roles, id=roles["devforum top contributor"])
-                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum top contributor"])
+            elif re.findall("devforum editor", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["devforum editor"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum editor"])
 
                 if role in ctx.author.roles:
                     for i in chat_color_roles:
@@ -2975,9 +2975,9 @@ class Misc(commands.Cog):
                     await ctx.send(
                         "You do not have the required role, please contact a staff member to assist you, or apply for the desired role using the `>apply` command.")
                     return
-            elif re.findall("devforum community sage", ctx.message.content, re.IGNORECASE):
-                role = discord.utils.get(ctx.guild.roles, id=roles["devforum community sage"])
-                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum community sage"])
+            elif re.findall("devforum leader", ctx.message.content, re.IGNORECASE):
+                role = discord.utils.get(ctx.guild.roles, id=roles["devforum leader"])
+                chat_color_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles["devforum leader"])
 
                 if role in ctx.author.roles:
                     for i in chat_color_roles:
