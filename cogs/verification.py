@@ -162,13 +162,15 @@ class Verification(commands.Cog):
         if robloxpy.DoesNameExist(roblox_name):
             amount = 10
             code = ' '.join(random.choices(choices, k=amount))
+            f = discord.File("Steps.png", filename="Steps.png")
             code_embed = discord.Embed(
                 title="**Welcome to Content Creators**",
-                description=f"Please respond in under 5 minutes!\n\nHello, please copy the given code, and paste it in your Roblox Bio/Description, and once you're done, respond with `done`!\n\n*NOTE: This is **Case Sensitive!***\n\n\n**Your Code:**\n**{code}**",
+                description=f"Please respond in under 5 minutes!\n\nHello, please copy the given code, and paste it in your Roblox Bio/Description, and once you're done, respond with `done`!\n\n*NOTE: This is **Case Sensitive!***\n\n\n**Your Code:**\n\n```{code}```\n\n**Here's how you do it:**",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
-            await command_caller.send(embed=code_embed)
+            code_embed.set_image(url="attachment://Steps.png")
+            await command_caller.send(embed=code_embed, file=f)
             try:
                 roblox_desc_message = await self.bot.wait_for('message', check=check_dm, timeout=300)
                 roblox_desc = roblox_desc_message.content
