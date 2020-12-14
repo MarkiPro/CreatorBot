@@ -218,60 +218,6 @@ class Verification(commands.Cog):
         )
         await log_channel.send(embed=log_embed)
 
-    @commands.command()
-    async def rblx_whois(self, ctx, roblox_user):
-        rblx_user = robloxpy.GetUserName(roblox_user) or robloxpy.GetUserID(roblox_user)
-        rblx_user_name = robloxpy.GetUserName(rblx_user) or rblx_user
-        rblx_user_id = robloxpy.GetUserID(rblx_user) or rblx_user
-
-        the_embed = discord.Embed(
-            title=f"**Who is {str(rblx_user_name).upper()}**",
-            color=0x0064ff
-        )
-
-        async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds={rblx_user_id}&size=420x420&format=Png&isCircular=false') as _avatar_json:
-                avatar_json = await _avatar_json.json()
-                avatar_url = avatar_json['data']['imageUrl']
-
-        async with aiohttp.ClientSession() as session2:
-            async with session2.get(f'https://users.roblox.com/v1/users/{rblx_user_id}/') as _user_json:
-                user_json = await _user_json.json()
-                description = user_json['description']
-                isBanned = user_json['isBanned']
-                created = user_json['created']
-
-        async with aiohttp.ClientSession() as session3:
-            async with session3.get(f'https://users.roblox.com/v1/users/{rblx_user_id}/status') as _status_json:
-                status_json = await _status_json.json()
-                status = status_json['status']
-
-        async with aiohttp.ClientSession() as session4:
-            async with session4.get(f'https://groups.roblox.com/v2/users/{rblx_user_id}/groups/roles') as _groups_json:
-                groups_json = await _groups_json.json()
-                amount_of_groups = groups_json['data'].length
-
-        async with aiohttp.ClientSession() as session5:
-            async with session5.get(f'https://friends.roblox.com/v1/users/{rblx_user_id}/friends') as _friends_json:
-                friends_json = await _friends_json.json()
-                friends = []
-
-                for friend in friends_json['data']:
-                    friends.append(friend['name'])
-
-                friend_count = len(friends)
-
-        the_embed.set_thumbnail(get_avatar())
-        the_embed.add_field(name="**Account Created**", value=f"{created}", inline=True)
-        the_embed.add_field(name="**User Banned**", value=f"{isBanned}", inline=True)
-        the_embed.add_field(name="**User Friends**", value=f"{friend_count}", inline=True)
-        the_embed.add_field(name="**User Groups**", value=f"{amount_of_groups}", inline=True)
-        the_embed.add_field(name="**Account Description**", value=f"{description}", inline=False)
-        the_embed.description = f"{status}"
-        the_embed.timestamp = datetime.datetime.utcnow()
-
-        await ctx.send(embed=the_embed)
-
 
 def setup(bot):
     bot.add_cog(Verification(bot))
