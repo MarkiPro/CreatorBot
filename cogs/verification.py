@@ -135,6 +135,7 @@ class Verification(commands.Cog):
         command_caller = ctx.author
         verified_role = discord.utils.get(ctx.guild.roles, id=741735258411499560)
         log_channel = self.bot.get_channel(745240151063789578)
+        choices = ["flowers", "roses", "blueberries", "fruits", "lantern", "green", "blue", "violets", "lollipops", "good", "great", "perfect", "amazing", "sky", "tulips", "unicorn", "bagel", "potato", "tomato", "tomatoes", "bagels", "creative"]
 
         call_embed = discord.Embed(
             title="**Welcome to Content Creators**",
@@ -159,9 +160,8 @@ class Verification(commands.Cog):
         except asyncio.TimeoutError:
             await ctx.author.send("You ran out of time, please run the `>rblx_verify` command again in <#741733794536751114> and try again.")
         if robloxpy.DoesNameExist(roblox_name):
-            N = 10
-            s = string.ascii_uppercase + string.ascii_lowercase + string.digits
-            code = ''.join(random.choices(s, k=N))
+            amount = 10
+            code = ' '.join(random.choices(choices, k=amount))
             code_embed = discord.Embed(
                 title="**Welcome to Content Creators**",
                 description=f"Please respond in under 5 minutes!\n\nHello, please copy the given code, and paste it in your Roblox Bio/Description, and once you're done, respond with `done`!\n\n*NOTE: This is **Case Sensitive!***\n\n\n**Your Code:**\n**{code}**",
