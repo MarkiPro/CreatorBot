@@ -229,58 +229,45 @@ class Verification(commands.Cog):
             color=0x0064ff
         )
 
-        def get_avatar():
-            async with aiohttp.ClientSession() as session:
-                async with session.get(f'https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds={rblx_user_id}&size=420x420&format=Png&isCircular=false') as _avatar_json:
-                    avatar_json = await _avatar_json.json()
-                    avatar_url = avatar_json['data']['imageUrl']
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f'https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds={rblx_user_id}&size=420x420&format=Png&isCircular=false') as _avatar_json:
+                avatar_json = await _avatar_json.json()
+                avatar_url = avatar_json['data']['imageUrl']
 
-                return avatar_url
+        async with aiohttp.ClientSession() as session2:
+            async with session2.get(f'https://users.roblox.com/v1/users/{rblx_user_id}/') as _user_json:
+                user_json = await _user_json.json()
+                description = user_json['description']
+                isBanned = user_json['isBanned']
+                created = user_json['created']
 
-        def get_info():
-            async with aiohttp.ClientSession() as session2:
-                async with session2.get(f'https://users.roblox.com/v1/users/{rblx_user_id}/') as _user_json:
-                    user_json = await _user_json.json()
-                    description = user_json['description']
-                    isBanned = user_json['isBanned']
-                    created = user_json['created']
+        async with aiohttp.ClientSession() as session3:
+            async with session3.get(f'https://users.roblox.com/v1/users/{rblx_user_id}/status') as _status_json:
+                status_json = await _status_json.json()
+                status = status_json['status']
 
-        def get_status():
-            async with aiohttp.ClientSession() as session3:
-                async with session3.get(f'https://users.roblox.com/v1/users/{rblx_user_id}/status') as _status_json:
-                    status_json = await _status_json.json()
-                    status = status_json['status']
+        async with aiohttp.ClientSession() as session4:
+            async with session4.get(f'https://groups.roblox.com/v2/users/{rblx_user_id}/groups/roles') as _groups_json:
+                groups_json = await _groups_json.json()
+                amount_of_groups = groups_json['data'].length
 
-                return status
+        async with aiohttp.ClientSession() as session5:
+            async with session5.get(f'https://friends.roblox.com/v1/users/{rblx_user_id}/friends') as _friends_json:
+                friends_json = await _friends_json.json()
+                friends = []
 
-        def get_groups():
-            async with aiohttp.ClientSession() as session4:
-                async with session4.get(f'https://groups.roblox.com/v2/users/{rblx_user_id}/groups/roles') as _groups_json:
-                    groups_json = await _groups_json.json()
-                    amount_of_groups = groups_json['data'].length
+                for friend in friends_json['data']:
+                    friends.append(friend['name'])
 
-                return amount_of_groups
-
-        def get_friends():
-            async with aiohttp.ClientSession() as session5:
-                async with session5.get(f'https://friends.roblox.com/v1/users/{rblx_user_id}/friends') as _friends_json:
-                    friends_json = await _friends_json.json()
-                    friends = []
-
-                    for friend in friends_json['data']:
-                        friends.append(friend['name'])
-
-                    friend_count = len(friends)
-
-                return friend_count
+                friend_count = len(friends)
 
         the_embed.set_thumbnail(get_avatar())
-        the_embed.add_field(name="**Account Created**", value=f"e", inline=True)
-        the_embed.add_field(name="**User Banned**", value=f"e", inline=True)
-        the_embed.add_field(name="**User Friends**", value=f"{get_friends()}", inline=True)
-        the_embed.add_field(name="**User Groups**", value=f"{get_groups()}", inline=True)
-        the_embed.add_field(name="**Account Description**", value=f"e", inline=False)
-        the_embed.description = f"{get_status()}"
+        the_embed.add_field(name="**Account Created**", value=f"{created}", inline=True)
+        the_embed.add_field(name="**User Banned**", value=f"{isBanned}", inline=True)
+        the_embed.add_field(name="**User Friends**", value=f"{friend_count}", inline=True)
+        the_embed.add_field(name="**User Groups**", value=f"{amount_of_groups}", inline=True)
+        the_embed.add_field(name="**Account Description**", value=f"{description}", inline=False)
+        the_embed.description = f"{status}"
         the_embed.timestamp = datetime.datetime.utcnow()
 
         await ctx.send(embed=the_embed)
