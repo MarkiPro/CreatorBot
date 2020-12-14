@@ -241,20 +241,31 @@ class Verification(commands.Cog):
                 isBanned = user_json['isBanned']
                 created = user_json['created']
 
-        async with aiohttp.ClientSession() as session2:
-            async with session2.get(f'https://users.roblox.com/v1/users/{rblx_user_id}/status') as _status_json:
+        async with aiohttp.ClientSession() as session3:
+            async with session3.get(f'https://users.roblox.com/v1/users/{rblx_user_id}/status') as _status_json:
                 status_json = await _status_json.json()
                 status = status_json['status']
 
-        async with aiohttp.ClientSession() as session2:
-            async with session2.get(f'https://groups.roblox.com/v2/users/{rblx_user_id}/groups/roles') as _groups_json:
+        async with aiohttp.ClientSession() as session4:
+            async with session4.get(f'https://groups.roblox.com/v2/users/{rblx_user_id}/groups/roles') as _groups_json:
                 groups_json = await _groups_json.json()
                 amount_of_groups = groups_json['data'].length
 
+        async with aiohttp.ClientSession() as session5:
+            async with session5.get(f'https://friends.roblox.com/v1/users/{rblx_user_id}/friends') as _friends_json:
+                friends_json = await _friends_json.json()
+                friends = []
+
+                for friend in friends_json['data']:
+                    friends.append(friend['name'])
+
+                friend_count = len(friends)
+
         embed.set_thumbnail(avatar_url)
         embed.add_field(name="**Account Created**", value=f"{created}", inline=True)
-        embed.add_field(name="**Account Banned**", value=f"{isBanned}", inline=True)
-        embed.add_field(name="**Account Groups**", value=f"{amount_of_groups}", inline=True)
+        embed.add_field(name="**User Banned**", value=f"{isBanned}", inline=True)
+        embed.add_field(name="**User Friends**", value=f"{friend_count}", inline=True)
+        embed.add_field(name="**User Groups**", value=f"{amount_of_groups}", inline=True)
         embed.add_field(name="**Account Description**", value=f"{description}", inline=False)
         embed.description = f"{status}"
         embed.timestamp = datetime.datetime.utcnow()
