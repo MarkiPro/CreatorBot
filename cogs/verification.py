@@ -191,26 +191,25 @@ class Verification(commands.Cog):
                         await command_caller.add_roles(verified_role)
                     else:
                         return await command_caller.send("Description either unidentified or set incorrect!")
+                try:
+                    async with session.get(f'https://devforum.roblox.com/u/{str(roblox_name).lower()}.json') as _user_json:
+                        user_json = await _user_json.json()
+                        user = user_json['user']
+                        user_trust_level = user['trust_level'] - 1
+                        role_per_level = ["DevForum Member", "DevForum Regular", "DevForum Editor", "DevForum Leader"]
+                        for trust_level_role in role_per_level:
+                            contained_role = discord.utils.get(ctx.guild.roles, name=trust_level_role)
+                            if command_caller in contained_role.members:
+                                await command_caller.remove_roles(contained_role)
+                        role_name = role_per_level[user_trust_level]
+                        default_role = discord.utils.get(ctx.guild.roles, id=745347527209123871)
+                        role = discord.utils.get(ctx.guild.roles, name=role_name)
+                        await command_caller.add_roles(default_role)
+                        await command_caller.add_roles(role)
+                except:
+                    pass
         except:
-            return await command_caller.send("Could not identify the description!")
-        try:
-            async with aiohttp.ClientSession() as session:
-                async with session.get(f'https://devforum.roblox.com/u/{str(roblox_name).lower()}.json') as _user_json:
-                    user_json = await _user_json.json()
-                    user = user_json['user']
-                    user_trust_level = user['trust_level'] - 1
-                    role_per_level = ["DevForum Member", "DevForum Regular", "DevForum Editor", "DevForum Leader"]
-                    for trust_level_role in role_per_level:
-                        contained_role = discord.utils.get(ctx.guild.roles, name=trust_level_role)
-                        if command_caller in contained_role.members:
-                            await command_caller.remove_roles(contained_role)
-                    role_name = role_per_level[user_trust_level]
-                    default_role = discord.utils.get(ctx.guild.roles, id=745347527209123871)
-                    role = discord.utils.get(ctx.guild.roles, name=role_name)
-                    await command_caller.add_roles(default_role)
-                    await command_caller.add_roles(role)
-        except:
-            pass
+            return await command_caller.send("Something went wrong!")
         await command_caller.send("You've been successfully verified!")
         log_embed = discord.Embed(
             title="**Roblox Verified**",
