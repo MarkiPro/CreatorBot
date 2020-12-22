@@ -2881,15 +2881,15 @@ class Misc(commands.Cog):
             desired_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[role_name])
             needed_role = discord.utils.get(ctx.guild.roles, id=roles[role_name])
 
-            for role in chat_color_roles:
-                check_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[role])
-
-                if check_role in ctx.author.roles:
-                    await ctx.author.remove_roles(check_role)
-
             if needed_role in ctx.author.roles:
                 await ctx.author.add_roles(desired_role)
                 await ctx.send(f"Successfully given you the chat color role!")
+
+                for role in chat_color_roles:
+                    check_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[role])
+
+                    if check_role in ctx.author.roles:
+                        await ctx.author.remove_roles(check_role)
 
             elif not needed_role in ctx.author.roles:
                 await ctx.send("You do not have the required role! Please run `>apply`!")
