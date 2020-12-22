@@ -32,8 +32,9 @@ class Paginator:
             self.messages.append(message)
 
             if (i + 1) == len(self.words_list):
-                await message.add_reaction("👍")
-                await message.add_reaction("👎")
+                if not members_thing:
+                    await message.add_reaction("👍")
+                    await message.add_reaction("👎")
 
                 if autoreport:
                     def check(reaction1, user1):
