@@ -2934,7 +2934,7 @@ class Misc(commands.Cog):
         else:
             pass
         pag = Paginator(f"Members with the role {role} are displayed below:\n\n {role_members}", 1985)
-        await pag.send(bot=self.bot, channel=ctx.channel, members_thing=True)
+        await pag.send(bot=self.bot, channel=ctx.channel, members_thing=True, title=f"Members of Role **{role}**")
 
 
 def setup(bot):
