@@ -13,14 +13,15 @@ class Paginator:
         self.words_list = [self.text[i:i + n] for i in range(0, len(self.text), n)]
 
     async def send(self, bot, channel, end_channel=None, member=None, title=None, another_channel=None, role=None,
-                   mute_role=None, autoreport=None, messagee=None):
+                   mute_role=None, autoreport=None, messagee=None, members_thing=None):
         self.paginate()
         for i, entry in enumerate(self.words_list):
             prepared_embed = discord.Embed(description=entry, color=0x0064ff)
 
             if i == 0:
                 prepared_embed.title = f"{title}"
-                prepared_embed.set_thumbnail(url=member.avatar_url)
+                if not members_thing:
+                    prepared_embed.set_thumbnail(url=member.avatar_url)
             if (i + 1) == len(self.words_list):
                 prepared_embed.timestamp = datetime.datetime.utcnow()
 
