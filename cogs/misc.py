@@ -2919,7 +2919,7 @@ class Misc(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def members(self, ctx, role: discord.Role = None):
+    async def members(self, ctx, *, role: discord.Role = None):
         role_members = "\n".join([i.mention for i in role.members])
         allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
@@ -2934,7 +2934,7 @@ class Misc(commands.Cog):
         else:
             pass
         pag = Paginator(f"Members with the role {role} are displayed below:\n\n {role_members}", 1985)
-        await pag.send(bot=self.bot, channel=ctx.channel)
+        await pag.send(bot=self.bot, channel=ctx.channel, members_thing=True)
 
 
 def setup(bot):
