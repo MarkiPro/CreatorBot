@@ -2893,6 +2893,8 @@ class Misc(commands.Cog):
 
             elif not needed_role in ctx.author.roles:
                 await ctx.send("You do not have the required role! Please run `>apply`!")
+        else:
+            await ctx.send("Role not listed or doesn't exist, please run `/tag chat color roles` to see which roles are listed.")
 
     @commands.command()
     async def boosters(self, ctx):
