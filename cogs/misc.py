@@ -2876,7 +2876,7 @@ class Misc(commands.Cog):
                             "gfx designer": 734150696944795698, "twitch streamer": 738814580712669214,
                             "builder": 734149969292034208, "youtuber": 735557139984285706,
                             "3d modeler": 734527020905529375, "game designer": 732402691296198848,
-                            "programmer": 732387788493946881}
+                            "xml programmer": 732387788493946881, "css programmer": 732387788493946881, "js programmer": 732387788493946881, "java programmer": 732387788493946881, "php programmer": 732387788493946881, "lua programmer": 732387788493946881, "python programmer": 732387788493946881, "c++ programmer": 732387788493946881, "c# programmer": 732387788493946881, "c programmer": 732387788493946881, "ruby programmer": 732387788493946881}
         if role_name:
             desired_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[role_name])
             needed_role = discord.utils.get(ctx.guild.roles, id=roles[role_name])
@@ -2889,7 +2889,7 @@ class Misc(commands.Cog):
 
             if needed_role:
                 await ctx.author.add_roles(desired_role)
-                await ctx.send(f"Successfully given you the role **`{desired_role}`**")
+                await ctx.send(f"Successfully given you the chat color role!")
 
     @commands.command()
     async def boosters(self, ctx):
