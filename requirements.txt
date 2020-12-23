@@ -10,3 +10,4 @@ Paginator~=0.5.1
 opencv-python~=4.4.0.46
 robloxpy~=0.1.7
 discord~=1.0.1
+discord-py-slash-command~=1.0.6
