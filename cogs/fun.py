@@ -7,28 +7,11 @@ from discord_slash import SlashContext
 from discord_slash import SlashCommand
 import requests
 
-url = "https://discord.com/api/v8/applications/757698691011444786/commands"
-json = {
-    "name": "dog",
-    "description": "Displays a random dog image from the internet!",
-}
-# For authorization, you can use either your bot token 
-headers = {
-    "Authorization": "Bot NzU3Njk4NjkxMDExNDQ0Nzg2.X2kL5Q.NhsIkuoONFNaUiPqcFhdwYB6nzw"
-}
-r = requests.post(url, headers=headers, json=json)
 
 class Fun(commands.Cog):
     def __init__(self, bot):
-        if not hasattr(bot, "slash"):
-            bot.slash = SlashCommand(bot, override_type=True)
         self.bot = bot
-        self.bot.slash.get_cog_commands(self)
-    
-    def cog_unload(self):
-        self.bot.slash.remove_cog_commands(self)
 
-    @cog_ext.cog_slash(name="dog", description="Displays a random dog image from the internet!")
     @commands.command()
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def dog(self, ctx):
