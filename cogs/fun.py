@@ -1,14 +1,21 @@
 import random
-
 import aiohttp
 import discord
 from discord.ext import commands
+from discord_slash import SlashCommand
 
 
 class Fun(commands.Cog):
     def __init__(self, bot):
+        if not hasattr(bot, "slash"):
+            bot.slash = SlashCommand(bot, override_type=True)
         self.bot = bot
+        self.bot.slash.get_cog_commands(self)
+    
+    def cog_unload(self):
+        self.bot.slash.remove_cog_commands(self)
 
+    @cog_ext.cog_slash(name="Dog", description="Displays a random dog image from the internet!")
     @commands.command()
     @commands.cooldown(1, 5, commands.BucketType.member)
     async def dog(self, ctx):
@@ -26,20 +33,17 @@ class Fun(commands.Cog):
     @commands.command()
     async def print(self, ctx):
         try:
-            #async with aiohttp.ClientSession() as session:
-                #async with session.get('https://devforum.roblox.com/u/markipr0.json') as j:
-                    #res_j = await j.json()
-                    #trust_level = res_j['user']['trust_level']
-                    #if trust_level >= 0:
-                    #    if trust_level == 1:
             async with aiohttp.ClientSession() as session:
-                async with session.get('https://users.roblox.com/v1/users/1239087921/') as user:
+                async with session.get('https://devforum.roblox.com/u/lowered_username.json') as j:
+                    res_j = await j.json()
+                    trust_level = res_j['user']['trust_level']
+                    print(trust_level)
+                async with session.get('https://users.roblox.com/v1/users/id/') as user:
                     user_desc = await user.json()
                     print(user_desc)
                     print(user_desc['description'])
-
         except:
-            return await ctx.send("Could not find you on the devforum!")
+            return await ctx.send("Sumn went wrong!")
 
 
     @commands.command()
@@ -77,13 +81,13 @@ class Fun(commands.Cog):
         choice = choice.lower()
 
         choices = {"rock": {
-            "loose": ["scissors"],
+            "lose": ["scissors"],
         }, "paper": {
-            "loose": ['rock']
+            "lose": ['rock']
         }, "scissors": {
-            "loose": ['paper']
+            "lose": ['paper']
         }, "marki": {
-            "loose": ['rock', 'paper', 'scissors']
+            "lose": ['rock', 'paper', 'scissors']
         }}
 
         options = [i for i in choices.keys()]
@@ -96,7 +100,7 @@ class Fun(commands.Cog):
         if f"{choice}" == bot_choice:
             return await ctx.send(f"I chose {bot_choice}\nIt is a draw.")
 
-        if f"{choice}" in choices[bot_choice]['loose']:
+        if f"{choice}" in choices[bot_choice]['lose']:
             return await ctx.send(f"I chose {bot_choice}\nI won!")
         else:
             return await ctx.send(f"I chose {bot_choice}\nYou won!")
