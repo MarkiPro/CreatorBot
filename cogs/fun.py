@@ -8,7 +8,7 @@ class Fun(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @tasks.loop(100)
+    @tasks.loop(seconds=100)
     async def memez(self):
         try:
             embed = discord.Embed(title="A funny meme for you!", color=0xe700ff)
