@@ -16,7 +16,7 @@ class Fun(commands.Cog):
             async with aiohttp.ClientSession() as cs:
                 async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
                     res = await r.json()
-                    title = res['data']['children']['data']['title']
+                    title = res['data']['children'][random.randint(0, 25)]['data']['title']
                     embed.title = title
                     embed.set_image(url=res['data']['children'][random.randint(0, 25)]['data']['url'])
                     await channel.send(embed=embed)
@@ -60,7 +60,7 @@ class Fun(commands.Cog):
             async with aiohttp.ClientSession() as cs:
                 async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
                     res = await r.json()
-                    title = res['data']['children']['data']['title']
+                    title = res['data']['children'][random.randint(0, 25)]['data']['title']
                     embed.title = title
                     embed.set_image(url=res['data']['children'][random.randint(0, 25)]['data']['url'])
                     await ctx.send(embed=embed)
