@@ -11,15 +11,17 @@ class Fun(commands.Cog):
     @tasks.loop(seconds=100)
     async def memez(self):
         try:
-            embed = discord.Embed(title="A funny meme for you!", color=0xe700ff)
+            embed = discord.Embed(color=0xe700ff)
             channel = self.bot.get_channel(712625666490761297)
             async with aiohttp.ClientSession() as cs:
                 async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
                     res = await r.json()
+                    title = res['data']['children']['data']['title']
+                    embed.title = title
                     embed.set_image(url=res['data']['children'][random.randint(0, 25)]['data']['url'])
                     await channel.send(embed=embed)
         except:
-            return
+            return await channel.send("Something went wrong!")
 
     @commands.command()
     @commands.cooldown(1, 5, commands.BucketType.member)
@@ -34,22 +36,6 @@ class Fun(commands.Cog):
                     await ctx.send(embed=embed)
         except:
             return await ctx.send("There was an issue with loading the image.")
-
-    @commands.command()
-    async def print(self, ctx):
-        try:
-            async with aiohttp.ClientSession() as session:
-                async with session.get('https://devforum.roblox.com/u/lowered_username.json') as j:
-                    res_j = await j.json()
-                    trust_level = res_j['user']['trust_level']
-                    print(trust_level)
-                async with session.get('https://users.roblox.com/v1/users/id/') as user:
-                    user_desc = await user.json()
-                    print(user_desc)
-                    print(user_desc['description'])
-        except:
-            return await ctx.send("Sumn went wrong!")
-
 
     @commands.command()
     @commands.cooldown(1, 5, commands.BucketType.member)
@@ -74,6 +60,8 @@ class Fun(commands.Cog):
             async with aiohttp.ClientSession() as cs:
                 async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
                     res = await r.json()
+                    title = res['data']['children']['data']['title']
+                    embed.title = title
                     embed.set_image(url=res['data']['children'][random.randint(0, 25)]['data']['url'])
                     await ctx.send(embed=embed)
         except:
