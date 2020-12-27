@@ -8,16 +8,16 @@ class Fun(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @tasks.task(100)
-    async def memez(self, ctx):
+    @tasks.loop(100)
+    async def memez(self):
         try:
             embed = discord.Embed(title="A funny meme for you!", color=0xe700ff)
-
+            channel = self.bot.get_channel(712625666490761297)
             async with aiohttp.ClientSession() as cs:
                 async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
                     res = await r.json()
                     embed.set_image(url=res['data']['children'][random.randint(0, 25)]['data']['url'])
-                    await ctx.send(embed=embed)
+                    await channel.send(embed=embed)
         except:
             return
 
