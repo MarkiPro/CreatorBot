@@ -21,8 +21,7 @@ class Misc(commands.Cog):
         self.java_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.python_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.javascript_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
-        self.xml_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
-        self.css_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.html_and_css_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.ruby_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.c_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.php_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
@@ -262,7 +261,7 @@ class Misc(commands.Cog):
 
                 `Ruby Programmer`;
 
-                `XML Programmer`;
+                `HTML & CSS Programmer`;
 
                 `CSS Programmer`;""",
                 color=0x0064ff,
@@ -288,7 +287,7 @@ class Misc(commands.Cog):
                     await self.python_programmer_cool.time_it(user=ctx.author)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="Python Programmer Post",
+                    title="**Python Programmer Post**",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
                     color=0x0064ff
                 )
@@ -308,7 +307,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="Python Programmer Post",
+                    title="**Python Programmer Post**",
                     description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
                     color=0x0064ff
                 )
@@ -377,7 +376,7 @@ class Misc(commands.Cog):
                     await self.csharp_programmer_cool.time_it(user=ctx.author)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="C# Programmer Post",
+                    title="**C# Programmer Post**",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
                     color=0x0064ff
                 )
@@ -397,7 +396,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="C# Programmer Post",
+                    title="**C# Programmer Post**",
                     description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
                     color=0x0064ff
                 )
@@ -466,7 +465,7 @@ class Misc(commands.Cog):
                     await self.java_programmer_cool.time_it(user=ctx.author)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="Java Programmer Post",
+                    title="**Java Programmer Post**",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
                     color=0x0064ff
                 )
@@ -486,7 +485,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="Java Programmer Post",
+                    title="**Java Programmer Post**",
                     description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
                     color=0x0064ff
                 )
@@ -554,7 +553,7 @@ class Misc(commands.Cog):
                     await self.javascript_programmer_cool.time_it(user=ctx.author)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="JavaScript Programmer Post",
+                    title="**JavaScript Programmer Post**",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
                     color=0x0064ff
                 )
@@ -574,7 +573,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="JavaScript Programmer Post",
+                    title="**JavaScript Programmer Post**",
                     description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
                     color=0x0064ff
                 )
@@ -643,7 +642,7 @@ class Misc(commands.Cog):
                     await self.cpp_programmer_cool.time_it(user=ctx.author)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="CPP Programmer Post",
+                    title="**CPP Programmer Post**",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
                     color=0x0064ff
                 )
@@ -663,7 +662,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="CPP Programmer Post",
+                    title="**CPP Programmer Post**",
                     description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
                     color=0x0064ff
                 )
@@ -732,7 +731,7 @@ class Misc(commands.Cog):
                     await self.c_programmer_cool.time_it(user=ctx.author)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="C Programmer Post",
+                    title="**C Programmer Post**",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
                     color=0x0064ff
                 )
@@ -752,7 +751,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="C Programmer Post",
+                    title="**C Programmer Post**",
                     description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
                     color=0x0064ff
                 )
@@ -821,7 +820,7 @@ class Misc(commands.Cog):
                     await self.php_programmer_cool.time_it(user=ctx.author)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="PHP Programmer Post",
+                    title="**PHP Programmer Post**",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
                     color=0x0064ff
                 )
@@ -841,7 +840,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="PHP Programmer Post",
+                    title="**PHP Programmer Post**",
                     description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
                     color=0x0064ff
                 )
@@ -910,7 +909,7 @@ class Misc(commands.Cog):
                     await self.lua_programer_cool.time_it(user=ctx.author)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="Lua Programmer Post",
+                    title="**Lua Programmer Post**",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
                     color=0x0064ff
                 )
@@ -930,7 +929,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="Lua Programmer Post",
+                    title="**Lua Programmer Post**",
                     description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
                     color=0x0064ff
                 )
@@ -999,7 +998,7 @@ class Misc(commands.Cog):
                     await self.ruby_programmer_cool.time_it(user=ctx.author)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="Ruby Programmer Post",
+                    title="**Ruby Programmer Post**",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
                     color=0x0064ff
                 )
@@ -1019,7 +1018,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="Ruby Programmer Post",
+                    title="**Ruby Programmer Post**",
                     description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
                     color=0x0064ff
                 )
@@ -1085,102 +1084,13 @@ class Misc(commands.Cog):
                             datetime.datetime.utcnow() - self.ruby_programmer_cool.cooldown_start_time).total_seconds() < 3600:
                         await self.ruby_programmer_cool.time_it(user=ctx.author)
                         return
-            elif re.findall("xml programmer", programmer_category, re.IGNORECASE):
-                if self.xml_programmer_cool.cooldown_start_time != 0 and (
-                        datetime.datetime.utcnow() - self.xml_programmer_cool.cooldown_start_time).total_seconds() < 3600:
-                    await self.xml_programmer_cool.time_it(user=ctx.author)
-                    return
-                programmer_embed1 = discord.Embed(
-                    title="XML Programmer Post",
-                    description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                    color=0x0064ff
-                )
-                programmer_embed1.set_footer(
-                    text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-                await ctx.author.send(embed=programmer_embed1)
-                try:
-                    programmer_work_message = await self.bot.wait_for('message', check=check_dm,
-                                                                      timeout=1000)
-                    programmer_work = programmer_work_message.content
-                except asyncio.TimeoutError:
-                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-                if programmer_work.lower() == "cancel":
-                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-                programmer_embed1 = discord.Embed(
-                    title="XML Programmer Post",
-                    description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
-                    color=0x0064ff
-                )
-                programmer_embed1.set_footer(
-                    text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-                await ctx.author.send(embed=programmer_embed1)
-                try:
-                    programmer_information_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                    programmer_information = programmer_information_message.content
-                except asyncio.TimeoutError:
-                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-                if programmer_information.lower() == "cancel":
-                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-                programmer_embed3 = discord.Embed(
-                    title="**XML Programmer Application**",
-                    description="***Anything that you've missed that you would like to add onto your current statement?***",
-                    color=0x0064ff
-                )
-                programmer_embed3.set_footer(
-                    text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-                await ctx.author.send(embed=programmer_embed3)
-                try:
-                    programmer_other_message = await self.bot.wait_for('message', check=check_dm,
-                                                                       timeout=1000)
-                    programmer_other = programmer_other_message.content
-                except asyncio.TimeoutError:
-                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-                if programmer_other.lower() == "cancel":
-                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-                await ctx.author.send(
-                    "Would you like to send this for Application Approval?\n Reply with `yes` or `no`")
-                try:
-                    final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                    final_choice = final_choice_message.content
-                except asyncio.TimeoutError:
-                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-                if re.findall("no", final_choice, re.IGNORECASE):
-                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-                elif re.findall("yes", final_choice, re.IGNORECASE):
-                    await ctx.author.send("Sent for approval!")
-                    some_channel = self.bot.get_channel(739233397741715507)
-                    some_role = discord.utils.get(ctx.guild.roles, id=735147383716970507)
-                    title = "**XML Programmer Application**"
-                    pag = Paginator(
-                        f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                        1985)
-
-                    await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
-                                   title=title, mute_role=applications_muted)
-                    self.xml_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
-            elif re.findall("css programmer", programmer_category, re.IGNORECASE):
-                if self.css_programmer_cool.cooldown_start_time != 0 and (
+            elif re.findall("html & css programmer", programmer_category, re.IGNORECASE):
+                if self.html_and_css_programmer_cool.cooldown_start_time != 0 and (
                         datetime.datetime.utcnow() - self.css_programmer_cool.cooldown_start_time).total_seconds() < 3600:
                     await self.css_programmer_cool.time_it(user=ctx.author)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="CSS Programmer Post",
+                    title="**HTML & CSS Programmer Application**",
                     description="***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
                     color=0x0064ff
                 )
@@ -1200,7 +1110,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 programmer_embed1 = discord.Embed(
-                    title="CSS Programmer Post",
+                    title="**HTML & CSS Programmer Application**",
                     description="***Do you have anything you would like to say about yourself here? If yes, please do so.***",
                     color=0x0064ff
                 )
@@ -1219,7 +1129,7 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 programmer_embed3 = discord.Embed(
-                    title="**CSS Programmer Application**",
+                    title="**HTML & CSS Programmer Application**",
                     description="***Anything that you've missed that you would like to add onto your current statement?***",
                     color=0x0064ff
                 )
@@ -1255,14 +1165,14 @@ class Misc(commands.Cog):
                     await ctx.author.send("Sent for approval!")
                     some_channel = self.bot.get_channel(778686711810490379)
                     some_role = discord.utils.get(ctx.guild.roles, id=741099963626422322)
-                    title = "**CSS Programmer Application**"
+                    title = "**HTML & CSS Programmer Application**"
                     pag = Paginator(
                         f"**Work:** {programmer_work}\n**Information:** {programmer_information}\n**Other:** {programmer_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
                         1985)
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                    title=title, mute_role=applications_muted)
-                    self.css_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
+                    self.html_and_css_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("game designer", category, re.IGNORECASE):
             if self.game_designer_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.game_designer_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.game_designer_cool.time_it(user=ctx.author)
@@ -2860,7 +2770,7 @@ class Misc(commands.Cog):
                  "translator": 734527264657637416, "gfx designer": 733280979921141821,
                  "twitch streamer": 738814393663619182, "builder": 733281281671954442, "youtuber": 738788543211634756,
                  "3d modeler": 733281157872877629, "game designer": 733281086913773599,
-                 "css programmer": 741099963626422322, "xml programmer": 735147383716970507,
+                 "css programmer": 741099963626422322, "html & css programmer": 735147383716970507,
                  "ruby programmer": 735147661430227025, "lua programmer": 732376072397783093,
                  "php programmer": 732378321387520092, "c programmer": 732378157449216040,
                  "c++ programmer": 732377777772167188, "js programmer": 732377955669508097,
@@ -2876,7 +2786,7 @@ class Misc(commands.Cog):
                             "gfx designer": 734150696944795698, "twitch streamer": 738814580712669214,
                             "builder": 734149969292034208, "youtuber": 735557139984285706,
                             "3d modeler": 734527020905529375, "game designer": 732402691296198848,
-                            "xml programmer": 732387788493946881, "css programmer": 732387788493946881, "js programmer": 732387788493946881, "java programmer": 732387788493946881, "php programmer": 732387788493946881, "lua programmer": 732387788493946881, "python programmer": 732387788493946881, "c++ programmer": 732387788493946881, "c# programmer": 732387788493946881, "c programmer": 732387788493946881, "ruby programmer": 732387788493946881}
+                            "html & css programmer": 732387788493946881, "css programmer": 732387788493946881, "js programmer": 732387788493946881, "java programmer": 732387788493946881, "php programmer": 732387788493946881, "lua programmer": 732387788493946881, "python programmer": 732387788493946881, "c++ programmer": 732387788493946881, "c# programmer": 732387788493946881, "c programmer": 732387788493946881, "ruby programmer": 732387788493946881}
         if role_name:
             desired_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[role_name])
             needed_role = discord.utils.get(ctx.guild.roles, id=roles[role_name])
