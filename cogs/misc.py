@@ -5,6 +5,7 @@ import asyncio
 from paginator import Paginator
 import re
 from cooldown import Cooldown
+from pastebin import PastebinAPI
 
 
 class Misc(commands.Cog):
@@ -2216,6 +2217,72 @@ class Misc(commands.Cog):
                 await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                title=title, mute_role=applications_muted)
                 self.animator_cool = Cooldown(time=datetime.datetime.utcnow())
+
+    @commands.command(aliases=['code-format', "codeformat", "code format"], description="This command is used for assisting you with formatting your code!")
+    async def code_format(self, ctx):
+        cancel_prompt_embed = discord.Embed(
+            title="**CANCELLED**",
+            description="***The setup has been cancelled.***",
+            color=0xff0000
+        )
+        starting_embed = discord.Embed(
+            title="**CODE FORMAT**",
+            description="***Please continue the setup in DMs.***",
+            color=0x0064ff,
+            timestamp=datetime.datetime.utcnow()
+        )
+        code_request_embed = discord.Embed(
+            title="**CODE FORMAT**",
+            description="***Please paste your code!***"
+        )
+        code_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+        await ctx.send(embed=starting_embed)
+        await ctx.author.send(embed=code_request_embed)
+
+        def check_dm(m):
+            if isinstance(m.channel, discord.DMChannel):
+                if m.author == ctx.author:
+                    return True
+                else:
+                    return False
+            else:
+                return False
+        try:
+            code_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+            code = code_message.content
+        except asyncio.TimeoutError:
+            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+            await ctx.author.send(embed=cancel_prompt_embed)
+            return
+        if code.lower() == "cancel":
+            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+            await ctx.author.send(embed=cancel_prompt_embed)
+            return
+        code_format_request_embed = discord.Embed(
+            title="**CODE FORMAT**",
+            description="***Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on.***"
+        )
+        code_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+        await ctx.author.send(embed=code_request_embed)
+        try:
+            code_format_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+            code_format = code_format_message.content
+        except asyncio.TimeoutError:
+            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+            await ctx.author.send(embed=cancel_prompt_embed)
+            return
+        code = (f"\`\`\`{code_format}\n{code}\n\`\`\`")
+        try:
+            await ctx.author.send(code)
+            await ctx.author.send("Copy the message content above and paste it where you need to!")
+        except:
+            try:
+                my_key = PastebinAPI.generate_user_key("a69d904fff567bd3f6de8e146ec1e60e", "MarkiPro", "1234MPMM")
+                pastebin = PastebinAPI.paste("a69d904fff567bd3f6de8e146ec1e60e", code, api_user_key=my_key, paste_name="HELP NEEDED!", paste_format=code_format, paste_private="public", paste_expire_date="1M")
+                print(pastebin)
+            except:
+                await ctx.author.send("Something went wrong!")
+
 
     @commands.command(description="This command is used for posting.")
     async def post(self, ctx):
