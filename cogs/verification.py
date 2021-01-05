@@ -6,7 +6,7 @@ import os
 import asyncio
 import datetime
 import string
-import robloxpy
+import robloxpy as rb
 import aiohttp
 
 
@@ -30,15 +30,12 @@ class Verification(commands.Cog):
         else:
             pass
 
-        getit = lambda: (random.randrange(5, 295), random.randrange(5, 95))
-
         color = (200, 200, 200)
         shadow_color = (0, 0, 0)
 
         def random_string():
-            N = 8
             s = string.ascii_uppercase + string.ascii_lowercase + string.digits
-            random_string = ''.join(random.choices(s, k=N))
+            random_string = ''.join(random.choices(s, k=8))
             return random_string
 
         captcha_str = random_string()
@@ -135,7 +132,9 @@ class Verification(commands.Cog):
         command_caller = ctx.author
         verified_role = discord.utils.get(ctx.guild.roles, id=741735258411499560)
         log_channel = self.bot.get_channel(745240151063789578)
-        choices = ["flowers", "roses", "blueberries", "fruits", "lantern", "green", "blue", "violets", "lollipops", "good", "great", "perfect", "amazing", "sky", "tulips", "unicorn", "bagel", "potato", "tomato", "tomatoes", "bagels", "creative"]
+        choices = ["flowers", "roses", "blueberries", "fruits", "lantern", "green", "blue", "violets", "lollipops",
+                   "good", "great", "perfect", "amazing", "sky", "tulips", "unicorn", "bagel", "potato", "tomato",
+                   "tomatoes", "bagels", "creative"]
 
         call_embed = discord.Embed(
             title="**Welcome to Content Creators**",
@@ -158,8 +157,9 @@ class Verification(commands.Cog):
             roblox_name_message = await self.bot.wait_for('message', check=check_dm, timeout=300)
             roblox_name = roblox_name_message.content
         except asyncio.TimeoutError:
-            await ctx.author.send("You ran out of time, please run the `>rblx_verify` command again in <#741733794536751114> and try again.")
-        if robloxpy.DoesNameExist(roblox_name):
+            await ctx.author.send(
+                "You ran out of time, please run the `>rblx_verify` command again in <#741733794536751114> and try again.")
+        if rb.DoesNameExist(roblox_name):
             amount = 10
             code = ' '.join(random.choices(choices, k=amount))
             f = discord.File("Steps.png", filename="Steps.png")
@@ -177,11 +177,12 @@ class Verification(commands.Cog):
             except asyncio.TimeoutError:
                 await ctx.author.send(
                     "You ran out of time, please run the `>rblx_verify` command again in <#741733794536751114> and try again.")
-            if str(roblox_desc).lower() == "done" or str(roblox_desc).lower() == "yes" or str(roblox_desc).lower() == "ok":
+            if str(roblox_desc).lower() == "done" or str(roblox_desc).lower() == "yes" or str(
+                    roblox_desc).lower() == "ok":
                 pass
             else:
                 return await command_caller.send("Prompt Cancelled. Reason: User hadn't responded appropriately.")
-            roblox_id = robloxpy.NameToID(roblox_name)
+            roblox_id = rb.NameToID(roblox_name)
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(f'https://users.roblox.com/v1/users/{roblox_id}/') as user:
@@ -192,7 +193,8 @@ class Verification(commands.Cog):
                     else:
                         return await command_caller.send("Description either unidentified or set incorrect!")
                 try:
-                    async with session.get(f'https://devforum.roblox.com/u/{str(roblox_name).lower()}.json') as _user_json:
+                    async with session.get(
+                            f'https://devforum.roblox.com/u/{str(roblox_name).lower()}.json') as _user_json:
                         user_json = await _user_json.json()
                         user = user_json['user']
                         user_trust_level = user['trust_level'] - 1
