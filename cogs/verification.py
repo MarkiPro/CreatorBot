@@ -1,13 +1,13 @@
-import discord
-from discord.ext import commands
-import random
-from PIL import Image, ImageDraw, ImageFont
-import os
 import asyncio
 import datetime
+import os
+import random
 import string
-import robloxpy as rb
 import aiohttp
+import discord
+from PIL import Image, ImageDraw, ImageFont
+from discord.ext import commands
+import pyblox3
 
 
 class Verification(commands.Cog):
@@ -159,7 +159,7 @@ class Verification(commands.Cog):
         except asyncio.TimeoutError:
             await ctx.author.send(
                 "You ran out of time, please run the `>rblx_verify` command again in <#741733794536751114> and try again.")
-        if rb.DoesNameExist(roblox_name):
+        if pyblox3.Users.checkUsernameExists(username=roblox_name):
             amount = 10
             code = ' '.join(random.choices(choices, k=amount))
             f = discord.File("Steps.png", filename="Steps.png")
@@ -182,7 +182,7 @@ class Verification(commands.Cog):
                 pass
             else:
                 return await command_caller.send("Prompt Cancelled. Reason: User hadn't responded appropriately.")
-            roblox_id = rb.NameToID(roblox_name)
+            roblox_id = pyblox3.Users.User(username=roblox_name).Id
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(f'https://users.roblox.com/v1/users/{roblox_id}/') as user:
