@@ -1087,8 +1087,8 @@ class Misc(commands.Cog):
                         return
             elif re.findall("html & css programmer", programmer_category, re.IGNORECASE):
                 if self.html_and_css_programmer_cool.cooldown_start_time != 0 and (
-                        datetime.datetime.utcnow() - self.css_programmer_cool.cooldown_start_time).total_seconds() < 3600:
-                    await self.css_programmer_cool.time_it(user=ctx.author)
+                        datetime.datetime.utcnow() - self.html_and_css_programmer_cool.cooldown_start_time).total_seconds() < 3600:
+                    await self.html_and_css_programmer_cool.time_it(user=ctx.author)
                     return
                 programmer_embed1 = discord.Embed(
                     title="**HTML & CSS Programmer Application**",
@@ -2233,7 +2233,8 @@ class Misc(commands.Cog):
         )
         code_request_embed = discord.Embed(
             title="**CODE FORMAT**",
-            description="***Please paste your code!***"
+            description="***Please paste your code!***",
+            color=0x0064ff
         )
         code_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
         await ctx.send(embed=starting_embed)
@@ -2262,8 +2263,8 @@ class Misc(commands.Cog):
             title="**CODE FORMAT**",
             description="***Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on.***"
         )
-        code_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-        await ctx.author.send(embed=code_request_embed)
+        code_format_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+        await ctx.author.send(embed=code_format_request_embed)
         try:
             code_format_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
             code_format = code_format_message.content
@@ -2277,8 +2278,8 @@ class Misc(commands.Cog):
             await ctx.author.send("Copy the message content above and paste it where you need to!")
         except:
             try:
-                my_key = PastebinAPI.generate_user_key("a69d904fff567bd3f6de8e146ec1e60e", "MarkiPro", "1234MPMM")
-                pastebin = PastebinAPI.paste("a69d904fff567bd3f6de8e146ec1e60e", code, api_user_key=my_key, paste_name="HELP NEEDED!", paste_format=code_format, paste_private="public", paste_expire_date="1M")
+                my_key = PastebinAPI.generate_user_key(api_dev_key="a69d904fff567bd3f6de8e146ec1e60e", username="MarkiPro", password="1234MPMM")
+                pastebin = PastebinAPI.paste(api_dev_key="a69d904fff567bd3f6de8e146ec1e60e", api_paste_code=code, api_user_key=my_key, paste_name="HELP NEEDED!", paste_format=code_format, paste_private="public", paste_expire_date="1M")
                 print(pastebin)
             except:
                 await ctx.author.send("Something went wrong!")
