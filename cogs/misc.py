@@ -5,7 +5,7 @@ import asyncio
 from paginator import Paginator
 import re
 from cooldown import Cooldown
-from pastebin import PastebinAPI
+import mystbin
 
 
 class Misc(commands.Cog):
@@ -2278,9 +2278,21 @@ class Misc(commands.Cog):
             await ctx.author.send("Copy the message content above and paste it where you need to!")
         except:
             try:
-                my_key = PastebinAPI.generate_user_key(api_dev_key="a69d904fff567bd3f6de8e146ec1e60e", username="MarkiPro", password="1234MPMM")
-                pastebin = PastebinAPI.paste(api_dev_key="a69d904fff567bd3f6de8e146ec1e60e", api_paste_code=code, api_user_key=my_key, paste_name="HELP NEEDED!", paste_format=code_format, paste_private="public", paste_expire_date="1M")
-                print(pastebin)
+                mystbin_client = mystbin.Client()
+
+                paste = await mystbin_client.post("Hello from MystBin!", syntax=code_format)
+                str(paste)
+
+                paste_url = paste.url
+
+                get_paste = await mystbin_client.get("https://mystb.in/<your generated ID>")
+
+                print(paste_url)
+                print(get_paste)
+
+                await ctx.author.send(f"This is the link to your code! Copy and paste it where you need to!\n\n{get_paste}\n\n{paste_url}")
+
+                paste.created_at
             except:
                 await ctx.author.send("Something went wrong!")
 
