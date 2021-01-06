@@ -2336,7 +2336,8 @@ class Misc(commands.Cog):
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        f = open("formats.txt", "r")
+        f = open("formats.txt", "rt")
+        print(f)
         if code_format_answer in f:
             f.close()
         else:
