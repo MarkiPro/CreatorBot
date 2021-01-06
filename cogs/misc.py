@@ -2281,7 +2281,7 @@ class Misc(commands.Cog):
             try:
                 mystbin_client = mystbin.Client()
 
-                paste = await mystbin_client.post("Test", syntax=code_format)
+                paste = await mystbin_client.post(code, syntax=code_format)
 
                 paste_url = paste.url
                 print(paste_url)
