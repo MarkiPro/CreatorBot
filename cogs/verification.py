@@ -14,7 +14,7 @@ class Verification(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(description="Run this command to verify you're a human and gain access to the server.")
     async def verify(self, ctx):
         verified_role = ctx.guild.get_role(695328817157373992)
         log_channel = ctx.guild.get_channel(745904248461590549)
@@ -128,7 +128,7 @@ class Verification(commands.Cog):
             await log_channel.send(embed=log_embed1)
         os.remove(file_name)
 
-    @commands.command()
+    @commands.command(description="Run this command to verify your Roblox account.")
     async def rblx_verify(self, ctx):
         command_caller = ctx.author
         verified_role = discord.utils.get(ctx.guild.roles, id=741735258411499560)
