@@ -11,6 +11,7 @@ import mystbin
 class Misc(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.skip = False
         self.bot.help_command.cog = self
         self.hiring_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.for_hire_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
@@ -2298,26 +2299,27 @@ class Misc(commands.Cog):
                     return
                 if more_code_answer == "no":
                     break
-        try:
-            if not code:
-                code_request_embed = discord.Embed(
-                    title="**CODE FORMAT**",
-                    description="Please paste your code!",
-                    color=0x0064ff
-                )
-                code_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-                await ctx.author.send(embed=code_request_embed)
-                try:
-                    code_requesting_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                    code_answer = code_requesting_message.content
-                except:
-                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-                if code_answer.lower() == "cancel":
-                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
+                self.skip = True
+        if self.skip == False:
+            code_request_embed = discord.Embed(
+                title="**CODE FORMAT**",
+                description="Please paste your code!",
+                color=0x0064ff
+            )
+            code_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+            await ctx.author.send(embed=code_request_embed)
+            try:
+                code_requesting_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                code_answer = code_requesting_message.content
+            except:
+                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                await ctx.author.send(embed=cancel_prompt_embed)
+                return
+            if code_answer.lower() == "cancel":
+                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                await ctx.author.send(embed=cancel_prompt_embed)
+                return
+        self.skip = False
         code_format_request_embed = discord.Embed(
             title="**CODE FORMAT**",
             description="Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on",
