@@ -2278,9 +2278,9 @@ class Misc(commands.Cog):
             await ctx.author.send("Copy the message content above and paste it where you need to!")
         except:
             try:
-                mystbin_client = Client()
+                mystbin_client = mystbin.Client()
 
-                paste = await mystbin_client.post("Hello from MystBin!", syntax=code_format)
+                paste = await mystbin_client.post("Test", syntax=code_format)
                 str(paste)
 
                 paste_url = paste.url
