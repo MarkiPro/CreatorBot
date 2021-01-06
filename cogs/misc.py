@@ -2298,7 +2298,46 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 if more_code_answer == "no":
-                    break
+                    code_format_request_embed = discord.Embed(
+                        title="**CODE FORMAT**",
+                        description="Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on",
+                        color=0x0064ff
+                    )
+                    code_format_request_embed.set_footer(
+                        text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+                    await ctx.author.send(embed=code_format_request_embed)
+                    try:
+                        code_format_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                        code_format_answer = code_format_message.content
+                    except:
+                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                        await ctx.author.send(embed=cancel_prompt_embed)
+                        return
+                    if code_format_answer.lower() == "cancel":
+                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                        await ctx.author.send(embed=cancel_prompt_embed)
+                        return
+                    if code_format_answer not in self.formats_list:
+                        return await ctx.author.send("Unknown format!")
+                    try:
+                        actual_code = code_answer or code
+                        formated_code = f"\`\`\`{code_format_answer}\n{actual_code}\n\`\`\`"
+                        await ctx.author.send(formated_code)
+                        await ctx.author.send("Copy the message content above and paste it where you need to!")
+                    except:
+                        try:
+                            actual_code = code_answer or code
+                            mystbin_client = mystbin.Client()
+
+                            paste = await mystbin_client.post(actual_code, syntax=code_format_answer)
+
+                            paste_url = paste.url
+                            print(paste_url)
+
+                            await ctx.author.send(
+                                f"This is the link to your code! Copy and paste it where you need to!\n\n{paste_url}")
+                        except:
+                            await ctx.author.send("Something went wrong!")
         if answer == "yes":
             code_request_embed = discord.Embed(
                 title="**CODE FORMAT**",
@@ -2319,44 +2358,42 @@ class Misc(commands.Cog):
                 cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                 await ctx.author.send(embed=cancel_prompt_embed)
                 return
-        code_format_request_embed = discord.Embed(
-            title="**CODE FORMAT**",
-            description="Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on",
-            color=0x0064ff
-        )
-        code_format_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-        await ctx.author.send(embed=code_format_request_embed)
-        try:
-            code_format_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-            code_format_answer = code_format_message.content
-        except:
-            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-            await ctx.author.send(embed=cancel_prompt_embed)
-            return
-        if code_format_answer.lower() == "cancel":
-            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-            await ctx.author.send(embed=cancel_prompt_embed)
-            return
-        if code_format_answer not in self.formats_list:
-            return await ctx.author.send("Unknown format!")
-        try:
-            actual_code = code_answer or code
-            formated_code = f"\`\`\`{code_format_answer}\n{actual_code}\n\`\`\`"
-            await ctx.author.send(formated_code)
-            await ctx.author.send("Copy the message content above and paste it where you need to!")
-        except:
+            code_format_request_embed = discord.Embed(
+                title="**CODE FORMAT**",
+                description="Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on",
+                color=0x0064ff
+            )
+            code_format_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+            await ctx.author.send(embed=code_format_request_embed)
             try:
-                actual_code = code_answer or code
-                mystbin_client = mystbin.Client()
-
-                paste = await mystbin_client.post(actual_code, syntax=code_format_answer)
-
-                paste_url = paste.url
-                print(paste_url)
-
-                await ctx.author.send(f"This is the link to your code! Copy and paste it where you need to!\n\n{paste_url}")
+                code_format_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                code_format_answer = code_format_message.content
             except:
-                await ctx.author.send("Something went wrong!")
+                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                await ctx.author.send(embed=cancel_prompt_embed)
+                return
+            if code_format_answer.lower() == "cancel":
+                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                await ctx.author.send(embed=cancel_prompt_embed)
+                return
+            if code_format_answer not in self.formats_list:
+                return await ctx.author.send("Unknown format!")
+            try:
+                formated_code = f"\`\`\`{code_format_answer}\n{code_answer}\n\`\`\`"
+                await ctx.author.send(formated_code)
+                await ctx.author.send("Copy the message content above and paste it where you need to!")
+            except:
+                try:
+                    mystbin_client = mystbin.Client()
+
+                    paste = await mystbin_client.post(code_answer, syntax=code_format_answer)
+
+                    paste_url = paste.url
+                    print(paste_url)
+
+                    await ctx.author.send(f"This is the link to your code! Copy and paste it where you need to!\n\n{paste_url}")
+                except:
+                    await ctx.author.send("Something went wrong!")
 
     @commands.command(description="This command is used for posting.")
     async def post(self, ctx):
