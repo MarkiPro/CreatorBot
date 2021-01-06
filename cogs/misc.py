@@ -2257,7 +2257,7 @@ class Misc(commands.Cog):
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        if answer == "yes":
+        if answer == "no":
             for x in range(11):
                 code_request_embed = discord.Embed(
                     title="**CODE FORMAT**",
