@@ -19,6 +19,7 @@ class Verification(commands.Cog):
         verified_role = ctx.guild.get_role(695328817157373992)
         log_channel = ctx.guild.get_channel(745904248461590549)
         verification_channel = ctx.guild.get_channel(745331129535561758)
+        verif_instr_channel = ctx.guild.get_channel(713020247543906368)
 
         if ctx.author in verified_role.members:
             return await ctx.send("You are already verified!")
@@ -26,7 +27,7 @@ class Verification(commands.Cog):
             pass
         if ctx.channel != verification_channel:
             return await ctx.send(
-                "Please go to verify in <@#745331129535561758>, and if you need assistance, you should first read over <@#713020247543906368>!")
+                f"Please go to verify in {verification_channel.mention}, and if you need assistance, you should first read over {verif_instr_channel.mention}!")
         else:
             pass
 
