@@ -30,8 +30,6 @@ class Log(Cog):
             pass
         if before.position != after.position:
             return
-        print(before.permissions)
-        print(after.permissions)
         if before.permissions != after.permissions:
             log_embed = discord.Embed(
                 title="**Role Updated**",
@@ -115,8 +113,6 @@ class Log(Cog):
             pass
         if before.position != after.position:
             return
-        print(before.permissions)
-        print(after.permissions)
         if before.permissions != after.permissions:
             log_embed = discord.Embed(
                 title="**Role Updated**",
@@ -259,7 +255,6 @@ class Log(Cog):
         matched_inv = re.findall("discord.gg/|discord.com/invite/", message.content, re.IGNORECASE)
         if matched_inv:
             matched_invite = re.search("discord.gg/\w+|discord.com/invite/\w+", message.content).group()
-            print(matched_invite)
             invite = await self.bot.fetch_invite(matched_invite)
             if invite.guild is not cc_guild and not message.author is self.bot.user:
                 await message.author.send("No advertising allowed!")
@@ -495,7 +490,6 @@ class Log(Cog):
         matched_inv = re.findall("discord.gg/|discord.com/invite/", message.content, re.IGNORECASE)
         if matched_inv:
             matched_invite = re.search("discord.gg/\w+|discord.com/invite/\w+", message.content).group()
-            print(matched_invite)
             invite = await self.bot.fetch_invite(matched_invite)
             if invite.guild is not cc_guild:
                 await message.author.send("No advertising allowed!")
@@ -668,7 +662,6 @@ class Log(Cog):
 
             await nick_update_log_channel.send(embed=nick_log_embed)
         if len(after.roles) > len(before.roles):
-            print("well hello there")
             role_difference_set = set(after.roles).difference(set(before.roles))
             for first_role in role_difference_set:
                 actual_role = discord.utils.get(guild.roles, name=str(first_role))
@@ -684,7 +677,6 @@ class Log(Cog):
                     role_log_embed.set_thumbnail(url=before.avatar_url)
                     await role_update_log_channel.send(embed=role_log_embed)
         elif len(before.roles) > len(after.roles):
-            print("hi!")
             role_difference_set = set(before.roles).difference(set(after.roles))
             for first_role in role_difference_set:
                 actual_role = discord.utils.get(guild.roles, name=str(first_role))
@@ -711,7 +703,6 @@ class Log(Cog):
         try:
             if before.channel:
                 if before.channel.guild != cc_guild and after.channel.guild != cc_guild:
-                    print("returned!")
                     return
                 else:
                     pass
