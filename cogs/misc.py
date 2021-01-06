@@ -5,7 +5,7 @@ import asyncio
 from paginator import Paginator
 import re
 from cooldown import Cooldown
-import mystbin
+from mystbin import Client
 
 
 class Misc(commands.Cog):
@@ -2272,13 +2272,13 @@ class Misc(commands.Cog):
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        code = (f"\`\`\`{code_format}\n{code}\n\`\`\`")
+        code = f"\`\`\`{code_format}\n{code}\n\`\`\`"
         try:
             await ctx.author.send(code)
             await ctx.author.send("Copy the message content above and paste it where you need to!")
         except:
             try:
-                mystbin_client = mystbin.Client()
+                mystbin_client = Client()
 
                 paste = await mystbin_client.post("Hello from MystBin!", syntax=code_format)
                 str(paste)
@@ -2291,11 +2291,8 @@ class Misc(commands.Cog):
                 print(get_paste)
 
                 await ctx.author.send(f"This is the link to your code! Copy and paste it where you need to!\n\n{get_paste}\n\n{paste_url}")
-
-                paste.created_at
             except:
                 await ctx.author.send("Something went wrong!")
-
 
     @commands.command(description="This command is used for posting.")
     async def post(self, ctx):
@@ -2881,7 +2878,7 @@ class Misc(commands.Cog):
                     if check_role in ctx.author.roles:
                         await ctx.author.remove_roles(check_role)
 
-            elif not needed_role in ctx.author.roles:
+            elif needed_role not in ctx.author.roles:
                 await ctx.send("You do not have the required role! Please run `>apply`!")
         else:
             await ctx.send("Role not listed or doesn't exist, please run `/tag chat color roles` to see which roles are listed.")
