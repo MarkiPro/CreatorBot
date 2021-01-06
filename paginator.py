@@ -93,6 +93,7 @@ class Paginator:
                             return user2 and str(reaction2.emoji) in ["👍", "👎", "🔇"]
 
                         reaction2, user2 = await bot.wait_for("reaction_add", check=check)
+
                         if str(reaction2.emoji) == "👍":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
