@@ -128,7 +128,7 @@ class Verification(commands.Cog):
             await log_channel.send(embed=log_embed1)
         os.remove(file_name)
 
-    @commands.command(description="Run this command to verify your Roblox account.")
+    @commands.command(aliases=['rblx-verify', 'rbx-verify', 'rbx_verify', 'roblox-verify', 'roblox_verify'], description="Run this command to verify your Roblox account.")
     async def rblx_verify(self, ctx):
         command_caller = ctx.author
         verified_role = discord.utils.get(ctx.guild.roles, id=741735258411499560)
