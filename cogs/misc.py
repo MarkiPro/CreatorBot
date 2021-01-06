@@ -2266,14 +2266,9 @@ class Misc(commands.Cog):
                 )
                 code_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=code_request_embed)
-                try:
-                    code_request_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                    code = code + ("\n".join(code_request_message.content))
-                except:
-                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                    await ctx.author.send(embed=cancel_prompt_embed)
-                    return
-                if code == "cancel":
+                code_request_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                code = code + ("\n".join(code_request_message.content))
+                if code.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
