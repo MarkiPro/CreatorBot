@@ -2220,6 +2220,8 @@ class Misc(commands.Cog):
 
     @commands.command(aliases=['code-format', "codeformat", "code format"], description="This command is used for assisting you with formatting your code!")
     async def code_format(self, ctx):
+        questions = ["Is your code longer or shorter? Can it fit in a single message? (yes/no)", "Please paste your code!", "Is there more code? (yes/no)", "Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on"]
+        decision_answers = ["yes", "no", "cancel"]
         cancel_prompt_embed = discord.Embed(
             title="**CANCELLED**",
             description="***The setup has been cancelled.***",
@@ -2231,14 +2233,14 @@ class Misc(commands.Cog):
             color=0x0064ff,
             timestamp=datetime.datetime.utcnow()
         )
-        code_request_embed = discord.Embed(
+        question_embed = discord.Embed(
             title="**CODE FORMAT**",
-            description="***Please paste your code!***",
             color=0x0064ff
         )
-        code_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+        question_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
         await ctx.send(embed=starting_embed)
-        await ctx.author.send(embed=code_request_embed)
+        question_embed.description = questions[0]
+        await ctx.author.send(embed=question_embed)
 
         def check_dm(m):
             if isinstance(m.channel, discord.DMChannel):
@@ -2249,39 +2251,79 @@ class Misc(commands.Cog):
             else:
                 return False
         try:
-            code_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-            code = code_message.content
-        except asyncio.TimeoutError:
+            answer_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+            answer = answer_message.content
+        except:
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        if code.lower() == "cancel":
-            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-            await ctx.author.send(embed=cancel_prompt_embed)
-            return
+        if answer == "yes":
+            for x in range(11):
+                code_request_embed = discord.Embed(
+                    title="**CODE FORMAT**",
+                    description=questions[1],
+                    color=0x0064ff
+                )
+                code_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+                await ctx.author.send(embed=code_request_embed)
+                try:
+                    code_request_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    code = code + ("\n".join(code_request_message.content))
+                except:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if code == "cancel":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                more_code_question_embed = discord.Embed(
+                    title="**CODE FORMAT**",
+                    description=questions[2],
+                    color=0x0064ff
+                )
+                more_code_question_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+                await ctx.author.send(embed=more_code_question_embed)
+                try:
+                    more_code_answer_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                    more_code_answer = more_code_answer_message.content
+                except:
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if more_code_answer == "cancel":
+                    cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                    await ctx.author.send(embed=cancel_prompt_embed)
+                    return
+                if more_code_answer == "no":
+                    break
         code_format_request_embed = discord.Embed(
             title="**CODE FORMAT**",
-            description="***Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on.***",
+            description=questions[3],
             color=0x0064ff
         )
         code_format_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
         await ctx.author.send(embed=code_format_request_embed)
         try:
             code_format_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-            code_format = code_format_message.content
-        except asyncio.TimeoutError:
+            code_format_answer = more_code_answer_message.content
+        except:
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        code = f"\`\`\`{code_format}\n{code}\n\`\`\`"
+        if code_format_answer == "cancel":
+            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+            await ctx.author.send(embed=cancel_prompt_embed)
+            return
         try:
-            await ctx.author.send(code)
+            formated_code = f"\`\`\`{code_format_answer}\n{code}\n\`\`\`"
+            await ctx.author.send(formated_code)
             await ctx.author.send("Copy the message content above and paste it where you need to!")
         except:
             try:
                 mystbin_client = mystbin.Client()
 
-                paste = await mystbin_client.post(code, syntax=code_format)
+                paste = await mystbin_client.post(code, syntax=code_format_answer)
 
                 paste_url = paste.url
                 print(paste_url)
