@@ -2340,19 +2340,17 @@ class Misc(commands.Cog):
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        if code_format_answer in self.formats_list:
-            pass
-        else:
+        if code_format_answer not in self.formats_list:
             return await ctx.author.send("Unknown format!")
         try:
-            formated_code = f"\`\`\`{code_format_answer}\n{code_answer}\n\`\`\`"
+            formated_code = f"\`\`\`{code_format_answer}\n{code_answer or code}\n\`\`\`"
             await ctx.author.send(formated_code)
             await ctx.author.send("Copy the message content above and paste it where you need to!")
         except:
             try:
                 mystbin_client = mystbin.Client()
 
-                paste = await mystbin_client.post(code_answer, syntax=code_format_answer)
+                paste = await mystbin_client.post(code_answer or code, syntax=code_format_answer)
 
                 paste_url = paste.url
                 print(paste_url)
