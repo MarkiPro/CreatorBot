@@ -2282,16 +2282,11 @@ class Misc(commands.Cog):
                 mystbin_client = mystbin.Client()
 
                 paste = await mystbin_client.post("Test", syntax=code_format)
-                str(paste)
 
                 paste_url = paste.url
-
-                get_paste = await mystbin_client.get("https://mystb.in/<your generated ID>")
-
                 print(paste_url)
-                print(get_paste)
 
-                await ctx.author.send(f"This is the link to your code! Copy and paste it where you need to!\n\n{get_paste}\n\n{paste_url}")
+                await ctx.author.send(f"This is the link to your code! Copy and paste it where you need to!\n\n{paste_url}")
             except:
                 await ctx.author.send("Something went wrong!")
 
