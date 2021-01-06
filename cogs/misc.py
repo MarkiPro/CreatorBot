@@ -12,6 +12,7 @@ class Misc(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.skip = False
+        self.formats_list = ["python", "lua", "c++", "csharp", "cpp", "cs", "css", "html", "json", "go", "js", "javascript", "java", "py", "c"]
         self.bot.help_command.cog = self
         self.hiring_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.for_hire_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
@@ -2298,9 +2299,10 @@ class Misc(commands.Cog):
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
                 if more_code_answer == "no":
+                    self.skip = True
                     break
                 self.skip = True
-        if self.skip == False:
+        if self.skip != True:
             code_request_embed = discord.Embed(
                 title="**CODE FORMAT**",
                 description="Please paste your code!",
@@ -2338,13 +2340,10 @@ class Misc(commands.Cog):
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        f = open("formats.txt", "rt")
-        print(f)
-        if code_format_answer in f:
-            f.close()
+        if code_format_answer in self.formats_list:
+            pass
         else:
-            await ctx.author.send("Unknown format!")
-            return
+            return await ctx.author.send("Unknown format!")
         try:
             formated_code = f"\`\`\`{code_format_answer}\n{code_answer}\n\`\`\`"
             await ctx.author.send(formated_code)
