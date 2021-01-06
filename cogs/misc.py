@@ -2340,6 +2340,7 @@ class Misc(commands.Cog):
         if code_format_answer not in self.formats_list:
             return await ctx.author.send("Unknown format!")
         try:
+            actual_code = code_answer or code
             formated_code = f"\`\`\`{code_format_answer}\n{actual_code}\n\`\`\`"
             await ctx.author.send(formated_code)
             await ctx.author.send("Copy the message content above and paste it where you need to!")
