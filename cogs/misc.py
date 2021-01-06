@@ -2320,16 +2320,14 @@ class Misc(commands.Cog):
                     if code_format_answer not in self.formats_list:
                         return await ctx.author.send("Unknown format!")
                     try:
-                        actual_code = code_answer or code
-                        formated_code = f"\`\`\`{code_format_answer}\n{actual_code}\n\`\`\`"
+                        formated_code = f"\`\`\`{code_format_answer}\n{code}\n\`\`\`"
                         await ctx.author.send(formated_code)
                         await ctx.author.send("Copy the message content above and paste it where you need to!")
                     except:
                         try:
-                            actual_code = code_answer or code
                             mystbin_client = mystbin.Client()
 
-                            paste = await mystbin_client.post(actual_code, syntax=code_format_answer)
+                            paste = await mystbin_client.post(code, syntax=code_format_answer)
 
                             paste_url = paste.url
                             print(paste_url)
@@ -2338,6 +2336,8 @@ class Misc(commands.Cog):
                                 f"This is the link to your code! Copy and paste it where you need to!\n\n{paste_url}")
                         except:
                             await ctx.author.send("Something went wrong!")
+                    break
+
         if answer == "yes":
             code_request_embed = discord.Embed(
                 title="**CODE FORMAT**",
