@@ -2261,7 +2261,8 @@ class Misc(commands.Cog):
             return
         code_format_request_embed = discord.Embed(
             title="**CODE FORMAT**",
-            description="***Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on.***"
+            description="***Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on.***",
+            color=0x0064ff
         )
         code_format_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
         await ctx.author.send(embed=code_format_request_embed)
