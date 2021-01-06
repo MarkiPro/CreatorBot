@@ -2308,13 +2308,13 @@ class Misc(commands.Cog):
         code_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
         await ctx.author.send(embed=code_request_embed)
         try:
-            code_request_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-            code = code_request_message.content
+            code_requesting_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+            code_answer = code_requesting_message.content
         except:
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        if code.lower() == "cancel":
+        if code_answer.lower() == "cancel":
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
@@ -2327,24 +2327,24 @@ class Misc(commands.Cog):
         await ctx.author.send(embed=code_format_request_embed)
         try:
             code_format_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-            code_format_answer = more_code_answer_message.content
+            code_format_answer = code_format_message.content
         except:
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        if code_format_answer == "cancel":
+        if code_format_answer.lower() == "cancel":
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         try:
-            formated_code = f"\`\`\`{code_format_answer}\n{code}\n\`\`\`"
+            formated_code = f"\`\`\`{code_format_answer}\n{code_answer}\n\`\`\`"
             await ctx.author.send(formated_code)
             await ctx.author.send("Copy the message content above and paste it where you need to!")
         except:
             try:
                 mystbin_client = mystbin.Client()
 
-                paste = await mystbin_client.post(code, syntax=code_format_answer)
+                paste = await mystbin_client.post(code_answer, syntax=code_format_answer)
 
                 paste_url = paste.url
                 print(paste_url)
