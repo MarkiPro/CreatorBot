@@ -5,7 +5,7 @@ import asyncio
 from paginator import Paginator
 import re
 from cooldown import Cooldown
-from mystbin import Client
+import mystbin
 
 
 class Misc(commands.Cog):
