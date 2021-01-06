@@ -2220,8 +2220,6 @@ class Misc(commands.Cog):
 
     @commands.command(aliases=['code-format', "codeformat", "code format"], description="This command is used for assisting you with formatting your code!")
     async def code_format(self, ctx):
-        questions = ["Is your code longer or shorter? Can it fit in a single message? (yes/no)", "Please paste your code!", "Is there more code? (yes/no)", "Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on"]
-        decision_answers = ["yes", "no", "cancel"]
         cancel_prompt_embed = discord.Embed(
             title="**CANCELLED**",
             description="***The setup has been cancelled.***",
@@ -2235,11 +2233,11 @@ class Misc(commands.Cog):
         )
         question_embed = discord.Embed(
             title="**CODE FORMAT**",
+            description="Is your code longer or shorter? Can it fit in a single message? (yes/no)",
             color=0x0064ff
         )
         question_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
         await ctx.send(embed=starting_embed)
-        question_embed.description = questions[0]
         await ctx.author.send(embed=question_embed)
 
         def check_dm(m):
@@ -2261,7 +2259,7 @@ class Misc(commands.Cog):
             for x in range(11):
                 code_request_embed = discord.Embed(
                     title="**CODE FORMAT**",
-                    description=questions[1],
+                    description="Please paste your code!",
                     color=0x0064ff
                 )
                 code_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
@@ -2282,7 +2280,7 @@ class Misc(commands.Cog):
                     return
                 more_code_question_embed = discord.Embed(
                     title="**CODE FORMAT**",
-                    description=questions[2],
+                    description="Is there more code? (yes/no)",
                     color=0x0064ff
                 )
                 more_code_question_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
@@ -2302,7 +2300,7 @@ class Misc(commands.Cog):
                     break
         code_request_embed = discord.Embed(
             title="**CODE FORMAT**",
-            description=questions[1],
+            description="Please paste your code!",
             color=0x0064ff
         )
         code_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
@@ -2320,7 +2318,7 @@ class Misc(commands.Cog):
             return
         code_format_request_embed = discord.Embed(
             title="**CODE FORMAT**",
-            description=questions[3],
+            description="Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on",
             color=0x0064ff
         )
         code_format_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
@@ -2335,6 +2333,12 @@ class Misc(commands.Cog):
         if code_format_answer.lower() == "cancel":
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
+            return
+        f = open("formats.txt", "r")
+        if code_format_answer in f:
+            f.close()
+        else:
+            await ctx.author.send("Unknown format!")
             return
         try:
             formated_code = f"\`\`\`{code_format_answer}\n{code_answer}\n\`\`\`"
