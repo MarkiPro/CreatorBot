@@ -7,6 +7,7 @@ import aiohttp
 import discord
 from PIL import Image, ImageDraw, ImageFont
 from discord.ext import commands
+import robloxpy.User.Internal as LocalUser
 import robloxpy.User.External as External
 
 
@@ -226,6 +227,10 @@ class Verification(commands.Cog):
         )
         await log_channel.send(embed=log_embed)
 
+    @commands.command()
+    async def check_if(self, ctx):
+        IsOver13 = LocalUser.UserAbove13
+        print(IsOver13)
 
 def setup(bot):
     bot.add_cog(Verification(bot))
