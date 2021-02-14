@@ -48,8 +48,8 @@ class Misc(commands.Cog):
         usd_string = str(usd)
         robux_string = str(robux_amount)
 
-        times_of_iteration_for_usd = int(len(usd_string) / 3)
-        times_of_iteration_for_robux = int(len(robux_string) / 3)
+        times_of_iteration_for_usd = int(usd / 3)
+        times_of_iteration_for_robux = int(robux_amount / 3)
 
         if times_of_iteration_for_robux >= 1:
             for iteration in range(times_of_iteration_for_robux):
