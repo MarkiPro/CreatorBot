@@ -47,11 +47,12 @@ class Misc(commands.Cog):
 
         usd_string = str(usd)
 
-        times_of_iteration = int(len(usd_string) / 3)
+        times_of_iteration_for_usd = int(len(usd_string) / 3)
+
         for iteration in range(times_of_iteration):
             usd_string = usd_string[:-int(3*iteration)] + ", " + usd_string[-int(3*iteration):]
 
-        return await ctx.channel.send(f"**{robux_amount}** Robux is equivalent to {usd} USD.")
+        return await ctx.channel.send(f"**{robux_amount}** Robux is equivalent to **{usd_string}** USD.")
 
     @commands.command(aliases=["for-hire", "forhire"],
                       description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
