@@ -118,6 +118,25 @@ for file in os.listdir('cogs/'):
         print(f"LOADED {file}")
         bot.load_extension(f'cogs.{file[:-3]}')
 
+@bot.event
+async def on_command_error(ctx, error):
+    blocked_list = [">:", ">;", ">0", ">1", ">2", ">3", ">4", ">5", ">6", ">7", ">8", ">9", ">/", ">|", ">_", ">?", "><", ">.", ">,", ">>", ">=", ">-", ">`", ">!", ">@", ">#", ">$", ">%", ">^", ">&", ">*", ">(", ">)"]
+    if isinstance(error, commands.CommandNotFound):
+        if ctx.message.content.startswith(tuple(blocked_list)):
+            return
+        else:
+            pass
+    else:
+        pass
+    embed = discord.Embed(
+        title="**ERROR**",
+        description=f"***:no_entry_sign: {error}***",
+        color=0xff0000
+    )
+    error_msg = await ctx.send(embed=embed)
 
+    await asyncio.sleep(10)
+
+    await error_msg.delete()
 
 bot.run(token)
