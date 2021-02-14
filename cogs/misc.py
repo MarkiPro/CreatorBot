@@ -49,7 +49,7 @@ class Misc(commands.Cog):
 
         times_of_iteration = len(usd_string) / 3
         for iteration in range(times_of_iteration):
-            usd_string = usd_string[:-(3*iteration)] + ", " + usd_string[-(3*iteration):]
+            usd_string = usd_string[:-int(3*iteration)] + ", " + usd_string[-int(3*iteration):]
 
         return ctx.channel.send(f"**{robux_amount}** Robux is equivalent to {usd} USD.")
 
