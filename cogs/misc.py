@@ -2485,7 +2485,7 @@ class Misc(commands.Cog):
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         else:
-            with open("posts.json") as posts:
+            with open("CreatorBot/cogs/posts.json") as posts:
                 posts = json.loads(posts)
                 try:
                     category_json = posts[f"{category}"]
