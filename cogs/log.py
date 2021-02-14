@@ -225,7 +225,20 @@ class Log(Cog):
         staff_role = discord.utils.get(cc_guild.roles, id=756565123350659385)
         banned_words = ["porn", "fuck", "shit", "ass", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger",
                         "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "sex",
-                        "seggz", "segz", "cnut", "fcuk", "penis", "fück", "cünt", "fúck", "cúnt", "fùck", "cùnt", "fŭck", "cŭnt", "fûck", "cûnt", "fǔck", "cǔnt", "fůck", "cůnt", "fǘck", "cǘnt", "fǜck", "cǜnt", "fǚck", "cǚnt", "fǖck", "cǖnt", "fűck", "cűnt", "fũck", "cũnt", "fṹck", "cṹnt", "fųck", "cųnt", "fų́ck", "cų́nt", "fų̃ck", "cų̃nt", "fūck", "cūnt", "fṻck", "cṻnt", "fū̀ck", "cū̀nt", "fū́ck", "cū́nt", "fū̃ck", "cū̃nt", "fủck", "củnt", "fȕck", "cȕnt", "fȗck", "cȗnt", "fưck", "cưnt", "fứck", "cứnt", "fừck", "cừnt", "fữck", "cữnt", "fửck", "cửnt", "fựck", "cựnt", "fụck", "cụnt", "fṳck", "cṳnt", "fṷck", "cṷnt", "fṵck", "cṵnt", "fʉck", "cʉnt", "fᶙck", "cᶙnt", "fꭒck", "cꭒnt"]
+                        "seggz", "segz", "cnut", "fcuk", "penis", "fück", "cünt", "fúck", "cúnt", "fùck", "cùnt",
+                        "fŭck", "cŭnt", "fûck", "cûnt", "fǔck", "cǔnt", "fůck", "cůnt", "fǘck", "cǘnt", "fǜck", "cǜnt",
+                        "fǚck", "cǚnt", "fǖck", "cǖnt", "fűck", "cűnt", "fũck", "cũnt", "fṹck", "cṹnt", "fųck", "cųnt",
+                        "fų́ck", "cų́nt", "fų̃ck", "cų̃nt", "fūck", "cūnt", "fṻck", "cṻnt", "fū̀ck", "cū̀nt", "fū́ck",
+                        "cū́nt", "fū̃ck", "cū̃nt", "fủck", "củnt", "fȕck", "cȕnt", "fȗck", "cȗnt", "fưck", "cưnt",
+                        "fứck", "cứnt", "fừck", "cừnt", "fữck", "cữnt", "fửck", "cửnt", "fựck", "cựnt", "fụck", "cụnt",
+                        "fṳck", "cṳnt", "fṷck", "cṷnt", "fṵck", "cṵnt", "fʉck", "cʉnt", "fᶙck", "cᶙnt", "fꭒck", "cꭒnt",
+                        "fcük", "cnüt", "fcúk", "cnút", "fcùk", "cnùt", "fcŭk", "cnŭt", "fcûk", "cnût", "fcǔk", "cnǔt",
+                        "fcůk", "cnůt", "fcǘk", "cnǘt", "fcǜk", "cnǜt", "fcǚk", "cnǚt", "fcǖk", "cnǖt", "fcűk", "cnűt",
+                        "fcũk", "cnũt", "fcṹk", "cnṹt", "fcųk", "cnųt", "fcų́k", "cnų́t", "fcų̃k", "cnų̃t", "fcūk",
+                        "cnūt", "fcṻk", "cnṻt", "fcū̀k", "cnū̀t", "fcū́k", "cnū́t", "fcū̃k", "cnū̃t", "fcủk", "cnủt",
+                        "fcȕk", "cnȕt", "fcȗk", "cnȗt", "fcưk", "cnưt", "fcứk", "cnứt", "fcừk", "cnừt", "fcữk", "cnữt",
+                        "fcửk", "cnửt", "fcựk", "cnựt", "fcụk", "cnụt", "fcṳk", "cnṳt", "fcṷk", "cnṷt", "fcṵk", "cnṵt",
+                        "fcʉk", "cnʉt", "fcᶙk", "cnᶙt", "fcꭒk", "cnꭒt"]
         mute_role = discord.utils.get(cc_guild.roles, id=712730274412232807)
 
         if message.author == self.bot.user:
@@ -256,7 +269,7 @@ class Log(Cog):
         if matched_inv:
             matched_invite = re.search("discord.gg/\w+|discord.com/invite/\w+", message.content).group()
             invite = await self.bot.fetch_invite(matched_invite)
-            if invite.guild is not cc_guild and not message.author is self.bot.user:
+            if invite.guild is not cc_guild and message.author != self.bot.user:
                 await message.author.send("No advertising allowed!")
                 log_embed_punished = discord.Embed(
                     title="**Member Advertising**",
@@ -266,12 +279,12 @@ class Log(Cog):
                 )
                 try:
                     log_embed_punished.set_thumbnail(url=message.author.avatar_url)
-                except:
+                except Exception:
                     pass
                 await log_channel.send(embed=log_embed_punished)
                 self.invite_muteable_offence += 1
                 await message.delete()
-        if self.invite_muteable_offence >= 3 and not message.author is self.bot.user:
+        if self.invite_muteable_offence >= 3 and message.author != self.bot.user:
             self.invite_kickable_offence += 1
             log_embed_muted = discord.Embed(
                 title="**Member Auto-Muted**",
@@ -281,7 +294,7 @@ class Log(Cog):
             )
             try:
                 log_embed_muted.set_thumbnail(url=message.author.avatar_url)
-            except:
+            except Exception:
                 pass
             await log_channel.send(embed=log_embed_muted)
             await message.author.add_roles(mute_role)
@@ -289,7 +302,7 @@ class Log(Cog):
             await asyncio.sleep(1800)
             await message.author.remove_roles(mute_role)
 
-        if self.invite_kickable_offence >= 3 and not message.author is self.bot.user:
+        if self.invite_kickable_offence >= 3 and message.author != self.bot.user:
             kick_embed = discord.Embed(
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been kicked in **{log_channel.guild}** for advertising other servers!*",
@@ -298,7 +311,7 @@ class Log(Cog):
             )
             try:
                 await message.author.send(embed=kick_embed)
-            except:
+            except Exception:
                 pass
             log_embed_kicked = discord.Embed(
                 title="**Member Kicked**",
@@ -308,7 +321,7 @@ class Log(Cog):
             )
             try:
                 log_embed_kicked.set_thumbnail(url=message.author.avatar_url)
-            except:
+            except Exception:
                 pass
             await log_channel.send(embed=log_embed_kicked)
             self.invite_kickable_offence = 0
@@ -332,11 +345,11 @@ class Log(Cog):
 
             try:
                 await message.author.send(embed=ban_embed)
-            except:
+            except Exception:
                 pass
             try:
                 await message.author.ban(reason="Sent something inappropriate, or turned out to be underage!")
-            except:
+            except Exception:
                 return
             if any(re.findall("|".join(banned_racial_words), message.content, re.IGNORECASE)):
                 ban_embed_reason = discord.Embed(
@@ -347,7 +360,7 @@ class Log(Cog):
                 )
                 try:
                     ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
-                except:
+                except Exception:
                     pass
                 await log_channel.send(embed=ban_embed_reason)
             if re.findall("https://web.roblox.com", message.content, re.IGNORECASE):
@@ -359,7 +372,7 @@ class Log(Cog):
                 )
                 try:
                     ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
-                except:
+                except Exception:
                     pass
                 await log_channel.send(embed=ban_embed_reason)
             if any(re.findall("|".join(banned_links_v2), message.content, re.IGNORECASE)):
@@ -371,7 +384,7 @@ class Log(Cog):
                 )
                 try:
                     ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
-                except:
+                except Exception:
                     pass
                 await log_channel.send(embed=ban_embed_reason)
         if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
@@ -442,7 +455,8 @@ class Log(Cog):
     async def on_message_edit(self, before, after):
         messages_log_channel = self.bot.get_channel(771471454629003314)
         message = after
-        banned_links = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://web.roblox.com", "https://brazzers.com"]
+        banned_links = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://web.roblox.com",
+                        "https://brazzers.com"]
         banned_racial_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah",
                                "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger",
                                "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar",
@@ -453,7 +467,13 @@ class Log(Cog):
         staff_role = discord.utils.get(cc_guild.roles, id=756565123350659385)
         banned_words = ["porn", "fuck", "shit", "ass", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger",
                         "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "sex",
-                        "seggz", "segz", "cnut", "fcuk", "penis", "fück", "cünt", "fúck", "cúnt", "fùck", "cùnt", "fŭck", "cŭnt", "fûck", "cûnt", "fǔck", "cǔnt", "fůck", "cůnt", "fǘck", "cǘnt", "fǜck", "cǜnt", "fǚck", "cǚnt", "fǖck", "cǖnt", "fűck", "cűnt", "fũck", "cũnt", "fṹck", "cṹnt", "fųck", "cųnt", "fų́ck", "cų́nt", "fų̃ck", "cų̃nt", "fūck", "cūnt", "fṻck", "cṻnt", "fū̀ck", "cū̀nt", "fū́ck", "cū́nt", "fū̃ck", "cū̃nt", "fủck", "củnt", "fȕck", "cȕnt", "fȗck", "cȗnt", "fưck", "cưnt", "fứck", "cứnt", "fừck", "cừnt", "fữck", "cữnt", "fửck", "cửnt", "fựck", "cựnt", "fụck", "cụnt", "fṳck", "cṳnt", "fṷck", "cṷnt", "fṵck", "cṵnt", "fʉck", "cʉnt", "fᶙck", "cᶙnt", "fꭒck", "cꭒnt"]
+                        "seggz", "segz", "cnut", "fcuk", "penis", "fück", "cünt", "fúck", "cúnt", "fùck", "cùnt",
+                        "fŭck", "cŭnt", "fûck", "cûnt", "fǔck", "cǔnt", "fůck", "cůnt", "fǘck", "cǘnt", "fǜck", "cǜnt",
+                        "fǚck", "cǚnt", "fǖck", "cǖnt", "fűck", "cűnt", "fũck", "cũnt", "fṹck", "cṹnt", "fųck", "cųnt",
+                        "fų́ck", "cų́nt", "fų̃ck", "cų̃nt", "fūck", "cūnt", "fṻck", "cṻnt", "fū̀ck", "cū̀nt", "fū́ck",
+                        "cū́nt", "fū̃ck", "cū̃nt", "fủck", "củnt", "fȕck", "cȕnt", "fȗck", "cȗnt", "fưck", "cưnt",
+                        "fứck", "cứnt", "fừck", "cừnt", "fữck", "cữnt", "fửck", "cửnt", "fựck", "cựnt", "fụck", "cụnt",
+                        "fṳck", "cṳnt", "fṷck", "cṷnt", "fṵck", "cṵnt", "fʉck", "cʉnt", "fᶙck", "cᶙnt", "fꭒck", "cꭒnt"]
         mute_role = discord.utils.get(cc_guild.roles, id=712730274412232807)
 
         if message.author == self.bot.user:
@@ -501,12 +521,12 @@ class Log(Cog):
                 )
                 try:
                     log_embed_punished.set_thumbnail(url=message.author.avatar_url)
-                except:
+                except Exception:
                     pass
                 await log_channel.send(embed=log_embed_punished)
                 self.invite_muteable_offence += 1
                 await message.delete()
-        if self.invite_muteable_offence >= 3 and not message.author is self.bot.user:
+        if self.invite_muteable_offence >= 3 and message.author != self.bot.user:
             self.invite_kickable_offence += 1
             log_embed_muted = discord.Embed(
                 title="**Member Auto-Muted**",
@@ -516,7 +536,7 @@ class Log(Cog):
             )
             try:
                 log_embed_muted.set_thumbnail(url=message.author.avatar_url)
-            except:
+            except Exception:
                 pass
             await log_channel.send(embed=log_embed_muted)
             await message.author.add_roles(mute_role)
@@ -524,7 +544,7 @@ class Log(Cog):
             await asyncio.sleep(1800)
             await message.author.remove_roles(mute_role)
 
-        if self.invite_kickable_offence >= 3 and not message.author is self.bot.user:
+        if self.invite_kickable_offence >= 3 and message.author != self.bot.user:
             kick_embed = discord.Embed(
                 title="**NOTIFICATION**",
                 description=f":bell: *You have been kicked in **{log_channel.guild}** for advertising other servers!*",
@@ -533,7 +553,7 @@ class Log(Cog):
             )
             try:
                 await message.author.send(embed=kick_embed)
-            except:
+            except Exception:
                 pass
             log_embed_kicked = discord.Embed(
                 title="**Member Kicked**",
@@ -543,7 +563,7 @@ class Log(Cog):
             )
             try:
                 log_embed_kicked.set_thumbnail(url=message.author.avatar_url)
-            except:
+            except Exception:
                 pass
             await log_channel.send(embed=log_embed_kicked)
             self.invite_kickable_offence = 0
@@ -568,11 +588,11 @@ class Log(Cog):
 
             try:
                 await message.author.send(embed=ban_embed)
-            except:
+            except Exception:
                 pass
             try:
                 await message.author.ban(reason="Sent something inappropriate, or turned out to be underage!")
-            except:
+            except Exception:
                 return
             if any(re.findall("|".join(banned_racial_words), message.content, re.IGNORECASE)):
                 ban_embed_reason = discord.Embed(
@@ -583,7 +603,7 @@ class Log(Cog):
                 )
                 try:
                     ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
-                except:
+                except Exception:
                     pass
                 await log_channel.send(embed=ban_embed_reason)
             if re.findall("https://web.roblox.com", message.content, re.IGNORECASE):
@@ -595,7 +615,7 @@ class Log(Cog):
                 )
                 try:
                     ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
-                except:
+                except Exception:
                     pass
                 await log_channel.send(embed=ban_embed_reason)
             if any(re.findall("|".join(banned_links_v2), message.content, re.IGNORECASE)):
@@ -607,7 +627,7 @@ class Log(Cog):
                 )
                 try:
                     ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
-                except:
+                except Exception:
                     pass
                 await log_channel.send(embed=ban_embed_reason)
         if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
@@ -641,7 +661,10 @@ class Log(Cog):
                           732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698,
                           735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516,
                           735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672,
-                          734527854871707762, 746758563703291938, 695328817157373992, 741735258411499560, 722793289119432736, 734638949162811470, 734639357360603166, 734639430828032061, 734639586038513716, 734639664606085133, 742333164352962581, 742333167133786124, 742333168576888943, 742333169423876106, 745347527209123871]
+                          734527854871707762, 746758563703291938, 695328817157373992, 741735258411499560,
+                          722793289119432736, 734638949162811470, 734639357360603166, 734639430828032061,
+                          734639586038513716, 734639664606085133, 742333164352962581, 742333167133786124,
+                          742333168576888943, 742333169423876106, 745347527209123871]
         role_update_log_channel = self.bot.get_channel(770368850679169075)
         nick_update_log_channel = self.bot.get_channel(771465528618254347)
 
@@ -665,7 +688,7 @@ class Log(Cog):
             role_difference_set = set(after.roles).difference(set(before.roles))
             for first_role in role_difference_set:
                 actual_role = discord.utils.get(guild.roles, name=str(first_role))
-                if not actual_role.id in excluded_roles:
+                if actual_role.id not in excluded_roles:
                     role_log_embed = discord.Embed(
                         title="**Role Update**",
                         description=f"*Role Added for **{after.mention}***!",
@@ -680,7 +703,7 @@ class Log(Cog):
             role_difference_set = set(before.roles).difference(set(after.roles))
             for first_role in role_difference_set:
                 actual_role = discord.utils.get(guild.roles, name=str(first_role))
-                if not actual_role.id in excluded_roles:
+                if actual_role.id not in excluded_roles:
                     role_log_embed = discord.Embed(
                         title="**Role Update**",
                         description=f"*Role removed for **{after.mention}***!",
