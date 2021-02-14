@@ -6,6 +6,9 @@ from paginator import Paginator
 import re
 from cooldown import Cooldown
 import mystbin
+import json
+from pathlib import Path
+import os
 
 
 class Misc(commands.Cog):
@@ -43,13 +46,13 @@ class Misc(commands.Cog):
     @commands.command(description="This command converts Roblox Currency (Robux) into USD.")
     async def convert(self, ctx, robux):
         robux_amount = int(robux)
-        usd = robux_amount * 0.0035
+        usd_amount = robux_amount * 0.0035
 
-        usd_string = str(usd)
+        usd_string = str(usd_amount)
         robux_string = str(robux_amount)
 
-        times_of_iteration_for_usd = int(usd / 3)
-        times_of_iteration_for_robux = int(robux_amount / 3)
+        times_of_iteration_for_usd = int(len(usd_string) / 3)
+        times_of_iteration_for_robux = int(len(robux_string) / 3)
 
         if times_of_iteration_for_robux >= 1:
             for iteration in range(times_of_iteration_for_robux):
@@ -2359,7 +2362,7 @@ class Misc(commands.Cog):
                             await ctx.author.send("Something went wrong!")
                     break
 
-        if answer == "yes":
+        elif answer == "yes":
             code_request_embed = discord.Embed(
                 title="**CODE FORMAT**",
                 description="Please paste your code!",
@@ -2472,403 +2475,46 @@ class Misc(commands.Cog):
                 return False
         try:
             picked_category_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-            category = picked_category_message.content
+            category = picked_category_message.content.lower()
         except asyncio.TimeoutError:
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        if category.lower() == "cancel":
+        if category == "cancel":
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             await ctx.author.send(embed=cancel_prompt_embed)
             return
-        elif re.findall("hiring", category, re.IGNORECASE):
-            if self.hiring_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.hiring_cool.cooldown_start_time).total_seconds() < 3600:
-                await self.hiring_cool.time_it(user=ctx.author)
-                return
-            hiring_embed1 = discord.Embed(
-                title="**HIRING POST**",
-                description="***Tell us more about the job, you may freely go into detail as much as you feel like is needed.***",
-                color=0x0064ff
-            )
-            hiring_embed1.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=hiring_embed1)
-            try:
-                hiring_details_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                hiring_details = hiring_details_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if hiring_details.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            hiring_embed2 = discord.Embed(
-                title="**HIRING POST**",
-                description="***Describe the payment to this job.***",
-                color=0x0064ff
-            )
-            hiring_embed2.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=hiring_embed2)
-            try:
-                hiring_payment_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                hiring_payment = hiring_payment_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if hiring_payment.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            hiring_embed3 = discord.Embed(
-                title="**HIRING POST**",
-                description="***Showcase some of your work here, could be a link to a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                color=0x0064ff
-            )
-            hiring_embed3.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=hiring_embed3)
-            try:
-                hiring_image_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                hiring_image = hiring_image_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if hiring_image.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            hiring_embed4 = discord.Embed(
-                title="**HIRING POST**",
-                description="***In case you have something else that you would like to add onto the previous statements, please provide it now.***",
-                color=0x0064ff
-            )
-            hiring_embed4.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=hiring_embed4)
-            try:
-                hiring_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                hiring_other = hiring_other_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if hiring_other.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            await ctx.author.send(
-                "Would you like to send this for Post Approval?\n Reply with `yes` or `no`")
-            try:
-                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                final_choice = final_choice_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if re.findall("no", final_choice, re.IGNORECASE):
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if re.findall("yes", final_choice, re.IGNORECASE):
-                await ctx.author.send("Sent for approval!")
-                some_channel = self.bot.get_channel(739247560065024050)
-                end_channel = self.bot.get_channel(727550350097252482)
-                title = "**HIRING POST**"
-                pag = Paginator(
-                    f"**About the job:** {hiring_details}\n**Payment:** {hiring_payment}\n**Showcase:** {hiring_image}\n**Other:** {hiring_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                    1985)
-
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
-                self.hiring_cool = Cooldown(time=datetime.datetime.utcnow())
-        elif re.findall("for_hire|for hire|for-hire|forhire", category, re.IGNORECASE):
-            if self.for_hire_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.for_hire_cool.cooldown_start_time).total_seconds() < 3600:
-                await self.for_hire_cool.time_it(user=ctx.author)
-                return
-            for_hire_embed1 = discord.Embed(
-                title="**FOR-HIRE POST**",
-                description="***Define your specialties here, like for example a Java programmer, an Artist et cetera.***",
-                color=0x0064ff
-            )
-            for_hire_embed1.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=for_hire_embed1)
-            try:
-                for_hire_specialties_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                for_hire_specialties = for_hire_specialties_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if for_hire_specialties.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            for_hire_embed2 = discord.Embed(
-                title="**FOR-HIRE POST**",
-                description="***Showcase some of your previous work examples here, could be a link to a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                color=0x0064ff
-            )
-            for_hire_embed2.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=for_hire_embed2)
-            try:
-                for_hire_showcase_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                for_hire_showcase = for_hire_showcase_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if for_hire_showcase.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            for_hire_embed3 = discord.Embed(
-                title="**FOR-HIRE POST**",
-                description="***What is your desired payment for the job? Please define it here.***",
-                color=0x0064ff
-            )
-            for_hire_embed3.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=for_hire_embed3)
-            try:
-                for_hire_payment_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                for_hire_payment = for_hire_payment_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if for_hire_payment.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            for_hire_embed4 = discord.Embed(
-                title="**FOR-HIRE POST**",
-                description="***In case you have something else that you would like to add onto the previous statements, please provide it now.***",
-                color=0x0064ff
-            )
-            for_hire_embed4.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=for_hire_embed4)
-            try:
-                for_hire_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                for_hire_other = for_hire_other_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if for_hire_other.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            await ctx.author.send(
-                "Would you like to send this for Post Approval?\n Reply with `yes` or `no`")
-            try:
-                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                final_choice = final_choice_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if re.findall("no", final_choice, re.IGNORECASE):
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            elif re.findall("yes", final_choice, re.IGNORECASE):
-                await ctx.author.send("Sent for approval!")
-                some_channel = self.bot.get_channel(739247630193786900)
-                end_channel = self.bot.get_channel(727550761801613393)
-                title = "**FOR-HIRE POST**"
-                pag = Paginator(
-                    f"**Specialties:** {for_hire_specialties}\n**Showcase:** {for_hire_showcase}\n**Payment:** {for_hire_payment}\n**Other:** {for_hire_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                    1985)
-
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
-                self.for_hire_cool = Cooldown(time=datetime.datetime.utcnow())
-        elif re.findall("sell_creations|sell creations|sell-creations|sellcreations", category, re.IGNORECASE):
-            if self.sell_creations_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.sell_creations_cool.cooldown_start_time).total_seconds() < 3600:
-                await self.sell_creations_cool.time_it(user=ctx.author)
-                return
-            sell_creations_embed1 = discord.Embed(
-                title="**SELL-CREATIONS POST**",
-                description="***Showcase the creation here. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***",
-                color=0x0064ff
-            )
-            sell_creations_embed1.set_footer(
-                text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=sell_creations_embed1)
-            try:
-                sell_creations_showcase_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                sell_creations_showcase = sell_creations_showcase_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if sell_creations_showcase.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            sell_creations_embed2 = discord.Embed(
-                title="**SELL-CREATIONS POST**",
-                description="***What is your desired payment for your work? Please define it here.***",
-                color=0x0064ff
-            )
-            sell_creations_embed2.set_footer(
-                text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=sell_creations_embed2)
-            try:
-                sell_creations_payment_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                sell_creations_payment = sell_creations_payment_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if sell_creations_payment.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            sell_creations_embed3 = discord.Embed(
-                title="**SELL-CREATIONS POST**",
-                description="***In case you have something else that you would like to add onto the previous statements, please provide it now.***",
-                color=0x0064ff
-            )
-            sell_creations_embed3.set_footer(
-                text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=sell_creations_embed3)
-            try:
-                sell_creations_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                sell_creations_other = sell_creations_other_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if sell_creations_other.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            await ctx.author.send(
-                "Would you like to send this for Post Approval?\n Reply with `yes` or `no`")
-            try:
-                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                final_choice = final_choice_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if re.findall("no", final_choice, re.IGNORECASE):
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            elif re.findall("yes", final_choice, re.IGNORECASE):
-                await ctx.author.send("Sent for approval!")
-                some_channel = self.bot.get_channel(739247602393940168)
-                end_channel = self.bot.get_channel(727550553806340197)
-                title = "**SELL-CREATIONS POST**"
-                pag = Paginator(
-                    f"**Showcase:** {sell_creations_showcase}\n**Payment:** {sell_creations_payment}\n**Other:** {sell_creations_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                    1985)
-
-                await pag.send(self.bot, some_channel, end_channel, ctx.author, title, mute_role=post_muted)
-                self.sell_creations_cool = Cooldown(time=datetime.datetime.utcnow())
-        elif re.findall("report", category, re.IGNORECASE):
-            if self.report_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.report_cool.cooldown_start_time).total_seconds() < 3600:
-                await self.report_cool.time_it(user=ctx.author)
-                return
-            report_embed1 = discord.Embed(
-                title="**REPORT POST**",
-                description="***Who are you filing this report on? Please provide their Username and Discriminator/Tag. Example: Noob#1234 or MarkiPro#3753***",
-                color=0x0064ff
-            )
-            report_embed1.set_footer(
-                text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=report_embed1)
-            try:
-                reported_user_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                reported_user = reported_user_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if reported_user.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            report_embed2 = discord.Embed(
-                title="**REPORT POST**",
-                description="***What did this person do?***",
-                color=0x0064ff
-            )
-            report_embed2.set_footer(
-                text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=report_embed2)
-            try:
-                report_reason_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                report_reason = report_reason_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if report_reason.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            report_embed3 = discord.Embed(
-                title="**REPORT POST**",
-                description="***Do you have any evidence? If so, provide it here (ATTACHMENTS ARE NOT SUPPORTED!)***",
-                color=0x0064ff
-            )
-            report_embed3.set_footer(
-                text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=report_embed3)
-            try:
-                report_evidence_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                report_evidence = report_evidence_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if report_evidence.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            report_embed4 = discord.Embed(
-                title="**REPORT POST**",
-                description="***In case you have something else you wanted to add onto your current statement, please do.***",
-                color=0x0064ff
-            )
-            report_embed4.set_footer(
-                text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-            await ctx.author.send(embed=report_embed4)
-            try:
-                report_other_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                report_other = report_other_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if report_other.lower() == "cancel":
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            await ctx.author.send(
-                "Would you like to send this for Post Approval?\n Reply with `yes` or `no`")
-            try:
-                final_choice_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                final_choice = final_choice_message.content
-            except asyncio.TimeoutError:
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            if re.findall("no", final_choice, re.IGNORECASE):
-                cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                await ctx.author.send(embed=cancel_prompt_embed)
-                return
-            elif re.findall("yes", final_choice, re.IGNORECASE):
-                await ctx.author.send("Sent!")
-                some_channel = self.bot.get_channel(773637163048239124)
-                title = "**REPORT POST**"
-                pag = Paginator(
-                    f"**Subject Information:** {reported_user}\n**Report Reason:** {report_reason}\n**Evidence:** {report_evidence}\n**Other:** {report_other}\n**Contact:** {ctx.author.mention}({ctx.author})",
-                    1985)
-
-                await pag.send(bot=self.bot, channel=some_channel, member=ctx.author, title=title, mute_role=post_muted)
-                self.report_cool = Cooldown(time=datetime.datetime.utcnow())
+        else:
+            with open("posts.json") as posts:
+                try:
+                    category_json = posts[f"{category}"]
+                except:
+                    return await ctx.author.send("There is no such category!")
+                cooldown_category = self[f"{category}cool"]
+                if cooldown_category.cooldown_start_time != 0 and (datetime.datetime.utcnow() - cooldown_category.cooldown_start_time).total_seconds() < 3600:
+                    await self.hiring_cool.time_it(user=ctx.author)
+                    return
+                questions = category_json["questions"]
+                title = category_json["title"]
+                for question in questions:
+                    new_embed = discord.Embed(
+                        title=title,
+                        description=question,
+                        color=0x0064ff
+                    )
+                    new_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+                    await ctx.author.send(embed=new_embed)
+                    try:
+                        details_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                        details = details_message.content
+                    except asyncio.TimeoutError:
+                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                        await ctx.author.send(embed=cancel_prompt_embed)
+                        return
+                    if details.lower() == "cancel":
+                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                        await ctx.author.send(embed=cancel_prompt_embed)
+                        return
 
     @commands.command(
         aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info",
