@@ -40,6 +40,19 @@ class Misc(commands.Cog):
         self.clothing_designer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.gfx_designer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
 
+    @commands.command(description="This command converts Roblox Currency (Robux) into USD.")
+    async def convert(self, ctx, robux):
+        robux_amount = int(robux)
+        usd = robux_amount * 0.0035
+
+        usd_string = str(usd)
+
+        times_of_iteration = int(len(usd_string)) / 3
+        for iteration in range(times_of_iteration):
+            usd_string = usd_string[:-(3*iteration)] + ", " + usd_string[-(3*iteration):]
+
+        return ctx.channel.send(f"**{robux_amount}** Robux is equivalent to {usd} USD.")
+
     @commands.command(aliases=["for-hire", "forhire"],
                       description="Toggle Not For Hire role off, and For Hire on, that way everyone knows you are for hire.")
     @commands.cooldown(1, 300, commands.BucketType.member)
