@@ -47,7 +47,7 @@ class Misc(commands.Cog):
 
         usd_string = str(usd)
 
-        times_of_iteration = int(len(usd_string)) / 3
+        times_of_iteration = len(usd_string) / 3
         for iteration in range(times_of_iteration):
             usd_string = usd_string[:-(3*iteration)] + ", " + usd_string[-(3*iteration):]
 
