@@ -2492,7 +2492,7 @@ class Misc(commands.Cog):
                     category_json = posts[f"{category}"]
                 except:
                     return await ctx.author.send("There is no such category!")
-                cooldown_category = [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"]
+                cooldown_category = [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0]
                 if cooldown_category.cooldown_start_time != 0 and (datetime.datetime.utcnow() - cooldown_category.cooldown_start_time).total_seconds() < 3600:
                     await cooldown_category.time_it(user=ctx.author)
                     return
