@@ -2317,11 +2317,11 @@ class Misc(commands.Cog):
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if more_code_answer == "cancel":
+                if more_code_answer.lower() == "cancel":
                     cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                     await ctx.author.send(embed=cancel_prompt_embed)
                     return
-                if more_code_answer == "no":
+                elif more_code_answer == "no":
                     code_format_request_embed = discord.Embed(
                         title="**CODE FORMAT**",
                         description="Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on",
@@ -2485,7 +2485,7 @@ class Misc(commands.Cog):
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         else:
-            with open("posts.json") as posts:
+            with open("cogs/posts.json") as posts:
                 posts = json.loads(posts)
                 try:
                     category_json = posts[f"{category}"]
