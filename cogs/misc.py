@@ -2422,6 +2422,7 @@ class Misc(commands.Cog):
 
     @commands.command(description="This command is used for posting.")
     async def post(self, ctx):
+        post_text = ""
         allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
         post_muted = ctx.guild.get_role(780494155075420262)
@@ -2431,8 +2432,7 @@ class Misc(commands.Cog):
         else:
             pass
         if ctx.channel.id not in allowed_channels:
-            await ctx.send("Run the command again in <#712659793008918538>")
-            return
+            return await ctx.send("Run the command again in <#712659793008918538>")
         cancel_prompt_embed = discord.Embed(
             title="**CANCELLED**",
             description="***The setup has been cancelled.***",
@@ -2479,12 +2479,10 @@ class Misc(commands.Cog):
             category = picked_category_message.content.lower()
         except asyncio.TimeoutError:
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-            await ctx.author.send(embed=cancel_prompt_embed)
-            return
+            return await ctx.author.send(embed=cancel_prompt_embed)
         if category == "cancel":
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-            await ctx.author.send(embed=cancel_prompt_embed)
-            return
+            return await ctx.author.send(embed=cancel_prompt_embed)
         else:
             with open("cogs/posts.json", "r") as posts:
                 posts = json.load(posts)
@@ -2494,10 +2492,18 @@ class Misc(commands.Cog):
                     return await ctx.author.send("There is no such category!")
                 cooldown_category = [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0]
                 if cooldown_category.cooldown_start_time != 0 and (datetime.datetime.utcnow() - cooldown_category.cooldown_start_time).total_seconds() < 3600:
-                    await cooldown_category.time_it(user=ctx.author)
-                    return
+                    return await cooldown_category.time_it(user=ctx.author)
                 questions = category_json["questions"]
                 title = category_json["title"]
+
+                mute_role_id = category_json["mute_role"]
+                channel_id = category_json["channel"]
+                final_channel_id = category_json["end_channel"]
+
+                mute_role = ctx.guild.get_role(mute_role_id)
+                channel = self.bot.get_channel(channel_id)
+                final_channel = self.bot.get_channel(final_channel_id)
+
                 for question in questions:
                     new_embed = discord.Embed(
                         title=title,
@@ -2511,12 +2517,18 @@ class Misc(commands.Cog):
                         details = details_message.content
                     except asyncio.TimeoutError:
                         cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
+                        return await ctx.author.send(embed=cancel_prompt_embed)
                     if details.lower() == "cancel":
                         cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        await ctx.author.send(embed=cancel_prompt_embed)
-                        return
+                        return await ctx.author.send(embed=cancel_prompt_embed)
+                    if question == len(questions):
+                        if details.lower() == "yes":
+                            pag = Paginator(post_text, 1985)
+
+                            await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author, title=title, mute_role=mute_role)
+                        else:
+                            pass
+                    post_text.join(f"**{question}:** {details}\n")
 
     @commands.command(
         aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info",
