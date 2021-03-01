@@ -2507,6 +2507,7 @@ class Misc(commands.Cog):
 
                 position = 0
                 for question in questions:
+                    print(f"{position}/{len(questions)}")
                     new_embed = discord.Embed(
                         title=title,
                         description=questions[question],
