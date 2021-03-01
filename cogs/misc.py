@@ -2505,7 +2505,7 @@ class Misc(commands.Cog):
                 if final_channel_id:
                     final_channel = self.bot.get_channel(final_channel_id)
 
-                position = 0
+                position = 1
                 for question in questions:
                     print(f"{position}/{len(questions)}")
                     new_embed = discord.Embed(
