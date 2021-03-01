@@ -2486,7 +2486,7 @@ class Misc(commands.Cog):
             return
         else:
             with open("cogs/posts.json", "r") as posts:
-                posts = json.loads(posts)
+                posts = json.load(posts)
                 try:
                     category_json = posts[f"{category}"]
                 except:
