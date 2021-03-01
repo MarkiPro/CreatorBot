@@ -2510,7 +2510,7 @@ class Misc(commands.Cog):
                     print(f"{position}/{len(questions)}")
                     new_embed = discord.Embed(
                         title=title,
-                        description=questions[question],
+                        description=f"{questions[question]}\n\nQuestion: {position}/{len(questions)}",
                         color=0x0064ff
                     )
                     new_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
@@ -2525,7 +2525,9 @@ class Misc(commands.Cog):
                         cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                         return await ctx.author.send(embed=cancel_prompt_embed)
                     if position == len(questions):
+                        print("e")
                         if details.lower() == "yes":
+                            print("hi noob")
                             pag = Paginator(post_text, 1985)
 
                             if final_channel:
@@ -2535,6 +2537,7 @@ class Misc(commands.Cog):
                             cooldown_category = Cooldown(time=datetime.datetime.utcnow())
                             return
                         else:
+                            print("nupe")
                             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                             return await ctx.author.send(embed=cancel_prompt_embed)
                     post_text.join(f"**{question}:** {details}\n")
