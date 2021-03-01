@@ -2501,7 +2501,7 @@ class Misc(commands.Cog):
                 for question in questions:
                     new_embed = discord.Embed(
                         title=title,
-                        description=question,
+                        description=questions[question],
                         color=0x0064ff
                     )
                     new_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
