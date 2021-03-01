@@ -7,8 +7,6 @@ import re
 from cooldown import Cooldown
 import mystbin
 import json
-from pathlib import Path
-import os
 
 
 class Misc(commands.Cog):
@@ -21,7 +19,7 @@ class Misc(commands.Cog):
         self.sell_creations_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.report_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.cpp_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
-        self.lua_programer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        self.lua_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.csharp_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.java_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.python_programmer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
@@ -180,7 +178,7 @@ class Misc(commands.Cog):
         )
         await ctx.send(embed=credits_embed)
 
-    @commands.command(description="This command is used for applying for appliable roles (STAFF ROLES NOT INCLUDED!).")
+    @commands.command(description="This command is used for applying for applicable roles (STAFF ROLES NOT INCLUDED!).")
     async def apply(self, ctx):
         allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
         applications_muted = ctx.guild.get_role(780494171730477086)
@@ -931,9 +929,9 @@ class Misc(commands.Cog):
                                    title=title, mute_role=applications_muted)
                     self.php_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
             elif re.findall("lua programmer", programmer_category, re.IGNORECASE):
-                if self.lua_programer_cool.cooldown_start_time != 0 and (
-                        datetime.datetime.utcnow() - self.lua_programer_cool.cooldown_start_time).total_seconds() < 3600:
-                    await self.lua_programer_cool.time_it(user=ctx.author)
+                if self.lua_programmer_cool.cooldown_start_time != 0 and (
+                        datetime.datetime.utcnow() - self.lua_programmer_cool.cooldown_start_time).total_seconds() < 3600:
+                    await self.lua_programmer_cool.time_it(user=ctx.author)
                     return
                 programmer_embed1 = discord.Embed(
                     title="**Lua Programmer Post**",
@@ -1018,7 +1016,7 @@ class Misc(commands.Cog):
 
                     await pag.send(bot=self.bot, channel=some_channel, role=some_role, member=ctx.author,
                                    title=title, mute_role=applications_muted)
-                    self.lua_programer_cool = Cooldown(time=datetime.datetime.utcnow())
+                    self.lua_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
             elif re.findall("ruby programmer", programmer_category, re.IGNORECASE):
                 if self.ruby_programmer_cool.cooldown_start_time != 0 and (
                         datetime.datetime.utcnow() - self.ruby_programmer_cool.cooldown_start_time).total_seconds() < 3600:
@@ -2425,9 +2423,9 @@ class Misc(commands.Cog):
         post_text = ""
         allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
 
-        post_muted = ctx.guild.get_role(780494155075420262)
+        mute_role = ctx.guild.get_role(780494155075420262)
 
-        if ctx.author in post_muted.members:
+        if ctx.author in mute_role.members:
             return await ctx.send("You are restricted from using this command, you have the `Post Muted` role. Please consult with a staff member about it.")
         else:
             pass
@@ -2493,17 +2491,21 @@ class Misc(commands.Cog):
                 cooldown_category = [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0]
                 if cooldown_category.cooldown_start_time != 0 and (datetime.datetime.utcnow() - cooldown_category.cooldown_start_time).total_seconds() < 3600:
                     return await cooldown_category.time_it(user=ctx.author)
+
                 questions = category_json["questions"]
                 title = category_json["title"]
 
-                mute_role_id = category_json["mute_role"]
                 channel_id = category_json["channel"]
-                final_channel_id = category_json["end_channel"]
+                try:
+                    final_channel_id = category_json["end_channel"]
+                except:
+                    pass
 
-                mute_role = ctx.guild.get_role(mute_role_id)
                 channel = self.bot.get_channel(channel_id)
-                final_channel = self.bot.get_channel(final_channel_id)
+                if final_channel_id:
+                    final_channel = self.bot.get_channel(final_channel_id)
 
+                position = 0
                 for question in questions:
                     new_embed = discord.Embed(
                         title=title,
@@ -2521,14 +2523,21 @@ class Misc(commands.Cog):
                     if details.lower() == "cancel":
                         cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                         return await ctx.author.send(embed=cancel_prompt_embed)
-                    if question == len(questions):
+                    if position == len(questions):
                         if details.lower() == "yes":
                             pag = Paginator(post_text, 1985)
 
-                            await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author, title=title, mute_role=mute_role)
+                            if final_channel:
+                                await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author, title=title, mute_role=mute_role)
+                            else:
+                                await pag.send(bot=self.bot, channel=channel, member=ctx.author, title=title, mute_role=mute_role)
+                            cooldown_category = Cooldown(time=datetime.datetime.utcnow())
+                            return
                         else:
-                            pass
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            return await ctx.author.send(embed=cancel_prompt_embed)
                     post_text.join(f"**{question}:** {details}\n")
+                    position += 1
 
     @commands.command(
         aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info",
@@ -2599,14 +2608,14 @@ class Misc(commands.Cog):
                         value=f"{user.created_at.strftime(format)} ({delta_created.days} days)", inline=True)
         embed.add_field(name="Nickname", value=f"{user.nick}", inline=True)
         embed.add_field(name="Join Position", value=f"#{join_pos}", inline=True)
-        exculded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651,
+        excluded_roles = [611227128020598805, 707957214995808296, 732375953203789965, 743590325448212651,
                           743013370588037191, 732388199107657828, 743013368511594569, 743013366515236915,
                           743013366880272474, 743013367840768072, 743013368134107166, 732387788493946881,
                           732402691296198848, 734149969292034208, 734150445764837466, 734150696944795698,
                           735497751978311681, 734527020905529375, 734664303327838230, 734527130565738516,
                           735557139984285706, 738814580712669214, 734664243038912552, 734527217350082672,
                           734527854871707762, 746758563703291938]
-        roles = ", ".join(role.mention for role in user.roles if role.id not in exculded_roles) or 'No roles assigned.'
+        roles = ", ".join(role.mention for role in user.roles if role.id not in excluded_roles) or 'No roles assigned.'
         embed.add_field(name="Guild Roles", value=f"{roles}", inline=False)
         notable_perms = ['administrator', 'manage_guild', 'view_audit_log', 'manage_roles', 'manage_channels',
                          'ban_members', 'kick_members', 'manage_messages', 'mention_everyone', 'manage_emojis',
