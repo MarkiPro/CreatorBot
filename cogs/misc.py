@@ -42,6 +42,7 @@ class Misc(commands.Cog):
         self.threed_modeler_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.clothing_designer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.gfx_designer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
+        print(type(self))
 
     @commands.command(description="This command converts Roblox Currency (Robux) into USD.")
     async def convert(self, ctx, robux):
@@ -2493,7 +2494,7 @@ class Misc(commands.Cog):
                     return await ctx.author.send("There is no such category!")
                 cooldown_category = self[f"{category}cool"]
                 if cooldown_category.cooldown_start_time != 0 and (datetime.datetime.utcnow() - cooldown_category.cooldown_start_time).total_seconds() < 3600:
-                    await self.hiring_cool.time_it(user=ctx.author)
+                    await cooldown_category.time_it(user=ctx.author)
                     return
                 questions = category_json["questions"]
                 title = category_json["title"]
