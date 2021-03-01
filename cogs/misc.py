@@ -2242,6 +2242,133 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
                 self.animator_cool = Cooldown(time=datetime.datetime.utcnow())
 
+    @commands.command(description="This command is used for posting.")
+    async def post(self, ctx):
+        post_text = ""
+        allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
+
+        mute_role = ctx.guild.get_role(780494155075420262)
+
+        if ctx.author in mute_role.members:
+            return await ctx.send("You are restricted from using this command, you have the `Post Muted` role. Please consult with a staff member about it.")
+        else:
+            pass
+        if ctx.channel.id not in allowed_channels:
+            return await ctx.send("Run the command again in <#712659793008918538>")
+        cancel_prompt_embed = discord.Embed(
+            title="**CANCELLED**",
+            description="***The setup has been cancelled.***",
+            color=0xff0000
+        )
+        categories_embed = discord.Embed(
+            title="**POST SETUP**",
+            description="***Please continue the setup in DMs.***",
+            color=0x0064ff,
+            timestamp=datetime.datetime.utcnow()
+        )
+        categories = discord.Embed(
+            title="**POST SETUP**",
+            description="""
+            ***What would you like to do? Reply with the name of the category you would like to post in.***
+
+
+                `hiring`;
+
+                `for_hire`;
+
+                `sell_creations`;
+
+                `report`;
+
+            """,
+            color=0x0064ff,
+            timestamp=datetime.datetime.utcnow()
+        )
+        categories.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+        await ctx.send(embed=categories_embed)
+        await ctx.author.send(embed=categories)
+
+        def check_dm(m):
+            if isinstance(m.channel, discord.DMChannel):
+                if m.author == ctx.author:
+                    return True
+                else:
+                    return False
+            else:
+                return False
+        try:
+            picked_category_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+            category = picked_category_message.content.lower()
+        except asyncio.TimeoutError:
+            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+            return await ctx.author.send(embed=cancel_prompt_embed)
+        if category == "cancel":
+            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+            return await ctx.author.send(embed=cancel_prompt_embed)
+        else:
+            with open("cogs/posts.json", "r") as posts:
+                posts = json.load(posts)
+                try:
+                    category_json = posts[f"{category}"]
+                except:
+                    return await ctx.author.send("There is no such category!")
+                cooldown_category = [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0]
+                if cooldown_category.cooldown_start_time != 0 and (datetime.datetime.utcnow() - cooldown_category.cooldown_start_time).total_seconds() < 3600:
+                    return await cooldown_category.time_it(user=ctx.author)
+
+                questions = category_json["questions"]
+                title = category_json["title"]
+
+                channel_id = category_json["channel"]
+                try:
+                    final_channel_id = category_json["end_channel"]
+                except:
+                    pass
+
+                channel = self.bot.get_channel(channel_id)
+                if final_channel_id:
+                    final_channel = self.bot.get_channel(final_channel_id)
+
+                position = 1
+                for question in questions:
+                    print(f"{position}/{len(questions)}")
+                    new_embed = discord.Embed(
+                        title=title,
+                        description=f"{questions[question]}\n\nQuestion: {position}/{len(questions)}",
+                        color=0x0064ff
+                    )
+                    new_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+                    await ctx.author.send(embed=new_embed)
+                    try:
+                        details_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
+                        details = details_message.content
+                    except asyncio.TimeoutError:
+                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                        return await ctx.author.send(embed=cancel_prompt_embed)
+                    if details.lower() == "cancel":
+                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                        return await ctx.author.send(embed=cancel_prompt_embed)
+                    if position == len(questions):
+                        print("e")
+                        if details.lower() == "yes":
+                            print("hi noob")
+                            pag = Paginator(post_text, 1985)
+
+                            if final_channel:
+                                await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author, title=title, mute_role=mute_role)
+                                print("aloha")
+                            else:
+                                print("yeeehaaaaaw")
+                                await pag.send(bot=self.bot, channel=channel, member=ctx.author, title=title, mute_role=mute_role)
+                            cooldown_category = Cooldown(time=datetime.datetime.utcnow())
+                            return
+                        else:
+                            print("nupe")
+                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
+                            return await ctx.author.send(embed=cancel_prompt_embed)
+                    post_text.join(f"**{question}:** {details}\n")
+                    position += 1
+
     @commands.command(aliases=['code-format', "codeformat", "code format"], description="This command is used for assisting you with formatting your code!")
     async def code_format(self, ctx):
         cancel_prompt_embed = discord.Embed(
@@ -2417,131 +2544,6 @@ class Misc(commands.Cog):
                     await ctx.author.send(f"This is the link to your code! Copy and paste it where you need to!\n\n{paste_url}")
                 except:
                     await ctx.author.send("Something went wrong!")
-
-    @commands.command(description="This command is used for posting.")
-    async def post(self, ctx):
-        post_text = ""
-        allowed_channels = [712659793008918538, 712624774479740931, 712624686399225907, 722898958996865035]
-
-        mute_role = ctx.guild.get_role(780494155075420262)
-
-        if ctx.author in mute_role.members:
-            return await ctx.send("You are restricted from using this command, you have the `Post Muted` role. Please consult with a staff member about it.")
-        else:
-            pass
-        if ctx.channel.id not in allowed_channels:
-            return await ctx.send("Run the command again in <#712659793008918538>")
-        cancel_prompt_embed = discord.Embed(
-            title="**CANCELLED**",
-            description="***The setup has been cancelled.***",
-            color=0xff0000
-        )
-        categories_embed = discord.Embed(
-            title="**POST SETUP**",
-            description="***Please continue the setup in DMs.***",
-            color=0x0064ff,
-            timestamp=datetime.datetime.utcnow()
-        )
-        categories = discord.Embed(
-            title="**POST SETUP**",
-            description="""
-            ***What would you like to do? Reply with the name of the category you would like to post in.***
-
-
-                `hiring`;
-
-                `for_hire`;
-
-                `sell_creations`;
-
-                `report`;
-
-            """,
-            color=0x0064ff,
-            timestamp=datetime.datetime.utcnow()
-        )
-        categories.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-        await ctx.send(embed=categories_embed)
-        await ctx.author.send(embed=categories)
-
-        def check_dm(m):
-            if isinstance(m.channel, discord.DMChannel):
-                if m.author == ctx.author:
-                    return True
-                else:
-                    return False
-            else:
-                return False
-        try:
-            picked_category_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-            category = picked_category_message.content.lower()
-        except asyncio.TimeoutError:
-            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-            return await ctx.author.send(embed=cancel_prompt_embed)
-        if category == "cancel":
-            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-            return await ctx.author.send(embed=cancel_prompt_embed)
-        else:
-            with open("cogs/posts.json", "r") as posts:
-                posts = json.load(posts)
-                try:
-                    category_json = posts[f"{category}"]
-                except:
-                    return await ctx.author.send("There is no such category!")
-                cooldown_category = [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0]
-                if cooldown_category.cooldown_start_time != 0 and (datetime.datetime.utcnow() - cooldown_category.cooldown_start_time).total_seconds() < 3600:
-                    return await cooldown_category.time_it(user=ctx.author)
-
-                questions = category_json["questions"]
-                title = category_json["title"]
-
-                channel_id = category_json["channel"]
-                try:
-                    final_channel_id = category_json["end_channel"]
-                except:
-                    pass
-
-                channel = self.bot.get_channel(channel_id)
-                if final_channel_id:
-                    final_channel = self.bot.get_channel(final_channel_id)
-
-                position = 1
-                for question in questions:
-                    print(f"{position}/{len(questions)}")
-                    new_embed = discord.Embed(
-                        title=title,
-                        description=f"{questions[question]}\n\nQuestion: {position}/{len(questions)}",
-                        color=0x0064ff
-                    )
-                    new_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-                    await ctx.author.send(embed=new_embed)
-                    try:
-                        details_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
-                        details = details_message.content
-                    except asyncio.TimeoutError:
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        return await ctx.author.send(embed=cancel_prompt_embed)
-                    if details.lower() == "cancel":
-                        cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                        return await ctx.author.send(embed=cancel_prompt_embed)
-                    if position == len(questions):
-                        print("e")
-                        if details.lower() == "yes":
-                            print("hi noob")
-                            pag = Paginator(post_text, 1985)
-
-                            if final_channel:
-                                await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author, title=title, mute_role=mute_role)
-                            else:
-                                await pag.send(bot=self.bot, channel=channel, member=ctx.author, title=title, mute_role=mute_role)
-                            cooldown_category = Cooldown(time=datetime.datetime.utcnow())
-                            return
-                        else:
-                            print("nupe")
-                            cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
-                            return await ctx.author.send(embed=cancel_prompt_embed)
-                    post_text.join(f"**{question}:** {details}\n")
-                    position += 1
 
     @commands.command(
         aliases=["server-info", "si", "s-i", "guild-info", "guildinfo", "gi", "g-i", "server_info", "s_i", "guild_info",
