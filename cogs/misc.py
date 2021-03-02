@@ -2341,8 +2341,12 @@ class Misc(commands.Cog):
                 channel_id = category_json["channel"]
                 final_channel_id = category_json["end_channel"]
 
+                print(channel_id, final_channel_id)
+
                 channel = self.bot.get_channel(channel_id)
                 final_channel = self.bot.get_channel(final_channel_id)
+
+                print(channel, final_channel)
 
                 position = 1
                 for question in questions:
@@ -2366,7 +2370,7 @@ class Misc(commands.Cog):
                         return await ctx.author.send(embed=cancel_prompt_embed)
                     if position == len(questions):
                         if details.lower() == "yes":
-                            pag = Paginator("eeeee", 1985)
+                            pag = Paginator(post_text, 1985)
 
                             await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author,
                                            title=title, mute_role=mute_role)
