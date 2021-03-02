@@ -41,7 +41,6 @@ class Misc(commands.Cog):
         self.threed_modeler_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.clothing_designer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.gfx_designer_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
-        print(type(self))
 
     @commands.command(description="This command converts Roblox Currency (Robux) into USD.")
     async def convert(self, ctx, robux):
@@ -2331,8 +2330,8 @@ class Misc(commands.Cog):
                     return await ctx.author.send("There is no such category!")
                 cooldown_category = [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if
                                      category_cooldown == f"{category}_cool"][0]
-                if cooldown_category.cooldown_start_time != 0 and (
-                        datetime.datetime.utcnow() - cooldown_category.cooldown_start_time).total_seconds() < 3600:
+                if cooldown_category.cooldown_start_time != 0 and (datetime.datetime.utcnow() - cooldown_category.cooldown_start_time).total_seconds() < 3600:
+                    print("cooldown")
                     return await cooldown_category.time_it(user=ctx.author)
 
                 questions = category_json["questions"]
@@ -2350,7 +2349,6 @@ class Misc(commands.Cog):
 
                 position = 1
                 for question in questions:
-                    print(f"{position}/{len(questions)}")
                     new_embed = discord.Embed(
                         title=title,
                         description=f"{questions[question]}\n\nQuestion: {position}/{len(questions)}",
@@ -2379,8 +2377,7 @@ class Misc(commands.Cog):
                             else:
                                 await pag.send(bot=self.bot, channel=channel, member=ctx.author,
                                                title=title, mute_role=mute_role)
-                            [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if
-                             category_cooldown == f"{category}_cool"][0] = Cooldown(time=datetime.datetime.utcnow())
+                            [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0] = Cooldown(time=datetime.datetime.utcnow())
                             return
                         else:
                             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
@@ -2503,7 +2500,6 @@ class Misc(commands.Cog):
                             paste = await mystbin_client.post(code, syntax=code_format_answer)
 
                             paste_url = paste.url
-                            print(paste_url)
 
                             await ctx.author.send(
                                 f"This is the link to your code! Copy and paste it where you need to!\n\n{paste_url}")
@@ -2563,7 +2559,6 @@ class Misc(commands.Cog):
                     paste = await mystbin_client.post(code_answer, syntax=code_format_answer)
 
                     paste_url = paste.url
-                    print(paste_url)
 
                     await ctx.author.send(
                         f"This is the link to your code! Copy and paste it where you need to!\n\n{paste_url}")
