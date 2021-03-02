@@ -2339,14 +2339,14 @@ class Misc(commands.Cog):
                 title = category_json["title"]
 
                 channel_id = category_json["channel"]
-                final_channel_id = category_json["end_channel"]
-
-                print(channel_id, final_channel_id)
+                try:
+                    final_channel_id = category_json["end_channel"]
+                except:
+                    pass
 
                 channel = self.bot.get_channel(channel_id)
-                final_channel = self.bot.get_channel(final_channel_id)
-
-                print(channel, final_channel)
+                if final_channel_id:
+                    final_channel = self.bot.get_channel(final_channel_id)
 
                 position = 1
                 for question in questions:
@@ -2372,8 +2372,13 @@ class Misc(commands.Cog):
                         if details.lower() == "yes":
                             pag = Paginator(post_text, 1985)
 
-                            await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author,
-                                           title=title, mute_role=mute_role)
+                            if final_channel:
+                                await pag.send(bot=self.bot, channel=channel, end_channel=final_channel,
+                                               member=ctx.author,
+                                               title=title, mute_role=mute_role)
+                            else:
+                                await pag.send(bot=self.bot, channel=channel, member=ctx.author,
+                                               title=title, mute_role=mute_role)
                             [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if
                              category_cooldown == f"{category}_cool"][0] = Cooldown(time=datetime.datetime.utcnow())
                             return
