@@ -2355,7 +2355,7 @@ class Misc(commands.Cog):
                         else:
                             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                             return await ctx.author.send(embed=cancel_prompt_embed)
-                    post_text + f"**{question}:** {details}\n"
+                    post_text += f"**{question}:** {details}\n"
                     position += 1
 
     @commands.command(aliases=['code-format', "codeformat", "code format"], description="This command is used for assisting you with formatting your code!")
