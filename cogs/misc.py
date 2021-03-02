@@ -2331,7 +2331,7 @@ class Misc(commands.Cog):
                 cooldown = [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0]
                 print([cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0])
                 print(self.hiring_cool)
-                print(self.iteritems())
+                print(type(vars(self).items()))
                 print(cooldown)
                 if cooldown.cooldown_start_time != 0 and (datetime.datetime.utcnow() - cooldown.cooldown_start_time).total_seconds() < 3600:
                     print("cooldown")
