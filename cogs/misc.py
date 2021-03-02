@@ -2328,7 +2328,7 @@ class Misc(commands.Cog):
                     category_json = posts[f"{category}"]
                 except:
                     return await ctx.author.send("There is no such category!")
-                    cooldown_name = f"{category}_cool"
+                cooldown_name = f"{category}_cool"
                 if vars(self)[cooldown_name].cooldown_start_time != 0 and (datetime.datetime.utcnow() - vars(self)[cooldown_name].cooldown_start_time).total_seconds() < 3600:
                     print("cooldown")
                     await vars(self)[cooldown_name].time_it(user=ctx.author)
@@ -2378,7 +2378,7 @@ class Misc(commands.Cog):
                             except:
                                 await ctx.author.send("Your report has been sent!")
                                 await pag.send(bot=self.bot, channel=channel, member=ctx.author, title=title, mute_role=mute_role)
-                            [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0] = Cooldown(time=datetime.datetime.utcnow())
+                            vars(self)[cooldown_name] = Cooldown(time=datetime.datetime.utcnow())
                             return
                         else:
                             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
