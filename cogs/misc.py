@@ -2345,16 +2345,13 @@ class Misc(commands.Cog):
                         cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                         return await ctx.author.send(embed=cancel_prompt_embed)
                     if position == len(questions):
-                        print("e")
                         if details.lower() == "yes":
-                            print("hi noob")
                             pag = Paginator(post_text, 1985)
 
                             await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author, title=title, mute_role=mute_role)
                             [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0] = Cooldown(time=datetime.datetime.utcnow())
                             return
                         else:
-                            print("nupe")
                             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                             return await ctx.author.send(embed=cancel_prompt_embed)
                     post_text.join(f"**{question}:** {details}\n")
