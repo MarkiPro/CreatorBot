@@ -197,7 +197,7 @@ class Misc(commands.Cog):
             color=0xff0000,
             timestamp=datetime.datetime.utcnow()
         )
-        pre_DM_embed = discord.Embed(
+        pre_dm_embed = discord.Embed(
             title="**APPLICATION SETUP**",
             description="***Please continue the setup in DMs.***",
             color=0x0064ff,
@@ -240,7 +240,7 @@ class Misc(commands.Cog):
             timestamp=datetime.datetime.utcnow()
         )
         categories.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
-        await ctx.send(embed=pre_DM_embed)
+        await ctx.send(embed=pre_dm_embed)
         await ctx.author.send(embed=categories)
 
         def check_dm(m):
@@ -2329,7 +2329,8 @@ class Misc(commands.Cog):
                     return await ctx.author.send("There is no such category!")
                 if [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0].cooldown_start_time != 0 and (datetime.datetime.utcnow() - [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0].cooldown_start_time).total_seconds() < 3600:
                     print("cooldown")
-                    return await [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0].time_it(user=ctx.author)
+                    await [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0].time_it(user=ctx.author)
+                    return
 
                 questions = category_json["questions"]
                 title = category_json["title"]
