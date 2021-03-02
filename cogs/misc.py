@@ -12,7 +12,8 @@ import json
 class Misc(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.formats_list = ["python", "lua", "c++", "csharp", "cpp", "cs", "css", "html", "json", "go", "js", "javascript", "java", "py", "c"]
+        self.formats_list = ["python", "lua", "c++", "csharp", "cpp", "cs", "css", "html", "json", "go", "js",
+                             "javascript", "java", "py", "c"]
         self.bot.help_command.cog = self
         self.hiring_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.for_hire_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
@@ -55,11 +56,11 @@ class Misc(commands.Cog):
 
         if times_of_iteration_for_robux >= 1:
             for iteration in range(times_of_iteration_for_robux):
-                robux_string = robux_string[:-int(3*iteration)] + ", " + robux_string[-int(3*iteration):]
+                robux_string = robux_string[:-int(3 * iteration)] + ", " + robux_string[-int(3 * iteration):]
 
         if times_of_iteration_for_usd >= 1:
             for iteration in range(times_of_iteration_for_usd):
-                usd_string = usd_string[:-int(3*iteration)] + ", " + usd_string[-int(3*iteration):]
+                usd_string = usd_string[:-int(3 * iteration)] + ", " + usd_string[-int(3 * iteration):]
 
         return await ctx.channel.send(f"**{robux_string}** Robux is equivalent to **{usd_string}** USD.")
 
@@ -184,7 +185,8 @@ class Misc(commands.Cog):
         applications_muted = ctx.guild.get_role(780494171730477086)
 
         if ctx.author in applications_muted.members:
-            return await ctx.send("You are restricted from using this command, you have the `Applications Muted` role. Please consult with a staff member about it.")
+            return await ctx.send(
+                "You are restricted from using this command, you have the `Applications Muted` role. Please consult with a staff member about it.")
         else:
             pass
         if ctx.channel.id not in allowed_channels:
@@ -250,6 +252,7 @@ class Misc(commands.Cog):
                     return False
             else:
                 return False
+
         try:
             picked_category_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
             category = picked_category_message.content
@@ -1199,7 +1202,8 @@ class Misc(commands.Cog):
                                    title=title, mute_role=applications_muted)
                     self.html_and_css_programmer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("game designer", category, re.IGNORECASE):
-            if self.game_designer_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.game_designer_cool.cooldown_start_time).total_seconds() < 3600:
+            if self.game_designer_cool.cooldown_start_time != 0 and (
+                    datetime.datetime.utcnow() - self.game_designer_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.game_designer_cool.time_it(user=ctx.author)
                 return
             game_designer_embed1 = discord.Embed(
@@ -1286,7 +1290,8 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
                 self.game_designer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("3d modeler", category, re.IGNORECASE):
-            if self.threed_modeler_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.threed_modeler_cool.cooldown_start_time).total_seconds() < 3600:
+            if self.threed_modeler_cool.cooldown_start_time != 0 and (
+                    datetime.datetime.utcnow() - self.threed_modeler_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.threed_modeler_cool.time_it(user=ctx.author)
                 return
             threed_modeler_embed1 = discord.Embed(
@@ -1373,7 +1378,8 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
                 self.threed_modeler_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("youtuber", category, re.IGNORECASE):
-            if self.youtuber_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.youtuber_cool.cooldown_start_time).total_seconds() < 3600:
+            if self.youtuber_cool.cooldown_start_time != 0 and (
+                    datetime.datetime.utcnow() - self.youtuber_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.youtuber_cool.time_it(user=ctx.author)
                 return
             youtuber_embed1 = discord.Embed(
@@ -1459,7 +1465,8 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
                 self.youtuber_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("roblox builder", category, re.IGNORECASE):
-            if self.roblox_studio_builder_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.roblox_studio_builder_cool.cooldown_start_time).total_seconds() < 3600:
+            if self.roblox_studio_builder_cool.cooldown_start_time != 0 and (
+                    datetime.datetime.utcnow() - self.roblox_studio_builder_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.roblox_studio_builder_cool.time_it(user=ctx.author)
                 return
             builder_embed1 = discord.Embed(
@@ -1545,7 +1552,8 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
                 self.roblox_studio_builder_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("twitch streamer", category, re.IGNORECASE):
-            if self.twitch_streamer_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.twitch_streamer_cool.cooldown_start_time).total_seconds() < 3600:
+            if self.twitch_streamer_cool.cooldown_start_time != 0 and (
+                    datetime.datetime.utcnow() - self.twitch_streamer_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.twitch_streamer_cool.time_it(user=ctx.author)
                 return
             twitch_streamer_embed1 = discord.Embed(
@@ -1633,7 +1641,8 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
                 self.twitch_streamer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("gfx designer", category, re.IGNORECASE):
-            if self.gfx_designer_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.gfx_designer_cool.cooldown_start_time).total_seconds() < 3600:
+            if self.gfx_designer_cool.cooldown_start_time != 0 and (
+                    datetime.datetime.utcnow() - self.gfx_designer_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.gfx_designer_cool.time_it(user=ctx.author)
                 return
             gfx_designer_embed1 = discord.Embed(
@@ -1720,7 +1729,8 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
                 self.gfx_designer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("translator", category, re.IGNORECASE):
-            if self.translator_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.translator_cool.cooldown_start_time).total_seconds() < 3600:
+            if self.translator_cool.cooldown_start_time != 0 and (
+                    datetime.datetime.utcnow() - self.translator_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.translator_cool.time_it(user=ctx.author)
                 return
             translator_embed1 = discord.Embed(
@@ -1807,7 +1817,8 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
                 self.translator_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("ui designer", category, re.IGNORECASE):
-            if self.ui_designer_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.ui_designer_cool.cooldown_start_time).total_seconds() < 3600:
+            if self.ui_designer_cool.cooldown_start_time != 0 and (
+                    datetime.datetime.utcnow() - self.ui_designer_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.ui_designer_cool.time_it(user=ctx.author)
                 return
             ui_designer_embed1 = discord.Embed(
@@ -1894,7 +1905,8 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
                 self.ui_designer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("clothing designer", category, re.IGNORECASE):
-            if self.clothing_designer_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.clothing_designer_cool.cooldown_start_time).total_seconds() < 3600:
+            if self.clothing_designer_cool.cooldown_start_time != 0 and (
+                    datetime.datetime.utcnow() - self.clothing_designer_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.clothing_designer_cool.time_it(user=ctx.author)
                 return
             clothing_designer_embed1 = discord.Embed(
@@ -1983,7 +1995,8 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
                 self.clothing_designer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("artist", category, re.IGNORECASE):
-            if self.artist_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.artist_cool.cooldown_start_time).total_seconds() < 3600:
+            if self.artist_cool.cooldown_start_time != 0 and (
+                    datetime.datetime.utcnow() - self.artist_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.artist_cool.time_it(user=ctx.author)
                 return
             artist_embed1 = discord.Embed(
@@ -2069,7 +2082,8 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
                 self.artist_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("music composer", category, re.IGNORECASE):
-            if self.music_composer_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.music_composer_cool.cooldown_start_time).total_seconds() < 3600:
+            if self.music_composer_cool.cooldown_start_time != 0 and (
+                    datetime.datetime.utcnow() - self.music_composer_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.music_composer_cool.time_it(user=ctx.author)
                 return
             music_composer_embed1 = discord.Embed(
@@ -2156,7 +2170,8 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
                 self.music_composer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("animator", category, re.IGNORECASE):
-            if self.animator_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.animator_cool.cooldown_start_time).total_seconds() < 3600:
+            if self.animator_cool.cooldown_start_time != 0 and (
+                    datetime.datetime.utcnow() - self.animator_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.animator_cool.time_it(user=ctx.author)
                 return
             animator_embed1 = discord.Embed(
@@ -2250,7 +2265,8 @@ class Misc(commands.Cog):
         mute_role = ctx.guild.get_role(780494155075420262)
 
         if ctx.author in mute_role.members:
-            return await ctx.send("You are restricted from using this command, you have the `Post Muted` role. Please consult with a staff member about it.")
+            return await ctx.send(
+                "You are restricted from using this command, you have the `Post Muted` role. Please consult with a staff member about it.")
         else:
             pass
         if ctx.channel.id not in allowed_channels:
@@ -2296,6 +2312,7 @@ class Misc(commands.Cog):
                     return False
             else:
                 return False
+
         try:
             picked_category_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
             category = picked_category_message.content.lower()
@@ -2312,8 +2329,10 @@ class Misc(commands.Cog):
                     category_json = posts[f"{category}"]
                 except:
                     return await ctx.author.send("There is no such category!")
-                cooldown_category = [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0]
-                if cooldown_category.cooldown_start_time != 0 and (datetime.datetime.utcnow() - cooldown_category.cooldown_start_time).total_seconds() < 3600:
+                cooldown_category = [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if
+                                     category_cooldown == f"{category}_cool"][0]
+                if cooldown_category.cooldown_start_time != 0 and (
+                        datetime.datetime.utcnow() - cooldown_category.cooldown_start_time).total_seconds() < 3600:
                     return await cooldown_category.time_it(user=ctx.author)
 
                 questions = category_json["questions"]
@@ -2333,7 +2352,8 @@ class Misc(commands.Cog):
                         description=f"{questions[question]}\n\nQuestion: {position}/{len(questions)}",
                         color=0x0064ff
                     )
-                    new_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+                    new_embed.set_footer(
+                        text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                     await ctx.author.send(embed=new_embed)
                     try:
                         details_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
@@ -2347,10 +2367,11 @@ class Misc(commands.Cog):
                     if position == len(questions):
                         if details.lower() == "yes":
                             pag = Paginator(post_text, 1985)
-                            print(post_text)
 
-                            await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author, title=title, mute_role=mute_role)
-                            [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0] = Cooldown(time=datetime.datetime.utcnow())
+                            await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author,
+                                           title=title, mute_role=mute_role)
+                            [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if
+                             category_cooldown == f"{category}_cool"][0] = Cooldown(time=datetime.datetime.utcnow())
                             return
                         else:
                             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
@@ -2358,7 +2379,8 @@ class Misc(commands.Cog):
                     post_text += f"**{question}:** {details}\n"
                     position += 1
 
-    @commands.command(aliases=['code-format', "codeformat", "code format"], description="This command is used for assisting you with formatting your code!")
+    @commands.command(aliases=['code-format', "codeformat", "code format"],
+                      description="This command is used for assisting you with formatting your code!")
     async def code_format(self, ctx):
         cancel_prompt_embed = discord.Embed(
             title="**CANCELLED**",
@@ -2388,6 +2410,7 @@ class Misc(commands.Cog):
                     return False
             else:
                 return False
+
         try:
             answer_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
             answer = answer_message.content
@@ -2402,7 +2425,8 @@ class Misc(commands.Cog):
                     description="Please paste your code!",
                     color=0x0064ff
                 )
-                code_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+                code_request_embed.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=code_request_embed)
                 try:
                     code_request_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
@@ -2423,7 +2447,8 @@ class Misc(commands.Cog):
                     description="Is there more code? (yes/no)",
                     color=0x0064ff
                 )
-                more_code_question_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+                more_code_question_embed.set_footer(
+                    text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
                 await ctx.author.send(embed=more_code_question_embed)
                 try:
                     more_code_answer_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
@@ -2502,7 +2527,8 @@ class Misc(commands.Cog):
                 description="Please tell us what format you want for your code! Examples: `python`, `lua`, `c`, `csharp`, `c++` and so on",
                 color=0x0064ff
             )
-            code_format_request_embed.set_footer(text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
+            code_format_request_embed.set_footer(
+                text="Reply to this message within `16 minutes` • Reply with `cancel` to cancel.")
             await ctx.author.send(embed=code_format_request_embed)
             try:
                 code_format_message = await self.bot.wait_for('message', check=check_dm, timeout=1000)
@@ -2530,7 +2556,8 @@ class Misc(commands.Cog):
                     paste_url = paste.url
                     print(paste_url)
 
-                    await ctx.author.send(f"This is the link to your code! Copy and paste it where you need to!\n\n{paste_url}")
+                    await ctx.author.send(
+                        f"This is the link to your code! Copy and paste it where you need to!\n\n{paste_url}")
                 except:
                     await ctx.author.send("Something went wrong!")
 
@@ -2649,7 +2676,12 @@ class Misc(commands.Cog):
                             "gfx designer": 734150696944795698, "twitch streamer": 738814580712669214,
                             "builder": 734149969292034208, "youtuber": 735557139984285706,
                             "3d modeler": 734527020905529375, "game designer": 732402691296198848,
-                            "html & css programmer": 732387788493946881, "css programmer": 732387788493946881, "js programmer": 732387788493946881, "java programmer": 732387788493946881, "php programmer": 732387788493946881, "lua programmer": 732387788493946881, "python programmer": 732387788493946881, "c++ programmer": 732387788493946881, "c# programmer": 732387788493946881, "c programmer": 732387788493946881, "ruby programmer": 732387788493946881}
+                            "html & css programmer": 732387788493946881, "css programmer": 732387788493946881,
+                            "js programmer": 732387788493946881, "java programmer": 732387788493946881,
+                            "php programmer": 732387788493946881, "lua programmer": 732387788493946881,
+                            "python programmer": 732387788493946881, "c++ programmer": 732387788493946881,
+                            "c# programmer": 732387788493946881, "c programmer": 732387788493946881,
+                            "ruby programmer": 732387788493946881}
         if role_name:
             desired_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[role_name])
             needed_role = discord.utils.get(ctx.guild.roles, id=roles[role_name])
@@ -2667,7 +2699,8 @@ class Misc(commands.Cog):
             elif needed_role not in ctx.author.roles:
                 await ctx.send("You do not have the required role! Please run `>apply`!")
         else:
-            await ctx.send("Role not listed or doesn't exist, please run `/tag chat color roles` to see which roles are listed.")
+            await ctx.send(
+                "Role not listed or doesn't exist, please run `/tag chat color roles` to see which roles are listed.")
 
     @commands.command()
     async def boosters(self, ctx):
