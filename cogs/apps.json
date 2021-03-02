@@ -1,16 +1,27 @@
 {
-  "programmer": {"First": "Which Programmer role would you like to apply for? Reply with the name of the role you would like to apply for.\n\n    `Python Programmer`;\n\n    `C# Programmer`;\n\n    `Java Programmer`;\n\n    `JavaScript Programmer`;\n\n    `CPP Programmer`;\n\n    `C Programmer`;\n\n    `PHP Programmer`;\n\n    `Lua Programmer`;\n\n    `Ruby Programmer`;\n\n    `HTML & CSS Programmer`;"},
-  "": {},
-  "": {},
-  "": {},
-  "": {},
-  "": {},
-  "": {},
-  "": {},
-  "": {},
-  "": {},
-  "": {},
-  "": {},
-  "": {},
-  "": {}
+  "programmer": {"Category": "Which Programmer role would you like to apply for? Reply with the name of the role you would like to apply for.\n\n    `Python Programmer`;\n\n    `C# Programmer`;\n\n    `Java Programmer`;\n\n    `JavaScript Programmer`;\n\n    `CPP Programmer`;\n\n    `C Programmer`;\n\n    `PHP Programmer`;\n\n    `Lua Programmer`;\n\n    `Ruby Programmer`;\n\n    `HTML & CSS Programmer`;"},
+  "game designer": {"questions": {
+    "Work": "\"***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***\"", "About": "***Do you have anything you would like to say about yourself here? If yes, please do so.***", "Other": "***Anything that you've missed that you would like to add onto your current statement?***", "Final": "Would you like to send this for Approval?\n Reply with `yes` or `no`"}},
+  "3d modeler": {"questions": {
+    "Work": "\"***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***\"", "About": "***Do you have anything you would like to say about yourself here? If yes, please do so.***", "Other": "***Anything that you've missed that you would like to add onto your current statement?***", "Final": "Would you like to send this for Approval?\n Reply with `yes` or `no`"}},
+  "youtuber": {"questions": {
+    "Work": "\"***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***\"", "About": "***Do you have anything you would like to say about yourself here? If yes, please do so.***", "Other": "***Anything that you've missed that you would like to add onto your current statement?***", "Final": "Would you like to send this for Approval?\n Reply with `yes` or `no`"}},
+  "roblox builder": {"questions": {
+    "Work": "\"***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***\"", "About": "***Do you have anything you would like to say about yourself here? If yes, please do so.***", "Other": "***Anything that you've missed that you would like to add onto your current statement?***", "Final": "Would you like to send this for Approval?\n Reply with `yes` or `no`"}},
+  "twitch streamer": {"questions": {
+    "Work": "\"***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***\"", "About": "***Do you have anything you would like to say about yourself here? If yes, please do so.***", "Other": "***Anything that you've missed that you would like to add onto your current statement?***", "Final": "Would you like to send this for Approval?\n Reply with `yes` or `no`"}},
+  "gfx designer": {"questions": {
+    "Work": "\"***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***\"", "About": "***Do you have anything you would like to say about yourself here? If yes, please do so.***", "Other": "***Anything that you've missed that you would like to add onto your current statement?***", "Final": "Would you like to send this for Approval?\n Reply with `yes` or `no`"}},
+  "translator": {"questions": {
+    "Work": "\"***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***\"", "About": "***Do you have anything you would like to say about yourself here? If yes, please do so.***", "Other": "***Anything that you've missed that you would like to add onto your current statement?***", "Final": "Would you like to send this for Approval?\n Reply with `yes` or `no`"}},
+  "ui designer": {"questions": {
+    "Work": "\"***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***\"", "About": "***Do you have anything you would like to say about yourself here? If yes, please do so.***", "Other": "***Anything that you've missed that you would like to add onto your current statement?***", "Final": "Would you like to send this for Approval?\n Reply with `yes` or `no`"}},
+  "clothing designer": {"questions": {
+    "Work": "\"***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***\"", "About": "***Do you have anything you would like to say about yourself here? If yes, please do so.***", "Other": "***Anything that you've missed that you would like to add onto your current statement?***", "Final": "Would you like to send this for Approval?\n Reply with `yes` or `no`"}},
+  "artist": {"questions": {
+    "Work": "\"***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***\"", "About": "***Do you have anything you would like to say about yourself here? If yes, please do so.***", "Other": "***Anything that you've missed that you would like to add onto your current statement?***", "Final": "Would you like to send this for Approval?\n Reply with `yes` or `no`"}},
+  "music composer": {"questions": {
+    "Work": "\"***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***\"", "About": "***Do you have anything you would like to say about yourself here? If yes, please do so.***", "Other": "***Anything that you've missed that you would like to add onto your current statement?***", "Final": "Would you like to send this for Approval?\n Reply with `yes` or `no`"}},
+  "animator": {"questions": {
+    "Work": "\"***Provide some work examples you've done in the past. You could link a portfolio. (ATTACHMENTS ARE CURRENTLY NOT SUPPORTED!)***\"", "About": "***Do you have anything you would like to say about yourself here? If yes, please do so.***", "Other": "***Anything that you've missed that you would like to add onto your current statement?***", "Final": "Would you like to send this for Approval?\n Reply with `yes` or `no`"}}
 }
