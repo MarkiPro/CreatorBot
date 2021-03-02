@@ -2368,8 +2368,10 @@ class Misc(commands.Cog):
                             pag = Paginator(post_text, 1985)
 
                             if final_channel:
+                                await ctx.author.send("Your post has been sent for approval!")
                                 await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author, title=title, mute_role=mute_role)
                             else:
+                                await ctx.author.send("Your report has been sent!")
                                 await pag.send(bot=self.bot, channel=channel, member=ctx.author, title=title, mute_role=mute_role)
                             [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0] = Cooldown(time=datetime.datetime.utcnow())
                             return
