@@ -7,6 +7,7 @@ import re
 from cooldown import Cooldown
 import mystbin
 import json
+import os
 
 
 class Misc(commands.Cog):
@@ -2330,7 +2331,7 @@ class Misc(commands.Cog):
                 cooldown = [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0]
                 print([cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0])
                 print(self.hiring_cool)
-                print(list(vars(self).items())[f"{category}_cool"])
+                print(os.listdir(self))
                 print(cooldown)
                 if cooldown.cooldown_start_time != 0 and (datetime.datetime.utcnow() - cooldown.cooldown_start_time).total_seconds() < 3600:
                     print("cooldown")
