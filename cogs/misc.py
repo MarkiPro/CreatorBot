@@ -2347,6 +2347,7 @@ class Misc(commands.Cog):
                     if position == len(questions):
                         if details.lower() == "yes":
                             pag = Paginator(post_text, 1985)
+                            print(post_text)
 
                             await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author, title=title, mute_role=mute_role)
                             [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0] = Cooldown(time=datetime.datetime.utcnow())
