@@ -2169,8 +2169,7 @@ class Misc(commands.Cog):
                                title=title, mute_role=applications_muted)
                 self.music_composer_cool = Cooldown(time=datetime.datetime.utcnow())
         elif re.findall("animator", category, re.IGNORECASE):
-            if self.animator_cool.cooldown_start_time != 0 and (
-                    datetime.datetime.utcnow() - self.animator_cool.cooldown_start_time).total_seconds() < 3600:
+            if self.animator_cool.cooldown_start_time != 0 and (datetime.datetime.utcnow() - self.animator_cool.cooldown_start_time).total_seconds() < 3600:
                 await self.animator_cool.time_it(user=ctx.author)
                 return
             animator_embed1 = discord.Embed(
@@ -2328,11 +2327,9 @@ class Misc(commands.Cog):
                     category_json = posts[f"{category}"]
                 except:
                     return await ctx.author.send("There is no such category!")
-                cooldown_category = [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if
-                                     category_cooldown == f"{category}_cool"][0]
-                if cooldown_category.cooldown_start_time != 0 and (datetime.datetime.utcnow() - cooldown_category.cooldown_start_time).total_seconds() < 3600:
+                if [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0].cooldown_start_time != 0 and (datetime.datetime.utcnow() - [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0].cooldown_start_time).total_seconds() < 3600:
                     print("cooldown")
-                    return await cooldown_category.time_it(user=ctx.author)
+                    return await [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0].time_it(user=ctx.author)
 
                 questions = category_json["questions"]
                 title = category_json["title"]
@@ -2371,12 +2368,9 @@ class Misc(commands.Cog):
                             pag = Paginator(post_text, 1985)
 
                             if final_channel:
-                                await pag.send(bot=self.bot, channel=channel, end_channel=final_channel,
-                                               member=ctx.author,
-                                               title=title, mute_role=mute_role)
+                                await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author, title=title, mute_role=mute_role)
                             else:
-                                await pag.send(bot=self.bot, channel=channel, member=ctx.author,
-                                               title=title, mute_role=mute_role)
+                                await pag.send(bot=self.bot, channel=channel, member=ctx.author, title=title, mute_role=mute_role)
                             [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0] = Cooldown(time=datetime.datetime.utcnow())
                             return
                         else:
