@@ -2366,7 +2366,7 @@ class Misc(commands.Cog):
                         return await ctx.author.send(embed=cancel_prompt_embed)
                     if position == len(questions):
                         if details.lower() == "yes":
-                            pag = Paginator(post_text, 1985)
+                            pag = Paginator("eeeee", 1985)
 
                             await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author,
                                            title=title, mute_role=mute_role)
