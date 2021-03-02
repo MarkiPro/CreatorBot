@@ -2328,6 +2328,7 @@ class Misc(commands.Cog):
                 except:
                     return await ctx.author.send("There is no such category!")
                 print([cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"], [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0])
+                print(self.hiring_cool)
                 if [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0].cooldown_start_time != 0 and (datetime.datetime.utcnow() - [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0].cooldown_start_time).total_seconds() < 3600:
                     print("cooldown")
                     await [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0].time_it(user=ctx.author)
