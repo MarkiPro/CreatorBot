@@ -223,7 +223,7 @@ class Log(Cog):
         log_channel = self.bot.get_channel(712761128895381676)
         cc_guild = self.bot.get_guild(id=611227128020598805)
         staff_role = discord.utils.get(cc_guild.roles, id=756565123350659385)
-        banned_words = ["porn", "fuck", "shit", "ass", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger",
+        banned_words = ["porn", "fuck", "shit", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger",
                         "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "sex",
                         "seggz", "segz", "cnut", "fcuk", "penis", "fück", "cünt", "fúck", "cúnt", "fùck", "cùnt",
                         "fŭck", "cŭnt", "fûck", "cûnt", "fǔck", "cǔnt", "fůck", "cůnt", "fǘck", "cǘnt", "fǜck", "cǜnt",
@@ -465,7 +465,7 @@ class Log(Cog):
         log_channel = self.bot.get_channel(712761128895381676)
         cc_guild = self.bot.get_guild(id=611227128020598805)
         staff_role = discord.utils.get(cc_guild.roles, id=756565123350659385)
-        banned_words = ["porn", "fuck", "shit", "ass", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger",
+        banned_words = ["porn", "fuck", "shit", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger",
                         "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "sex",
                         "seggz", "segz", "cnut", "fcuk", "penis", "fück", "cünt", "fúck", "cúnt", "fùck", "cùnt",
                         "fŭck", "cŭnt", "fûck", "cûnt", "fǔck", "cǔnt", "fůck", "cůnt", "fǘck", "cǘnt", "fǜck", "cǜnt",
