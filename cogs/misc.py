@@ -2341,8 +2341,10 @@ class Misc(commands.Cog):
                     pass
 
                 channel = self.bot.get_channel(channel_id)
-                if final_channel_id:
+                try:
                     final_channel = self.bot.get_channel(final_channel_id)
+                except:
+                    pass
 
                 position = 1
                 for question in questions:
@@ -2367,10 +2369,10 @@ class Misc(commands.Cog):
                         if details.lower() == "yes":
                             pag = Paginator(post_text, 1985)
 
-                            if final_channel:
+                            try:
                                 await ctx.author.send("Your post has been sent for approval!")
                                 await pag.send(bot=self.bot, channel=channel, end_channel=final_channel, member=ctx.author, title=title, mute_role=mute_role)
-                            else:
+                            except:
                                 await ctx.author.send("Your report has been sent!")
                                 await pag.send(bot=self.bot, channel=channel, member=ctx.author, title=title, mute_role=mute_role)
                             [cat_cooldown for category_cooldown, cat_cooldown in vars(self).items() if category_cooldown == f"{category}_cool"][0] = Cooldown(time=datetime.datetime.utcnow())
