@@ -741,6 +741,7 @@ class Misc(commands.Cog):
     @commands.command()
     async def role(self, ctx, *, role_name=None):
         with open("configs/role.json", "r") as json_roles:
+            print(json_roles)
             roles = json_roles["roles"]
             chat_color_roles = json_roles["chat_color_roles"]
 
