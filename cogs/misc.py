@@ -287,7 +287,6 @@ class Misc(commands.Cog):
                 try:
                     category_json = apps[f"{category}"]
                 except:
-                    pass
                     try:
                         category_json = apps["programmer"]["category"][f"{category}"]
                     except:
