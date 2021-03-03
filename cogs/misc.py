@@ -747,11 +747,8 @@ class Misc(commands.Cog):
             chat_color_roles = json_roles["chat_color_roles"]
 
             if role_name in roles or role_name in chat_color_roles:
-                try:
-                    desired_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[role_name])
-                    needed_role = discord.utils.get(ctx.guild.roles, id=roles[role_name])
-                except:
-                    return await ctx.send("Role not listed or doesn't exist, please run `/tag chat color roles` to see which roles are listed.")
+                desired_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[role_name])
+                needed_role = discord.utils.get(ctx.guild.roles, id=roles[role_name])
 
                 if needed_role in ctx.author.roles:
                     await ctx.author.add_roles(desired_role)
