@@ -740,57 +740,29 @@ class Misc(commands.Cog):
 
     @commands.command()
     async def role(self, ctx, *, role_name=None):
-        roles = {"former staff": 741728478721736755, "roblox verified": 741735258411499560,
-                 "verified": 695328817157373992, "devforum member": 742333164352962581,
-                 "devforum regular": 742333167133786124, "devforum editor": 742333168576888943,
-                 "devforum leader": 742333169423876106, "first server booster": 712685506424471612,
-                 "server booster": 762172204628181023, "animator": 734662028353994752,
-                 "music composer": 735497558855516161, "artist": 734662196025360416,
-                 "clothing designer": 734177621876801637, "ui designer": 733274530524561430,
-                 "translator": 734527264657637416, "gfx designer": 733280979921141821,
-                 "twitch streamer": 738814393663619182, "builder": 733281281671954442, "youtuber": 738788543211634756,
-                 "3d modeler": 733281157872877629, "game designer": 733281086913773599,
-                 "css programmer": 741099963626422322, "html & css programmer": 735147383716970507,
-                 "ruby programmer": 735147661430227025, "lua programmer": 732376072397783093,
-                 "php programmer": 732378321387520092, "c programmer": 732378157449216040,
-                 "c++ programmer": 732377777772167188, "js programmer": 732377955669508097,
-                 "java programmer": 732379273100263464, "c# programmer": 732377857317142650,
-                 "python programmer": 732377712286761001}
-        chat_color_roles = {"former staff": 743013368511594569, "roblox verified": 743013370588037191,
-                            "verified": 732388199107657828, "devforum member": 743013366515236915,
-                            "devforum regular": 743013366880272474, "devforum editor": 743013367840768072,
-                            "devforum leader": 743013368134107166, "server booster": 734527854871707762,
-                            "animator": 734664243038912552, "music composer": 735497751978311681,
-                            "artist": 734664303327838230, "clothing designer": 734527130565738516,
-                            "ui designer": 734150445764837466, "translator": 734527217350082672,
-                            "gfx designer": 734150696944795698, "twitch streamer": 738814580712669214,
-                            "builder": 734149969292034208, "youtuber": 735557139984285706,
-                            "3d modeler": 734527020905529375, "game designer": 732402691296198848,
-                            "html & css programmer": 732387788493946881, "css programmer": 732387788493946881,
-                            "js programmer": 732387788493946881, "java programmer": 732387788493946881,
-                            "php programmer": 732387788493946881, "lua programmer": 732387788493946881,
-                            "python programmer": 732387788493946881, "c++ programmer": 732387788493946881,
-                            "c# programmer": 732387788493946881, "c programmer": 732387788493946881,
-                            "ruby programmer": 732387788493946881}
-        if role_name:
-            desired_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[role_name])
-            needed_role = discord.utils.get(ctx.guild.roles, id=roles[role_name])
+        with open("configs/role.json", "r") as json_roles:
+            roles = json_roles["roles"]
+            chat_color_roles = json_roles["chat_color_roles"]
 
-            if needed_role in ctx.author.roles:
-                await ctx.author.add_roles(desired_role)
-                await ctx.send(f"Successfully given you the chat color role!")
+            if role_name:
+                desired_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[role_name])
+                needed_role = discord.utils.get(ctx.guild.roles, id=roles[role_name])
 
-                for role in chat_color_roles:
-                    check_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[role])
+                if needed_role in ctx.author.roles:
+                    await ctx.author.add_roles(desired_role)
+                    await ctx.send(f"Successfully given you the chat color role!")
 
-                    if check_role in ctx.author.roles:
-                        await ctx.author.remove_roles(check_role)
+                    for role in chat_color_roles:
+                        check_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[role])
 
-            elif needed_role not in ctx.author.roles:
-                await ctx.send("You do not have the required role! Please run `>apply`!")
-        else:
-            await ctx.send(
-                "Role not listed or doesn't exist, please run `/tag chat color roles` to see which roles are listed.")
+                        if check_role in ctx.author.roles:
+                            await ctx.author.remove_roles(check_role)
+
+                elif needed_role not in ctx.author.roles:
+                    await ctx.send("You do not have the required role! Please run `>apply`!")
+            else:
+                await ctx.send(
+                    "Role not listed or doesn't exist, please run `/tag chat color roles` to see which roles are listed.")
 
     @commands.command()
     async def boosters(self, ctx):
