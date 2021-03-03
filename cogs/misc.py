@@ -264,12 +264,12 @@ class Misc(commands.Cog):
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         else:
-            with open("cogs/posts.json", "r") as posts:
-                posts = json.load(posts)
+            with open("cogs/apps.json", "r") as apps:
+                apps = json.load(apps)
                 if category == "programmer":
                     starter_embed = discord.Embed(
                         title="**APPLICATION SETUP**",
-                        description=posts["programmer"]["Categories"],
+                        description=apps["programmer"]["Categories"],
                         color=0x0064ff,
                         timestamp=datetime.datetime.utcnow()
                     )
@@ -285,7 +285,7 @@ class Misc(commands.Cog):
                         cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                         return await ctx.author.send(embed=cancel_prompt_embed)
                 try:
-                    category_json = posts[f"{category}"] or posts["programmer"]["category"][f"{category}"]
+                    category_json = apps[f"{category}"] or apps["programmer"]["category"][f"{category}"]
                 except:
                     return await ctx.author.send("There is no such category!")
 
