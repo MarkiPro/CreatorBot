@@ -264,7 +264,7 @@ class Misc(commands.Cog):
             await ctx.author.send(embed=cancel_prompt_embed)
             return
         else:
-            with open("cogs/apps.json", "r") as apps:
+            with open("configs/apps.json", "r") as apps:
                 apps = json.load(apps)
                 if category == "programmer":
                     starter_embed = discord.Embed(
@@ -406,7 +406,7 @@ class Misc(commands.Cog):
             cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
             return await ctx.author.send(embed=cancel_prompt_embed)
         else:
-            with open("cogs/posts.json", "r") as posts:
+            with open("configs/posts.json", "r") as posts:
                 posts = json.load(posts)
                 try:
                     category_json = posts[f"{category}"]
