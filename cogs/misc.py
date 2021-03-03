@@ -285,8 +285,13 @@ class Misc(commands.Cog):
                         cancel_prompt_embed.timestamp = datetime.datetime.utcnow()
                         return await ctx.author.send(embed=cancel_prompt_embed)
                 try:
-                    category_json = apps[f"{category}"] or apps["programmer"]["category"][f"{category}"]
+                    category_json = apps[f"{category}"]
                 except:
+                    pass
+                    try:
+                        category_json = apps["programmer"]["category"][f"{category}"]
+                    except:
+                        pass
                     return await ctx.author.send("There is no such category!")
 
                 cooldown_name = f"{category.replace(' ', '_')}_cool"
