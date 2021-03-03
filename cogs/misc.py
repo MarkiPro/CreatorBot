@@ -744,7 +744,7 @@ class Misc(commands.Cog):
             roles = json_roles["roles"]
             chat_color_roles = json_roles["chat_color_roles"]
 
-            if role_name:
+            if role_name in roles or role_name in chat_color_roles:
                 desired_role = discord.utils.get(ctx.guild.roles, id=chat_color_roles[role_name])
                 needed_role = discord.utils.get(ctx.guild.roles, id=roles[role_name])
 
