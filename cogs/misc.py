@@ -289,7 +289,7 @@ class Misc(commands.Cog):
                 except:
                     return await ctx.author.send("There is no such category!")
 
-                cooldown_name = f"{category}_cool"
+                cooldown_name = f"{category.replace(' ', '_')}_cool"
                 if vars(self)[cooldown_name].cooldown_start_time != 0 and (datetime.datetime.utcnow() - vars(self)[cooldown_name].cooldown_start_time).total_seconds() < 3600:
                     print("cooldown")
                     await vars(self)[cooldown_name].time_it(user=ctx.author)
