@@ -69,7 +69,7 @@ class Paginator:
                                 await msgs.delete()
                                 await messagee.delete()
                                 await member.send(
-                                    "The action taken against you was claimed to be the right thing, and soon enough, you will recieve your punishment!")
+                                    "The action taken against you was claimed to be the right thing, and soon enough, you will receive your punishment!")
                                 await another_channel.send(embed=prepared_embed)
                                 return
 
@@ -79,6 +79,7 @@ class Paginator:
                                 await member.send(
                                     "The action was claimed to be mistaken, and without further punishments, you may continue on with your day!")
                                 return
+                    return
 
                 if role and not autoreport:
                     await message.add_reaction("🔇")
@@ -125,7 +126,7 @@ class Paginator:
                                 await msgs.delete()
                                 await member.send("Your application has been denied!")
                                 return
-                        elif str(reaction2.emoji) == "🔇":
+                        elif str(reaction1.emoji) == "🔇":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
                                 await member.send("Your application has been denied and you have been muted!")
@@ -175,7 +176,7 @@ class Paginator:
                                 await msgs.delete()
                                 await member.send("Your post has been denied!")
                                 return
-                        elif str(reaction2.emoji) == "🔇":
+                        elif str(reaction1.emoji) == "🔇":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
                                 await member.send("Your report has been denied and you have been muted!")
@@ -226,9 +227,10 @@ class Paginator:
                                 await msgs.delete()
                                 await member.send("Your post has been denied!")
                                 return
-                        elif str(reaction2.emoji) == "🔇":
+                        elif str(reaction1.emoji) == "🔇":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
                                 await member.send("Your post has been denied and you have been muted!")
                                 await member.add_roles(mute_role)
                                 return
+                    return
