@@ -104,7 +104,7 @@ class Paginator:
                         elif str(reaction2.emoji) == "👎":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
-                                await member.send("Your application has been declined!")
+                                await member.send("Your application has been denied!")
                                 return
                         elif str(reaction2.emoji) == "🔇":
                             for _, msgs in enumerate(self.messages):
@@ -123,7 +123,7 @@ class Paginator:
                         elif str(reaction1.emoji) == "👎":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
-                                await member.send("Your application has been declined!")
+                                await member.send("Your application has been denied!")
                                 return
                         elif str(reaction2.emoji) == "🔇":
                             for _, msgs in enumerate(self.messages):
@@ -155,7 +155,7 @@ class Paginator:
                         elif str(reaction2.emoji) == "👎":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
-                                await member.send("Your report has been declined!")
+                                await member.send("Your report has been denied!")
                                 return
                         elif str(reaction2.emoji) == "🔇":
                             for _, msgs in enumerate(self.messages):
@@ -173,7 +173,7 @@ class Paginator:
                         elif str(reaction1.emoji) == "👎":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
-                                await member.send("Your post has been declined!")
+                                await member.send("Your post has been denied!")
                                 return
                         elif str(reaction2.emoji) == "🔇":
                             for _, msgs in enumerate(self.messages):
@@ -205,7 +205,7 @@ class Paginator:
                         elif str(reaction2.emoji) == "👎":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
-                                await member.send("Your post has been declined!")
+                                await member.send("Your post has been denied!")
                                 return
                         elif str(reaction2.emoji) == "🔇":
                             for _, msgs in enumerate(self.messages):
@@ -224,7 +224,7 @@ class Paginator:
                         elif str(reaction1.emoji) == "👎":
                             for _, msgs in enumerate(self.messages):
                                 await msgs.delete()
-                                await member.send("Your post has been declined!")
+                                await member.send("Your post has been denied!")
                                 return
                         elif str(reaction2.emoji) == "🔇":
                             for _, msgs in enumerate(self.messages):
