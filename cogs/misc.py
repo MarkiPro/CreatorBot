@@ -330,7 +330,7 @@ class Misc(commands.Cog):
                         if details.lower() == "yes":
                             pag = Paginator(application_text, 1985)
 
-                            await ctx.author.send("Your post has been sent for approval!")
+                            await ctx.author.send("Your application has been sent for approval!")
                             await pag.send(bot=self.bot, channel=channel, member=ctx.author, title=title, role=role, mute_role=applications_muted)
                             vars(self)[cooldown_name] = Cooldown(time=datetime.datetime.utcnow())
                             return
