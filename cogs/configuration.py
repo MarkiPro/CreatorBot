@@ -31,7 +31,7 @@ class Configuration(commands.Cog):
 
     @add_config.command()
     async def banned_word(self, ctx, *, word):
-        with open("configs/banned.json", "wr") as banned_stuff_json:
+        with open("configs/banned.json") as banned_stuff_json:
             banned_stuff = json.load(banned_stuff_json)
             banned_words = banned_stuff["banned_words"]
 
