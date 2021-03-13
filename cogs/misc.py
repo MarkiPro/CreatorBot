@@ -11,8 +11,7 @@ import json
 class Misc(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.formats_list = ["python", "lua", "c++", "csharp", "cpp", "cs", "css", "html", "json", "go", "js",
-                             "javascript", "java", "py", "c"]
+        self.formats_list = ["python", "lua", "c++", "csharp", "cpp", "cs", "css", "html", "json", "go", "js", "javascript", "java", "py", "c"]
         self.bot.help_command.cog = self
         self.hiring_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
         self.for_hire_cool = Cooldown(time=datetime.datetime.utcfromtimestamp(0))
