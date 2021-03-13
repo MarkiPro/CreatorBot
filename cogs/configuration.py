@@ -25,6 +25,7 @@ class Configuration(commands.Cog):
 
             if added_link not in banned_links:
                 banned_links.append(added_link)
+                json.dump(banned_stuff)
                 await ctx.send("Listed the link!")
             else:
                 await ctx.send("That link is already listed!")
@@ -39,6 +40,7 @@ class Configuration(commands.Cog):
 
             if added_word not in banned_words:
                 banned_words.append(added_word)
+                json.dump(banned_stuff)
                 await ctx.send("Listed the word!")
             else:
                 await ctx.send("That word is already listed!")
