@@ -213,8 +213,6 @@ class Log(Cog):
     @Cog.listener()
     async def on_message(self, message):
         suggestions_channel = self.bot.get_channel(712655570737299567)
-        banned_links = ["https://pornhub.com", "https://porn.com", "https://fuq.com", "https://web.roblox.com",
-                        "https://brazzers.com"]
         banned_racial_words = ["nigger", "nig", "nigor", "nigra", "nigre", "nigar", "niggur", "nigga", "niggah",
                                "niggar", "nigguh", "niggress", "nigette", "negro", "nibba", "niba", "n1gger", "n1ger",
                                "n1g", "n1gor", "n1gra", "n1gre", "n1gar", "n1ggur", "n1gga", "n1ggah", "n1ggar",
@@ -223,7 +221,7 @@ class Log(Cog):
         log_channel = self.bot.get_channel(712761128895381676)
         cc_guild = self.bot.get_guild(id=611227128020598805)
         staff_role = discord.utils.get(cc_guild.roles, id=756565123350659385)
-        banned_words = ["porn", "fuck", "shit", "dick", "pussy", "arse", "bitch", "bollocks", "cunt", "bugger",
+        banned_words = ["porn", "fuck", "shit", "dick", "pussy", "bitch", "bollocks", "cunt", "bugger",
                         "cock", "blowjob", "choad", "twat", "shag", "wanker", "bint", "balls", "tit", "boob", "sex",
                         "seggz", "segz", "cnut", "fcuk", "penis", "fück", "cünt", "fúck", "cúnt", "fùck", "cùnt",
                         "fŭck", "cŭnt", "fûck", "cûnt", "fǔck", "cǔnt", "fůck", "cůnt", "fǘck", "cǘnt", "fǜck", "cǜnt",
@@ -279,7 +277,7 @@ class Log(Cog):
                 )
                 try:
                     log_embed_punished.set_thumbnail(url=message.author.avatar_url)
-                except Exception:
+                except:
                     pass
                 await log_channel.send(embed=log_embed_punished)
                 self.invite_muteable_offence += 1
@@ -294,7 +292,7 @@ class Log(Cog):
             )
             try:
                 log_embed_muted.set_thumbnail(url=message.author.avatar_url)
-            except Exception:
+            except:
                 pass
             await log_channel.send(embed=log_embed_muted)
             await message.author.add_roles(mute_role)
@@ -311,7 +309,7 @@ class Log(Cog):
             )
             try:
                 await message.author.send(embed=kick_embed)
-            except Exception:
+            except:
                 pass
             log_embed_kicked = discord.Embed(
                 title="**Member Kicked**",
@@ -321,7 +319,7 @@ class Log(Cog):
             )
             try:
                 log_embed_kicked.set_thumbnail(url=message.author.avatar_url)
-            except Exception:
+            except:
                 pass
             await log_channel.send(embed=log_embed_kicked)
             self.invite_kickable_offence = 0
@@ -331,7 +329,7 @@ class Log(Cog):
         else:
             pass
         if any(re.findall("|".join(banned_racial_words), message.content, re.IGNORECASE)) or any(
-                re.findall("|".join(banned_links), message.content, re.IGNORECASE)):
+                re.findall("|".join("https://web.roblox.com"), message.content, re.IGNORECASE)):
             await message.delete()
             ban_embed = discord.Embed(
                 title="**NOTIFICATION**",
@@ -345,11 +343,11 @@ class Log(Cog):
 
             try:
                 await message.author.send(embed=ban_embed)
-            except Exception:
+            except:
                 pass
             try:
                 await message.author.ban(reason="Sent something inappropriate, or turned out to be underage!")
-            except Exception:
+            except:
                 return
             if any(re.findall("|".join(banned_racial_words), message.content, re.IGNORECASE)):
                 ban_embed_reason = discord.Embed(
@@ -360,7 +358,7 @@ class Log(Cog):
                 )
                 try:
                     ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
-                except Exception:
+                except:
                     pass
                 await log_channel.send(embed=ban_embed_reason)
             if re.findall("https://web.roblox.com", message.content, re.IGNORECASE):
@@ -372,7 +370,7 @@ class Log(Cog):
                 )
                 try:
                     ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
-                except Exception:
+                except:
                     pass
                 await log_channel.send(embed=ban_embed_reason)
             if any(re.findall("|".join(banned_links_v2), message.content, re.IGNORECASE)):
@@ -384,7 +382,7 @@ class Log(Cog):
                 )
                 try:
                     ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
-                except Exception:
+                except:
                     pass
                 await log_channel.send(embed=ban_embed_reason)
         if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
@@ -521,7 +519,7 @@ class Log(Cog):
                 )
                 try:
                     log_embed_punished.set_thumbnail(url=message.author.avatar_url)
-                except Exception:
+                except:
                     pass
                 await log_channel.send(embed=log_embed_punished)
                 self.invite_muteable_offence += 1
@@ -536,7 +534,7 @@ class Log(Cog):
             )
             try:
                 log_embed_muted.set_thumbnail(url=message.author.avatar_url)
-            except Exception:
+            except:
                 pass
             await log_channel.send(embed=log_embed_muted)
             await message.author.add_roles(mute_role)
@@ -553,7 +551,7 @@ class Log(Cog):
             )
             try:
                 await message.author.send(embed=kick_embed)
-            except Exception:
+            except:
                 pass
             log_embed_kicked = discord.Embed(
                 title="**Member Kicked**",
@@ -563,7 +561,7 @@ class Log(Cog):
             )
             try:
                 log_embed_kicked.set_thumbnail(url=message.author.avatar_url)
-            except Exception:
+            except:
                 pass
             await log_channel.send(embed=log_embed_kicked)
             self.invite_kickable_offence = 0
@@ -588,11 +586,11 @@ class Log(Cog):
 
             try:
                 await message.author.send(embed=ban_embed)
-            except Exception:
+            except:
                 pass
             try:
                 await message.author.ban(reason="Sent something inappropriate, or turned out to be underage!")
-            except Exception:
+            except:
                 return
             if any(re.findall("|".join(banned_racial_words), message.content, re.IGNORECASE)):
                 ban_embed_reason = discord.Embed(
@@ -603,7 +601,7 @@ class Log(Cog):
                 )
                 try:
                     ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
-                except Exception:
+                except:
                     pass
                 await log_channel.send(embed=ban_embed_reason)
             if re.findall("https://web.roblox.com", message.content, re.IGNORECASE):
@@ -615,7 +613,7 @@ class Log(Cog):
                 )
                 try:
                     ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
-                except Exception:
+                except:
                     pass
                 await log_channel.send(embed=ban_embed_reason)
             if any(re.findall("|".join(banned_links_v2), message.content, re.IGNORECASE)):
@@ -627,7 +625,7 @@ class Log(Cog):
                 )
                 try:
                     ban_embed_reason.set_thumbnail(url=message.author.avatar_url)
-                except Exception:
+                except:
                     pass
                 await log_channel.send(embed=ban_embed_reason)
         if any(re.findall("|".join(banned_words), message.content, re.IGNORECASE)):
@@ -731,7 +729,7 @@ class Log(Cog):
                     pass
             else:
                 pass
-        except Exception:
+        except:
             pass
         if after.channel and not before.channel:
             member_joined_vc_log_embed = discord.Embed(
@@ -953,7 +951,7 @@ class Log(Cog):
                 return
             else:
                 pass
-        except Exception:
+        except:
             pass
 
         log_embed = discord.Embed(
