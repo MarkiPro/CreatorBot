@@ -142,7 +142,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed2)
         try:
             await member.send(embed=embed2)
-        except Exception:
+        except:
             pass
         await ctx.send(embed=embed1)
         await member.ban(reason=reason)
@@ -259,8 +259,8 @@ class Moderation(commands.Cog):
 
     @commands.group()
     async def add(self, ctx):
-        staff_role = discord.utils.get(ctx.guild.roles, id=756565123350659385)
-        if ctx.author in staff_role.members:
+        bot_config_role = discord.utils.get(ctx.guild.roles, id=756565123350659385)
+        if ctx.author in bot_config_role.members:
             pass
         else:
             return
