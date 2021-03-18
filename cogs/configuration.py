@@ -39,15 +39,10 @@ class Configuration(commands.Cog):
 
             added_word = str(word)
 
-            random_list = {
-                "blah": {},
-                "blah again" : []
-            }
-
             if added_word not in banned_words:
                 banned_words.append(added_word)
                 with open("configs/banned.json", "w") as writer:
-                    json.dump(random_list, writer)
+                    json.dump(banned_stuff, writer)
                 await ctx.send("Listed the word!")
             else:
                 return await ctx.send("That word is already listed!")
