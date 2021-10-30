@@ -3,8 +3,7 @@ import os
 import asyncio
 import discord
 from discord.ext import commands
-
-token = os.environ['TOKEN']
+from webserver import keep_alive
 
 
 class EmbedHelpCommand(commands.MinimalHelpCommand):
@@ -119,5 +118,8 @@ for file in os.listdir('cogs/'):
         bot.load_extension(f'cogs.{file[:-3]}')
 
 
+keep_alive()
+
+token = os.environ.get("DISCORD_BOT_SECRET")
 
 bot.run(token)
