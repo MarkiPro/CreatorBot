@@ -32,6 +32,6 @@ help_slash = SlashHelp(bot, slash, token, dpy_command=True, auto_create=False)
 
 @slash.slash(name="help")
 async def help(ctx, command=None):
-    await help_slash.send_help(ctx, command, guild_id=ctx.guild.id)
+    await help_slash.send_help(ctx, command, guild_id=611227128020598805)
 
 bot.run(token)
