@@ -27,11 +27,11 @@ keep_alive()
 token = os.environ.get("DISCORD_BOT_SECRET")
 
 slash = SlashCommand(bot, sync_commands=True)
-help_slash = SlashHelp(bot, slash, token, author_only=True, color=0x0064ff, auto_create=False)
+help_slash = SlashHelp(bot, slash, token, author_only=True, color=0x0064ff, dpy_command=True, auto_create=True)
 
 
 @slash.slash(name="help")
 async def help(ctx, command=None):
-    await help_slash.send_help(ctx, command, guild_id=611227128020598805)
+    await help_slash.send_help(ctx, command, guild_id=ctx.guild.id)
 
 bot.run(token)
