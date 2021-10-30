@@ -73,7 +73,11 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
 
         pag = Paginator(description, 1985)
 
+<<<<<<< HEAD:bot/bot.py
         await pag.send(bot=self.bot, channel=self.get_destination(), title='**BOT COMMANDS**')
+=======
+        await pag.send(bot=self.bot, channel=self.get_destination(), title=title)
+>>>>>>> parent of 456d916 (Update bot.py):bot.py
 
     async def send_group_help(self, group):
         embed = discord.Embed(title=group.qualified_name.upper(), colour=self.COLOUR, image=bot.user.avatar_url)
@@ -85,8 +89,14 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
             for command in filtered:
                 desc = desc + f'**{self.get_command_signature(command)}**\n\n'
 
+<<<<<<< HEAD:bot/bot.py
         embed.description = desc
         await self.get_destination().send(embed=embed)
+=======
+        pag = Paginator(description, 1985)
+
+        await pag.send(bot=self.bot, channel=self.get_destination(), title=title)
+>>>>>>> parent of 456d916 (Update bot.py):bot.py
 
     async def send_command_help(self, command):
         cog = 'Uncategorized' if command.cog is None else command.cog.qualified_name
@@ -98,14 +108,27 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
         no_aliases = 'This command has no aliases.'
 
         if isinstance(command, commands.Command):
+<<<<<<< HEAD:bot/bot.py
             embed.description = f"\n\n{self.get_command_signature(command)} - This is the correct usage of the ``{command.name}`` command. {command.description or no_desc}\n\nAliases: {command_aliases or no_aliases} "
             # embed.add_field(name=self.get_command_signature(command), value=command.description or 'No description  assigned.', inline=False)
+=======
+            description = f"\n\n{self.get_command_signature(command)} - This is the correct usage of the ``{command.name}`` command. {command.description or no_desc}\n\nAliases: {command_aliases or no_aliases} "
+>>>>>>> parent of 456d916 (Update bot.py):bot.py
 
         await self.get_destination().send(embed=embed)
 
+<<<<<<< HEAD:bot/bot.py
+=======
+        await pag.send(bot=self.bot, channel=self.get_destination(), title=title)
+>>>>>>> parent of 456d916 (Update bot.py):bot.py
 
 intents = discord.Intents.all()
 
+<<<<<<< HEAD:bot/bot.py
+=======
+intents = discord.Intents.all()
+
+>>>>>>> parent of 456d916 (Update bot.py):bot.py
 bot = commands.Bot(commands.when_mentioned_or(">"), case_insensitive=True, help_command=EmbedHelpCommand(), intents=intents)
 
 
