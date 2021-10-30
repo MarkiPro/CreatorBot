@@ -1,9 +1,6 @@
-aiohttp==3.7.3
-async-timeout==3.0.1
-asyncio==3.4.3
-Augmentor==0.2.8
-discord==1.0.1
-mystbin.py==1.0.1
-pbwrap==1.2.2
-Pillow==8.0.1
-robloxpy==0.2.3
+discord~=1.7.3
+aiohttp~=3.7.4.post0
+Flask~=2.0.2
+robloxpy~=0.2.21
+Pillow~=8.4.0
+mystbin.py
