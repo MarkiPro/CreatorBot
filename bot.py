@@ -2,6 +2,7 @@ import datetime
 import os
 import discord
 from discord.ext import commands
+from paginator import Paginator
 from webserver import keep_alive
 
 
@@ -25,8 +26,6 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
             return f"``{self.clean_prefix}{command.qualified_name}``"
 
     async def send_bot_help(self, mapping):
-        embed = discord.Embed(title='**BOT COMMANDS**', colour=self.COLOUR, image=bot.user.avatar_url)
-        # description = f'**{self.context.bot.description}**'
 
         commands_dict = {}
 
@@ -43,50 +42,60 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
         for cog in commands_dict.keys():
             description = description + f"**{cog}**\n\n".upper()
             for command in commands_dict.get(cog):
-                description = description + f"**{self.get_command_signature(command)}**\n\n"
+                description += f"**{self.get_command_signature(command)}**\n\n"
 
-        embed.description = description
-        await self.context.author.send(embed=embed)
+        pag = Paginator(description, 1985)
+
+        await pag.send(bot=self.bot, channel=self.context.author, title='**BOT COMMANDS**')
 
     async def send_cog_help(self, cog):
-        embed = discord.Embed(title='{0.qualified_name} Commands'.format(cog), colour=self.COLOUR,
-                              image=bot.user.avatar_url)
+
+        title = f'{cog.qualified_name} Commands'
+        description = ""
+
         if cog.description:
-            embed.description = cog.description
+            description = cog.description
 
         filtered = await self.filter_commands(cog.get_commands(), sort=True)
         for command in filtered:
-            embed.add_field(name=self.get_command_signature(command), value=command.description or '...', inline=False)
+            description += f"**{self.get_command_signature(command)}**\n{command.description or '...'}\n\n"
 
-        await self.get_destination().send(embed=embed)
+        pag = Paginator(description, 1985)
+
+        await pag.send(bot=self.bot, channel=self.get_destination(), title=title)
 
     async def send_group_help(self, group):
-        embed = discord.Embed(title=group.qualified_name.upper(), colour=self.COLOUR, image=bot.user.avatar_url)
 
-        desc = ''
+        title = group.qualified_name.upper()
+
+        description = ''
 
         if isinstance(group, commands.Group):
             filtered = await self.filter_commands(group.commands, sort=True)
             for command in filtered:
-                desc = desc + f'**{self.get_command_signature(command)}**\n\n'
+                description += f'**{self.get_command_signature(command)}**\n\n'
 
-        embed.description = desc
-        await self.get_destination().send(embed=embed)
+        pag = Paginator(description, 1985)
+
+        await pag.send(bot=self.bot, channel=self.get_destination(), title=title)
 
     async def send_command_help(self, command):
         cog = 'Uncategorized' if command.cog is None else command.cog.qualified_name
-        embed = discord.Embed(title=f"{command.name} - {cog}".upper(), colour=self.COLOUR, image=bot.user.avatar_url,
-                              timestamp=datetime.datetime.utcnow())
-        # embed.set_author(name=f"{self.context.author}", icon_url=self.context.author.avatar_url)
+
         no_desc = "No description assigned."
         command_aliases = ", ".join([f"``{i}``" for i in command.aliases])
         no_aliases = 'This command has no aliases.'
 
-        if isinstance(command, commands.Command):
-            embed.description = f"\n\n{self.get_command_signature(command)} - This is the correct usage of the ``{command.name}`` command. {command.description or no_desc}\n\nAliases: {command_aliases or no_aliases} "
-            # embed.add_field(name=self.get_command_signature(command), value=command.description or 'No description  assigned.', inline=False)
+        title = f"{command.name} - {cog}".upper()
 
-        await self.get_destination().send(embed=embed)
+        description = ""
+
+        if isinstance(command, commands.Command):
+            description = f"\n\n{self.get_command_signature(command)} - This is the correct usage of the ``{command.name}`` command. {command.description or no_desc}\n\nAliases: {command_aliases or no_aliases} "
+
+        pag = Paginator(description, 1985)
+
+        await pag.send(bot=self.bot, channel=self.get_destination(), title=title)
 
 
 intents = discord.Intents.all()
