@@ -4,3 +4,4 @@ Flask~=2.0.2
 robloxpy~=0.2.21
 Pillow~=8.4.0
 mystbin.py
+pycord~=0.0.1
