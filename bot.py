@@ -5,16 +5,17 @@ from discord.ext import commands
 from paginator import Paginator
 from webserver import keep_alive
 
+intents = discord.Intents.all()
+
+bot = commands.Bot(commands.when_mentioned_or(">"), case_insensitive=True, intents=intents)
+
 
 class EmbedHelpCommand(commands.MinimalHelpCommand):
-
     def __init__(self):
         super().__init__(command_attrs={
             'description': "This command will inform you about any command that you'd like to, or all the commands by leaving the command argument empty."
         })
         self.dm_help = False
-
-    COLOUR = 0x1E90FF
 
     def command_not_found(self, string):
         return 'Command not found.'
@@ -42,15 +43,15 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
         for cog in commands_dict.keys():
             description = description + f"**{cog}**\n\n".upper()
             for command in commands_dict.get(cog):
-                description += f"**{self.get_command_signature(command)}**\n\n"
+                description = description + f"**{self.get_command_signature(command)}**\n\n"
 
         pag = Paginator(description, 1985)
-
-        await pag.send(bot=self.bot, channel=self.context.author, title='**BOT COMMANDS**')
+        await pag.send(bot=bot, channel=self.context.author, title='**BOT COMMANDS**')
 
     async def send_cog_help(self, cog):
 
         title = f'{cog.qualified_name} Commands'
+
         description = ""
 
         if cog.description:
@@ -58,16 +59,14 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
 
         filtered = await self.filter_commands(cog.get_commands(), sort=True)
         for command in filtered:
-            description += f"**{self.get_command_signature(command)}**\n{command.description or '...'}\n\n"
+            description += f"\n{self.get_command_signature(command)}\n{command.description or '...'}\n"
 
         pag = Paginator(description, 1985)
-
-        await pag.send(bot=self.bot, channel=self.get_destination(), title=title)
+        await pag.send(bot=bot, channel=self.get_destination(), title=title)
 
     async def send_group_help(self, group):
 
         title = group.qualified_name.upper()
-
         description = ''
 
         if isinstance(group, commands.Group):
@@ -77,11 +76,10 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
 
         pag = Paginator(description, 1985)
 
-        await pag.send(bot=self.bot, channel=self.get_destination(), title=title)
+        await pag.send(bot=bot, channel=self.get_destination(), title=title)
 
     async def send_command_help(self, command):
         cog = 'Uncategorized' if command.cog is None else command.cog.qualified_name
-
         no_desc = "No description assigned."
         command_aliases = ", ".join([f"``{i}``" for i in command.aliases])
         no_aliases = 'This command has no aliases.'
@@ -94,13 +92,10 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
             description = f"\n\n{self.get_command_signature(command)} - This is the correct usage of the ``{command.name}`` command. {command.description or no_desc}\n\nAliases: {command_aliases or no_aliases} "
 
         pag = Paginator(description, 1985)
-
         await pag.send(bot=self.bot, channel=self.get_destination(), title=title)
 
 
-intents = discord.Intents.all()
-
-bot = commands.Bot(commands.when_mentioned_or(">"), case_insensitive=True, help_command=EmbedHelpCommand(), intents=intents)
+bot.help_command = EmbedHelpCommand()
 
 
 @bot.event
