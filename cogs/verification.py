@@ -28,7 +28,8 @@ class Verification(commands.Cog):
             pass
         if ctx.channel != verification_channel:
             return await ctx.send(
-                f"Please go to verify in {verification_channel.mention}, and if you need assistance, you should first read over {verif_instr_channel.mention}!")
+                f"Please go to verify in {verification_channel.mention}, and if you need assistance, you should first "
+                f"read over {verif_instr_channel.mention}!")
         else:
             pass
 
@@ -37,8 +38,8 @@ class Verification(commands.Cog):
 
         def random_string():
             s = string.ascii_uppercase + string.ascii_lowercase + string.digits
-            random_string = ''.join(random.choices(s, k=8))
-            return random_string
+            random_code = ''.join(random.choices(s, k=8))
+            return random_code
 
         captcha_str = random_string()
         file_name = f"{ctx.message.id}.png"
@@ -68,7 +69,10 @@ class Verification(commands.Cog):
 
         verif_embed = discord.Embed(
             title="**Welcome to Content Creators**",
-            description="Please send the captcha code here, you have 5 minutes to do so.\n\nHello! You are required to complete a captcha before entering the server.\n\n*NOTE: This is **Case Sensitive***.\n\n**Why?**\nThis is to protect the server against targeted attacks using automated user accounts.\n\n**Your Captcha:**",
+            description="Please send the captcha code here, you have 5 minutes to do so.\n\nHello! You are required "
+                        "to complete a captcha before entering the server.\n\n*NOTE: This is **Case "
+                        "Sensitive***.\n\n**Why?**\nThis is to protect the server against targeted attacks using "
+                        "automated user accounts.\n\n**Your Captcha:**",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
@@ -91,7 +95,8 @@ class Verification(commands.Cog):
             answer = answer_message.content
             if answer == captcha_str:
                 await ctx.author.send(
-                    "You did the captcha correctly! Good job! You now have the verified role and full access to the server.")
+                    "You did the captcha correctly! Good job! You now have the verified role and full access to the "
+                    "server.")
                 log_embed2 = discord.Embed(
                     title="**Verification Success**",
                     description=f"Verification for {ctx.author.mention}({ctx.author})",
@@ -104,7 +109,8 @@ class Verification(commands.Cog):
                 await log_channel.send(embed=log_embed2)
             elif answer != captcha_str:
                 await ctx.author.send(
-                    "You failed the captcha, please run the `>verify` command again in <#745331129535561758> and try again.")
+                    "You failed the captcha, please run the `>verify` command again in <#745331129535561758> and try "
+                    "again.")
                 log_embed3 = discord.Embed(
                     title="**Verification Failed**",
                     description=f"Verification for {ctx.author.mention}({ctx.author})",
@@ -140,7 +146,8 @@ class Verification(commands.Cog):
 
         call_embed = discord.Embed(
             title="**Welcome to Content Creators**",
-            description="Please respond in under 5 minutes!\n\nHello, please respond with your Roblox Username!\n\n*NOTE: This is **Case Sensitive!***",
+            description="Please respond in under 5 minutes!\n\nHello, please respond with your Roblox "
+                        "Username!\n\n*NOTE: This is **Case Sensitive!***",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
@@ -160,14 +167,18 @@ class Verification(commands.Cog):
             roblox_name = roblox_name_message.content
         except asyncio.TimeoutError:
             await ctx.author.send(
-                "You ran out of time, please run the `>rblx_verify` command again in <#741733794536751114> and try again.")
+                "You ran out of time, please run the `>rblx_verify` command again in <#741733794536751114> and try "
+                "again.")
         try:
             amount = 10
             code = ' '.join(random.choices(choices, k=amount))
             f = discord.File("Steps.png", filename="Steps.png")
             code_embed = discord.Embed(
                 title="**Welcome to Content Creators**",
-                description=f"Please respond in under 5 minutes!\n\nHello, please copy the given code, and paste it in your Roblox Bio/Description, and once you're done, respond with `done`!\n\n*NOTE: This is **Case Sensitive!***\n\n\n**Your Code:**\n\n```{code}```\n\n**Here's how you do it:**",
+                description=f"Please respond in under 5 minutes!\n\nHello, please copy the given code, and paste it "
+                            f"in your Roblox Bio/Description, and once you're done, respond with `done`!\n\n*NOTE: "
+                            f"This is **Case Sensitive!***\n\n\n**Your Code:**\n\n```{code}```\n\n**Here's how you do "
+                            f"it:**",
                 timestamp=datetime.datetime.utcnow(),
                 color=0x0064ff
             )
@@ -178,7 +189,8 @@ class Verification(commands.Cog):
                 roblox_desc = roblox_desc_message.content
             except asyncio.TimeoutError:
                 await ctx.author.send(
-                    "You ran out of time, please run the `>rblx_verify` command again in <#741733794536751114> and try again.")
+                    "You ran out of time, please run the `>rblx_verify` command again in <#741733794536751114> and "
+                    "try again.")
             if str(roblox_desc).lower() == "done" or str(roblox_desc).lower() == "yes" or str(
                     roblox_desc).lower() == "ok":
                 pass
@@ -221,16 +233,18 @@ class Verification(commands.Cog):
         await command_caller.send("You've been successfully verified!")
         log_embed = discord.Embed(
             title="**Roblox Verified**",
-            description=f"{command_caller.mention} just verified their Roblox account under [{roblox_name}](https://www.roblox.com/users/{roblox_id}/profile)",
+            description=f"{command_caller.mention} just verified their Roblox account under [{roblox_name}](https"
+                        f"://www.roblox.com/users/{roblox_id}/profile)",
             timestamp=datetime.datetime.utcnow(),
             color=0x0064ff
         )
         await log_channel.send(embed=log_embed)
 
     @commands.command()
-    async def check_if(self, ctx):
-        IsOver13 = LocalUser.UserAbove13
-        print(IsOver13)
+    async def check_if(self):
+        is_over13 = LocalUser.UserAbove13
+        print(is_over13)
+
 
 def setup(bot):
     bot.add_cog(Verification(bot))
