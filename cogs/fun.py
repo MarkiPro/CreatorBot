@@ -83,20 +83,21 @@ class Fun(commands.Cog):
 
     @commands.command()
     async def rate(self, ctx, user: discord.User = None):
+
         markipro = await ctx.bot.fetch_user(530461779768377357)
-        if user is None or user.id == ctx.author.id:
-            await ctx.send(f"In my eyes, you're a **{random.randint(0, 10)}/10**! :eyes:")
+
+        if user == markipro:
+            await ctx.send("He's my creator!!! If I don't say he's a **10/10** which he is, I'm a goner! :eyes:")
         elif user == self.bot.user:
             await ctx.send("Well, obviously, I'm a **10/10**! :wink: :wink:")
-        elif user == markipro:
-            await ctx.send("He's my creator!!! If I don't say he's a **10/10** which he is, I'm a goner! :eyes:")
+        elif user is None or user.id == ctx.author.id:
+            await ctx.send(f"In my eyes, you're a **{random.randint(0, 10)}/10**! :eyes:")
         else:
             await ctx.send(f"I see them as a solid **{random.randint(0, 10)}/10**! :eyes:")
 
     @commands.command()
     async def spellout(self, ctx, *, msg: str):
-        await ctx.send(" ".join(list(msg.upper())))
-        await ctx.send("Duh!")
+        await ctx.send(" ".join(list(msg)))
 
     @commands.command()
     async def reverse(self, ctx, *, msg: str):
@@ -106,7 +107,7 @@ class Fun(commands.Cog):
     async def randomnumber(self, ctx, *, digits: int = 1):
         number = ""
         if digits > 250:
-            return await ctx.send("Cannot go higher than 250, as it slows the bot down when it is too high!")
+            return await ctx.send("Cannot go higher than 250, as it slows down the bot when it is too high!")
         for i in range(digits):
             number += str(random.randint(0, 9))
         await ctx.send(number)
