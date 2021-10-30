@@ -42,12 +42,12 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
 
         commands_dict = {}
 
-        for cog, commands in mapping.items():
+        for cog, bot_commands in mapping.items():
             name = 'Uncategorized' if cog is None else cog.qualified_name
-            filtered = await self.filter_commands(commands, sort=True)
+            filtered = await self.filter_commands(bot_commands, sort=True)
             if filtered:
                 commands_dict[name] = []
-                for c in commands:
+                for c in bot_commands:
                     commands_dict.get(f"{name}").append(c)
 
         description = '**``[]``: OPTIONAL, ``<>``: REQUIRED**\n\n'
