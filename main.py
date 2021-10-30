@@ -27,7 +27,7 @@ keep_alive()
 token = os.environ.get("DISCORD_BOT_SECRET")
 
 slash = SlashCommand(bot, sync_commands=True)
-help_slash = SlashHelp(bot, slash, token, author_only=True, color=0x0064ff, dpy_command=True, auto_create=False)
+help_slash = SlashHelp(bot, slash, token, color=0x0064ff, dpy_command=True, auto_create=False)
 
 
 @slash.slash(name="help")
