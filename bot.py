@@ -6,11 +6,12 @@ from webserver import keep_alive
 
 
 class EmbedHelpCommand(commands.MinimalHelpCommand):
-
     def __init__(self):
-        super().__init__(command_attrs={
-            'description': "This command will inform you about any command that you'd like to, or all the commands by leaving the command argument empty."
-        })
+        super().__init__(
+            command_attrs={
+                'description':
+                "This command will inform you about any command that you'd like to, or all the commands by leaving the command argument empty."
+            })
         self.dm_help = False
 
     COLOUR = 0x1E90FF
@@ -25,7 +26,9 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
             return f"``{self.clean_prefix}{command.qualified_name}``"
 
     async def send_bot_help(self, mapping):
-        embed = discord.Embed(title='**BOT COMMANDS**', colour=self.COLOUR, image=bot.user.avatar_url)
+        embed = discord.Embed(title='**BOT COMMANDS**',
+                              colour=self.COLOUR,
+                              image=bot.user.avatar_url)
         # description = f'**{self.context.bot.description}**'
 
         commands_dict = {}
@@ -49,19 +52,24 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
         await self.context.author.send(embed=embed)
 
     async def send_cog_help(self, cog):
-        embed = discord.Embed(title='{0.qualified_name} Commands'.format(cog), colour=self.COLOUR,
+        embed = discord.Embed(title='{0.qualified_name} Commands'.format(cog),
+                              colour=self.COLOUR,
                               image=bot.user.avatar_url)
         if cog.description:
             embed.description = cog.description
 
         filtered = await self.filter_commands(cog.get_commands(), sort=True)
         for command in filtered:
-            embed.add_field(name=self.get_command_signature(command), value=command.description or '...', inline=False)
+            embed.add_field(name=self.get_command_signature(command),
+                            value=command.description or '...',
+                            inline=False)
 
         await self.get_destination().send(embed=embed)
 
     async def send_group_help(self, group):
-        embed = discord.Embed(title=group.qualified_name.upper(), colour=self.COLOUR, image=bot.user.avatar_url)
+        embed = discord.Embed(title=group.qualified_name.upper(),
+                              colour=self.COLOUR,
+                              image=bot.user.avatar_url)
 
         desc = ''
 
@@ -75,7 +83,9 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
 
     async def send_command_help(self, command):
         cog = 'Uncategorized' if command.cog is None else command.cog.qualified_name
-        embed = discord.Embed(title=f"{command.name} - {cog}".upper(), colour=self.COLOUR, image=bot.user.avatar_url,
+        embed = discord.Embed(title=f"{command.name} - {cog}".upper(),
+                              colour=self.COLOUR,
+                              image=bot.user.avatar_url,
                               timestamp=datetime.datetime.utcnow())
         # embed.set_author(name=f"{self.context.author}", icon_url=self.context.author.avatar_url)
         no_desc = "No description assigned."
@@ -91,13 +101,17 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
 
 intents = discord.Intents.all()
 
-bot = commands.Bot(commands.when_mentioned_or(">"), case_insensitive=True, help_command=EmbedHelpCommand(), intents=intents)
+bot = commands.Bot(commands.when_mentioned_or(">"),
+                   case_insensitive=True,
+                   help_command=EmbedHelpCommand(),
+                   intents=intents)
 
 
 @bot.event
 async def on_ready():
     print(f"Ready. Logged onto {bot.user}")
-    activity = discord.Activity(type=discord.ActivityType.watching, name="Scaled Studios")
+    activity = discord.Activity(type=discord.ActivityType.watching,
+                                name="Scaled Studios")
     await bot.change_presence(activity=activity)
 
 
