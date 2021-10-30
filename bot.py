@@ -1,9 +1,7 @@
 import datetime
 import os
-
 import discord
 from discord.ext import commands
-
 from webserver import keep_alive
 
 
@@ -107,7 +105,6 @@ for file in os.listdir('cogs/'):
     if file.endswith('.py'):
         print(f"LOADED {file}")
         bot.load_extension(f'cogs.{file[:-3]}')
-
 
 keep_alive()
 
