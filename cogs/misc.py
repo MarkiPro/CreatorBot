@@ -45,19 +45,8 @@ class Misc(commands.Cog):
         robux_amount = int(robux)
         usd_amount = robux_amount * 0.0035
 
-        usd_string = str(usd_amount)
-        robux_string = str(robux_amount)
-
-        times_of_iteration_for_usd = int(len(usd_string) / 3)
-        times_of_iteration_for_robux = int(len(robux_string) / 3)
-
-        if times_of_iteration_for_robux >= 1:
-            for iteration in range(times_of_iteration_for_robux):
-                robux_string = robux_string[:-int(3 * iteration)] + ", " + robux_string[-int(3 * iteration):]
-
-        if times_of_iteration_for_usd >= 1:
-            for iteration in range(times_of_iteration_for_usd):
-                usd_string = usd_string[:-int(3 * iteration)] + ", " + usd_string[-int(3 * iteration):]
+        usd_string = "{:,}".format(usd_amount)
+        robux_string = "{:,}".format(robux_amount)
 
         return await ctx.channel.send(f"**{robux_string}** Robux is equivalent to **{usd_string}** USD.")
 
