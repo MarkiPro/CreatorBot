@@ -769,7 +769,7 @@ class Misc(commands.Cog):
             timestamp=datetime.datetime.utcnow()
         )
 
-        if not boosters:
+        if boosters is "":
             embed.description = "There are no boosters in this guild.  :cry:"
             pass
 

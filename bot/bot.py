@@ -7,6 +7,15 @@ from webserver import keep_alive
 
 
 class EmbedHelpCommand(commands.MinimalHelpCommand):
+    """This is an example of a HelpCommand that utilizes embeds.
+    It's pretty basic but it lacks some nuances that people might expect.
+    1. It breaks if you have more than 25 cogs or more than 25 subcommands. (Most people don't reach this)
+    2. It doesn't DM users. To do this, you have to override `get_destination`. It's simple.
+    Other than those two things this is a basic skeleton to get you started. It should
+    be simple to modify if you desire some other behaviour.
+    To use this, pass it to the bot constructor e.g.:
+    bot = commands.Bot(help_command=EmbedHelpCommand())
+    """
 
     def __init__(self):
         super().__init__(command_attrs={
@@ -14,6 +23,7 @@ class EmbedHelpCommand(commands.MinimalHelpCommand):
         })
         self.dm_help = False
 
+    # Set the embed colour here
     COLOUR = 0x1E90FF
 
     def command_not_found(self, string):
